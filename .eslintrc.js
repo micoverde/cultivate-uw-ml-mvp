@@ -7,7 +7,9 @@ module.exports = {
   },
   extends: [
     'eslint:recommended',
-    '@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
   ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -23,14 +25,21 @@ module.exports = {
     'react-hooks',
   ],
   rules: {
-    'indent': ['error', 2],
+    // TypeScript-specific rules
+    '@typescript-eslint/no-unused-vars': 'warn',
+    '@typescript-eslint/no-explicit-any': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'warn',
+
+    // General rules
     'linebreak-style': ['error', 'unix'],
-    'quotes': ['error', 'single'],
-    'semi': ['error', 'always'],
-    'no-unused-vars': 'warn',
+    'no-unused-vars': 'off', // Handled by TypeScript
     'no-console': 'warn',
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+
+    // React rules
+    'react/jsx-uses-react': 'off', // Not needed with new JSX transform
+    'react/react-in-jsx-scope': 'off', // Not needed with new JSX transform
   },
   settings: {
     react: {
@@ -44,5 +53,16 @@ module.exports = {
     'venv/',
     '*.pyc',
     '__pycache__/',
+    '.eslintrc.js',
+    'demo/vite.config.js',
+    'vite.config.js',
+  ],
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off',
+      },
+    },
   ],
 };
