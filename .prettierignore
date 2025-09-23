@@ -1,0 +1,13 @@
+node_modules/
+dist/
+build/
+venv/
+*.pyc
+__pycache__/
+.git/
+.github/
+*.md
+*.yml
+*.yaml
+package-lock.json
+requirements.txt

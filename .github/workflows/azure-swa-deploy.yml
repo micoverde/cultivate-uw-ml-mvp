@@ -1,0 +1,91 @@
+name: Azure Static Web Apps CI/CD
+
+# ✅ INFRASTRUCTURE READY - Azure Resources Created
+#
+# Azure Resources (Created 2025-09-23):
+# - Azure Static Web App: swa-cultivate-ml-mvp (calm-tree-06f328310.1.azurestaticapps.net)
+# - Storage Account: stcultivateml (ML models container: ml-models)
+# - Application Insights: appins-cultivate-ml (monitoring & telemetry)
+# - GitHub Secret: AZURE_STATIC_WEB_APPS_API_TOKEN ✅ Configured
+#
+# This workflow deploys immediately without waiting for security scans
+# Security monitoring runs asynchronously and will trigger rollback if issues found
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    branches:
+      - main
+
+jobs:
+  build_and_deploy_job:
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
+    runs-on: ubuntu-latest
+    name: Build and Deploy Job
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install and build demo
+        run: |
+          cd demo
+          npm install
+          npm run build
+
+      - name: Install API dependencies
+        run: |
+          cd api
+          npm install
+
+      - name: Build and Deploy
+        id: builddeploy
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # ✅ CONFIGURED: Azure SWA resource created, deployment token in GitHub secrets
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          action: "upload"
+          app_location: "/demo" # App source code path
+          api_location: "/api" # API source code path
+          output_location: "dist" # Built app content directory
+        env:
+          # Environment variables for Azure SWA
+          API_HOST: ${{ vars.API_HOST || 'calm-tree-06f328310.1.azurestaticapps.net' }}
+          API_PORT: ${{ vars.API_PORT || '443' }}
+          ML_MODEL_PATH: ${{ vars.ML_MODEL_PATH || './models/' }}
+          NODE_ENV: production
+          # Azure resource references
+          AZURE_STORAGE_ACCOUNT: stcultivateml
+          AZURE_APPINSIGHTS_INSTRUMENTATIONKEY: 4ae4e7dd-900e-48da-836e-bdadbc323b5a
+
+  close_pull_request_job:
+    if: github.event_name == 'pull_request' && github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    name: Close Pull Request Job
+    steps:
+      - name: Close Pull Request
+        id: closepullrequest
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          # ✅ CONFIGURED: Azure SWA resource created, deployment token in GitHub secrets
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          action: "close"

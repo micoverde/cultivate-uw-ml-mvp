@@ -1,0 +1,30 @@
+{
+  "total_examples": 25,
+  "total_questions_analyzed": 50,
+  "quality_distribution": {
+    "needs_improvement": 16,
+    "good": 8,
+    "exemplary": 1
+  },
+  "age_group_distribution": {
+    "PK": 19,
+    "TODDLER": 2,
+    "INFANT AND TODDLER": 1,
+    "Toddler": 1,
+    "PK or Toddler?": 1,
+    "PK and Toddler": 1
+  },
+  "question_type_distribution": {
+    "open_ended": 18,
+    "closed_ended": 31
+  },
+  "average_scores": {
+    "overall_score": 0.30310000000000004,
+    "open_ended_ratio": 0.36,
+    "wait_time_ratio": 0.26,
+    "avg_questions_per_video": 2.0
+  },
+  "data_source": "cultivate_learning_expert_annotations",
+  "validation_level": "researcher_validated",
+  "created_at": "2025-09-23"
+}
