@@ -1,0 +1,1977 @@
+[
+  {
+    "id": "expert_annotation_0",
+    "video_file": "Structure Activity Video_SUBS.mp4",
+    "asset_id": 56587820,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Structure Activity Video_SUBS.mp4",
+      "age_group": "PK",
+      "description": "In this 7-minute video, an educator leads a small group in which they explore a melon. The educator uses visuals to compare the melon to a pumpkin they have explored and to remind children of previous learning. Children answer questions about similarities and differences, characteristics and vocabulary related to the anatomy of the melon. The educator cuts into the melon as children make predictions about what is inside. Each child gets a scoop of seeds on a tray to explore the smell, texture and taste.",
+      "questions": [
+        {
+          "timestamp": "0:37",
+          "description": "CEQ (yes/no) and teaches pauses for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) and teaches pauses for a response"
+        },
+        {
+          "timestamp": "0:44",
+          "description": "OEQ and teacher gives a child an opportunity to respond",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "OEQ and teacher gives a child an opportunity to respond"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.25,
+        "overall_score": 0.125,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 0.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 1.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_1",
+    "video_file": "Book about Flowers SOM SUBS .mp4",
+    "asset_id": 163402756,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Book about Flowers SOM SUBS .mp4",
+      "age_group": "PK",
+      "description": "In this 2 minute video, the educator begins to read a book. As the educator begins they also book mapping and begin to ask chidlren what they think will happen. 00:50 The educator and chidlren read together and the educator points to different parts of the pages to ask the children questions and help identify the different parts of a flower.",
+      "questions": [
+        {
+          "timestamp": "0:18",
+          "description": "OEQ with a pause allowing one child to respond",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "OEQ with a pause allowing one child to respond"
+        },
+        {
+          "timestamp": "0:25",
+          "description": "Teacher repeats same OEQ allowing another child to respond",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "Teacher repeats same OEQ allowing another child to respond"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 2,
+        "closed_ended_count": 0,
+        "open_ended_ratio": 1.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.4,
+        "overall_score": 0.2,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 7,
+          "repetition_extension": 0.0,
+          "advanced_language": 4.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 7,
+          "creating_suggesting": 5.0,
+          "integration": 3.0,
+          "connections_links": 4.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_2",
+    "video_file": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+    "asset_id": 162954734,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+      "age_group": "TODDLER",
+      "description": "An educator sits at a table of older toddlers as they eat lunch. She engages them in conversation as she talks about the foods in their lunchboxes.",
+      "questions": [
+        {
+          "timestamp": "0:03",
+          "description": "CEQ with brief pause for child to confirm yes",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": true,
+            "rhetorical": false
+          },
+          "quality_score": 0.25,
+          "expert_analysis": "CEQ with brief pause for child to confirm yes"
+        },
+        {
+          "timestamp": "0:05",
+          "description": "CEQ brief pause for child to confirm yes",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": true,
+            "rhetorical": false
+          },
+          "quality_score": 0.25,
+          "expert_analysis": "CEQ brief pause for child to confirm yes"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.25,
+        "overall_score": 0.125,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_3",
+    "video_file": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "asset_id": 162954537,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+      "age_group": "TODDLER",
+      "description": "An educator kneels at a sensory table with paper \"grass\", flowers, beans, flowers, and scoops, She models how to \"plant\" a flower in the pot and encourages them to do so. She asks some open-ended questions like \"what do you see?\" and \"what does your flower smell like?\".",
+      "questions": [
+        {
+          "timestamp": "0:02",
+          "description": "CEQ (yes/no) with no pause for a response teacher continues talking",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) with no pause for a response teacher continues talking"
+        },
+        {
+          "timestamp": "0:12",
+          "description": "CEQ  (yes/no) pauses for a response when child doesn't answer teacher repeats the question",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ  (yes/no) pauses for a response when child doesn't answer teacher repeats the question"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.05,
+        "overall_score": 0.025,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_4",
+    "video_file": "Launch Highland Park 004.mp4",
+    "asset_id": 161765962,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Launch Highland Park 004.mp4",
+      "age_group": "PK",
+      "description": "The children are sitting down eating snack. An educator sits at the end of the table and asks children questions. She also narrates and positive behavior support. She asks several children specific follow up questions.",
+      "questions": [
+        {
+          "timestamp": "0:02",
+          "description": "OEQ with a pause but child shrugs ",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "OEQ with a pause but child shrugs "
+        },
+        {
+          "timestamp": "0:04",
+          "description": "Teacher gets more specific with her 1st question by turning it into a CEQ (yes/no)",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "Teacher gets more specific with her 1st question by turning it into a CEQ (yes/no)"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.25,
+        "overall_score": 0.125,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 0.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 1.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_5",
+    "video_file": "YWCA Bessie T Draper Jeanette 099.mp4",
+    "asset_id": 161524537,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "YWCA Bessie T Draper Jeanette 099.mp4",
+      "age_group": "INFANT AND TODDLER",
+      "description": "In this video, an educator sits on a chair reading a book out loud. Another adult sits on the floor supporting the children. The educator reading out loud has to stop and ask a child to sit down. She continues reading and the toddlers are engaged, pointing at the pages and babbling/talking out loud. The children continue to move around as she reads but they remain engaged.",
+      "questions": [
+        {
+          "timestamp": "0:10",
+          "description": "CEQ (yes/no) but teacher doesn't wait for a response begins redirecting a child",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) but teacher doesn't wait for a response begins redirecting a child"
+        },
+        {
+          "timestamp": "0:43",
+          "description": "CEQ (yes/no) but doesn't pause for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) but doesn't pause for a response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.0,
+        "overall_score": 0.0,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_6",
+    "video_file": "Launch Cascade Vista Breanna 013.MP4",
+    "asset_id": 161447297,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Launch Cascade Vista Breanna 013.MP4",
+      "age_group": "PK",
+      "description": "Children are working on a project, and the educator provides assistance to help a child finish. At 1:15, the educator reminds a child to stop what he is doing, saying, \"(Child's name), not inside the class, no thank you.\" Other children are also at the table and engage in conversation. The children tell the educator that they are friends and show the educator what they have made. At 2:15, two children begin to discuss a letter, and then one child explains what he made.",
+      "questions": [
+        {
+          "timestamp": "0:08",
+          "description": "CEQ (yes/no) but teacher answers her own question",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) but teacher answers her own question"
+        },
+        {
+          "timestamp": "0:24",
+          "description": "CEQ \"which one is the bottom?\" and waits for child to respond",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ \"which one is the bottom?\" and waits for child to respond"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.1,
+        "overall_score": 0.05,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_7",
+    "video_file": "Conflict Management during Outdoor Play",
+    "asset_id": 159878847,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Conflict Management during Outdoor Play",
+      "age_group": "PK",
+      "description": "This video includes educators engaged in responsive teaching practices with children. The educators use verbal instruction, materials, proximity and conflict resolution strategies to guide children in Problem solving strategies.",
+      "questions": [
+        {
+          "timestamp": "0:01",
+          "description": "CEQ \"whose hat is it?\" brief pause before teacher restates the question in different words",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": true,
+            "rhetorical": false
+          },
+          "quality_score": 0.25,
+          "expert_analysis": "CEQ \"whose hat is it?\" brief pause before teacher restates the question in different words"
+        },
+        {
+          "timestamp": "0:03",
+          "description": "CEQ (yes/no) pauses for response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "CEQ (yes/no) pauses for response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.325,
+        "overall_score": 0.1625,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 2.5,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 1.5,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_8",
+    "video_file": "CDCSA Wenatchee Center Yasmin 035",
+    "asset_id": 158527927,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "CDCSA Wenatchee Center Yasmin 035",
+      "age_group": "PK",
+      "description": "Children are playing outside in the sand area filling up their buckets. One child leaves to water a plant while the other child stays. The educator engages in conversation asking the child his thought process and how to ask the children to share with them. While keeping an eye on the other child the educator fails to notice a child wanting to take the bucket from another child and reacts by saying 'whoa' when a child throws sand in the air. The educator continues to talk to both children.",
+      "questions": [
+        {
+          "timestamp": "0:01",
+          "description": "CEQ (yes/no) teacher waits for response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "CEQ (yes/no) teacher waits for response"
+        },
+        {
+          "timestamp": "0:12",
+          "description": "OEQ, good \"how\" question, teacher listens for a response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.9000000000000001,
+          "expert_analysis": "OEQ, good \"how\" question, teacher listens for a response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 1.0,
+        "avg_question_quality": 0.6500000000000001,
+        "overall_score": 0.6950000000000001,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 5.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 6.0,
+          "encouraging_effort": 4.5,
+          "specific_information": 1.6,
+          "back_and_forth": 7
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 4.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_9",
+    "video_file": "CDCSA Wenatchee Center Karina 021",
+    "asset_id": 158527763,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "CDCSA Wenatchee Center Karina 021",
+      "age_group": "Toddler",
+      "description": "Children are having meal time as educators are serving and talking to the children. Educators assist with serving and asking if children need more food.",
+      "questions": [
+        {
+          "timestamp": "0:18",
+          "description": "CEQ (yes/no) teacher waits for response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "CEQ (yes/no) teacher waits for response"
+        },
+        {
+          "timestamp": "0:31",
+          "description": "CEQ (yes/no) teacher in background asks a question sound is much lower, harder to hear",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) teacher in background asks a question sound is much lower, harder to hear"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.25,
+        "overall_score": 0.125,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 2.5,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 1.5,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_10",
+    "video_file": "Being Aware of a Toddler's Needs",
+    "asset_id": 159878873,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Being Aware of a Toddler's Needs",
+      "age_group": "PK or Toddler?",
+      "description": "This video includes educators engaged in responsive teaching practices with children. The educators use verbal instruction, materials, proximity and conflict resolution strategies to guide children in Problem solving strategies.",
+      "questions": [
+        {
+          "timestamp": "0:02",
+          "description": "OEQ \"what would you like to do? And teacher waits for response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.7,
+          "expert_analysis": "OEQ \"what would you like to do? And teacher waits for response"
+        },
+        {
+          "timestamp": "0:05",
+          "description": "CEQ (yes/no) but teacher answers her own question without waiting for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) but teacher answers her own question without waiting for a response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.35,
+        "overall_score": 0.605,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_11",
+    "video_file": "CDCSA Wenatchee Center Karina 017",
+    "asset_id": 158527757,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "CDCSA Wenatchee Center Karina 017",
+      "age_group": "PK",
+      "description": "Children are playing near an educator as the educator asks which song they want to sing. One of the children has a drum and other one decides to sing 'wheels on the bus,' throughout the song the children decide what to sing next as the educator facilitates the song. A child arrives to the classroom and the child gets up to greet them. The child is able to decide where to play next.",
+      "questions": [
+        {
+          "timestamp": "0:02",
+          "description": "CEQ \"what song could we sing?\" requires only one word response but questions allows for a broad range of responses",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ \"what song could we sing?\" requires only one word response but questions allows for a broad range of responses"
+        },
+        {
+          "timestamp": "0:04",
+          "description": "CEQ, Teacher asks \"what?\" for the child to repeat what he said",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ, Teacher asks \"what?\" for the child to repeat what he said"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.1,
+        "overall_score": 0.05,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_12",
+    "video_file": "CDCSA Sunset Ridge Khani 011",
+    "asset_id": 158526693,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "CDCSA Sunset Ridge Khani 011",
+      "age_group": "PK",
+      "description": "A child is sitting at table with a teacher. The teacher asks the child questions about the material she is playing attempting to engage in a conversation with the child.",
+      "questions": [
+        {
+          "timestamp": "0:06",
+          "description": "OEQ, \"how can...\" and brief pause for child response ",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": true,
+            "rhetorical": false
+          },
+          "quality_score": 0.7500000000000001,
+          "expert_analysis": "OEQ, \"how can...\" and brief pause for child response "
+        },
+        {
+          "timestamp": "0:22",
+          "description": "CEQ, \"how many\u2026\" but doesn\u2019t pause for response and continues talking",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ, \"how many\u2026\" but doesn\u2019t pause for response and continues talking"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.37500000000000006,
+        "overall_score": 0.18750000000000003,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 0.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 1.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_13",
+    "video_file": "Center Street Nancy Coach iPhone 010",
+    "asset_id": 154480223,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Center Street Nancy Coach iPhone 010",
+      "age_group": "PK",
+      "description": "This is a 20-minute video clip filmed by an educational coach of circle time. They sing a song in different ways (fast, loud, silent). 1:45 The educator asks the children for help writing numbers 1-9 on a white board. She then asks them how to form various two-digit numbers. 5:19 She asks them to name opposites. 5:54 She shows the children photos of children with disabilities and asks them what games they could play together. 13:24 She tells them to lie down, and they listen to a song on a speaker while acting out parts. 17:00 They sing another song.",
+      "questions": [
+        {
+          "timestamp": "1:53",
+          "description": "CEQ (yes/no) seemed more rhetorical not really waiting for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": true
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) seemed more rhetorical not really waiting for a response"
+        },
+        {
+          "timestamp": "2:00",
+          "description": "OEQ, \"what do I do?\" teacher waits for children to shoutout response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.7,
+          "expert_analysis": "OEQ, \"what do I do?\" teacher waits for children to shoutout response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.35,
+        "overall_score": 0.605,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_14",
+    "video_file": "Edgewater Early Head Start Martha 036",
+    "asset_id": 152342221,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Edgewater Early Head Start Martha 036",
+      "age_group": "PK",
+      "description": "Main focus: Supporting social and emotional development. Educators paint with preschoolers on an easel.",
+      "questions": [
+        {
+          "timestamp": "0:05",
+          "description": "CEQ (yes/no) waits intently for child response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) waits intently for child response"
+        },
+        {
+          "timestamp": "0:34",
+          "description": "OEQ, \"what else is yellow\" doesn't encourage more than one word but promotes deeper thinking",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4000000000000001,
+          "expert_analysis": "OEQ, \"what else is yellow\" doesn't encourage more than one word but promotes deeper thinking"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.25000000000000006,
+        "overall_score": 0.12500000000000003,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 0.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 1.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_15",
+    "video_file": "Fiddleheads Sarah 038",
+    "asset_id": 129737801,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Fiddleheads Sarah 038",
+      "age_group": "PK",
+      "description": "Outdoor Nature Based Learning Program. Main Focus: Behavioral expectations. An educator leads a group of preschoolers on a trail. They discuss with the children the expectations for their walk.",
+      "questions": [
+        {
+          "timestamp": "0:14",
+          "description": "CEQ teacher looking for a specific answer, pauses for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ teacher looking for a specific answer, pauses for a response"
+        },
+        {
+          "timestamp": "0:17",
+          "description": "CEQ (yes/no) brief pause for response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": true,
+            "rhetorical": false
+          },
+          "quality_score": 0.25,
+          "expert_analysis": "CEQ (yes/no) brief pause for response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.175,
+        "overall_score": 0.0875,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_16",
+    "video_file": "Little Teddys - Jeanette First Walkthrough 015",
+    "asset_id": 94273400,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Little Teddys - Jeanette First Walkthrough 015",
+      "age_group": "PK and Toddler",
+      "description": "Coach is engaged with a group of children, and reading a story & asking questions based on children's interest. Pointing out to images in the book. :30 mark helps child find a seat.",
+      "questions": [
+        {
+          "timestamp": "0:00",
+          "description": "CEQ (yes/no) pause for child response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) pause for child response"
+        },
+        {
+          "timestamp": "0:07",
+          "description": "OEQ, \"what happens when\u2026\" teacher pauses for response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.7,
+          "expert_analysis": "OEQ, \"what happens when\u2026\" teacher pauses for response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.39999999999999997,
+        "overall_score": 0.62,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_17",
+    "video_file": "What Can We Measure_ESP SUBS",
+    "asset_id": 66514411,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "What Can We Measure_ESP SUBS",
+      "age_group": "PK",
+      "description": "in this 1 1/2 minute video, an educator asks children at a large group what types of things they can measure. They then measure their bodies with feet.",
+      "questions": [
+        {
+          "timestamp": "0:05",
+          "description": "OEQ promotoes deeper thinking but not more than one word response, teacher listens to response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.7,
+          "expert_analysis": "OEQ promotoes deeper thinking but not more than one word response, teacher listens to response"
+        },
+        {
+          "timestamp": "0:24",
+          "description": "OEQ, \"what else?\" promotoes deeper thinking but not more than one word response, teacher listens to response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.7,
+          "expert_analysis": "OEQ, \"what else?\" promotoes deeper thinking but not more than one word response, teacher listens to response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 2,
+        "closed_ended_count": 0,
+        "open_ended_ratio": 1.0,
+        "wait_time_ratio": 1.0,
+        "avg_question_quality": 0.7,
+        "overall_score": 0.9400000000000001,
+        "quality_category": "exemplary"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 7,
+          "repetition_extension": 5.0,
+          "advanced_language": 4.0
+        },
+        "quality_feedback": {
+          "scaffolding": 6.0,
+          "encouraging_effort": 6.0,
+          "specific_information": 1.6,
+          "back_and_forth": 7
+        },
+        "concept_development": {
+          "analysis_reasoning": 7,
+          "creating_suggesting": 5.0,
+          "integration": 6.0,
+          "connections_links": 4.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_18",
+    "video_file": "Puddle Jumpers - Debra 054",
+    "asset_id": 65579863,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Puddle Jumpers - Debra 054",
+      "age_group": "PK",
+      "description": "Main focus: The teacher and group of children are sitting on the floor engaging in book reading. The teacher asks questions about children's ability and connects it to the reading. The teacher listen to children's conversations.",
+      "questions": [
+        {
+          "timestamp": "0:01",
+          "description": "CEQ (yes/no) but doesn't pause for a response and goes right into her next question",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) but doesn't pause for a response and goes right into her next question"
+        },
+        {
+          "timestamp": "0:03",
+          "description": "CEQ (yes/no) listens to responses",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) listens to responses"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.05,
+        "overall_score": 0.025,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_19",
+    "video_file": "Offer Resources AIAN_SUBS",
+    "asset_id": 56650940,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Offer Resources AIAN_SUBS",
+      "age_group": "PK",
+      "description": "In this 30-second video, an educator uses a toy orca to talk about whales. She then has children go over to the map and shows them, using the toy orca to show them where they migrate.",
+      "questions": [
+        {
+          "timestamp": "0:13",
+          "description": "CEQ (yes/no) rhetorical dooesn't wait for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": true
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "CEQ (yes/no) rhetorical dooesn't wait for a response"
+        },
+        {
+          "timestamp": "na",
+          "description": "na",
+          "question_type": "unknown",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.0,
+          "expert_analysis": "na"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 0,
+        "closed_ended_count": 2,
+        "open_ended_ratio": 0.0,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.0,
+        "overall_score": 0.0,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 0.0,
+          "repetition_extension": 0.0,
+          "advanced_language": 0.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 0.0,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 0.0,
+          "creating_suggesting": 0.0,
+          "integration": 0.0,
+          "connections_links": 0.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_20",
+    "video_file": "Snoqualmie_Ridge_ELC-Linda-001",
+    "asset_id": 48393993,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Snoqualmie_Ridge_ELC-Linda-001",
+      "age_group": "PK",
+      "description": "Main Focus: Mathematical knowledge and skills. Two preschool-aged girls and a teacher engage in water play at the sensory table. They are using measuring cups and spoons to fill up larger measuring cups. The teacher facilitates learning by asking the children to share what they are doing and what is happening to their cups of water. The teacher encourages the girls to look at the measurements on their cups and read them to see how full they are. There is frequent conversation throughout the video. The teacher provides information about the types of measurements they are using (i.e. \u001c one cup\u001d , \u001c one teaspoon\u001d , etc.) and uses Narration to summarize the girls\u0019 actions. (3:50) The teacher invites two new students to the water table and explains the goals for the activity and some ideas about ways to explore. Throughout the video, there are mid-level examples of Supporting Cognition as the teacher asks open-ended questions and prompts thought processes. The teacher demonstrates high quality emotional support through Caring community and Following Children's Lead.",
+      "questions": [
+        {
+          "timestamp": "0:03",
+          "description": "CEQ (yes/no) waits for child to respond",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) waits for child to respond"
+        },
+        {
+          "timestamp": "0:05",
+          "description": "OEQ, \"how full is it? Teacher pauses for child to respond",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.9000000000000001,
+          "expert_analysis": "OEQ, \"how full is it? Teacher pauses for child to respond"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.5000000000000001,
+        "overall_score": 0.65,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_21",
+    "video_file": "Clarke County School District Lynn 007",
+    "asset_id": 48390102,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Clarke County School District Lynn 007",
+      "age_group": "PK",
+      "description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+      "questions": [
+        {
+          "timestamp": "0:01",
+          "description": "OEQ, \"what do you need help with?\" and teacher listens intently to response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.8999999999999999,
+          "expert_analysis": "OEQ, \"what do you need help with?\" and teacher listens intently to response"
+        },
+        {
+          "timestamp": "0:04",
+          "description": "CEQ (yes/no) listens to responses",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ (yes/no) listens to responses"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.49999999999999994,
+        "overall_score": 0.6499999999999999,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_22",
+    "video_file": "ACAP_Marty_005",
+    "asset_id": 48378879,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "ACAP_Marty_005",
+      "age_group": "PK",
+      "description": "MAIN FOCUS: Science Knowledge and Skills. Teacher at circle time preparing children for transition and explaining one of the activities. Has a child come up and demonstrate how to use \\\"magic\\\" magnifying glasses 0:00-3:38. Has second child model/demonstrate 3:50-6:08. Uses word \\\"lens\\\" at 0:35, \\\"transparent\\\" at 1:36. Ties lens to book they read 1:10. Spanish for red 2:53, 2:55,; blue 4:25. Reminds children not to laugh at one another, hurt feelings 1:46.",
+      "questions": [
+        {
+          "timestamp": "2:13",
+          "description": "CEQ and listens for a response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.1,
+          "expert_analysis": "CEQ and listens for a response"
+        },
+        {
+          "timestamp": "2:22",
+          "description": "OEQ, \"What do you think\u2026?\" but doesn't pause before repeating the question",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.30000000000000004,
+          "expert_analysis": "OEQ, \"What do you think\u2026?\" but doesn't pause before repeating the question"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.0,
+        "avg_question_quality": 0.2,
+        "overall_score": 0.1,
+        "quality_category": "needs_improvement"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 0.0,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 0.0,
+          "encouraging_effort": 1.5,
+          "specific_information": 1.6,
+          "back_and_forth": 0.0
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 1.5,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_23",
+    "video_file": "childrens_place_zaid_006",
+    "asset_id": 48385321,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "childrens_place_zaid_006",
+      "age_group": "PK",
+      "description": "A teacher and three students are in the main classroom area. 0:00-0:21/The teacher sings a song for students to get into a circle and sit down.0:22-1:32/The teacher leads a discussion referencing their \\&quot;sink and float\\&quot;&quot; chart. He goes down the list of items and asks the children questions regarding sink",
+      "questions": [
+        {
+          "timestamp": "0:22",
+          "description": "OEQ, \"what did we learn?\" but teacher does not pause for response before continuing to talk",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "OEQ, \"what did we learn?\" but teacher does not pause for response before continuing to talk"
+        },
+        {
+          "timestamp": "0:27",
+          "description": "CEQ, \"some tihngs what?\" and pauses for response",
+          "question_type": "closed_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.4,
+          "expert_analysis": "CEQ, \"some tihngs what?\" and pauses for response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 1,
+        "closed_ended_count": 1,
+        "open_ended_ratio": 0.5,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.4,
+        "overall_score": 0.62,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 3.5,
+          "repetition_extension": 2.5,
+          "advanced_language": 2.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 3.0,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 3.5,
+          "creating_suggesting": 2.5,
+          "integration": 3.0,
+          "connections_links": 2.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  },
+  {
+    "id": "expert_annotation_24",
+    "video_file": "Draw Results",
+    "asset_id": 48386726,
+    "source": "expert_annotations",
+    "analysis": {
+      "video_title": "Draw Results",
+      "age_group": "PK",
+      "description": "In this 30-second video an educator asks child what is different about two items drawn.",
+      "questions": [
+        {
+          "timestamp": "0:01",
+          "description": "OEQ, \"what is different\u2026?\" but doesn't pause for response before rewording her question",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": false,
+            "no_wait_time": true,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.30000000000000004,
+          "expert_analysis": "OEQ, \"what is different\u2026?\" but doesn't pause for response before rewording her question"
+        },
+        {
+          "timestamp": "0:03",
+          "description": "Good OEQ, \"how do they look different?\", and pauses for response",
+          "question_type": "open_ended",
+          "wait_time": {
+            "waits_for_response": true,
+            "no_wait_time": false,
+            "brief_pause": false,
+            "rhetorical": false
+          },
+          "quality_score": 0.9000000000000001,
+          "expert_analysis": "Good OEQ, \"how do they look different?\", and pauses for response"
+        }
+      ],
+      "metrics": {
+        "total_questions": 2,
+        "open_ended_count": 2,
+        "closed_ended_count": 0,
+        "open_ended_ratio": 1.0,
+        "wait_time_ratio": 0.5,
+        "avg_question_quality": 0.6000000000000001,
+        "overall_score": 0.68,
+        "quality_category": "good"
+      },
+      "class_framework": {
+        "language_modeling": {
+          "frequent_conversations": 3.0,
+          "open_ended_questions": 7,
+          "repetition_extension": 2.5,
+          "advanced_language": 4.0
+        },
+        "quality_feedback": {
+          "scaffolding": 3.0,
+          "encouraging_effort": 4.5,
+          "specific_information": 1.6,
+          "back_and_forth": 3.5
+        },
+        "concept_development": {
+          "analysis_reasoning": 7,
+          "creating_suggesting": 5.0,
+          "integration": 4.5,
+          "connections_links": 4.0
+        }
+      },
+      "expert_validated": true,
+      "annotation_source": "cultivate_learning_researchers"
+    },
+    "created_at": "2025-09-23",
+    "data_quality": "expert_validated",
+    "research_basis": [
+      "Cultivate Learning Expert Annotations",
+      "CLASS Framework Application",
+      "Open-ended Question Research",
+      "Wait Time Best Practices"
+    ]
+  }
+]
