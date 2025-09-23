@@ -1,0 +1,207 @@
+name: Security Monitoring (Async)
+
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main, dev ]
+  schedule:
+    # Run CodeQL analysis twice daily
+    - cron: '0 6,18 * * *'
+  workflow_dispatch:
+
+jobs:
+  codeql-analysis:
+    name: CodeQL Security Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'python' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v2
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-extended,security-and-quality
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v2
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v2
+      with:
+        category: "/language:${{matrix.language}}"
+
+  security-check:
+    name: Security Vulnerability Check
+    runs-on: ubuntu-latest
+    needs: codeql-analysis
+    if: always()
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for rollback
+
+    - name: Check for Critical Security Issues
+      id: security-check
+      run: |
+        # Check if CodeQL found any critical/high severity issues
+        echo "Checking security scan results..."
+
+        # Get the latest security alerts
+        CRITICAL_ALERTS=$(gh api repos/${{ github.repository }}/code-scanning/alerts \
+          --jq '[.[] | select(.rule.security_severity_level == "critical" or .rule.security_severity_level == "high") | select(.state == "open")] | length')
+
+        echo "Critical/High alerts found: $CRITICAL_ALERTS"
+        echo "critical_count=$CRITICAL_ALERTS" >> $GITHUB_OUTPUT
+
+        if [ "$CRITICAL_ALERTS" -gt 0 ]; then
+          echo "🚨 CRITICAL SECURITY ISSUES DETECTED!"
+          echo "security_breach=true" >> $GITHUB_OUTPUT
+        else
+          echo "✅ No critical security issues found"
+          echo "security_breach=false" >> $GITHUB_OUTPUT
+        fi
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Create Security Alert Issue
+      if: steps.security-check.outputs.security_breach == 'true'
+      run: |
+        gh issue create \
+          --title "🚨 CRITICAL SECURITY ALERT - Immediate Action Required" \
+          --label "security,critical,alert" \
+          --assignee "${{ github.repository_owner }}" \
+          --body "## 🚨 Critical Security Issues Detected
+
+        **Repository**: ${{ github.repository }}
+        **Branch**: ${{ github.ref_name }}
+        **Commit**: ${{ github.sha }}
+        **Detected**: $(date -u)
+
+        ### Summary
+        CodeQL has detected **${{ steps.security-check.outputs.critical_count }}** critical/high severity security issues.
+
+        ### Immediate Actions Required
+        1. 🔍 Review security alerts: https://github.com/${{ github.repository }}/security/code-scanning
+        2. 🛡️ Assess impact and severity
+        3. 🔄 Consider emergency rollback if in production
+        4. 🔧 Apply security patches immediately
+
+        ### Auto-Rollback Status
+        - **Branch**: ${{ github.ref_name }}
+        - **Previous Safe Commit**: $(git rev-parse HEAD~1)
+        - **Rollback Available**: $(if [ '${{ github.ref_name }}' == 'main' ]; then echo 'YES - Production rollback ready'; else echo 'N/A - Development branch'; fi)
+
+        ### Detection Details
+        - **Workflow**: ${{ github.workflow }}
+        - **Run ID**: ${{ github.run_id }}
+        - **Triggered by**: ${{ github.event_name }}
+
+        **⚠️ DO NOT IGNORE THIS ALERT ⚠️**
+
+        This issue was automatically created by the Security Monitoring workflow."
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Trigger Emergency Rollback (Production)
+      if: steps.security-check.outputs.security_breach == 'true' && github.ref_name == 'main'
+      run: |
+        echo "🚨 INITIATING EMERGENCY ROLLBACK FOR PRODUCTION"
+
+        # Get the previous safe commit
+        SAFE_COMMIT=$(git rev-parse HEAD~1)
+        echo "Rolling back to commit: $SAFE_COMMIT"
+
+        # Create emergency rollback branch
+        ROLLBACK_BRANCH="emergency-rollback-$(date +%s)"
+        git checkout -b "$ROLLBACK_BRANCH" "$SAFE_COMMIT"
+        git push origin "$ROLLBACK_BRANCH"
+
+        # Create emergency rollback PR
+        gh pr create \
+          --base main \
+          --head "$ROLLBACK_BRANCH" \
+          --title "🚨 EMERGENCY ROLLBACK - Security Breach Detected" \
+          --label "emergency,rollback,security" \
+          --assignee "${{ github.repository_owner }}" \
+          --body "## 🚨 EMERGENCY SECURITY ROLLBACK
+
+        **CRITICAL**: This PR rolls back production to a safe state due to security vulnerabilities.
+
+        ### Security Breach Details
+        - **Critical Issues**: ${{ steps.security-check.outputs.critical_count }}
+        - **Dangerous Commit**: ${{ github.sha }}
+        - **Safe Rollback Target**: $SAFE_COMMIT
+        - **Detection Time**: $(date -u)
+
+        ### What This PR Does
+        - Reverts production to last known safe commit
+        - Removes vulnerable code from production
+        - Maintains service availability while securing environment
+
+        ### Required Actions
+        1. **REVIEW IMMEDIATELY** - Check security alerts
+        2. **MERGE ASAP** - Restore production security
+        3. **INVESTIGATE** - Root cause analysis
+        4. **PATCH** - Fix vulnerabilities before re-deployment
+
+        **🔴 THIS IS AN AUTOMATED EMERGENCY RESPONSE 🔴**
+
+        Auto-generated by Security Monitoring workflow."
+
+        echo "Emergency rollback PR created: $ROLLBACK_BRANCH"
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Notify Slack/Teams (if configured)
+      if: steps.security-check.outputs.security_breach == 'true'
+      run: |
+        echo "🚨 Security breach notification would be sent here"
+        echo "Configure SLACK_WEBHOOK or TEAMS_WEBHOOK secrets for real notifications"
+        # Example webhook notification:
+        # curl -X POST -H 'Content-type: application/json' \
+        #   --data '{"text":"🚨 CRITICAL SECURITY ALERT in ${{ github.repository }}"}' \
+        #   ${{ secrets.SLACK_WEBHOOK }}
+
+  security-report:
+    name: Security Status Report
+    runs-on: ubuntu-latest
+    needs: [codeql-analysis, security-check]
+    if: always()
+
+    steps:
+    - name: Generate Security Summary
+      run: |
+        echo "## 🛡️ Security Monitoring Report" >> $GITHUB_STEP_SUMMARY
+        echo "**Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Branch**: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Commit**: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Scan Time**: $(date -u)" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+
+        if [ "${{ needs.security-check.outputs.security_breach }}" == "true" ]; then
+          echo "### 🚨 CRITICAL SECURITY ISSUES DETECTED" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ❌ SECURITY BREACH" >> $GITHUB_STEP_SUMMARY
+          echo "- **Critical Issues**: ${{ needs.security-check.outputs.critical_count }}" >> $GITHUB_STEP_SUMMARY
+          echo "- **Action Taken**: Emergency protocols activated" >> $GITHUB_STEP_SUMMARY
+        else
+          echo "### ✅ Security Status: CLEAN" >> $GITHUB_STEP_SUMMARY
+          echo "- **Status**: ✅ NO CRITICAL ISSUES" >> $GITHUB_STEP_SUMMARY
+          echo "- **CodeQL**: Analysis completed successfully" >> $GITHUB_STEP_SUMMARY
+        fi
+
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "**Next Scheduled Scan**: $(date -d '+12 hours' -u)" >> $GITHUB_STEP_SUMMARY

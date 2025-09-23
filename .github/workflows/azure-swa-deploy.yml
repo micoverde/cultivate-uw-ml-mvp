@@ -1,5 +1,8 @@
 name: Azure Static Web Apps CI/CD
 
+# This workflow deploys immediately without waiting for security scans
+# Security monitoring runs asynchronously and will trigger rollback if issues found
+
 on:
   push:
     branches:

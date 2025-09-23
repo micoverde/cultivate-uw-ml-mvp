@@ -149,20 +149,69 @@ git push -u origin hotfix/critical-issue
 gh pr create --base main --title "HOTFIX: Critical Issue"
 ```
 
-## 🔒 Branch Protection Summary
+## 🔒 Branch Protection & Security Architecture
 
 ### main Branch Protection
 - ✅ Require pull request reviews (1 required)
+- ✅ Require code owner reviews (@micoverde approval)
 - ✅ Dismiss stale PR reviews when new commits pushed
-- ✅ Require status checks: "Build and Deploy Job" (Azure CI/CD)
+- ✅ Require status checks: "Fast CI" (immediate feedback)
 - ✅ Require branches to be up-to-date before merging
 - ❌ Include administrators in restrictions (for emergency access)
 
 ### dev Branch Protection
 - ✅ Require pull request reviews (1 required)
+- ✅ Require code owner reviews (@micoverde approval)
 - ✅ Dismiss stale PR reviews when new commits pushed
-- ❌ Required status checks (allows faster iteration)
+- ✅ Required status checks: "Fast CI" (basic validation)
 - ❌ Administrator restrictions (team flexibility)
+
+## 🛡️ Asynchronous Security Monitoring
+
+### Security Architecture Philosophy
+**Fast Deploy + Async Security + Auto Rollback**
+
+1. **Fast CI** (~2-3 minutes): Basic validation, syntax checks, build verification
+2. **Azure Deployment** (~5 minutes): Immediate deployment to staging/production
+3. **Security Monitoring** (~10-15 minutes): Comprehensive CodeQL analysis
+4. **Auto-Rollback** (if needed): Emergency rollback if critical issues detected
+
+### Security Workflows
+
+#### Fast CI (Blocking - Required for PRs)
+- ✅ Python syntax validation
+- ✅ Frontend build verification
+- ✅ Basic security checks (secrets, debug code)
+- ⏱️ **Duration**: 2-3 minutes
+- 🚦 **Blocks**: PR merging
+
+#### Security Monitoring (Non-blocking - Async)
+- 🔍 **CodeQL Analysis**: JavaScript + Python security scanning
+- 🕒 **Schedule**: Every 12 hours + on every push
+- 📊 **Severity**: Critical/High alerts trigger emergency response
+- ⏱️ **Duration**: 10-15 minutes
+- 🚦 **Blocks**: Nothing (runs asynchronously)
+
+#### Emergency Response (Automatic)
+- 🚨 **Trigger**: Critical/High severity security issues detected
+- 📝 **Alert**: Creates GitHub issue with security details
+- 🔄 **Rollback**: Auto-creates emergency rollback PR for main branch
+- 📢 **Notification**: Alerts via GitHub + optional Slack/Teams
+- ⚡ **Speed**: Immediate response upon detection
+
+### Security Alert Response Procedure
+
+#### Automatic Actions (No human intervention)
+1. **Detection**: CodeQL finds critical security issue
+2. **Alert**: GitHub issue created with details
+3. **Rollback**: Emergency PR created from safe commit
+4. **Notification**: Stakeholders notified
+
+#### Manual Actions Required
+1. **Review**: Check security alerts and assess impact
+2. **Merge**: Approve emergency rollback PR if needed
+3. **Investigate**: Root cause analysis of security issue
+4. **Patch**: Fix vulnerabilities before re-deployment
 
 ## 🎯 SPRINT 2b Specific Guidelines
 
