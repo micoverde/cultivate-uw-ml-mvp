@@ -1,0 +1,20 @@
+{
+  "name": "cultivate-uw-ml-api",
+  "version": "1.0.0",
+  "description": "Azure Functions API for Cultivate Learning ML MVP",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'Azure Functions API build complete'",
+    "start": "func start",
+    "test": "echo 'API tests not yet implemented'"
+  },
+  "dependencies": {
+    "@azure/functions": "^4.0.0"
+  },
+  "devDependencies": {
+    "azure-functions-core-tools": "^4.0.5455"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
