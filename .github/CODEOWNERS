@@ -1,0 +1,27 @@
+# CODEOWNERS file for Cultivate Learning ML MVP
+#
+# This file defines who must review and approve changes to different parts of the codebase.
+# As the repo owner, Warren (@micoverde) must approve all external contributions.
+# Team members can be added as additional reviewers for specific areas.
+
+# Global rule: Warren must approve all changes
+* @micoverde
+
+# Critical infrastructure requires Warren's approval
+/.github/ @micoverde
+/docs/ @micoverde
+*.yml @micoverde
+*.yaml @micoverde
+
+# Security-sensitive files require Warren's approval
+/src/data_pipeline/ @micoverde
+/scripts/ @micoverde
+
+# Team-specific areas (Warren + specialist)
+# ML models and training
+/src/ml_models/ @micoverde
+# API and backend
+/src/api/ @micoverde
+# Frontend components
+/demo/ @micoverde
+/frontend/ @micoverde
