@@ -1,5 +1,9 @@
 # 🚀 Azure Static Web Apps Setup Guide
 
+## ⚠️ INFRASTRUCTURE SETUP REQUIRED
+
+**IMPORTANT**: Azure infrastructure does NOT yet exist for this project. You must create the Azure Static Web App resource first before deployments can work. Follow the steps below to set up the required infrastructure.
+
 ## 📋 Overview
 
 This guide covers the complete Azure Static Web Apps (SWA) setup for the Cultivate Learning ML MVP, including GitHub integration, environment configuration, and deployment workflows.
@@ -23,15 +27,17 @@ GitHub Repository → Azure SWA → Production Deployment
 
 ### 1. Create Azure Static Web App Resource
 
+⚠️ **REQUIRED FIRST STEP**: This Azure resource does NOT exist yet and must be created.
+
 #### Via Azure Portal
 1. Navigate to [Azure Portal](https://portal.azure.com)
 2. Click "Create a resource" → "Static Web App"
 3. Configure the resource:
    - **Subscription**: Your Azure subscription
-   - **Resource Group**: Create new or use existing
-   - **Name**: `cultivate-uw-ml-mvp`
+   - **Resource Group**: Create new or use existing (suggested: `cultivate-ml-rg`)
+   - **Name**: `cultivate-uw-ml-mvp` (CRITICAL: use this exact name)
    - **Plan Type**: Free (for development) or Standard (for production)
-   - **Region**: Choose closest to your users
+   - **Region**: Choose closest to your users (suggested: East US)
    - **Source**: GitHub
    - **GitHub Account**: Authenticate and select account
    - **Organization**: `micoverde`
@@ -41,6 +47,8 @@ GitHub Repository → Azure SWA → Production Deployment
    - **App location**: `/demo`
    - **API location**: `/api`
    - **Output location**: `dist`
+
+⚠️ **IMPORTANT**: After creation, the Azure portal will automatically create a deployment token. This token MUST be added to GitHub secrets as `AZURE_STATIC_WEB_APPS_API_TOKEN`.
 
 #### Via Azure CLI
 ```bash
