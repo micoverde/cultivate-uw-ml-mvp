@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import CLASSDashboard from './CLASSDashboard';
 import ScaffoldingVisualization from './ScaffoldingVisualization';
+import EnhancedRecommendations from './EnhancedRecommendations';
 
 const AnalysisResults = ({ results, onStartNew }) => {
   const {
@@ -20,6 +21,7 @@ const AnalysisResults = ({ results, onStartNew }) => {
     class_scores,
     scaffolding_analysis,
     recommendations,
+    enhanced_recommendations,
     processing_time,
     completed_at
   } = results;
@@ -204,30 +206,11 @@ const AnalysisResults = ({ results, onStartNew }) => {
             </div>
           </div>
 
-          {/* Recommendations */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="flex items-center mb-4">
-              <CheckCircle className="h-5 w-5 text-green-600 mr-2" />
-              <h3 className="text-lg font-semibold text-gray-900">Recommendations</h3>
-            </div>
-
-            <div className="space-y-3">
-              {recommendations.map((recommendation, index) => (
-                <div key={index} className="flex items-start p-3 bg-blue-50 rounded-lg">
-                  <div className="flex-shrink-0 w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                    <span className="text-xs font-medium text-blue-600">{index + 1}</span>
-                  </div>
-                  <p className="text-sm text-gray-700 leading-relaxed">{recommendation}</p>
-                </div>
-              ))}
-            </div>
-
-            {recommendations.length === 0 && (
-              <p className="text-sm text-gray-500 italic">
-                Great work! No specific recommendations at this time.
-              </p>
-            )}
-          </div>
+          {/* Enhanced Recommendations */}
+          <EnhancedRecommendations
+            enhancedRecommendations={enhanced_recommendations}
+            legacyRecommendations={recommendations}
+          />
 
           {/* Research Context */}
           <div className="bg-white rounded-lg shadow-lg p-6">

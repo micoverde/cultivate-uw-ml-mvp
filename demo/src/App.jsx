@@ -3,9 +3,10 @@ import { Brain, Users, Camera, Mic, BarChart3, Heart } from 'lucide-react';
 import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
 import MockAnalysisTest from './components/MockAnalysisTest';
+import MockRecommendationsTest from './components/MockRecommendationsTest';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results', 'recommendations'
   const [analysisResults, setAnalysisResults] = useState(null);
 
   const handleTryDemo = () => {
@@ -28,6 +29,10 @@ function App() {
   };
 
   // Render different views based on current state
+  if (currentView === 'recommendations') {
+    return <MockRecommendationsTest />;
+  }
+
   if (currentView === 'demo') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
