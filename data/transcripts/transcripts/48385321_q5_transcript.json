@@ -1,0 +1,129 @@
+{
+  "clip_id": "48385321_q5",
+  "clip_filename": "48385321_q5.wav",
+  "original_video": "childrens_place_zaid_006",
+  "timestamp_range": "53.0-58.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "How did the can feel? Did it feel very heavy or very light?",
+      "start": 0.9600000000000009,
+      "end": 4.92,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 0.9600000000000009,
+          "end": 1.4800000000000004,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " did",
+          "start": 1.4800000000000004,
+          "end": 2.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 2.0,
+          "end": 2.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " can",
+          "start": 2.16,
+          "end": 2.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " feel?",
+          "start": 2.42,
+          "end": 2.74,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Did",
+          "start": 2.8,
+          "end": 2.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it",
+          "start": 2.92,
+          "end": 3.1,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " feel",
+          "start": 3.1,
+          "end": 3.24,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " very",
+          "start": 3.24,
+          "end": 3.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " heavy",
+          "start": 3.72,
+          "end": 4.04,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " or",
+          "start": 4.04,
+          "end": 4.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " very",
+          "start": 4.36,
+          "end": 4.76,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " light?",
+          "start": 4.76,
+          "end": 4.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.6711480352613661
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "How did the can feel? Did it feel very heavy or very light?"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ with only two options for response, teacher pauses for response",
+    "age_group": "PK",
+    "video_description": "A teacher and three students are in the main classroom area. 0:00-0:21/The teacher sings a song for students to get into a circle and sit down.0:22-1:32/The teacher leads a discussion referencing their \\&quot;sink and float\\&quot;&quot; chart. He goes down the list of items and asks the children questions regarding sink",
+    "original_timestamp": "0:55",
+    "asset_number": "48385321"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.6711480352613661,
+    "num_speakers": 0,
+    "total_words": 13,
+    "processing_timestamp": "2025-09-24T12:23:57.220586"
+  }
+}

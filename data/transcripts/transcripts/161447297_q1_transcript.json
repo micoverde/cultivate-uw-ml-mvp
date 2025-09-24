@@ -1,0 +1,73 @@
+{
+  "clip_id": "161447297_q1",
+  "clip_filename": "161447297_q1.wav",
+  "original_video": "Launch Cascade Vista Breanna 013.MP4",
+  "timestamp_range": "6.0-11.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Whoever starts with the water!",
+      "start": 0.0,
+      "end": 1.02,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Whoever",
+          "start": 0.0,
+          "end": 0.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " starts",
+          "start": 0.42,
+          "end": 0.74,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " with",
+          "start": 0.74,
+          "end": 0.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 0.98,
+          "end": 1.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " water!",
+          "start": 1.0,
+          "end": 1.02,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.2881967226664225
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Whoever starts with the water!"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) but teacher answers her own question",
+    "age_group": "PK",
+    "video_description": "Children are working on a project, and the educator provides assistance to help a child finish. At 1:15, the educator reminds a child to stop what he is doing, saying, \"(Child's name), not inside the class, no thank you.\" Other children are also at the table and engage in conversation. The children tell the educator that they are friends and show the educator what they have made. At 2:15, two children begin to discuss a letter, and then one child explains what he made.",
+    "original_timestamp": "0:08",
+    "asset_number": "161447297"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.2881967226664225,
+    "num_speakers": 0,
+    "total_words": 5,
+    "processing_timestamp": "2025-09-24T12:03:30.647406"
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "clip_id": "161524537_q1",
+  "clip_filename": "161524537_q1.wav",
+  "original_video": "YWCA Bessie T Draper Jeanette 099.mp4",
+  "timestamp_range": "8.0-13.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "I said maybe my bear is up in the moon.",
+      "start": 0.0,
+      "end": 3.56,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " I",
+          "start": 0.0,
+          "end": 0.1,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " said",
+          "start": 0.1,
+          "end": 0.34,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " maybe",
+          "start": 0.34,
+          "end": 1.1,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " my",
+          "start": 1.1,
+          "end": 1.56,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " bear",
+          "start": 1.56,
+          "end": 1.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " is",
+          "start": 1.84,
+          "end": 2.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " up",
+          "start": 2.14,
+          "end": 2.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " in",
+          "start": 2.58,
+          "end": 3.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 3.0,
+          "end": 3.26,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " moon.",
+          "start": 3.26,
+          "end": 3.56,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5877243518829346
+    },
+    {
+      "text": "See the moon?",
+      "start": 3.74,
+      "end": 4.38,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " See",
+          "start": 3.74,
+          "end": 3.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 3.86,
+          "end": 4.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " moon?",
+          "start": 4.14,
+          "end": 4.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5877243518829346
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "I said maybe my bear is up in the moon.",
+      "See the moon?"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) but teacher doesn't wait for a response begins redirecting a child",
+    "age_group": "INFANT AND TODDLER",
+    "video_description": "In this video, an educator sits on a chair reading a book out loud. Another adult sits on the floor supporting the children. The educator reading out loud has to stop and ask a child to sit down. She continues reading and the toddlers are engaged, pointing at the pages and babbling/talking out loud. The children continue to move around as she reads but they remain engaged.",
+    "original_timestamp": "0:10",
+    "asset_number": "161524537"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5877243518829346,
+    "num_speakers": 0,
+    "total_words": 13,
+    "processing_timestamp": "2025-09-24T12:02:41.381030"
+  }
+}

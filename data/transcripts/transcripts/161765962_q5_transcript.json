@@ -1,0 +1,128 @@
+{
+  "clip_id": "161765962_q5",
+  "clip_filename": "161765962_q5.wav",
+  "original_video": "Launch Highland Park 004.mp4",
+  "timestamp_range": "36.0-41.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Yes.",
+      "start": 0.0,
+      "end": 0.8,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Yes.",
+          "start": 0.0,
+          "end": 0.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4682677008888938
+    },
+    {
+      "text": "All about unity, right?",
+      "start": 1.38,
+      "end": 3.22,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " All",
+          "start": 1.38,
+          "end": 2.02,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " about",
+          "start": 2.02,
+          "end": 2.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " unity,",
+          "start": 2.42,
+          "end": 2.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " right?",
+          "start": 3.08,
+          "end": 3.22,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4682677008888938
+    },
+    {
+      "text": "We've been talking about unity.",
+      "start": 3.3,
+      "end": 4.62,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " We've",
+          "start": 3.3,
+          "end": 3.5,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " been",
+          "start": 3.5,
+          "end": 3.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " talking",
+          "start": 3.58,
+          "end": 3.88,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " about",
+          "start": 3.88,
+          "end": 4.2,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " unity.",
+          "start": 4.2,
+          "end": 4.62,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4682677008888938
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Yes.",
+      "All about unity, right?",
+      "We've been talking about unity."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) without a pause for response teacher keeps talking",
+    "age_group": "PK",
+    "video_description": "The children are sitting down eating snack. An educator sits at the end of the table and asks children questions. She also narrates and positive behavior support. She asks several children specific follow up questions.",
+    "original_timestamp": "0:38",
+    "asset_number": "161765962"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.4682677008888938,
+    "num_speakers": 0,
+    "total_words": 10,
+    "processing_timestamp": "2025-09-24T12:02:25.295611"
+  }
+}

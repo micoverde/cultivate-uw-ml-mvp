@@ -1,0 +1,136 @@
+{
+  "clip_id": "129737801_q1",
+  "clip_filename": "129737801_q1.wav",
+  "original_video": "Fiddleheads Sarah 038",
+  "timestamp_range": "12.0-17.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Okay, I was gonna say, oh, what kind of feet are we gonna use?",
+      "start": 0.5399999999999997,
+      "end": 3.18,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Okay,",
+          "start": 0.5399999999999997,
+          "end": 0.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " I",
+          "start": 1.02,
+          "end": 1.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " was",
+          "start": 1.16,
+          "end": 1.24,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " gonna",
+          "start": 1.24,
+          "end": 1.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " say,",
+          "start": 1.38,
+          "end": 1.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " oh,",
+          "start": 1.6,
+          "end": 1.7,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " what",
+          "start": 1.84,
+          "end": 1.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " kind",
+          "start": 1.92,
+          "end": 2.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " of",
+          "start": 2.14,
+          "end": 2.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " feet",
+          "start": 2.28,
+          "end": 2.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " are",
+          "start": 2.38,
+          "end": 2.52,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we",
+          "start": 2.52,
+          "end": 2.66,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " gonna",
+          "start": 2.66,
+          "end": 2.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " use?",
+          "start": 2.82,
+          "end": 3.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5143231891450428
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Okay, I was gonna say, oh, what kind of feet are we gonna use?"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ teacher looking for a specific answer, pauses for a response",
+    "age_group": "PK",
+    "video_description": "Outdoor Nature Based Learning Program. Main Focus: Behavioral expectations. An educator leads a group of preschoolers on a trail. They discuss with the children the expectations for their walk.",
+    "original_timestamp": "0:14",
+    "asset_number": "129737801"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5143231891450428,
+    "num_speakers": 0,
+    "total_words": 14,
+    "processing_timestamp": "2025-09-24T12:13:09.384094"
+  }
+}

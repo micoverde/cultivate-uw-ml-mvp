@@ -1,0 +1,143 @@
+{
+  "clip_id": "48390102_q4",
+  "clip_filename": "48390102_q4.wav",
+  "original_video": "Clarke County School District Lynn 007",
+  "timestamp_range": "14.0-19.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "over. Did you hear that big sentence and that lovely voice? She said it so.",
+      "start": 0.0,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " over.",
+          "start": 0.0,
+          "end": 0.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Did",
+          "start": 1.2,
+          "end": 1.34,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.34,
+          "end": 1.46,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " hear",
+          "start": 1.46,
+          "end": 1.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " that",
+          "start": 1.54,
+          "end": 1.74,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " big",
+          "start": 1.74,
+          "end": 1.94,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " sentence",
+          "start": 1.94,
+          "end": 2.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " and",
+          "start": 2.36,
+          "end": 2.6,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " that",
+          "start": 2.6,
+          "end": 2.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " lovely",
+          "start": 2.84,
+          "end": 3.26,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " voice?",
+          "start": 3.26,
+          "end": 3.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " She",
+          "start": 4.26,
+          "end": 4.48,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " said",
+          "start": 4.48,
+          "end": 4.68,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it",
+          "start": 4.68,
+          "end": 4.9,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " so.",
+          "start": 4.9,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.6396785009474981
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "over. Did you hear that big sentence and that lovely voice? She said it so."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) seemed rhetorical more like pointing out a positive behavior",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+    "original_timestamp": "0:16",
+    "asset_number": "48390102"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.6396785009474981,
+    "num_speakers": 0,
+    "total_words": 15,
+    "processing_timestamp": "2025-09-24T12:20:22.847669"
+  }
+}

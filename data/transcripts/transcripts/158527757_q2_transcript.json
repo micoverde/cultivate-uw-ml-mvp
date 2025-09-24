@@ -1,0 +1,169 @@
+{
+  "clip_id": "158527757_q2",
+  "clip_filename": "158527757_q2.wav",
+  "original_video": "CDCSA Wenatchee Center Karina 017",
+  "timestamp_range": "2.0-7.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "What song could we sing this morning?",
+      "start": 0.0,
+      "end": 1.4,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " What",
+          "start": 0.0,
+          "end": 0.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " song",
+          "start": 0.14,
+          "end": 0.4,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " could",
+          "start": 0.4,
+          "end": 0.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we",
+          "start": 0.54,
+          "end": 0.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " sing",
+          "start": 0.72,
+          "end": 0.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " this",
+          "start": 0.92,
+          "end": 1.2,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " morning?",
+          "start": 1.2,
+          "end": 1.4,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.48761987686157227
+    },
+    {
+      "text": "Kaki.",
+      "start": 1.76,
+      "end": 2.06,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Kaki.",
+          "start": 1.76,
+          "end": 2.06,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.48761987686157227
+    },
+    {
+      "text": "What?",
+      "start": 2.62,
+      "end": 3.0,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " What?",
+          "start": 2.62,
+          "end": 3.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.48761987686157227
+    },
+    {
+      "text": "Kaki.",
+      "start": 3.42,
+      "end": 3.86,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Kaki.",
+          "start": 3.42,
+          "end": 3.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.48761987686157227
+    },
+    {
+      "text": "OK, you start.",
+      "start": 4.22,
+      "end": 4.94,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " OK,",
+          "start": 4.22,
+          "end": 4.4,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 4.5,
+          "end": 4.74,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " start.",
+          "start": 4.74,
+          "end": 4.94,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.48761987686157227
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "What song could we sing this morning?",
+      "Kaki.",
+      "What?",
+      "Kaki.",
+      "OK, you start."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ, Teacher asks \"what?\" for the child to repeat what he said",
+    "age_group": "PK",
+    "video_description": "Children are playing near an educator as the educator asks which song they want to sing. One of the children has a drum and other one decides to sing 'wheels on the bus,' throughout the song the children decide what to sing next as the educator facilitates the song. A child arrives to the classroom and the child gets up to greet them. The child is able to decide where to play next.",
+    "original_timestamp": "0:04",
+    "asset_number": "158527757"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.48761987686157227,
+    "num_speakers": 0,
+    "total_words": 13,
+    "processing_timestamp": "2025-09-24T12:09:32.656777"
+  }
+}

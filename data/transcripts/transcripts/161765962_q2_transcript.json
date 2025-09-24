@@ -1,0 +1,80 @@
+{
+  "clip_id": "161765962_q2",
+  "clip_filename": "161765962_q2.wav",
+  "original_video": "Launch Highland Park 004.mp4",
+  "timestamp_range": "2.0-7.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "next? Are you gonna eat it?",
+      "start": 0.0,
+      "end": 2.86,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " next?",
+          "start": 0.0,
+          "end": 0.64,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Are",
+          "start": 1.74,
+          "end": 1.76,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.76,
+          "end": 1.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " gonna",
+          "start": 1.92,
+          "end": 2.1,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " eat",
+          "start": 2.1,
+          "end": 2.32,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it?",
+          "start": 2.32,
+          "end": 2.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4446260278875177
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "next? Are you gonna eat it?"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "Teacher gets more specific with her 1st question by turning it into a CEQ (yes/no)",
+    "age_group": "PK",
+    "video_description": "The children are sitting down eating snack. An educator sits at the end of the table and asks children questions. She also narrates and positive behavior support. She asks several children specific follow up questions.",
+    "original_timestamp": "0:04",
+    "asset_number": "161765962"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.4446260278875177,
+    "num_speakers": 0,
+    "total_words": 6,
+    "processing_timestamp": "2025-09-24T12:01:43.847431"
+  }
+}

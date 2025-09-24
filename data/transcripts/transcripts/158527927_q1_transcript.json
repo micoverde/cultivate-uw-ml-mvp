@@ -1,0 +1,104 @@
+{
+  "clip_id": "158527927_q1",
+  "clip_filename": "158527927_q1.wav",
+  "original_video": "CDCSA Wenatchee Center Yasmin 035",
+  "timestamp_range": "0.0-4.0",
+  "duration": 4.0,
+  "transcript_segments": [
+    {
+      "text": "You want this one?",
+      "start": 0.0,
+      "end": 1.12,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " You",
+          "start": 0.0,
+          "end": 0.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " want",
+          "start": 0.16,
+          "end": 0.26,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " this",
+          "start": 0.26,
+          "end": 0.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " one?",
+          "start": 0.58,
+          "end": 1.12,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5384577342442104
+    },
+    {
+      "text": "It has a little",
+      "start": 3.44,
+      "end": 3.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " It",
+          "start": 3.44,
+          "end": 3.44,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " has",
+          "start": 3.44,
+          "end": 3.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " a",
+          "start": 3.72,
+          "end": 3.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " little",
+          "start": 3.92,
+          "end": 3.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5384577342442104
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "You want this one?",
+      "It has a little"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) teacher waits for response",
+    "age_group": "PK",
+    "video_description": "Children are playing outside in the sand area filling up their buckets. One child leaves to water a plant while the other child stays. The educator engages in conversation asking the child his thought process and how to ask the children to share with them. While keeping an eye on the other child the educator fails to notice a child wanting to take the bucket from another child and reacts by saying 'whoa' when a child throws sand in the air. The educator continues to talk to both children.",
+    "original_timestamp": "0:01",
+    "asset_number": "158527927"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5384577342442104,
+    "num_speakers": 0,
+    "total_words": 8,
+    "processing_timestamp": "2025-09-24T12:06:28.740232"
+  }
+}

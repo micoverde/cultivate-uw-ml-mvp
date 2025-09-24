@@ -1,0 +1,80 @@
+{
+  "clip_id": "48378879_q1",
+  "clip_filename": "48378879_q1.wav",
+  "original_video": "ACAP_Marty_005",
+  "timestamp_range": "131.0-136.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "What color do your friends look?",
+      "start": 0.0,
+      "end": 4.2,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " What",
+          "start": 0.0,
+          "end": 1.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " color",
+          "start": 1.0,
+          "end": 1.32,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do",
+          "start": 1.32,
+          "end": 3.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " your",
+          "start": 3.28,
+          "end": 3.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " friends",
+          "start": 3.58,
+          "end": 3.88,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " look?",
+          "start": 3.88,
+          "end": 4.2,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4631967544555664
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "What color do your friends look?"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ and listens for a response",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Science Knowledge and Skills. Teacher at circle time preparing children for transition and explaining one of the activities. Has a child come up and demonstrate how to use \\\"magic\\\" magnifying glasses 0:00-3:38. Has second child model/demonstrate 3:50-6:08. Uses word \\\"lens\\\" at 0:35, \\\"transparent\\\" at 1:36. Ties lens to book they read 1:10. Spanish for red 2:53, 2:55,; blue 4:25. Reminds children not to laugh at one another, hurt feelings 1:46.",
+    "original_timestamp": "2:13",
+    "asset_number": "48378879"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.4631967544555664,
+    "num_speakers": 0,
+    "total_words": 6,
+    "processing_timestamp": "2025-09-24T12:21:38.412971"
+  }
+}

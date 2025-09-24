@@ -20,7 +20,7 @@
     "audio_duration"
   ],
   "vector_shape": [
-    33,
+    98,
     18
   ],
   "description": "Feature vectors compatible with Issue #76 multi-modal BERT architecture"

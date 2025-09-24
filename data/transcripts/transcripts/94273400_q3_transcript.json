@@ -1,0 +1,83 @@
+{
+  "clip_id": "94273400_q3",
+  "clip_filename": "94273400_q3.wav",
+  "original_video": "Little Teddys - Jeanette First Walkthrough 015",
+  "timestamp_range": "17.0-22.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Please! Eat your what?",
+      "start": 0.0,
+      "end": 2.26,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Please!",
+          "start": 0.0,
+          "end": 0.76,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Eat",
+          "start": 1.28,
+          "end": 1.5,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " your",
+          "start": 1.5,
+          "end": 1.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " what?",
+          "start": 1.8,
+          "end": 2.26,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.28545311519077843
+    },
+    {
+      "text": "Peas!",
+      "start": 3.12,
+      "end": 3.42,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Peas!",
+          "start": 3.12,
+          "end": 3.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.28545311519077843
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Please! Eat your what?",
+      "Peas!"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ, asks children to finish the line but teacher responsds for them",
+    "age_group": "PK and Toddler",
+    "video_description": "Coach is engaged with a group of children, and reading a story & asking questions based on children's interest. Pointing out to images in the book. :30 mark helps child find a seat.",
+    "original_timestamp": "0:19",
+    "asset_number": "94273400"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.28545311519077843,
+    "num_speakers": 0,
+    "total_words": 5,
+    "processing_timestamp": "2025-09-24T12:14:47.681959"
+  }
+}

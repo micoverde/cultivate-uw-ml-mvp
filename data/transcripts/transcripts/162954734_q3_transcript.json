@@ -1,0 +1,104 @@
+{
+  "clip_id": "162954734_q3",
+  "clip_filename": "162954734_q3.wav",
+  "original_video": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+  "timestamp_range": "8.0-13.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Jojo, do you have pasta?",
+      "start": 0.0,
+      "end": 2.86,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Jojo,",
+          "start": 0.0,
+          "end": 1.04,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do",
+          "start": 1.34,
+          "end": 1.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.36,
+          "end": 1.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " have",
+          "start": 1.82,
+          "end": 2.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " pasta?",
+          "start": 2.18,
+          "end": 2.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4875792927212186
+    },
+    {
+      "text": "He's a pasta!",
+      "start": 3.18,
+      "end": 4.02,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " He's",
+          "start": 3.18,
+          "end": 3.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " a",
+          "start": 3.28,
+          "end": 3.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " pasta!",
+          "start": 3.42,
+          "end": 4.02,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4875792927212186
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Jojo, do you have pasta?",
+      "He's a pasta!"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) but teacher does not stop for a response",
+    "age_group": "TODDLER",
+    "video_description": "An educator sits at a table of older toddlers as they eat lunch. She engages them in conversation as she talks about the foods in their lunchboxes.",
+    "original_timestamp": "0:10",
+    "asset_number": "162954734"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.4875792927212186,
+    "num_speakers": 0,
+    "total_words": 8,
+    "processing_timestamp": "2025-09-24T11:59:39.314036"
+  }
+}
