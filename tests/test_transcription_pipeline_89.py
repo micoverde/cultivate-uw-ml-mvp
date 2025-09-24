@@ -18,6 +18,7 @@ import shutil
 from pathlib import Path
 import json
 import numpy as np
+import torch
 from unittest.mock import Mock, patch, MagicMock, AsyncMock
 from dataclasses import asdict
 
