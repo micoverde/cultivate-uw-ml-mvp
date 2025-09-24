@@ -1,0 +1,80 @@
+{
+  "clip_id": "129737801_q2",
+  "clip_filename": "129737801_q2.wav",
+  "original_video": "Fiddleheads Sarah 038",
+  "timestamp_range": "15.0-20.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "We're going to use running feet.",
+      "start": 1.4400000000000004,
+      "end": 3.28,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " We're",
+          "start": 1.4400000000000004,
+          "end": 2.08,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " going",
+          "start": 2.08,
+          "end": 2.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " to",
+          "start": 2.16,
+          "end": 2.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " use",
+          "start": 2.38,
+          "end": 2.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " running",
+          "start": 2.54,
+          "end": 2.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " feet.",
+          "start": 2.86,
+          "end": 3.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5071647383949973
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "We're going to use running feet."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) brief pause for response",
+    "age_group": "PK",
+    "video_description": "Outdoor Nature Based Learning Program. Main Focus: Behavioral expectations. An educator leads a group of preschoolers on a trail. They discuss with the children the expectations for their walk.",
+    "original_timestamp": "0:17",
+    "asset_number": "129737801"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5071647383949973,
+    "num_speakers": 0,
+    "total_words": 6,
+    "processing_timestamp": "2025-09-24T12:13:25.520818"
+  }
+}

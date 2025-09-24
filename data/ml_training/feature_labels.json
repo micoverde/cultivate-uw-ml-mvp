@@ -1,0 +1,27 @@
+{
+  "feature_names": [
+    "ling_word_count",
+    "ling_character_count",
+    "ling_question_count",
+    "ling_has_question",
+    "ling_educator_language_score",
+    "ling_avg_word_length",
+    "ling_avg_sentence_length",
+    "ling_sentence_count",
+    "ling_avg_word_confidence",
+    "ling_text_complexity_score",
+    "interact_question_type_score",
+    "interact_age_appropriateness",
+    "interact_provides_wait_time",
+    "interact_creates_response_opportunity",
+    "interact_teacher_support_present",
+    "interact_overall_interaction_quality",
+    "transcription_confidence",
+    "audio_duration"
+  ],
+  "vector_shape": [
+    98,
+    18
+  ],
+  "description": "Feature vectors compatible with Issue #76 multi-modal BERT architecture"
+}

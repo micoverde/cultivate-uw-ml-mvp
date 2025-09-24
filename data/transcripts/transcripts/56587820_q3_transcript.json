@@ -1,0 +1,136 @@
+{
+  "clip_id": "56587820_q3",
+  "clip_filename": "56587820_q3.wav",
+  "original_video": "Structure Activity Video_SUBS.mp4",
+  "timestamp_range": "60.0-65.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "pumpkin. Yeah, the pumpkin is much bigger, isn't it? So I took the picture.",
+      "start": 0.0,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " pumpkin.",
+          "start": 0.0,
+          "end": 0.62,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Yeah,",
+          "start": 1.06,
+          "end": 1.3,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 1.38,
+          "end": 1.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " pumpkin",
+          "start": 1.54,
+          "end": 1.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " is",
+          "start": 1.86,
+          "end": 2.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " much",
+          "start": 2.16,
+          "end": 2.46,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " bigger,",
+          "start": 2.46,
+          "end": 2.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " isn't",
+          "start": 3.0,
+          "end": 3.22,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it?",
+          "start": 3.22,
+          "end": 3.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " So",
+          "start": 3.94,
+          "end": 4.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " I",
+          "start": 4.36,
+          "end": 4.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " took",
+          "start": 4.54,
+          "end": 4.68,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 4.68,
+          "end": 4.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " picture.",
+          "start": 4.78,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.645985230155613
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "pumpkin. Yeah, the pumpkin is much bigger, isn't it? So I took the picture."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) that seems rhetorical teacher doesn't pause for a response continues talking",
+    "age_group": "PK",
+    "video_description": "In this 7-minute video, an educator leads a small group in which they explore a melon. The educator uses visuals to compare the melon to a pumpkin they have explored and to remind children of previous learning. Children answer questions about similarities and differences, characteristics and vocabulary related to the anatomy of the melon. The educator cuts into the melon as children make predictions about what is inside. Each child gets a scoop of seeds on a tray to explore the smell, texture and taste.",
+    "original_timestamp": "1:02",
+    "asset_number": "56587820"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.645985230155613,
+    "num_speakers": 0,
+    "total_words": 14,
+    "processing_timestamp": "2025-09-24T11:56:25.432234"
+  }
+}

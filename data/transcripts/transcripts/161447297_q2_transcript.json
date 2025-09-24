@@ -1,0 +1,196 @@
+{
+  "clip_id": "161447297_q2",
+  "clip_filename": "161447297_q2.wav",
+  "original_video": "Launch Cascade Vista Breanna 013.MP4",
+  "timestamp_range": "22.0-27.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "You put it over both.",
+      "start": 0.0,
+      "end": 0.72,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " You",
+          "start": 0.0,
+          "end": 0.08,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " put",
+          "start": 0.08,
+          "end": 0.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it",
+          "start": 0.18,
+          "end": 0.3,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " over",
+          "start": 0.3,
+          "end": 0.48,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " both.",
+          "start": 0.48,
+          "end": 0.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5955128025364231
+    },
+    {
+      "text": "That's how you spell your name.",
+      "start": 0.9,
+      "end": 1.82,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " That's",
+          "start": 0.9,
+          "end": 1.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " how",
+          "start": 1.18,
+          "end": 1.24,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.24,
+          "end": 1.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " spell",
+          "start": 1.38,
+          "end": 1.52,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " your",
+          "start": 1.52,
+          "end": 1.74,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " name.",
+          "start": 1.74,
+          "end": 1.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5955128025364231
+    },
+    {
+      "text": "Okay, which one's the bottom?",
+      "start": 2.1,
+      "end": 2.86,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Okay,",
+          "start": 2.1,
+          "end": 2.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " which",
+          "start": 2.24,
+          "end": 2.3,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " one's",
+          "start": 2.3,
+          "end": 2.46,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 2.46,
+          "end": 2.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " bottom?",
+          "start": 2.58,
+          "end": 2.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5955128025364231
+    },
+    {
+      "text": "",
+      "start": 4.38,
+      "end": 4.38,
+      "speaker": "unknown",
+      "words": [],
+      "confidence": 0.5955128025364231
+    },
+    {
+      "text": "Yep.",
+      "start": 4.76,
+      "end": 4.9,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Yep.",
+          "start": 4.76,
+          "end": 4.9,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5955128025364231
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "You put it over both.",
+      "That's how you spell your name.",
+      "Okay, which one's the bottom?",
+      "",
+      "Yep."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ \"which one is the bottom?\" and waits for child to respond",
+    "age_group": "PK",
+    "video_description": "Children are working on a project, and the educator provides assistance to help a child finish. At 1:15, the educator reminds a child to stop what he is doing, saying, \"(Child's name), not inside the class, no thank you.\" Other children are also at the table and engage in conversation. The children tell the educator that they are friends and show the educator what they have made. At 2:15, two children begin to discuss a letter, and then one child explains what he made.",
+    "original_timestamp": "0:24",
+    "asset_number": "161447297"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5955128025364231,
+    "num_speakers": 0,
+    "total_words": 17,
+    "processing_timestamp": "2025-09-24T12:04:01.000938"
+  }
+}

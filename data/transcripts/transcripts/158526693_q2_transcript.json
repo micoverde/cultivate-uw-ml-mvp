@@ -1,0 +1,111 @@
+{
+  "clip_id": "158526693_q2",
+  "clip_filename": "158526693_q2.wav",
+  "original_video": "CDCSA Sunset Ridge Khani 011",
+  "timestamp_range": "20.0-25.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "How many did you use?",
+      "start": 1.7200000000000002,
+      "end": 3.14,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 1.7200000000000002,
+          "end": 2.2,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " many",
+          "start": 2.2,
+          "end": 2.34,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " did",
+          "start": 2.34,
+          "end": 2.5,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 2.5,
+          "end": 2.76,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " use?",
+          "start": 2.76,
+          "end": 3.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.49446420108570777
+    },
+    {
+      "text": "Oh, look at that.",
+      "start": 3.38,
+      "end": 4.44,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Oh,",
+          "start": 3.38,
+          "end": 3.76,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " look",
+          "start": 3.94,
+          "end": 4.12,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " at",
+          "start": 4.12,
+          "end": 4.36,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " that.",
+          "start": 4.36,
+          "end": 4.44,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.49446420108570777
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "How many did you use?",
+      "Oh, look at that."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ, \"how many…\" but doesn’t pause for response and continues talking",
+    "age_group": "PK",
+    "video_description": "A child is sitting at table with a teacher. The teacher asks the child questions about the material she is playing attempting to engage in a conversation with the child.",
+    "original_timestamp": "0:22",
+    "asset_number": "158526693"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.49446420108570777,
+    "num_speakers": 0,
+    "total_words": 9,
+    "processing_timestamp": "2025-09-24T12:11:32.417901"
+  }
+}

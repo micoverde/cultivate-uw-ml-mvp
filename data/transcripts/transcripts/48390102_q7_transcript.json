@@ -1,0 +1,132 @@
+{
+  "clip_id": "48390102_q7",
+  "clip_filename": "48390102_q7.wav",
+  "original_video": "Clarke County School District Lynn 007",
+  "timestamp_range": "24.0-29.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "How did you know?",
+      "start": 0.7800000000000005,
+      "end": 2.16,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 0.7800000000000005,
+          "end": 1.3,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " did",
+          "start": 1.3,
+          "end": 1.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.8,
+          "end": 1.96,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " know?",
+          "start": 1.96,
+          "end": 2.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5598884381745991
+    },
+    {
+      "text": "How can we find out what the weather...",
+      "start": 2.36,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 2.36,
+          "end": 2.56,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " can",
+          "start": 2.56,
+          "end": 2.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we",
+          "start": 2.8,
+          "end": 3.1,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " find",
+          "start": 3.1,
+          "end": 3.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " out",
+          "start": 3.42,
+          "end": 4.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " what",
+          "start": 4.16,
+          "end": 4.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 4.42,
+          "end": 4.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " weather...",
+          "start": 4.78,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5598884381745991
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "How did you know?",
+      "How can we find out what the weather..."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "OEQ",
+    "description": "OEQ teacher rephrasing previous questions brief pauses but answers her own question",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+    "original_timestamp": "0:26",
+    "asset_number": "48390102"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5598884381745991,
+    "num_speakers": 0,
+    "total_words": 12,
+    "processing_timestamp": "2025-09-24T12:21:13.336001"
+  }
+}

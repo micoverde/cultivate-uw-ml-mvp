@@ -1,0 +1,143 @@
+{
+  "clip_id": "161765962_q1",
+  "clip_filename": "161765962_q1.wav",
+  "original_video": "Launch Highland Park 004.mp4",
+  "timestamp_range": "0.0-5.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "together so what are you going to do next are you going to eat it",
+      "start": 0.8999999999999995,
+      "end": 4.56,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " together",
+          "start": 0.8999999999999995,
+          "end": 1.1799999999999997,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " so",
+          "start": 1.1799999999999997,
+          "end": 1.46,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " what",
+          "start": 1.46,
+          "end": 1.6,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " are",
+          "start": 1.6,
+          "end": 1.7,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 1.7,
+          "end": 1.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " going",
+          "start": 1.8,
+          "end": 1.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " to",
+          "start": 1.92,
+          "end": 2.06,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do",
+          "start": 2.06,
+          "end": 2.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " next",
+          "start": 2.16,
+          "end": 2.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " are",
+          "start": 2.8,
+          "end": 3.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 3.78,
+          "end": 3.92,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " going",
+          "start": 3.92,
+          "end": 4.06,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " to",
+          "start": 4.06,
+          "end": 4.2,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " eat",
+          "start": 4.2,
+          "end": 4.3,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " it",
+          "start": 4.3,
+          "end": 4.56,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.6773347589704726
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "together so what are you going to do next are you going to eat it"
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "OEQ",
+    "description": "OEQ with a pause but child shrugs ",
+    "age_group": "PK",
+    "video_description": "The children are sitting down eating snack. An educator sits at the end of the table and asks children questions. She also narrates and positive behavior support. She asks several children specific follow up questions.",
+    "original_timestamp": "0:02",
+    "asset_number": "161765962"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.6773347589704726,
+    "num_speakers": 0,
+    "total_words": 15,
+    "processing_timestamp": "2025-09-24T12:01:32.614102"
+  }
+}

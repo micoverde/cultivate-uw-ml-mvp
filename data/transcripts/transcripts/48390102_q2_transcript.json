@@ -1,0 +1,157 @@
+{
+  "clip_id": "48390102_q2",
+  "clip_filename": "48390102_q2.wav",
+  "original_video": "Clarke County School District Lynn 007",
+  "timestamp_range": "2.0-7.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "You want to help with the weather? Say that. I would like to help with the weather.",
+      "start": 0.7799999999999996,
+      "end": 4.72,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " You",
+          "start": 0.7799999999999996,
+          "end": 1.14,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " want",
+          "start": 1.14,
+          "end": 1.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " to",
+          "start": 1.28,
+          "end": 1.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " help",
+          "start": 1.38,
+          "end": 1.48,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " with",
+          "start": 1.48,
+          "end": 1.64,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 1.64,
+          "end": 1.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " weather?",
+          "start": 1.82,
+          "end": 2.08,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Say",
+          "start": 2.74,
+          "end": 2.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " that.",
+          "start": 2.8,
+          "end": 3.18,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " I",
+          "start": 3.38,
+          "end": 3.56,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " would",
+          "start": 3.56,
+          "end": 3.7,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " like",
+          "start": 3.7,
+          "end": 3.86,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " to",
+          "start": 3.86,
+          "end": 4.04,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " help",
+          "start": 4.04,
+          "end": 4.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " with",
+          "start": 4.16,
+          "end": 4.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 4.38,
+          "end": 4.5,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " weather.",
+          "start": 4.5,
+          "end": 4.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.682201800139054
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "You want to help with the weather? Say that. I would like to help with the weather."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) listens to responses",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+    "original_timestamp": "0:04",
+    "asset_number": "48390102"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.682201800139054,
+    "num_speakers": 0,
+    "total_words": 17,
+    "processing_timestamp": "2025-09-24T12:19:55.556733"
+  }
+}

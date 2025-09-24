@@ -1,0 +1,104 @@
+{
+  "clip_id": "158527763_q4",
+  "clip_filename": "158527763_q4.wav",
+  "original_video": "CDCSA Wenatchee Center Karina 021",
+  "timestamp_range": "34.0-39.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Jair, did you need more?",
+      "start": 0.0,
+      "end": 3.58,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Jair,",
+          "start": 0.0,
+          "end": 0.22,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " did",
+          "start": 2.28,
+          "end": 2.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 2.38,
+          "end": 2.8,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " need",
+          "start": 2.8,
+          "end": 3.12,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " more?",
+          "start": 3.12,
+          "end": 3.58,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4071331024169922
+    },
+    {
+      "text": "You've got some.",
+      "start": 4.18,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " You've",
+          "start": 4.18,
+          "end": 4.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " got",
+          "start": 4.78,
+          "end": 4.88,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " some.",
+          "start": 4.88,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.4071331024169922
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Jair, did you need more?",
+      "You've got some."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "CEQ",
+    "description": "CEQ (yes/no) teacher waits for response",
+    "age_group": "Toddler",
+    "video_description": "Children are having meal time as educators are serving and talking to the children. Educators assist with serving and asking if children need more food.",
+    "original_timestamp": "0:36",
+    "asset_number": "158527763"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.4071331024169922,
+    "num_speakers": 0,
+    "total_words": 8,
+    "processing_timestamp": "2025-09-24T12:08:39.253191"
+  }
+}

@@ -1,0 +1,182 @@
+{
+  "clip_id": "48390102_q6",
+  "clip_filename": "48390102_q6.wav",
+  "original_video": "Clarke County School District Lynn 007",
+  "timestamp_range": "22.0-27.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "What should we do?",
+      "start": 0.0,
+      "end": 0.72,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " What",
+          "start": 0.0,
+          "end": 0.0,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " should",
+          "start": 0.0,
+          "end": 0.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we",
+          "start": 0.16,
+          "end": 0.38,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do?",
+          "start": 0.38,
+          "end": 0.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5099415498621324
+    },
+    {
+      "text": "How do we know?",
+      "start": 1.56,
+      "end": 2.44,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 1.56,
+          "end": 1.64,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do",
+          "start": 1.64,
+          "end": 1.82,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we",
+          "start": 1.82,
+          "end": 2.04,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " know?",
+          "start": 2.04,
+          "end": 2.44,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5099415498621324
+    },
+    {
+      "text": "How did you know?",
+      "start": 3.22,
+      "end": 4.16,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 3.22,
+          "end": 3.66,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " did",
+          "start": 3.66,
+          "end": 3.78,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 3.78,
+          "end": 3.94,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " know?",
+          "start": 3.94,
+          "end": 4.16,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5099415498621324
+    },
+    {
+      "text": "How can we?",
+      "start": 4.36,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " How",
+          "start": 4.36,
+          "end": 4.62,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " can",
+          "start": 4.62,
+          "end": 4.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " we?",
+          "start": 4.84,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.5099415498621324
+    },
+    {
+      "text": "",
+      "start": 4.98,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [],
+      "confidence": 0.5099415498621324
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "What should we do?",
+      "How do we know?",
+      "How did you know?",
+      "How can we?",
+      ""
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "OEQ",
+    "description": "OEQ, \"How…?\" teacher listens for response",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+    "original_timestamp": "0:24",
+    "asset_number": "48390102"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.5099415498621324,
+    "num_speakers": 0,
+    "total_words": 15,
+    "processing_timestamp": "2025-09-24T12:20:59.263205"
+  }
+}

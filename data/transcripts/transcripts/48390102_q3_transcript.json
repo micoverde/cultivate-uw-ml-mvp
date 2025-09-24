@@ -1,0 +1,166 @@
+{
+  "clip_id": "48390102_q3",
+  "clip_filename": "48390102_q3.wav",
+  "original_video": "Clarke County School District Lynn 007",
+  "timestamp_range": "9.0-14.0",
+  "duration": 5.0,
+  "transcript_segments": [
+    {
+      "text": "Let's look at Kelsey.",
+      "start": 0.0,
+      "end": 0.9,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Let's",
+          "start": 0.0,
+          "end": 0.32,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " look",
+          "start": 0.32,
+          "end": 0.54,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " at",
+          "start": 0.54,
+          "end": 0.72,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " Kelsey.",
+          "start": 0.72,
+          "end": 0.9,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.7562236292608853
+    },
+    {
+      "text": "She's the one talking.",
+      "start": 0.98,
+      "end": 1.84,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " She's",
+          "start": 0.98,
+          "end": 1.28,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " the",
+          "start": 1.28,
+          "end": 1.34,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " one",
+          "start": 1.34,
+          "end": 1.52,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " talking.",
+          "start": 1.52,
+          "end": 1.84,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.7562236292608853
+    },
+    {
+      "text": "What do you need?",
+      "start": 2.1,
+      "end": 2.6,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " What",
+          "start": 2.1,
+          "end": 2.24,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " do",
+          "start": 2.24,
+          "end": 2.42,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " you",
+          "start": 2.42,
+          "end": 2.5,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " need?",
+          "start": 2.5,
+          "end": 2.6,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.7562236292608853
+    },
+    {
+      "text": "Come on.",
+      "start": 4.540000000000001,
+      "end": 4.98,
+      "speaker": "unknown",
+      "words": [
+        {
+          "word": " Come",
+          "start": 4.540000000000001,
+          "end": 4.9,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        },
+        {
+          "word": " on.",
+          "start": 4.9,
+          "end": 4.98,
+          "confidence": 0.8,
+          "speaker": "unknown"
+        }
+      ],
+      "confidence": 0.7562236292608853
+    }
+  ],
+  "speakers": {
+    "unknown": [
+      "Let's look at Kelsey.",
+      "She's the one talking.",
+      "What do you need?",
+      "Come on."
+    ]
+  },
+  "quality_annotation": {
+    "question_type": "OEQ",
+    "description": "OEQ, \"what do you need?\" and teacher pauses for response",
+    "age_group": "PK",
+    "video_description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+    "original_timestamp": "0:11",
+    "asset_number": "48390102"
+  },
+  "processing_metadata": {
+    "whisper_model": "medium",
+    "transcription_confidence": 0.7562236292608853,
+    "num_speakers": 0,
+    "total_words": 14,
+    "processing_timestamp": "2025-09-24T12:20:10.366475"
+  }
+}

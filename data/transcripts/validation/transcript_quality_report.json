@@ -1,0 +1,165 @@
+{
+  "summary": {
+    "total_transcripts": 33,
+    "validation_timestamp": "2025-09-24T18:50:40.528407",
+    "overall_quality_score": 0.6576212247904364
+  },
+  "confidence_analysis": {
+    "mean_confidence": 0.5569318498548788,
+    "median_confidence": 0.5821307672036661,
+    "min_confidence": 0.2566603933061872,
+    "max_confidence": 0.7682131379842758,
+    "std_confidence": 0.13416323614711217
+  },
+  "content_analysis": {
+    "mean_word_count": 11,
+    "median_word_count": 10,
+    "clips_with_questions": 29,
+    "clips_with_educator_language": 17,
+    "question_percentage": 87.87878787878788,
+    "educator_language_percentage": 51.515151515151516
+  },
+  "speaker_analysis": {
+    "clips_with_speaker_id": 0,
+    "speaker_identification_rate": 0.0,
+    "note": "Low speaker identification expected due to PyAnnote diarization issues"
+  },
+  "question_type_distribution": {
+    "CEQ": 25,
+    "OEQ": 8
+  },
+  "educational_indicators": {
+    "cognitive_prompts": 5,
+    "open_ended_question": 12,
+    "engagement_prompts": 3,
+    "positive_reinforcement": 2
+  },
+  "quality_tiers": {
+    "high_quality_clips": 14,
+    "medium_quality_clips": 18,
+    "low_quality_clips": 1,
+    "high_quality_percentage": 42.42424242424242
+  },
+  "ml_readiness_assessment": {
+    "transcription_quality": "Good",
+    "educational_content_coverage": "Good",
+    "dataset_completeness": "33/105 clips processed",
+    "recommended_for_training": true
+  },
+  "detailed_metrics": [
+    {
+      "clip_id": "163402756_q1",
+      "confidence": 0.7682131379842758,
+      "quality_score": 0.9072852551937104,
+      "word_count": 12,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "cognitive_prompts",
+        "open_ended_question",
+        "engagement_prompts"
+      ]
+    },
+    {
+      "clip_id": "161765962_q4",
+      "confidence": 0.6815768805417148,
+      "quality_score": 0.822630752216686,
+      "word_count": 7,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "open_ended_question"
+      ]
+    },
+    {
+      "clip_id": "162954537_q5",
+      "confidence": 0.6697371800740559,
+      "quality_score": 0.8178948720296224,
+      "word_count": 11,
+      "has_question": true,
+      "question_type": "CEQ",
+      "educational_indicators": [
+        "open_ended_question"
+      ]
+    },
+    {
+      "clip_id": "163402756_q4",
+      "confidence": 0.6670020818710327,
+      "quality_score": 0.8168008327484132,
+      "word_count": 12,
+      "has_question": true,
+      "question_type": "CEQ",
+      "educational_indicators": [
+        "open_ended_question"
+      ]
+    },
+    {
+      "clip_id": "56587820_q4",
+      "confidence": 0.5317438973320855,
+      "quality_score": 0.8126975589328342,
+      "word_count": 10,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "cognitive_prompts",
+        "open_ended_question",
+        "engagement_prompts"
+      ]
+    },
+    {
+      "clip_id": "163402756_q3",
+      "confidence": 0.6350486278533936,
+      "quality_score": 0.8040194511413575,
+      "word_count": 17,
+      "has_question": true,
+      "question_type": "CEQ",
+      "educational_indicators": [
+        "positive_reinforcement"
+      ]
+    },
+    {
+      "clip_id": "163402756_q2",
+      "confidence": 0.49204551472383384,
+      "quality_score": 0.7968182058895336,
+      "word_count": 11,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "cognitive_prompts",
+        "open_ended_question",
+        "engagement_prompts"
+      ]
+    },
+    {
+      "clip_id": "56587820_q5",
+      "confidence": 0.730036145164853,
+      "quality_score": 0.7920144580659413,
+      "word_count": 15,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": []
+    },
+    {
+      "clip_id": "56587820_q2",
+      "confidence": 0.5987874811345881,
+      "quality_score": 0.7895149924538354,
+      "word_count": 7,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "open_ended_question"
+      ]
+    },
+    {
+      "clip_id": "158527927_q2",
+      "confidence": 0.5821307672036661,
+      "quality_score": 0.7828523068814666,
+      "word_count": 22,
+      "has_question": true,
+      "question_type": "OEQ",
+      "educational_indicators": [
+        "open_ended_question"
+      ]
+    }
+  ]
+}

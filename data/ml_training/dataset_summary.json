@@ -1,0 +1,37 @@
+{
+  "dataset_overview": {
+    "total_examples": 98,
+    "creation_timestamp": "2025-09-24T12:35:53.033267",
+    "source": "Issue #89 Transcription Pipeline"
+  },
+  "content_distribution": {
+    "question_types": {
+      "CEQ": 64,
+      "OEQ": 34
+    },
+    "age_groups": {
+      "TODDLER": 8,
+      "PK": 77,
+      "PK and Toddler": 5,
+      "Toddler": 6,
+      "INFANT AND TODDLER": 2
+    }
+  },
+  "quality_metrics": {
+    "mean_confidence": 0.548958693918306,
+    "confidence_range": [
+      0.20550330479939782,
+      0.834850730895996
+    ],
+    "mean_word_count": 11.03061224489796,
+    "word_count_range": [
+      2,
+      22
+    ]
+  },
+  "ml_compatibility": {
+    "feature_vector_ready": true,
+    "bert_compatible": true,
+    "issue_76_aligned": true
+  }
+}
