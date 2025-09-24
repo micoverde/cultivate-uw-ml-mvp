@@ -21,6 +21,9 @@ import logging
 # Import validation logic
 from ..validation.transcript_validator import TranscriptValidator, ValidationResult
 
+# Import ML pipeline for real analysis (Issue #47 - CLAUDE-4 implementation)
+from ...ml.inference.ml_inference_pipeline import ml_analyze_transcript, class_score_transcript
+
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/analyze", tags=["transcript-analysis"])
 
@@ -210,8 +213,9 @@ async def process_transcript_analysis(
         analysis_jobs[analysis_id].message = "Running ML models..."
         await asyncio.sleep(8)
 
-        # TODO: Call actual ML models when implemented (Issue #41)
-        ml_predictions = await simulate_ml_analysis(features)
+        # Real ML analysis using CLAUDE-4's implementation (Issue #47)
+        features['original_transcript'] = transcript  # Pass transcript for analysis
+        ml_predictions = await ml_analyze_transcript(features)
 
         # Stage 4: CLASS scoring (5 seconds)
         analysis_jobs[analysis_id].status = "scoring"
@@ -219,7 +223,8 @@ async def process_transcript_analysis(
         analysis_jobs[analysis_id].message = "Calculating CLASS framework scores..."
         await asyncio.sleep(5)
 
-        class_scores = await simulate_class_scoring(transcript)
+        # Real CLASS framework scoring using CLAUDE-4's implementation (Issue #47)
+        class_scores = await class_score_transcript(transcript)
 
         # Stage 5: Generate recommendations (3 seconds)
         analysis_jobs[analysis_id].progress = 95
@@ -249,14 +254,15 @@ async def process_transcript_analysis(
             completed_at=end_time
         )
 
-        logger.info(f"Completed analysis {analysis_id} in {processing_time:.2f}s")
+        logger.info(f"Completed analysis {analysis_id} in {processing_time:.2f}s using real ML models (CLAUDE-4)")
 
     except Exception as e:
         logger.error(f"Analysis {analysis_id} failed: {e}")
         analysis_jobs[analysis_id].status = "error"
         analysis_jobs[analysis_id].message = f"Analysis failed: {str(e)}"
 
-# Simulation functions (replace with real implementations)
+# Legacy simulation functions (DEPRECATED - replaced by CLAUDE-4's real ML models)
+# These functions are kept for reference but are no longer used in the pipeline
 async def simulate_feature_extraction(transcript: str) -> Dict[str, Any]:
     """Simulate feature extraction (replace with real pipeline from Issue #90)"""
     return {
