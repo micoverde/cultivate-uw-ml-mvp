@@ -22,7 +22,7 @@ import logging
 from ..validation.transcript_validator import TranscriptValidator, ValidationResult
 
 # Import ML pipeline for real analysis (Issue #47 - CLAUDE-4 implementation)
-from ...ml.inference.ml_inference_pipeline import ml_analyze_transcript, class_score_transcript
+from ...ml.inference.ml_inference_pipeline import ml_analyze_transcript, class_score_transcript, get_inference_pipeline
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/analyze", tags=["transcript-analysis"])
@@ -88,6 +88,7 @@ class AnalysisResult(BaseModel):
     transcript_summary: Dict[str, Any]
     ml_predictions: Dict[str, Any]
     class_scores: Dict[str, float]
+    scaffolding_analysis: Optional[Dict[str, Any]] = None  # Issue #49 - Scaffolding/ZPD analysis
     recommendations: List[str]
     processing_time: float
     created_at: datetime
@@ -213,18 +214,19 @@ async def process_transcript_analysis(
         analysis_jobs[analysis_id].message = "Running ML models..."
         await asyncio.sleep(8)
 
-        # Real ML analysis using CLAUDE-4's implementation (Issue #47)
+        # Comprehensive ML analysis using CLAUDE-4's implementation (Issues #47, #49)
         features['original_transcript'] = transcript  # Pass transcript for analysis
-        ml_predictions = await ml_analyze_transcript(features)
+        pipeline = get_inference_pipeline()
+        full_analysis = await pipeline.analyze_transcript(transcript, features)
 
-        # Stage 4: CLASS scoring (5 seconds)
-        analysis_jobs[analysis_id].status = "scoring"
+        ml_predictions = full_analysis['ml_predictions']
+        class_scores = full_analysis['class_scores']
+        scaffolding_analysis = full_analysis.get('scaffolding_analysis', {})
+
+        # Stage 4: Analysis complete (reduced time since we do comprehensive analysis in one step)
         analysis_jobs[analysis_id].progress = 85
-        analysis_jobs[analysis_id].message = "Calculating CLASS framework scores..."
-        await asyncio.sleep(5)
-
-        # Real CLASS framework scoring using CLAUDE-4's implementation (Issue #47)
-        class_scores = await class_score_transcript(transcript)
+        analysis_jobs[analysis_id].message = "Analysis complete, generating recommendations..."
+        await asyncio.sleep(2)
 
         # Stage 5: Generate recommendations (3 seconds)
         analysis_jobs[analysis_id].progress = 95
@@ -248,6 +250,7 @@ async def process_transcript_analysis(
             transcript_summary=extract_transcript_summary(transcript),
             ml_predictions=ml_predictions,
             class_scores=class_scores,
+            scaffolding_analysis=scaffolding_analysis,  # Issue #49 - Include scaffolding analysis
             recommendations=recommendations,
             processing_time=processing_time,
             created_at=start_time,

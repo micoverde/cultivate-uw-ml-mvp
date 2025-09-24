@@ -45,12 +45,14 @@ class MLInferencePipeline:
             from ..models.question_classifier import QuestionClassifier
             from ..models.wait_time_detector import WaitTimeDetector
             from ..models.class_scorer import CLASSFrameworkScorer
+            from ..models.scaffolding_zpd_analyzer import ScaffoldingZPDAnalyzer
 
             # Initialize demo-reliable models (classical ML)
             self.models[InferenceTier.DEMO_RELIABLE] = {
                 'question_classifier': QuestionClassifier(model_type='classical'),
                 'wait_time_detector': WaitTimeDetector(model_type='classical'),
-                'class_scorer': CLASSFrameworkScorer(model_type='classical')
+                'class_scorer': CLASSFrameworkScorer(model_type='classical'),
+                'scaffolding_analyzer': ScaffoldingZPDAnalyzer(model_type='classical')
             }
 
             logger.info("Demo-reliable models initialized successfully")
@@ -72,7 +74,8 @@ class MLInferencePipeline:
         self.models[InferenceTier.DEMO_RELIABLE] = {
             'question_classifier': None,
             'wait_time_detector': None,
-            'class_scorer': None
+            'class_scorer': None,
+            'scaffolding_analyzer': None
         }
 
     async def analyze_transcript(
@@ -102,10 +105,11 @@ class MLInferencePipeline:
             models = self.models.get(inference_tier, self.models[InferenceTier.DEMO_RELIABLE])
 
             # Parallel analysis for optimal performance
-            question_analysis, wait_time_analysis, class_analysis = await asyncio.gather(
+            question_analysis, wait_time_analysis, class_analysis, scaffolding_analysis = await asyncio.gather(
                 self._analyze_questions(transcript, models['question_classifier']),
                 self._analyze_wait_time(transcript, models['wait_time_detector']),
                 self._analyze_class_framework(transcript, models['class_scorer']),
+                self._analyze_scaffolding_zpd(transcript, models['scaffolding_analyzer']),
                 return_exceptions=True
             )
 
@@ -113,6 +117,7 @@ class MLInferencePipeline:
             question_results = self._safe_extract_results(question_analysis, 'question_analysis')
             wait_time_results = self._safe_extract_results(wait_time_analysis, 'wait_time_analysis')
             class_results = self._safe_extract_results(class_analysis, 'class_analysis')
+            scaffolding_results = self._safe_extract_results(scaffolding_analysis, 'scaffolding_analysis')
 
             # Combine results in expected format for CLAUDE-3's API
             ml_predictions = {
@@ -136,6 +141,7 @@ class MLInferencePipeline:
             return {
                 'ml_predictions': ml_predictions,
                 'class_scores': class_scores,
+                'scaffolding_analysis': scaffolding_results,
                 'processing_time': processing_time,
                 'inference_tier': inference_tier.value,
                 'model_versions': self._get_model_versions(models)
@@ -178,6 +184,17 @@ class MLInferencePipeline:
         except Exception as e:
             logger.warning(f"CLASS analysis failed: {e}, using fallback")
             return await self._fallback_class_analysis(transcript)
+
+    async def _analyze_scaffolding_zpd(self, transcript: str, model) -> Dict[str, Any]:
+        """Analyze scaffolding techniques and ZPD indicators"""
+        if model is None:
+            return await self._fallback_scaffolding_analysis(transcript)
+
+        try:
+            return await model.analyze(transcript)
+        except Exception as e:
+            logger.warning(f"Scaffolding analysis failed: {e}, using fallback")
+            return await self._fallback_scaffolding_analysis(transcript)
 
     def _safe_extract_results(self, analysis_result, analysis_type: str) -> Dict[str, Any]:
         """Safely extract analysis results, handling exceptions"""
@@ -267,6 +284,48 @@ class MLInferencePipeline:
             'classroom_organization': 3.8,
             'instructional_support': 4.1,
             'overall_score': (emotional_support_score + 3.8 + 4.1) / 3
+        }
+
+    async def _fallback_scaffolding_analysis(self, transcript: str) -> Dict[str, Any]:
+        """Fallback scaffolding analysis using pattern matching"""
+        import re
+
+        # Simple ZPD indicators
+        zpd_patterns = ['what do you think', 'tell me more', 'interesting', 'good thinking']
+        zpd_count = sum(1 for pattern in zpd_patterns if pattern in transcript.lower())
+
+        # Simple scaffolding techniques
+        scaffolding_patterns = ['what else', 'how about', 'let\'s try', 'what if']
+        scaffolding_count = sum(1 for pattern in scaffolding_patterns if pattern in transcript.lower())
+
+        return {
+            'overall_assessment': {
+                'overall_scaffolding_zpd_score': min(1.0, 0.6 + (zpd_count + scaffolding_count) * 0.1),
+                'assessment_summary': 'Fallback analysis detected moderate scaffolding and ZPD implementation.',
+                'zpd_implementation_score': min(1.0, 0.5 + zpd_count * 0.15),
+                'scaffolding_technique_score': min(1.0, 0.5 + scaffolding_count * 0.15),
+                'wait_time_implementation_score': 0.70,
+                'fading_support_score': 0.60
+            },
+            'zpd_indicators': {
+                'appropriate_challenge': {
+                    'frequency': max(1, zpd_count),
+                    'average_confidence': 0.75,
+                    'description': 'Questions and tasks that match child development level'
+                }
+            },
+            'scaffolding_techniques': {
+                'graduated_prompting': {
+                    'frequency': max(1, scaffolding_count),
+                    'average_effectiveness': 0.70,
+                    'description': 'Gradually increasing support and guidance'
+                }
+            },
+            'recommendations': [
+                'Consider asking more open-ended questions',
+                'Allow more wait time for child responses',
+                'Build on child contributions more explicitly'
+            ]
         }
 
 # Singleton instance for API integration
