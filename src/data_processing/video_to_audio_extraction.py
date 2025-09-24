@@ -40,7 +40,7 @@ class NumpyEncoder(json.JSONEncoder):
 
 # Import required libraries with error handling
 try:
-    from moviepy.editor import VideoFileClip
+    from moviepy import VideoFileClip
     import librosa
     import soundfile as sf
     from pydub import AudioSegment

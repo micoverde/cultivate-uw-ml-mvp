@@ -17,7 +17,7 @@ from pathlib import Path
 from datetime import datetime
 
 # Add src to path
-sys.path.append('src/data_processing')
+sys.path.append('data_processing')
 
 # Import the modules we can test
 from dataset_creation import HuggingFaceDatasetBuilder, DatasetVersionManager

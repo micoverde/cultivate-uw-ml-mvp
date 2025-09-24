@@ -21,7 +21,7 @@ from dataclasses import asdict
 
 # Import modules to test
 import sys
-sys.path.append('src/data_processing')
+sys.path.append('data_processing')
 
 from dataset_creation import (
     HuggingFaceDatasetBuilder, DatasetVersion, DatasetMetadata,
