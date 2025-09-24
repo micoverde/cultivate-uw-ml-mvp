@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Brain, Users, Camera, Mic, BarChart3, Heart } from 'lucide-react';
 import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
+import MockAnalysisTest from './components/MockAnalysisTest';
 
 function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results'

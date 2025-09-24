@@ -10,16 +10,22 @@ import {
   FileText,
   TrendingUp
 } from 'lucide-react';
+import CLASSDashboard from './CLASSDashboard';
+import ScaffoldingVisualization from './ScaffoldingVisualization';
 
 const AnalysisResults = ({ results, onStartNew }) => {
   const {
     transcript_summary,
     ml_predictions,
     class_scores,
+    scaffolding_analysis,
     recommendations,
     processing_time,
     completed_at
   } = results;
+
+  // Extract original transcript from results if available (for ScaffoldingVisualization)
+  const originalTranscript = results.original_transcript || '';
 
   // Format score display
   const formatScore = (score, isPercentage = true) => {
@@ -155,54 +161,21 @@ const AnalysisResults = ({ results, onStartNew }) => {
             </div>
           </div>
 
-          {/* CLASS Framework Scores */}
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <div className="flex items-center mb-6">
-              <TrendingUp className="h-6 w-6 text-indigo-600 mr-2" />
-              <h2 className="text-xl font-semibold text-gray-900">CLASS Framework Scores</h2>
-            </div>
+          {/* CLASS Framework Dashboard */}
+          {class_scores && (
+            <CLASSDashboard
+              classScores={class_scores}
+              scaffoldingResults={scaffolding_analysis}
+            />
+          )}
 
-            <div className="space-y-4">
-              {[
-                { key: 'emotional_support', label: 'Emotional Support', icon: '❤️' },
-                { key: 'classroom_organization', label: 'Classroom Organization', icon: '📋' },
-                { key: 'instructional_support', label: 'Instructional Support', icon: '🎓' },
-                { key: 'overall_score', label: 'Overall Score', icon: '⭐', isBold: true }
-              ].map(({ key, label, icon, isBold }) => {
-                const score = class_scores[key];
-                const isGood = score >= 4.0;
-
-                return (
-                  <div key={key} className={`flex items-center justify-between p-3 rounded-lg ${
-                    isGood ? 'bg-green-50' : 'bg-yellow-50'
-                  }`}>
-                    <div className="flex items-center">
-                      <span className="text-lg mr-2">{icon}</span>
-                      <span className={`${isBold ? 'font-semibold' : 'font-medium'} text-gray-900`}>
-                        {label}
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className={`text-2xl font-bold mr-2 ${
-                        isGood ? 'text-green-600' : 'text-yellow-600'
-                      }`}>
-                        {formatScore(score, false)}
-                      </span>
-                      <span className="text-gray-500 text-sm">/ 7</span>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-
-            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
-              <p className="text-sm text-gray-600">
-                <strong>CLASS Framework:</strong> Classroom Assessment Scoring System measuring
-                emotional support, classroom organization, and instructional support.
-                Scores range from 1 (low) to 7 (high).
-              </p>
-            </div>
-          </div>
+          {/* Scaffolding & ZPD Analysis */}
+          {scaffolding_analysis && (
+            <ScaffoldingVisualization
+              scaffoldingResults={scaffolding_analysis}
+              originalTranscript={originalTranscript}
+            />
+          )}
         </div>
 
         {/* Sidebar */}
