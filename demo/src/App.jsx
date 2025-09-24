@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { Brain, Users, Camera, Mic, BarChart3, Heart } from 'lucide-react';
 import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
+import MockAnalysisTest from './components/MockAnalysisTest';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results'
+  const [currentView, setCurrentView] = useState('test'); // 'home', 'demo', 'results', 'test'
   const [analysisResults, setAnalysisResults] = useState(null);
 
   const handleTryDemo = () => {
@@ -27,6 +28,10 @@ function App() {
   };
 
   // Render different views based on current state
+  if (currentView === 'test') {
+    return <MockAnalysisTest />;
+  }
+
   if (currentView === 'demo') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
