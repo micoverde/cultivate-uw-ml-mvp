@@ -133,6 +133,9 @@ class TranscriptionPipeline:
         self.diarization_pipeline = None
         self.speaker_embedder = None
 
+        # Load models immediately
+        self.initialize_models()
+
         # Processing statistics
         self.stats = {
             'clips_processed': 0,
