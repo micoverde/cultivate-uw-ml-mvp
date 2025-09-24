@@ -1,5 +1,13 @@
 name: Azure Static Web Apps CI/CD
 
+# ✅ INFRASTRUCTURE READY - Azure Resources Created
+#
+# Azure Resources (Created 2025-09-23):
+# - Azure Static Web App: swa-cultivate-ml-mvp (calm-tree-06f328310.1.azurestaticapps.net)
+# - Storage Account: stcultivateml (ML models container: ml-models)
+# - Application Insights: appins-cultivate-ml (monitoring & telemetry)
+# - GitHub Secret: AZURE_STATIC_WEB_APPS_API_TOKEN ✅ Configured
+#
 # This workflow deploys immediately without waiting for security scans
 # Security monitoring runs asynchronously and will trigger rollback if issues found
 
@@ -43,16 +51,31 @@ jobs:
           npm install
           npm run build
 
+      - name: Install API dependencies
+        run: |
+          cd api
+          npm install
+
       - name: Build and Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # ✅ CONFIGURED: Azure SWA resource created, deployment token in GitHub secrets
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_TREE_06F328310 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/demo" # App source code path
-          api_location: "/api" # API source code path - optional
-          output_location: "dist" # Built app content directory - optional
+          api_location: "/api" # API source code path
+          output_location: "dist" # Built app content directory
+        env:
+          # Environment variables for Azure SWA
+          API_HOST: ${{ vars.API_HOST || 'calm-tree-06f328310.1.azurestaticapps.net' }}
+          API_PORT: ${{ vars.API_PORT || '443' }}
+          ML_MODEL_PATH: ${{ vars.ML_MODEL_PATH || './models/' }}
+          NODE_ENV: production
+          # Azure resource references
+          AZURE_STORAGE_ACCOUNT: stcultivateml
+          AZURE_APPINSIGHTS_INSTRUMENTATIONKEY: 4ae4e7dd-900e-48da-836e-bdadbc323b5a
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
@@ -63,5 +86,6 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          # ✅ CONFIGURED: Azure SWA resource created, deployment token in GitHub secrets
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_CALM_TREE_06F328310 }}
           action: "close"
