@@ -1,7 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Brain, Users, Camera, Mic, BarChart3, Heart } from 'lucide-react';
+import TranscriptSubmission from './components/TranscriptSubmission';
+import AnalysisResults from './components/AnalysisResults';
 
 function App() {
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results'
+  const [analysisResults, setAnalysisResults] = useState(null);
+
+  const handleTryDemo = () => {
+    setCurrentView('demo');
+  };
+
+  const handleAnalysisComplete = (results) => {
+    setAnalysisResults(results);
+    setCurrentView('results');
+  };
+
+  const handleStartNew = () => {
+    setAnalysisResults(null);
+    setCurrentView('demo');
+  };
+
+  const handleBackHome = () => {
+    setCurrentView('home');
+    setAnalysisResults(null);
+  };
+
+  // Render different views based on current state
+  if (currentView === 'demo') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-6">
+              <div className="flex items-center">
+                <Brain className="h-8 w-8 text-indigo-600 mr-3" />
+                <h1 className="text-2xl font-bold text-gray-900">Cultivate Learning ML MVP</h1>
+              </div>
+              <button
+                onClick={handleBackHome}
+                className="text-gray-500 hover:text-gray-900 px-4 py-2 rounded-lg transition-colors"
+              >
+                ← Back to Home
+              </button>
+            </div>
+          </div>
+        </header>
+        <div className="py-8">
+          <TranscriptSubmission onAnalysisComplete={handleAnalysisComplete} />
+        </div>
+      </div>
+    );
+  }
+
+  if (currentView === 'results') {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center py-6">
+              <div className="flex items-center">
+                <Brain className="h-8 w-8 text-indigo-600 mr-3" />
+                <h1 className="text-2xl font-bold text-gray-900">Cultivate Learning ML MVP</h1>
+              </div>
+              <div className="flex space-x-4">
+                <button
+                  onClick={handleBackHome}
+                  className="text-gray-500 hover:text-gray-900 px-4 py-2 rounded-lg transition-colors"
+                >
+                  ← Home
+                </button>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div className="py-8">
+          <AnalysisResults results={analysisResults} onStartNew={handleStartNew} />
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
       {/* Header */}
@@ -34,7 +113,10 @@ function App() {
               machine learning to improve constructivist learning outcomes.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <button className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors">
+              <button
+                onClick={handleTryDemo}
+                className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
+              >
                 Try Demo
               </button>
               <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
