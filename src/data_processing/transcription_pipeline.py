@@ -193,17 +193,19 @@ class TranscriptionPipeline:
             logger.error(f"Failed to load clip metadata: {e}")
             return {'clips': []}
 
-    def transcribe_audio_clip(self, clip_path: Path) -> Dict:
+    def transcribe_audio_clip(self, clip_path) -> Dict:
         """
         Transcribe single audio clip with word-level timestamps
 
         Args:
-            clip_path: Path to audio clip file
+            clip_path: Path to audio clip file (str or Path)
 
         Returns:
             Whisper transcription result with word timestamps
         """
         try:
+            # Convert to Path if it's a string
+            clip_path = Path(clip_path) if isinstance(clip_path, str) else clip_path
             logger.info(f"Transcribing: {clip_path.name}")
 
             # Load audio file
