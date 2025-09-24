@@ -75,3 +75,29 @@ demo/node_modules/
 # Temporary files
 tmp/
 temp/
+
+# CRITICAL: Secure video data and audio processing (NEVER COMMIT)
+data/processed_audio/
+data/alignment_test_report.json
+data/video_analysis/
+*.wav
+*.mp4
+*.MP4
+*.mov
+*.MOV
+*.avi
+*.AVI
+
+# Audio extraction logs
+audio_extraction.log
+**/audio_extraction.log
+
+# Secure data directories (NEVER COMMIT EDUCATIONAL DATA)
+secure*/
+**/secure*/
+
+# Test output files that may contain sensitive metadata
+test_*.json
+alignment_*.json
+quality_*.json
+processing_*.txt
