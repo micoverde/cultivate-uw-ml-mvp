@@ -30,8 +30,7 @@ from dataset_creation import (
 from validation_framework import (
     ComprehensiveValidationFramework, ValidationReport, ValidationThresholds
 )
-from label_processing import MultiTaskLabels, ValidationResult
-from multi_task_labels import LabelMetadata
+from label_processing import MultiTaskLabels, ValidationResult, AnnotationMetadata
 
 class TestHuggingFaceDatasetBuilder(unittest.TestCase):
     """Test suite for HuggingFace dataset creation functionality."""
@@ -53,13 +52,15 @@ class TestHuggingFaceDatasetBuilder(unittest.TestCase):
     def test_create_label_identifier(self):
         """Test Issue #91: Label identifier creation for feature alignment."""
         # Create test label with metadata
-        metadata = LabelMetadata(
+        metadata = AnnotationMetadata(
             video_id="test_video_001",
             clip_filename="clip_001.wav",
             annotator_id="annotator_1",
             timestamp_start=10.5,
             timestamp_end=15.2,
-            original_csv_row=1
+            annotation_date="2024-09-23",
+            original_csv_row=1,
+            quality_confidence=0.9
         )
 
         label = MultiTaskLabels(
@@ -111,13 +112,15 @@ class TestHuggingFaceDatasetBuilder(unittest.TestCase):
 
         labels = []
         for i in range(n_samples):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i % 10}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
                 timestamp_start=float(i),
                 timestamp_end=float(i + 5),
-                original_csv_row=i
+                annotation_date="2024-09-23",
+                original_csv_row=i,
+                quality_confidence=0.9
             )
 
             label = MultiTaskLabels(
@@ -163,7 +166,7 @@ class TestHuggingFaceDatasetBuilder(unittest.TestCase):
         labels = []
 
         for i in range(50):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -204,7 +207,7 @@ class TestHuggingFaceDatasetBuilder(unittest.TestCase):
         labels = []
 
         for i in range(5):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -250,7 +253,7 @@ class TestHuggingFaceDatasetBuilder(unittest.TestCase):
         labels = []
 
         for i in range(10):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -315,7 +318,7 @@ class TestValidationFramework(unittest.TestCase):
         labels = []
 
         for i in range(50):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -360,7 +363,7 @@ class TestValidationFramework(unittest.TestCase):
         labels = []
 
         for i in range(30):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -408,7 +411,7 @@ class TestValidationFramework(unittest.TestCase):
 
         labels = []
         for i in range(27):  # 25 + 2 edge cases
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -452,7 +455,7 @@ class TestValidationFramework(unittest.TestCase):
         labels = []
 
         for i in range(120):  # Above minimum threshold
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i % 20}",  # 20 different videos
                 clip_filename=f"clip_{i}.wav",
                 annotator_id=f"annotator_{i % 3}",  # 3 annotators
@@ -561,7 +564,7 @@ class TestValidationFramework(unittest.TestCase):
         labels = []
 
         for i in range(60):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id="test_annotator",
@@ -743,7 +746,7 @@ class TestIntegrationScenarios(unittest.TestCase):
             feature_vectors[f"sample_{i}"] = np.random.randn(61)
 
             # Create multi-task label
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i % 20}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id=f"annotator_{i % 3}",
@@ -799,7 +802,7 @@ class TestIntegrationScenarios(unittest.TestCase):
         multi_task_labels = []
 
         for i in range(n_samples):
-            metadata = LabelMetadata(
+            metadata = AnnotationMetadata(
                 video_id=f"video_{i % 15}",
                 clip_filename=f"clip_{i}.wav",
                 annotator_id=f"annotator_{i % 2}",  # 2 annotators for agreement

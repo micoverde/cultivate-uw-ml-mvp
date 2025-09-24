@@ -295,9 +295,9 @@ class HuggingFaceDatasetBuilder:
         for label in labels:
             # Combine key stratification features
             target_components = [
-                str(label.pedagogical_quality),  # Main quality score
-                str(label.question_type),        # Question classification
-                str(int(label.engagement_score * 10) // 2)  # Engagement bins (5 levels)
+                str(label.interaction_quality_score),  # Main quality score
+                str(label.question_type),              # Question classification
+                str(int(label.class_emotional_support * 2) // 1)  # CLASS framework bins
             ]
             stratify_target.append("_".join(target_components))
 
