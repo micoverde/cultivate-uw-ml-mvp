@@ -24,6 +24,9 @@ from ..validation.transcript_validator import TranscriptValidator, ValidationRes
 # Import ML pipeline for real analysis (Issue #47 - CLAUDE-4 implementation)
 from ...ml.inference.ml_inference_pipeline import ml_analyze_transcript, class_score_transcript, get_inference_pipeline
 
+# Import enhanced recommendation engine (Issue #51 - Enhanced recommendations)
+from ...ml.models.recommendation_engine import create_recommendation_engine
+
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/analyze", tags=["transcript-analysis"])
 
@@ -89,7 +92,8 @@ class AnalysisResult(BaseModel):
     ml_predictions: Dict[str, Any]
     class_scores: Dict[str, float]
     scaffolding_analysis: Optional[Dict[str, Any]] = None  # Issue #49 - Scaffolding/ZPD analysis
-    recommendations: List[str]
+    recommendations: List[str]  # Legacy simple recommendations
+    enhanced_recommendations: Optional[List[Dict[str, Any]]] = None  # Issue #51 - Enhanced recommendations
     processing_time: float
     created_at: datetime
     completed_at: Optional[datetime] = None
@@ -233,7 +237,19 @@ async def process_transcript_analysis(
         analysis_jobs[analysis_id].message = "Generating recommendations..."
         await asyncio.sleep(3)
 
+        # Generate both legacy and enhanced recommendations
         recommendations = await generate_recommendations(ml_predictions, class_scores)
+
+        # Generate enhanced recommendations (Issue #51)
+        recommendation_engine = create_recommendation_engine()
+        enhanced_recommendations = recommendation_engine.generate_recommendations(
+            ml_predictions=ml_predictions,
+            class_scores=class_scores,
+            scaffolding_analysis=scaffolding_analysis,
+            transcript_analysis=features
+        )
+        # Convert to dict format for API response
+        enhanced_recommendations_dict = [rec.to_dict() for rec in enhanced_recommendations]
 
         # Complete analysis
         end_time = datetime.utcnow()
@@ -251,7 +267,8 @@ async def process_transcript_analysis(
             ml_predictions=ml_predictions,
             class_scores=class_scores,
             scaffolding_analysis=scaffolding_analysis,  # Issue #49 - Include scaffolding analysis
-            recommendations=recommendations,
+            recommendations=recommendations,  # Legacy recommendations
+            enhanced_recommendations=enhanced_recommendations_dict,  # Issue #51 - Enhanced recommendations
             processing_time=processing_time,
             created_at=start_time,
             completed_at=end_time
