@@ -211,7 +211,7 @@ class VideoToAudioExtractor:
                     return None
 
                 # Write temporary audio file
-                video.audio.write_audiofile(str(temp_audio), verbose=False, logger=None)
+                video.audio.write_audiofile(str(temp_audio), logger=None)
 
             # Load audio using librosa (much more robust)
             audio_array, sample_rate = librosa.load(str(temp_audio), sr=self.target_sample_rate)

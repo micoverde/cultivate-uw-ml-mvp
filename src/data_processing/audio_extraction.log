@@ -1,0 +1,635 @@
+2025-09-23 17:45:30,878 - INFO - VideoToAudioExtractor initialized
+2025-09-23 17:45:30,878 - INFO - Video directory: /home/warrenjo/src/tmp2/secure data
+2025-09-23 17:45:30,879 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:45:30,879 - INFO - Starting video-to-audio extraction pipeline
+2025-09-23 17:45:30,879 - INFO - Loading annotations from: /home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv
+2025-09-23 17:45:30,881 - INFO - Loaded 25 video annotations
+2025-09-23 17:45:30,881 - INFO - Columns: ['Video Title', 'Asset #', 'Age group', 'Timestamp', 'Question 1 ', 'Q1 description', 'Question 2 ', 'Q2 description', 'Question 3', 'Q3 description', 'Question 4', 'Q4 description', 'Question 5', 'Q5 description', 'Question 6', 'Q6 description', 'Question 7', 'Q7 description', 'Question 8', 'Q8 description', 'Description']
+2025-09-23 17:45:30,881 - INFO - Processing video: Structure Activity Video_SUBS.mp4 (Asset: 56587820)
+2025-09-23 17:45:30,881 - INFO - Extracting audio from: Structure Activity Video_SUBS.mp4
+2025-09-23 17:45:30,974 - ERROR - Failed to extract audio from Structure Activity Video_SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:30,974 - INFO - Processing video: Book about Flowers SOM SUBS .mp4 (Asset: 163402756)
+2025-09-23 17:45:30,975 - ERROR - Video file not found: Book about Flowers SOM SUBS .mp4
+2025-09-23 17:45:30,975 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 027.MP4 (Asset: 162954734)
+2025-09-23 17:45:30,975 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:45:30,975 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:45:31,294 - ERROR - Failed to extract audio from Building Blocks Little School Ladybugs Kaylee 027.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:31,294 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 013.MP4 (Asset: 162954537)
+2025-09-23 17:45:31,295 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:45:31,295 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:45:31,606 - ERROR - Failed to extract audio from Building Blocks Little School Ladybugs Kaylee 013.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:31,606 - INFO - Processing video: Launch Highland Park 004.mp4 (Asset: 161765962)
+2025-09-23 17:45:31,607 - INFO - Extracting audio from: Launch Highland Park 004.mp4
+2025-09-23 17:45:31,708 - ERROR - Failed to extract audio from Launch Highland Park 004.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:31,708 - INFO - Processing video: YWCA Bessie T Draper Jeanette 099.mp4 (Asset: 161524537)
+2025-09-23 17:45:31,708 - INFO - Extracting audio from: YWCA Bessie T Draper Jeanette 099.mp4
+2025-09-23 17:45:32,199 - ERROR - Failed to extract audio from YWCA Bessie T Draper Jeanette 099.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:32,200 - INFO - Processing video: Launch Cascade Vista Breanna 013.MP4 (Asset: 161447297)
+2025-09-23 17:45:32,200 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:45:32,200 - INFO - Extracting audio from: Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:45:32,295 - ERROR - Failed to extract audio from Launch Cascade Vista Breanna 013.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:32,295 - INFO - Processing video: Conflict Management during Outdoor Play (Asset: 159878847)
+2025-09-23 17:45:32,295 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4
+2025-09-23 17:45:32,295 - INFO - Extracting audio from: Conflict Management during Outdoor Play.mp4
+2025-09-23 17:45:32,562 - ERROR - Failed to extract audio from Conflict Management during Outdoor Play.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:32,563 - INFO - Processing video: CDCSA Wenatchee Center Yasmin 035 (Asset: 158527927)
+2025-09-23 17:45:32,563 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:45:32,563 - INFO - Extracting audio from: CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:45:32,896 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Yasmin 035.MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:32,897 - INFO - Processing video: CDCSA Wenatchee Center Karina 021 (Asset: 158527763)
+2025-09-23 17:45:32,897 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:45:32,897 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:45:33,171 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Karina 021.MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:33,171 - INFO - Processing video: Being Aware of a Toddler's Needs (Asset: 159878873)
+2025-09-23 17:45:33,171 - ERROR - Video file not found: Being Aware of a Toddler's Needs
+2025-09-23 17:45:33,171 - INFO - Processing video: CDCSA Wenatchee Center Karina 017 (Asset: 158527757)
+2025-09-23 17:45:33,171 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:45:33,171 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:45:33,423 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Karina 017.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:33,423 - INFO - Processing video: CDCSA Sunset Ridge Khani 011 (Asset: 158526693)
+2025-09-23 17:45:33,423 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:45:33,423 - INFO - Extracting audio from: CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:45:33,663 - ERROR - Failed to extract audio from CDCSA Sunset Ridge Khani 011.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:33,663 - INFO - Processing video: Center Street Nancy Coach iPhone 010 (Asset: 154480223)
+2025-09-23 17:45:33,663 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:45:33,663 - INFO - Extracting audio from: Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:45:33,984 - ERROR - Failed to extract audio from Center Street Nancy Coach iPhone 010.MOV: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:33,984 - INFO - Processing video: Edgewater Early Head Start Martha 036 (Asset: 152342221)
+2025-09-23 17:45:33,984 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:45:33,984 - INFO - Extracting audio from: Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:45:34,401 - ERROR - Failed to extract audio from Edgewater Early Head Start Martha 036.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:34,401 - INFO - Processing video: Fiddleheads Sarah 038 (Asset: 129737801)
+2025-09-23 17:45:34,401 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:45:34,402 - INFO - Extracting audio from: Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:45:34,825 - ERROR - Failed to extract audio from Fiddleheads Sarah 038 (1).MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:34,825 - INFO - Processing video: Little Teddys - Jeanette First Walkthrough 015 (Asset: 94273400)
+2025-09-23 17:45:34,825 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:45:34,825 - INFO - Extracting audio from: Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:45:35,059 - ERROR - Failed to extract audio from Little Teddys - Jeanette First Walkthrough 015.mov: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,060 - INFO - Processing video: What Can We Measure_ESP SUBS (Asset: 66514411)
+2025-09-23 17:45:35,060 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:45:35,060 - INFO - Extracting audio from: What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:45:35,124 - ERROR - Failed to extract audio from What Can We Measure_ESP SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,124 - INFO - Processing video: Puddle Jumpers - Debra 054 (Asset: 65579863)
+2025-09-23 17:45:35,124 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:45:35,124 - INFO - Extracting audio from: Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:45:35,362 - ERROR - Failed to extract audio from Puddle Jumpers - Debra 054.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,362 - INFO - Processing video: Offer Resources AIAN_SUBS (Asset: 56650940)
+2025-09-23 17:45:35,362 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:45:35,362 - INFO - Extracting audio from: Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:45:35,486 - ERROR - Failed to extract audio from Offer Resources AIAN_SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,486 - INFO - Processing video: Snoqualmie_Ridge_ELC-Linda-001 (Asset: 48393993)
+2025-09-23 17:45:35,486 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:45:35,486 - INFO - Extracting audio from: Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:45:35,546 - ERROR - Failed to extract audio from Snoqualmie_Ridge_ELC-Linda-001.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,547 - INFO - Processing video: Clarke County School District Lynn 007 (Asset: 48390102)
+2025-09-23 17:45:35,547 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4
+2025-09-23 17:45:35,547 - INFO - Extracting audio from: Clarke County School District Lynn 007.mp4
+2025-09-23 17:45:35,609 - ERROR - Failed to extract audio from Clarke County School District Lynn 007.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,610 - INFO - Processing video: ACAP_Marty_005 (Asset: 48378879)
+2025-09-23 17:45:35,610 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4
+2025-09-23 17:45:35,610 - INFO - Extracting audio from: ACAP_Marty_005.mp4
+2025-09-23 17:45:35,670 - ERROR - Failed to extract audio from ACAP_Marty_005.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,671 - INFO - Processing video: childrens_place_zaid_006 (Asset: 48385321)
+2025-09-23 17:45:35,671 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4
+2025-09-23 17:45:35,671 - INFO - Extracting audio from: childrens_place_zaid_006.mp4
+2025-09-23 17:45:35,728 - ERROR - Failed to extract audio from childrens_place_zaid_006.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,729 - INFO - Processing video: Draw Results (Asset: 48386726)
+2025-09-23 17:45:35,729 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Draw Results.mp4
+2025-09-23 17:45:35,729 - INFO - Extracting audio from: Draw Results.mp4
+2025-09-23 17:45:35,786 - ERROR - Failed to extract audio from Draw Results.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:45:35,786 - INFO - Manifest saved: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio/metadata/clip_manifest.json
+2025-09-23 17:45:35,786 - INFO - Processing log saved: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio/metadata/processing_log.txt
+2025-09-23 17:45:35,786 - WARNING - No valid clips found for quality report
+2025-09-23 17:45:35,786 - INFO - === Extraction Pipeline Complete ===
+2025-09-23 17:45:35,786 - INFO - Videos processed: 0
+2025-09-23 17:45:35,786 - INFO - Clips extracted: 0
+2025-09-23 17:45:35,786 - INFO - Failed extractions: 0
+2025-09-23 17:45:35,786 - INFO - Total duration: 0.00 seconds
+2025-09-23 17:45:35,786 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:45:35,786 - WARNING - ⚠️  WARNING: Only 0/119 clips extracted
+2025-09-23 17:46:03,398 - INFO - VideoToAudioExtractor initialized
+2025-09-23 17:46:03,398 - INFO - Video directory: /home/warrenjo/src/tmp2/secure data
+2025-09-23 17:46:03,398 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:46:03,398 - INFO - Starting video-to-audio extraction pipeline
+2025-09-23 17:46:03,398 - INFO - Loading annotations from: /home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv
+2025-09-23 17:46:03,400 - INFO - Loaded 25 video annotations
+2025-09-23 17:46:03,400 - INFO - Columns: ['Video Title', 'Asset #', 'Age group', 'Timestamp', 'Question 1 ', 'Q1 description', 'Question 2 ', 'Q2 description', 'Question 3', 'Q3 description', 'Question 4', 'Q4 description', 'Question 5', 'Q5 description', 'Question 6', 'Q6 description', 'Question 7', 'Q7 description', 'Question 8', 'Q8 description', 'Description']
+2025-09-23 17:46:03,401 - INFO - Processing video: Structure Activity Video_SUBS.mp4 (Asset: 56587820)
+2025-09-23 17:46:03,401 - INFO - Extracting audio from: Structure Activity Video_SUBS.mp4
+2025-09-23 17:46:03,476 - ERROR - Failed to extract audio from Structure Activity Video_SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:03,476 - INFO - Processing video: Book about Flowers SOM SUBS .mp4 (Asset: 163402756)
+2025-09-23 17:46:03,477 - ERROR - Video file not found: Book about Flowers SOM SUBS .mp4
+2025-09-23 17:46:03,477 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 027.MP4 (Asset: 162954734)
+2025-09-23 17:46:03,477 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:46:03,477 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:46:03,795 - ERROR - Failed to extract audio from Building Blocks Little School Ladybugs Kaylee 027.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:03,795 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 013.MP4 (Asset: 162954537)
+2025-09-23 17:46:03,795 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:46:03,795 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:46:04,144 - ERROR - Failed to extract audio from Building Blocks Little School Ladybugs Kaylee 013.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:04,144 - INFO - Processing video: Launch Highland Park 004.mp4 (Asset: 161765962)
+2025-09-23 17:46:04,144 - INFO - Extracting audio from: Launch Highland Park 004.mp4
+2025-09-23 17:46:04,252 - ERROR - Failed to extract audio from Launch Highland Park 004.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:04,252 - INFO - Processing video: YWCA Bessie T Draper Jeanette 099.mp4 (Asset: 161524537)
+2025-09-23 17:46:04,252 - INFO - Extracting audio from: YWCA Bessie T Draper Jeanette 099.mp4
+2025-09-23 17:46:04,662 - ERROR - Failed to extract audio from YWCA Bessie T Draper Jeanette 099.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:04,662 - INFO - Processing video: Launch Cascade Vista Breanna 013.MP4 (Asset: 161447297)
+2025-09-23 17:46:04,662 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:46:04,662 - INFO - Extracting audio from: Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:46:04,778 - ERROR - Failed to extract audio from Launch Cascade Vista Breanna 013.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:04,778 - INFO - Processing video: Conflict Management during Outdoor Play (Asset: 159878847)
+2025-09-23 17:46:04,778 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4
+2025-09-23 17:46:04,778 - INFO - Extracting audio from: Conflict Management during Outdoor Play.mp4
+2025-09-23 17:46:05,173 - ERROR - Failed to extract audio from Conflict Management during Outdoor Play.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:05,173 - INFO - Processing video: CDCSA Wenatchee Center Yasmin 035 (Asset: 158527927)
+2025-09-23 17:46:05,173 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:46:05,173 - INFO - Extracting audio from: CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:46:05,526 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Yasmin 035.MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:05,526 - INFO - Processing video: CDCSA Wenatchee Center Karina 021 (Asset: 158527763)
+2025-09-23 17:46:05,527 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:46:05,527 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:46:05,835 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Karina 021.MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:05,835 - INFO - Processing video: Being Aware of a Toddler's Needs (Asset: 159878873)
+2025-09-23 17:46:05,836 - ERROR - Video file not found: Being Aware of a Toddler's Needs
+2025-09-23 17:46:05,836 - INFO - Processing video: CDCSA Wenatchee Center Karina 017 (Asset: 158527757)
+2025-09-23 17:46:05,837 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:46:05,837 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:46:06,105 - ERROR - Failed to extract audio from CDCSA Wenatchee Center Karina 017.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:06,106 - INFO - Processing video: CDCSA Sunset Ridge Khani 011 (Asset: 158526693)
+2025-09-23 17:46:06,106 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:46:06,106 - INFO - Extracting audio from: CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:46:06,355 - ERROR - Failed to extract audio from CDCSA Sunset Ridge Khani 011.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:06,355 - INFO - Processing video: Center Street Nancy Coach iPhone 010 (Asset: 154480223)
+2025-09-23 17:46:06,355 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:46:06,355 - INFO - Extracting audio from: Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:46:06,639 - ERROR - Failed to extract audio from Center Street Nancy Coach iPhone 010.MOV: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:06,640 - INFO - Processing video: Edgewater Early Head Start Martha 036 (Asset: 152342221)
+2025-09-23 17:46:06,640 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:46:06,640 - INFO - Extracting audio from: Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:46:07,072 - ERROR - Failed to extract audio from Edgewater Early Head Start Martha 036.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:07,072 - INFO - Processing video: Fiddleheads Sarah 038 (Asset: 129737801)
+2025-09-23 17:46:07,072 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:46:07,072 - INFO - Extracting audio from: Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:46:07,879 - ERROR - Failed to extract audio from Fiddleheads Sarah 038 (1).MP4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:07,880 - INFO - Processing video: Little Teddys - Jeanette First Walkthrough 015 (Asset: 94273400)
+2025-09-23 17:46:07,880 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:46:07,880 - INFO - Extracting audio from: Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:46:08,297 - ERROR - Failed to extract audio from Little Teddys - Jeanette First Walkthrough 015.mov: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,297 - INFO - Processing video: What Can We Measure_ESP SUBS (Asset: 66514411)
+2025-09-23 17:46:08,298 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:46:08,298 - INFO - Extracting audio from: What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:46:08,364 - ERROR - Failed to extract audio from What Can We Measure_ESP SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,364 - INFO - Processing video: Puddle Jumpers - Debra 054 (Asset: 65579863)
+2025-09-23 17:46:08,365 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:46:08,365 - INFO - Extracting audio from: Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:46:08,622 - ERROR - Failed to extract audio from Puddle Jumpers - Debra 054.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,622 - INFO - Processing video: Offer Resources AIAN_SUBS (Asset: 56650940)
+2025-09-23 17:46:08,622 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:46:08,622 - INFO - Extracting audio from: Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:46:08,758 - ERROR - Failed to extract audio from Offer Resources AIAN_SUBS.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,759 - INFO - Processing video: Snoqualmie_Ridge_ELC-Linda-001 (Asset: 48393993)
+2025-09-23 17:46:08,759 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:46:08,759 - INFO - Extracting audio from: Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:46:08,824 - ERROR - Failed to extract audio from Snoqualmie_Ridge_ELC-Linda-001.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,824 - INFO - Processing video: Clarke County School District Lynn 007 (Asset: 48390102)
+2025-09-23 17:46:08,824 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4
+2025-09-23 17:46:08,824 - INFO - Extracting audio from: Clarke County School District Lynn 007.mp4
+2025-09-23 17:46:08,927 - ERROR - Failed to extract audio from Clarke County School District Lynn 007.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:08,928 - INFO - Processing video: ACAP_Marty_005 (Asset: 48378879)
+2025-09-23 17:46:08,928 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4
+2025-09-23 17:46:08,928 - INFO - Extracting audio from: ACAP_Marty_005.mp4
+2025-09-23 17:46:09,002 - ERROR - Failed to extract audio from ACAP_Marty_005.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:09,002 - INFO - Processing video: childrens_place_zaid_006 (Asset: 48385321)
+2025-09-23 17:46:09,002 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4
+2025-09-23 17:46:09,002 - INFO - Extracting audio from: childrens_place_zaid_006.mp4
+2025-09-23 17:46:09,075 - ERROR - Failed to extract audio from childrens_place_zaid_006.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:09,076 - INFO - Processing video: Draw Results (Asset: 48386726)
+2025-09-23 17:46:09,076 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Draw Results.mp4
+2025-09-23 17:46:09,076 - INFO - Extracting audio from: Draw Results.mp4
+2025-09-23 17:46:09,137 - ERROR - Failed to extract audio from Draw Results.mp4: arrays to stack must be passed as a "sequence" type such as list or tuple.
+2025-09-23 17:46:09,137 - INFO - Manifest saved: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio/metadata/clip_manifest.json
+2025-09-23 17:46:09,138 - INFO - Processing log saved: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio/metadata/processing_log.txt
+2025-09-23 17:46:09,138 - WARNING - No valid clips found for quality report
+2025-09-23 17:46:09,138 - INFO - === Extraction Pipeline Complete ===
+2025-09-23 17:46:09,138 - INFO - Videos processed: 0
+2025-09-23 17:46:09,138 - INFO - Clips extracted: 0
+2025-09-23 17:46:09,138 - INFO - Failed extractions: 0
+2025-09-23 17:46:09,138 - INFO - Total duration: 0.00 seconds
+2025-09-23 17:46:09,138 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:46:09,138 - WARNING - ⚠️  WARNING: Only 0/119 clips extracted
+2025-09-23 17:48:41,735 - INFO - VideoToAudioExtractor initialized
+2025-09-23 17:48:41,735 - INFO - Video directory: /home/warrenjo/src/tmp2/secure data
+2025-09-23 17:48:41,735 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:48:41,735 - INFO - Starting video-to-audio extraction pipeline
+2025-09-23 17:48:41,735 - INFO - Loading annotations from: /home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv
+2025-09-23 17:48:41,737 - INFO - Loaded 25 video annotations
+2025-09-23 17:48:41,737 - INFO - Columns: ['Video Title', 'Asset #', 'Age group', 'Timestamp', 'Question 1 ', 'Q1 description', 'Question 2 ', 'Q2 description', 'Question 3', 'Q3 description', 'Question 4', 'Q4 description', 'Question 5', 'Q5 description', 'Question 6', 'Q6 description', 'Question 7', 'Q7 description', 'Question 8', 'Q8 description', 'Description']
+2025-09-23 17:48:41,737 - INFO - Processing video: Structure Activity Video_SUBS.mp4 (Asset: 56587820)
+2025-09-23 17:48:41,737 - INFO - Extracting audio from: Structure Activity Video_SUBS.mp4
+2025-09-23 17:48:44,046 - INFO - Audio extracted: 425.06 seconds
+2025-09-23 17:48:44,526 - INFO - Extracted clip: 56587820_q1.wav (5.00s)
+2025-09-23 17:48:46,432 - INFO - Extracted clip: 56587820_q2.wav (5.00s)
+2025-09-23 17:48:46,433 - INFO - Completed processing: Structure Activity Video_SUBS.mp4 - 2 clips extracted
+2025-09-23 17:48:46,433 - INFO - Processing video: Book about Flowers SOM SUBS .mp4 (Asset: 163402756)
+2025-09-23 17:48:46,434 - ERROR - Video file not found: Book about Flowers SOM SUBS .mp4
+2025-09-23 17:48:46,434 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 027.MP4 (Asset: 162954734)
+2025-09-23 17:48:46,434 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:48:46,434 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:48:49,976 - INFO - Audio extracted: 125.13 seconds
+2025-09-23 17:48:49,989 - INFO - Extracted clip: 162954734_q1.wav (5.00s)
+2025-09-23 17:48:49,993 - INFO - Extracted clip: 162954734_q2.wav (5.00s)
+2025-09-23 17:48:49,994 - INFO - Completed processing: Building Blocks Little School Ladybugs Kaylee 027.MP4 - 2 clips extracted
+2025-09-23 17:48:49,994 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 013.MP4 (Asset: 162954537)
+2025-09-23 17:48:49,994 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:48:49,994 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:48:51,034 - INFO - Audio extracted: 165.67 seconds
+2025-09-23 17:48:51,038 - INFO - Extracted clip: 162954537_q1.wav (5.00s)
+2025-09-23 17:48:51,043 - INFO - Extracted clip: 162954537_q2.wav (5.00s)
+2025-09-23 17:48:51,044 - INFO - Completed processing: Building Blocks Little School Ladybugs Kaylee 013.MP4 - 2 clips extracted
+2025-09-23 17:48:51,044 - INFO - Processing video: Launch Highland Park 004.mp4 (Asset: 161765962)
+2025-09-23 17:48:51,044 - INFO - Extracting audio from: Launch Highland Park 004.mp4
+2025-09-23 17:48:51,651 - INFO - Audio extracted: 106.63 seconds
+2025-09-23 17:48:51,660 - INFO - Extracted clip: 161765962_q1.wav (5.00s)
+2025-09-23 17:48:51,664 - INFO - Extracted clip: 161765962_q2.wav (5.00s)
+2025-09-23 17:48:51,665 - INFO - Completed processing: Launch Highland Park 004.mp4 - 2 clips extracted
+2025-09-23 17:48:51,666 - INFO - Processing video: YWCA Bessie T Draper Jeanette 099.mp4 (Asset: 161524537)
+2025-09-23 17:48:51,666 - INFO - Extracting audio from: YWCA Bessie T Draper Jeanette 099.mp4
+2025-09-23 17:48:52,548 - INFO - Audio extracted: 111.11 seconds
+2025-09-23 17:48:52,552 - INFO - Extracted clip: 161524537_q1.wav (5.00s)
+2025-09-23 17:48:52,555 - INFO - Extracted clip: 161524537_q2.wav (5.00s)
+2025-09-23 17:48:52,556 - INFO - Completed processing: YWCA Bessie T Draper Jeanette 099.mp4 - 2 clips extracted
+2025-09-23 17:48:52,556 - INFO - Processing video: Launch Cascade Vista Breanna 013.MP4 (Asset: 161447297)
+2025-09-23 17:48:52,556 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:48:52,556 - INFO - Extracting audio from: Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:48:53,565 - INFO - Audio extracted: 181.71 seconds
+2025-09-23 17:48:53,580 - INFO - Extracted clip: 161447297_q1.wav (5.00s)
+2025-09-23 17:48:53,584 - INFO - Extracted clip: 161447297_q2.wav (5.00s)
+2025-09-23 17:48:53,585 - INFO - Completed processing: Launch Cascade Vista Breanna 013.MP4 - 2 clips extracted
+2025-09-23 17:48:53,586 - INFO - Processing video: Conflict Management during Outdoor Play (Asset: 159878847)
+2025-09-23 17:48:53,587 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4
+2025-09-23 17:48:53,587 - INFO - Extracting audio from: Conflict Management during Outdoor Play.mp4
+2025-09-23 17:48:54,361 - INFO - Audio extracted: 91.86 seconds
+2025-09-23 17:48:54,376 - INFO - Extracted clip: 159878847_q1.wav (4.00s)
+2025-09-23 17:48:54,381 - INFO - Extracted clip: 159878847_q2.wav (5.00s)
+2025-09-23 17:48:54,383 - INFO - Completed processing: Conflict Management during Outdoor Play - 2 clips extracted
+2025-09-23 17:48:54,384 - INFO - Processing video: CDCSA Wenatchee Center Yasmin 035 (Asset: 158527927)
+2025-09-23 17:48:54,384 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:48:54,384 - INFO - Extracting audio from: CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:48:55,180 - INFO - Audio extracted: 98.10 seconds
+2025-09-23 17:48:55,184 - INFO - Extracted clip: 158527927_q1.wav (4.00s)
+2025-09-23 17:48:55,188 - INFO - Extracted clip: 158527927_q2.wav (5.00s)
+2025-09-23 17:48:55,189 - INFO - Completed processing: CDCSA Wenatchee Center Yasmin 035 - 2 clips extracted
+2025-09-23 17:48:55,190 - INFO - Processing video: CDCSA Wenatchee Center Karina 021 (Asset: 158527763)
+2025-09-23 17:48:55,190 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:48:55,190 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:48:56,207 - INFO - Audio extracted: 130.26 seconds
+2025-09-23 17:48:56,215 - INFO - Extracted clip: 158527763_q1.wav (5.00s)
+2025-09-23 17:48:56,217 - WARNING - Invalid clip: 158527763_q1.wav
+2025-09-23 17:48:56,235 - INFO - Extracted clip: 158527763_q2.wav (5.00s)
+2025-09-23 17:48:56,236 - INFO - Completed processing: CDCSA Wenatchee Center Karina 021 - 1 clips extracted
+2025-09-23 17:48:56,236 - INFO - Processing video: Being Aware of a Toddler's Needs (Asset: 159878873)
+2025-09-23 17:48:56,236 - ERROR - Video file not found: Being Aware of a Toddler's Needs
+2025-09-23 17:48:56,236 - INFO - Processing video: CDCSA Wenatchee Center Karina 017 (Asset: 158527757)
+2025-09-23 17:48:56,237 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:48:56,237 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:48:57,776 - INFO - Audio extracted: 215.98 seconds
+2025-09-23 17:48:57,780 - INFO - Extracted clip: 158527757_q1.wav (5.00s)
+2025-09-23 17:48:57,783 - INFO - Extracted clip: 158527757_q2.wav (5.00s)
+2025-09-23 17:48:57,784 - INFO - Completed processing: CDCSA Wenatchee Center Karina 017 - 2 clips extracted
+2025-09-23 17:48:57,785 - INFO - Processing video: CDCSA Sunset Ridge Khani 011 (Asset: 158526693)
+2025-09-23 17:48:57,786 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:48:57,786 - INFO - Extracting audio from: CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:48:58,178 - INFO - Audio extracted: 41.54 seconds
+2025-09-23 17:48:58,183 - INFO - Extracted clip: 158526693_q1.wav (5.00s)
+2025-09-23 17:48:58,192 - INFO - Extracted clip: 158526693_q2.wav (5.00s)
+2025-09-23 17:48:58,193 - INFO - Completed processing: CDCSA Sunset Ridge Khani 011 - 2 clips extracted
+2025-09-23 17:48:58,193 - INFO - Processing video: Center Street Nancy Coach iPhone 010 (Asset: 154480223)
+2025-09-23 17:48:58,194 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:48:58,194 - INFO - Extracting audio from: Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:49:03,957 - INFO - Audio extracted: 1238.84 seconds
+2025-09-23 17:49:03,962 - INFO - Extracted clip: 154480223_q1.wav (5.00s)
+2025-09-23 17:49:03,968 - INFO - Extracted clip: 154480223_q2.wav (5.00s)
+2025-09-23 17:49:03,970 - INFO - Completed processing: Center Street Nancy Coach iPhone 010 - 2 clips extracted
+2025-09-23 17:49:03,970 - INFO - Processing video: Edgewater Early Head Start Martha 036 (Asset: 152342221)
+2025-09-23 17:49:03,971 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:49:03,971 - INFO - Extracting audio from: Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:49:05,021 - INFO - Audio extracted: 130.63 seconds
+2025-09-23 17:49:05,025 - INFO - Extracted clip: 152342221_q1.wav (5.00s)
+2025-09-23 17:49:05,031 - INFO - Extracted clip: 152342221_q2.wav (5.00s)
+2025-09-23 17:49:05,033 - INFO - Completed processing: Edgewater Early Head Start Martha 036 - 2 clips extracted
+2025-09-23 17:49:05,033 - INFO - Processing video: Fiddleheads Sarah 038 (Asset: 129737801)
+2025-09-23 17:49:05,033 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:49:05,033 - INFO - Extracting audio from: Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:49:05,578 - INFO - Audio extracted: 32.54 seconds
+2025-09-23 17:49:05,582 - INFO - Extracted clip: 129737801_q1.wav (5.00s)
+2025-09-23 17:49:05,587 - INFO - Extracted clip: 129737801_q2.wav (5.00s)
+2025-09-23 17:49:05,588 - INFO - Completed processing: Fiddleheads Sarah 038 - 2 clips extracted
+2025-09-23 17:49:05,588 - INFO - Processing video: Little Teddys - Jeanette First Walkthrough 015 (Asset: 94273400)
+2025-09-23 17:49:05,588 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:49:05,588 - INFO - Extracting audio from: Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:49:06,104 - INFO - Audio extracted: 64.56 seconds
+2025-09-23 17:49:06,108 - INFO - Extracted clip: 94273400_q1.wav (3.00s)
+2025-09-23 17:49:06,112 - INFO - Extracted clip: 94273400_q2.wav (5.00s)
+2025-09-23 17:49:06,113 - INFO - Completed processing: Little Teddys - Jeanette First Walkthrough 015 - 2 clips extracted
+2025-09-23 17:49:06,113 - INFO - Processing video: What Can We Measure_ESP SUBS (Asset: 66514411)
+2025-09-23 17:49:06,113 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:49:06,113 - INFO - Extracting audio from: What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:49:06,456 - INFO - Audio extracted: 79.51 seconds
+2025-09-23 17:49:06,467 - INFO - Extracted clip: 66514411_q1.wav (5.00s)
+2025-09-23 17:49:06,473 - INFO - Extracted clip: 66514411_q2.wav (5.00s)
+2025-09-23 17:49:06,474 - INFO - Completed processing: What Can We Measure_ESP SUBS - 2 clips extracted
+2025-09-23 17:49:06,475 - INFO - Processing video: Puddle Jumpers - Debra 054 (Asset: 65579863)
+2025-09-23 17:49:06,475 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:49:06,475 - INFO - Extracting audio from: Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:49:06,906 - INFO - Audio extracted: 46.05 seconds
+2025-09-23 17:49:06,910 - INFO - Extracted clip: 65579863_q1.wav (4.00s)
+2025-09-23 17:49:06,914 - INFO - Extracted clip: 65579863_q2.wav (5.00s)
+2025-09-23 17:49:06,916 - INFO - Completed processing: Puddle Jumpers - Debra 054 - 2 clips extracted
+2025-09-23 17:49:06,916 - INFO - Processing video: Offer Resources AIAN_SUBS (Asset: 56650940)
+2025-09-23 17:49:06,916 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:49:06,916 - INFO - Extracting audio from: Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:49:07,160 - INFO - Audio extracted: 38.91 seconds
+2025-09-23 17:49:07,163 - INFO - Extracted clip: 56650940_q1.wav (5.00s)
+2025-09-23 17:49:07,165 - INFO - Completed processing: Offer Resources AIAN_SUBS - 1 clips extracted
+2025-09-23 17:49:07,165 - INFO - Processing video: Snoqualmie_Ridge_ELC-Linda-001 (Asset: 48393993)
+2025-09-23 17:49:07,165 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:49:07,165 - INFO - Extracting audio from: Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:49:08,049 - INFO - Audio extracted: 256.64 seconds
+2025-09-23 17:49:08,054 - INFO - Extracted clip: 48393993_q1.wav (5.00s)
+2025-09-23 17:49:08,060 - INFO - Extracted clip: 48393993_q2.wav (5.00s)
+2025-09-23 17:49:08,061 - INFO - Completed processing: Snoqualmie_Ridge_ELC-Linda-001 - 2 clips extracted
+2025-09-23 17:49:08,062 - INFO - Processing video: Clarke County School District Lynn 007 (Asset: 48390102)
+2025-09-23 17:49:08,062 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4
+2025-09-23 17:49:08,062 - INFO - Extracting audio from: Clarke County School District Lynn 007.mp4
+2025-09-23 17:49:09,110 - INFO - Audio extracted: 292.69 seconds
+2025-09-23 17:49:09,115 - INFO - Extracted clip: 48390102_q1.wav (4.00s)
+2025-09-23 17:49:09,119 - INFO - Extracted clip: 48390102_q2.wav (5.00s)
+2025-09-23 17:49:09,120 - INFO - Completed processing: Clarke County School District Lynn 007 - 2 clips extracted
+2025-09-23 17:49:09,120 - INFO - Processing video: ACAP_Marty_005 (Asset: 48378879)
+2025-09-23 17:49:09,120 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4
+2025-09-23 17:49:09,120 - INFO - Extracting audio from: ACAP_Marty_005.mp4
+2025-09-23 17:49:10,389 - INFO - Audio extracted: 368.09 seconds
+2025-09-23 17:49:10,395 - INFO - Extracted clip: 48378879_q1.wav (5.00s)
+2025-09-23 17:49:10,398 - INFO - Extracted clip: 48378879_q2.wav (5.00s)
+2025-09-23 17:49:10,399 - INFO - Completed processing: ACAP_Marty_005 - 2 clips extracted
+2025-09-23 17:49:10,399 - INFO - Processing video: childrens_place_zaid_006 (Asset: 48385321)
+2025-09-23 17:49:10,400 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4
+2025-09-23 17:49:10,400 - INFO - Extracting audio from: childrens_place_zaid_006.mp4
+2025-09-23 17:49:10,750 - INFO - Audio extracted: 92.89 seconds
+2025-09-23 17:49:10,755 - INFO - Extracted clip: 48385321_q1.wav (5.00s)
+2025-09-23 17:49:10,759 - INFO - Extracted clip: 48385321_q2.wav (5.00s)
+2025-09-23 17:49:10,760 - INFO - Completed processing: childrens_place_zaid_006 - 2 clips extracted
+2025-09-23 17:49:10,760 - INFO - Processing video: Draw Results (Asset: 48386726)
+2025-09-23 17:49:10,761 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Draw Results.mp4
+2025-09-23 17:49:10,761 - INFO - Extracting audio from: Draw Results.mp4
+2025-09-23 17:49:10,939 - INFO - Audio extracted: 35.37 seconds
+2025-09-23 17:49:10,943 - INFO - Extracted clip: 48386726_q1.wav (4.00s)
+2025-09-23 17:49:10,949 - INFO - Extracted clip: 48386726_q2.wav (5.00s)
+2025-09-23 17:49:10,950 - INFO - Completed processing: Draw Results - 2 clips extracted
+2025-09-23 17:49:10,950 - ERROR - Failed to save manifest: Object of type float32 is not JSON serializable
+2025-09-23 17:49:10,951 - ERROR - Failed to generate quality report: Object of type float32 is not JSON serializable
+2025-09-23 17:49:10,951 - INFO - === Extraction Pipeline Complete ===
+2025-09-23 17:49:10,951 - INFO - Videos processed: 23
+2025-09-23 17:49:10,951 - INFO - Clips extracted: 44
+2025-09-23 17:49:10,951 - INFO - Failed extractions: 1
+2025-09-23 17:49:10,951 - INFO - Total duration: 213.00 seconds
+2025-09-23 17:49:10,951 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:49:10,951 - WARNING - ⚠️  WARNING: Only 44/119 clips extracted
+2025-09-23 17:54:36,613 - INFO - VideoToAudioExtractor initialized
+2025-09-23 17:54:36,614 - INFO - Video directory: /home/warrenjo/src/tmp2/secure data
+2025-09-23 17:54:36,614 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:54:36,614 - INFO - Starting video-to-audio extraction pipeline
+2025-09-23 17:54:36,614 - INFO - Loading annotations from: /home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv
+2025-09-23 17:54:36,615 - INFO - Loaded 25 video annotations
+2025-09-23 17:54:36,615 - INFO - Columns: ['Video Title', 'Asset #', 'Age group', 'Timestamp', 'Question 1 ', 'Q1 description', 'Question 2 ', 'Q2 description', 'Question 3', 'Q3 description', 'Question 4', 'Q4 description', 'Question 5', 'Q5 description', 'Question 6', 'Q6 description', 'Question 7', 'Q7 description', 'Question 8', 'Q8 description', 'Description']
+2025-09-23 17:54:36,616 - INFO - Processing video: Structure Activity Video_SUBS.mp4 (Asset: 56587820)
+2025-09-23 17:54:36,616 - INFO - Extracting audio from: Structure Activity Video_SUBS.mp4
+2025-09-23 17:54:42,126 - INFO - Audio extracted: 425.06 seconds
+2025-09-23 17:54:42,131 - INFO - Extracted clip: 56587820_q1.wav (5.00s)
+2025-09-23 17:54:42,155 - INFO - Extracted clip: 56587820_q2.wav (5.00s)
+2025-09-23 17:54:42,160 - INFO - Extracted clip: 56587820_q3.wav (5.00s)
+2025-09-23 17:54:42,164 - INFO - Extracted clip: 56587820_q4.wav (5.00s)
+2025-09-23 17:54:42,167 - INFO - Extracted clip: 56587820_q5.wav (5.00s)
+2025-09-23 17:54:42,169 - INFO - Completed processing: Structure Activity Video_SUBS.mp4 - 5 clips extracted
+2025-09-23 17:54:42,169 - INFO - Processing video: Book about Flowers SOM SUBS .mp4 (Asset: 163402756)
+2025-09-23 17:54:42,170 - ERROR - Video file not found: Book about Flowers SOM SUBS .mp4
+2025-09-23 17:54:42,170 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 027.MP4 (Asset: 162954734)
+2025-09-23 17:54:42,170 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:54:42,170 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 027.mp4
+2025-09-23 17:54:42,956 - INFO - Audio extracted: 125.13 seconds
+2025-09-23 17:54:42,967 - INFO - Extracted clip: 162954734_q1.wav (5.00s)
+2025-09-23 17:54:42,977 - INFO - Extracted clip: 162954734_q2.wav (5.00s)
+2025-09-23 17:54:42,982 - INFO - Extracted clip: 162954734_q3.wav (5.00s)
+2025-09-23 17:54:42,989 - INFO - Extracted clip: 162954734_q4.wav (5.00s)
+2025-09-23 17:54:42,990 - INFO - Completed processing: Building Blocks Little School Ladybugs Kaylee 027.MP4 - 4 clips extracted
+2025-09-23 17:54:42,990 - INFO - Processing video: Building Blocks Little School Ladybugs Kaylee 013.MP4 (Asset: 162954537)
+2025-09-23 17:54:42,990 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:54:42,991 - INFO - Extracting audio from: Building Blocks Little School Ladybugs Kaylee 013.mp4
+2025-09-23 17:54:43,896 - INFO - Audio extracted: 165.67 seconds
+2025-09-23 17:54:43,901 - INFO - Extracted clip: 162954537_q1.wav (5.00s)
+2025-09-23 17:54:43,906 - INFO - Extracted clip: 162954537_q2.wav (5.00s)
+2025-09-23 17:54:43,911 - INFO - Extracted clip: 162954537_q3.wav (5.00s)
+2025-09-23 17:54:43,912 - WARNING - Invalid clip: 162954537_q3.wav
+2025-09-23 17:54:43,916 - INFO - Extracted clip: 162954537_q4.wav (5.00s)
+2025-09-23 17:54:43,917 - WARNING - Invalid clip: 162954537_q4.wav
+2025-09-23 17:54:43,920 - INFO - Extracted clip: 162954537_q5.wav (5.00s)
+2025-09-23 17:54:43,925 - INFO - Extracted clip: 162954537_q6.wav (5.00s)
+2025-09-23 17:54:43,926 - INFO - Completed processing: Building Blocks Little School Ladybugs Kaylee 013.MP4 - 4 clips extracted
+2025-09-23 17:54:43,926 - INFO - Processing video: Launch Highland Park 004.mp4 (Asset: 161765962)
+2025-09-23 17:54:43,926 - INFO - Extracting audio from: Launch Highland Park 004.mp4
+2025-09-23 17:54:44,358 - INFO - Audio extracted: 106.63 seconds
+2025-09-23 17:54:44,362 - INFO - Extracted clip: 161765962_q1.wav (5.00s)
+2025-09-23 17:54:44,367 - INFO - Extracted clip: 161765962_q2.wav (5.00s)
+2025-09-23 17:54:44,371 - INFO - Extracted clip: 161765962_q3.wav (5.00s)
+2025-09-23 17:54:44,376 - INFO - Extracted clip: 161765962_q4.wav (5.00s)
+2025-09-23 17:54:44,379 - INFO - Extracted clip: 161765962_q5.wav (5.00s)
+2025-09-23 17:54:44,380 - INFO - Completed processing: Launch Highland Park 004.mp4 - 5 clips extracted
+2025-09-23 17:54:44,382 - INFO - Processing video: YWCA Bessie T Draper Jeanette 099.mp4 (Asset: 161524537)
+2025-09-23 17:54:44,382 - INFO - Extracting audio from: YWCA Bessie T Draper Jeanette 099.mp4
+2025-09-23 17:54:45,164 - INFO - Audio extracted: 111.11 seconds
+2025-09-23 17:54:45,170 - INFO - Extracted clip: 161524537_q1.wav (5.00s)
+2025-09-23 17:54:45,177 - INFO - Extracted clip: 161524537_q2.wav (5.00s)
+2025-09-23 17:54:45,178 - INFO - Completed processing: YWCA Bessie T Draper Jeanette 099.mp4 - 2 clips extracted
+2025-09-23 17:54:45,178 - INFO - Processing video: Launch Cascade Vista Breanna 013.MP4 (Asset: 161447297)
+2025-09-23 17:54:45,178 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:54:45,178 - INFO - Extracting audio from: Launch Cascade Vista Breanna 013.mp4
+2025-09-23 17:54:45,904 - INFO - Audio extracted: 181.71 seconds
+2025-09-23 17:54:45,910 - INFO - Extracted clip: 161447297_q1.wav (5.00s)
+2025-09-23 17:54:45,913 - INFO - Extracted clip: 161447297_q2.wav (5.00s)
+2025-09-23 17:54:45,916 - INFO - Extracted clip: 161447297_q3.wav (5.00s)
+2025-09-23 17:54:45,918 - INFO - Completed processing: Launch Cascade Vista Breanna 013.MP4 - 3 clips extracted
+2025-09-23 17:54:45,920 - INFO - Processing video: Conflict Management during Outdoor Play (Asset: 159878847)
+2025-09-23 17:54:45,920 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4
+2025-09-23 17:54:45,921 - INFO - Extracting audio from: Conflict Management during Outdoor Play.mp4
+2025-09-23 17:54:46,404 - INFO - Audio extracted: 91.86 seconds
+2025-09-23 17:54:46,407 - INFO - Extracted clip: 159878847_q1.wav (4.00s)
+2025-09-23 17:54:46,411 - INFO - Extracted clip: 159878847_q2.wav (5.00s)
+2025-09-23 17:54:46,416 - INFO - Extracted clip: 159878847_q3.wav (5.00s)
+2025-09-23 17:54:46,419 - INFO - Extracted clip: 159878847_q4.wav (5.00s)
+2025-09-23 17:54:46,420 - INFO - Completed processing: Conflict Management during Outdoor Play - 4 clips extracted
+2025-09-23 17:54:46,420 - INFO - Processing video: CDCSA Wenatchee Center Yasmin 035 (Asset: 158527927)
+2025-09-23 17:54:46,420 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:54:46,420 - INFO - Extracting audio from: CDCSA Wenatchee Center Yasmin 035.MP4
+2025-09-23 17:54:47,002 - INFO - Audio extracted: 98.10 seconds
+2025-09-23 17:54:47,006 - INFO - Extracted clip: 158527927_q1.wav (4.00s)
+2025-09-23 17:54:47,010 - INFO - Extracted clip: 158527927_q2.wav (5.00s)
+2025-09-23 17:54:47,014 - INFO - Extracted clip: 158527927_q3.wav (5.00s)
+2025-09-23 17:54:47,018 - INFO - Extracted clip: 158527927_q4.wav (5.00s)
+2025-09-23 17:54:47,019 - INFO - Completed processing: CDCSA Wenatchee Center Yasmin 035 - 4 clips extracted
+2025-09-23 17:54:47,019 - INFO - Processing video: CDCSA Wenatchee Center Karina 021 (Asset: 158527763)
+2025-09-23 17:54:47,020 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:54:47,020 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 021.MP4
+2025-09-23 17:54:47,655 - INFO - Audio extracted: 130.26 seconds
+2025-09-23 17:54:47,658 - INFO - Extracted clip: 158527763_q1.wav (5.00s)
+2025-09-23 17:54:47,660 - WARNING - Invalid clip: 158527763_q1.wav
+2025-09-23 17:54:47,663 - INFO - Extracted clip: 158527763_q2.wav (5.00s)
+2025-09-23 17:54:47,666 - INFO - Extracted clip: 158527763_q3.wav (5.00s)
+2025-09-23 17:54:47,671 - INFO - Extracted clip: 158527763_q4.wav (5.00s)
+2025-09-23 17:54:47,674 - INFO - Extracted clip: 158527763_q5.wav (5.00s)
+2025-09-23 17:54:47,678 - INFO - Extracted clip: 158527763_q6.wav (5.00s)
+2025-09-23 17:54:47,679 - INFO - Completed processing: CDCSA Wenatchee Center Karina 021 - 5 clips extracted
+2025-09-23 17:54:47,679 - INFO - Processing video: Being Aware of a Toddler's Needs (Asset: 159878873)
+2025-09-23 17:54:47,679 - ERROR - Video file not found: Being Aware of a Toddler's Needs
+2025-09-23 17:54:47,679 - INFO - Processing video: CDCSA Wenatchee Center Karina 017 (Asset: 158527757)
+2025-09-23 17:54:47,679 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:54:47,679 - INFO - Extracting audio from: CDCSA Wenatchee Center Karina 017.mp4
+2025-09-23 17:54:48,565 - INFO - Audio extracted: 215.98 seconds
+2025-09-23 17:54:48,568 - INFO - Extracted clip: 158527757_q1.wav (5.00s)
+2025-09-23 17:54:48,573 - INFO - Extracted clip: 158527757_q2.wav (5.00s)
+2025-09-23 17:54:48,577 - INFO - Extracted clip: 158527757_q3.wav (5.00s)
+2025-09-23 17:54:48,580 - INFO - Extracted clip: 158527757_q4.wav (5.00s)
+2025-09-23 17:54:48,584 - INFO - Extracted clip: 158527757_q5.wav (5.00s)
+2025-09-23 17:54:48,589 - INFO - Extracted clip: 158527757_q6.wav (5.00s)
+2025-09-23 17:54:48,590 - INFO - Completed processing: CDCSA Wenatchee Center Karina 017 - 6 clips extracted
+2025-09-23 17:54:48,592 - INFO - Processing video: CDCSA Sunset Ridge Khani 011 (Asset: 158526693)
+2025-09-23 17:54:48,592 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:54:48,592 - INFO - Extracting audio from: CDCSA Sunset Ridge Khani 011.mp4
+2025-09-23 17:54:48,928 - INFO - Audio extracted: 41.54 seconds
+2025-09-23 17:54:48,931 - INFO - Extracted clip: 158526693_q1.wav (5.00s)
+2025-09-23 17:54:48,936 - INFO - Extracted clip: 158526693_q2.wav (5.00s)
+2025-09-23 17:54:48,939 - INFO - Extracted clip: 158526693_q3.wav (5.00s)
+2025-09-23 17:54:48,943 - INFO - Extracted clip: 158526693_q4.wav (5.00s)
+2025-09-23 17:54:48,947 - INFO - Extracted clip: 158526693_q5.wav (5.00s)
+2025-09-23 17:54:48,948 - INFO - Completed processing: CDCSA Sunset Ridge Khani 011 - 5 clips extracted
+2025-09-23 17:54:48,948 - INFO - Processing video: Center Street Nancy Coach iPhone 010 (Asset: 154480223)
+2025-09-23 17:54:48,948 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:54:48,948 - INFO - Extracting audio from: Center Street Nancy Coach iPhone 010.MOV
+2025-09-23 17:54:54,003 - INFO - Audio extracted: 1238.84 seconds
+2025-09-23 17:54:54,007 - INFO - Extracted clip: 154480223_q1.wav (5.00s)
+2025-09-23 17:54:54,011 - INFO - Extracted clip: 154480223_q2.wav (5.00s)
+2025-09-23 17:54:54,016 - INFO - Extracted clip: 154480223_q3.wav (5.00s)
+2025-09-23 17:54:54,020 - INFO - Extracted clip: 154480223_q4.wav (5.00s)
+2025-09-23 17:54:54,030 - INFO - Extracted clip: 154480223_q5.wav (5.00s)
+2025-09-23 17:54:54,031 - INFO - Completed processing: Center Street Nancy Coach iPhone 010 - 5 clips extracted
+2025-09-23 17:54:54,032 - INFO - Processing video: Edgewater Early Head Start Martha 036 (Asset: 152342221)
+2025-09-23 17:54:54,032 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:54:54,032 - INFO - Extracting audio from: Edgewater Early Head Start Martha 036.mp4
+2025-09-23 17:54:54,943 - INFO - Audio extracted: 130.63 seconds
+2025-09-23 17:54:54,947 - INFO - Extracted clip: 152342221_q1.wav (5.00s)
+2025-09-23 17:54:54,951 - INFO - Extracted clip: 152342221_q2.wav (5.00s)
+2025-09-23 17:54:54,954 - INFO - Completed processing: Edgewater Early Head Start Martha 036 - 2 clips extracted
+2025-09-23 17:54:54,954 - INFO - Processing video: Fiddleheads Sarah 038 (Asset: 129737801)
+2025-09-23 17:54:54,954 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:54:54,954 - INFO - Extracting audio from: Fiddleheads Sarah 038 (1).MP4
+2025-09-23 17:54:55,446 - INFO - Audio extracted: 32.54 seconds
+2025-09-23 17:54:55,451 - INFO - Extracted clip: 129737801_q1.wav (5.00s)
+2025-09-23 17:54:55,454 - INFO - Extracted clip: 129737801_q2.wav (5.00s)
+2025-09-23 17:54:55,458 - INFO - Extracted clip: 129737801_q3.wav (5.00s)
+2025-09-23 17:54:55,462 - INFO - Extracted clip: 129737801_q4.wav (5.00s)
+2025-09-23 17:54:55,463 - INFO - Completed processing: Fiddleheads Sarah 038 - 4 clips extracted
+2025-09-23 17:54:55,463 - INFO - Processing video: Little Teddys - Jeanette First Walkthrough 015 (Asset: 94273400)
+2025-09-23 17:54:55,464 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:54:55,464 - INFO - Extracting audio from: Little Teddys - Jeanette First Walkthrough 015.mov
+2025-09-23 17:54:56,001 - INFO - Audio extracted: 64.56 seconds
+2025-09-23 17:54:56,006 - INFO - Extracted clip: 94273400_q1.wav (3.00s)
+2025-09-23 17:54:56,011 - INFO - Extracted clip: 94273400_q2.wav (5.00s)
+2025-09-23 17:54:56,016 - INFO - Extracted clip: 94273400_q3.wav (5.00s)
+2025-09-23 17:54:56,021 - INFO - Extracted clip: 94273400_q4.wav (5.00s)
+2025-09-23 17:54:56,025 - INFO - Extracted clip: 94273400_q5.wav (5.00s)
+2025-09-23 17:54:56,026 - INFO - Completed processing: Little Teddys - Jeanette First Walkthrough 015 - 5 clips extracted
+2025-09-23 17:54:56,026 - INFO - Processing video: What Can We Measure_ESP SUBS (Asset: 66514411)
+2025-09-23 17:54:56,026 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:54:56,026 - INFO - Extracting audio from: What Can We Measure_ESP SUBS.mp4
+2025-09-23 17:54:56,378 - INFO - Audio extracted: 79.51 seconds
+2025-09-23 17:54:56,381 - INFO - Extracted clip: 66514411_q1.wav (5.00s)
+2025-09-23 17:54:56,385 - INFO - Extracted clip: 66514411_q2.wav (5.00s)
+2025-09-23 17:54:56,387 - INFO - Completed processing: What Can We Measure_ESP SUBS - 2 clips extracted
+2025-09-23 17:54:56,387 - INFO - Processing video: Puddle Jumpers - Debra 054 (Asset: 65579863)
+2025-09-23 17:54:56,387 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:54:56,387 - INFO - Extracting audio from: Puddle Jumpers - Debra 054.mp4
+2025-09-23 17:54:56,807 - INFO - Audio extracted: 46.05 seconds
+2025-09-23 17:54:56,811 - INFO - Extracted clip: 65579863_q1.wav (4.00s)
+2025-09-23 17:54:56,815 - INFO - Extracted clip: 65579863_q2.wav (5.00s)
+2025-09-23 17:54:56,819 - INFO - Extracted clip: 65579863_q3.wav (5.00s)
+2025-09-23 17:54:56,821 - INFO - Completed processing: Puddle Jumpers - Debra 054 - 3 clips extracted
+2025-09-23 17:54:56,821 - INFO - Processing video: Offer Resources AIAN_SUBS (Asset: 56650940)
+2025-09-23 17:54:56,821 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:54:56,821 - INFO - Extracting audio from: Offer Resources AIAN_SUBS.mp4
+2025-09-23 17:54:57,042 - INFO - Audio extracted: 38.91 seconds
+2025-09-23 17:54:57,766 - INFO - Extracted clip: 56650940_q1.wav (5.00s)
+2025-09-23 17:54:57,768 - INFO - Completed processing: Offer Resources AIAN_SUBS - 1 clips extracted
+2025-09-23 17:54:57,768 - INFO - Processing video: Snoqualmie_Ridge_ELC-Linda-001 (Asset: 48393993)
+2025-09-23 17:54:57,768 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:54:57,768 - INFO - Extracting audio from: Snoqualmie_Ridge_ELC-Linda-001.mp4
+2025-09-23 17:54:58,728 - INFO - Audio extracted: 256.64 seconds
+2025-09-23 17:54:58,748 - INFO - Extracted clip: 48393993_q1.wav (5.00s)
+2025-09-23 17:54:58,754 - INFO - Extracted clip: 48393993_q2.wav (5.00s)
+2025-09-23 17:54:58,757 - INFO - Extracted clip: 48393993_q3.wav (5.00s)
+2025-09-23 17:54:58,761 - INFO - Extracted clip: 48393993_q4.wav (5.00s)
+2025-09-23 17:54:58,775 - INFO - Extracted clip: 48393993_q5.wav (5.00s)
+2025-09-23 17:54:58,779 - INFO - Extracted clip: 48393993_q6.wav (5.00s)
+2025-09-23 17:54:58,783 - INFO - Extracted clip: 48393993_q7.wav (5.00s)
+2025-09-23 17:54:58,784 - INFO - Completed processing: Snoqualmie_Ridge_ELC-Linda-001 - 7 clips extracted
+2025-09-23 17:54:58,784 - INFO - Processing video: Clarke County School District Lynn 007 (Asset: 48390102)
+2025-09-23 17:54:58,785 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4
+2025-09-23 17:54:58,785 - INFO - Extracting audio from: Clarke County School District Lynn 007.mp4
+2025-09-23 17:54:59,787 - INFO - Audio extracted: 292.69 seconds
+2025-09-23 17:54:59,798 - INFO - Extracted clip: 48390102_q1.wav (4.00s)
+2025-09-23 17:54:59,803 - INFO - Extracted clip: 48390102_q2.wav (5.00s)
+2025-09-23 17:54:59,808 - INFO - Extracted clip: 48390102_q3.wav (5.00s)
+2025-09-23 17:54:59,811 - INFO - Extracted clip: 48390102_q4.wav (5.00s)
+2025-09-23 17:54:59,815 - INFO - Extracted clip: 48390102_q5.wav (5.00s)
+2025-09-23 17:54:59,820 - INFO - Extracted clip: 48390102_q6.wav (5.00s)
+2025-09-23 17:54:59,825 - INFO - Extracted clip: 48390102_q7.wav (5.00s)
+2025-09-23 17:54:59,828 - INFO - Extracted clip: 48390102_q8.wav (5.00s)
+2025-09-23 17:54:59,830 - INFO - Completed processing: Clarke County School District Lynn 007 - 8 clips extracted
+2025-09-23 17:54:59,830 - INFO - Processing video: ACAP_Marty_005 (Asset: 48378879)
+2025-09-23 17:54:59,830 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4
+2025-09-23 17:54:59,830 - INFO - Extracting audio from: ACAP_Marty_005.mp4
+2025-09-23 17:55:01,060 - INFO - Audio extracted: 368.09 seconds
+2025-09-23 17:55:01,066 - INFO - Extracted clip: 48378879_q1.wav (5.00s)
+2025-09-23 17:55:01,071 - INFO - Extracted clip: 48378879_q2.wav (5.00s)
+2025-09-23 17:55:01,076 - INFO - Extracted clip: 48378879_q3.wav (5.00s)
+2025-09-23 17:55:01,080 - INFO - Extracted clip: 48378879_q4.wav (5.00s)
+2025-09-23 17:55:01,083 - INFO - Extracted clip: 48378879_q5.wav (5.00s)
+2025-09-23 17:55:01,085 - INFO - Completed processing: ACAP_Marty_005 - 5 clips extracted
+2025-09-23 17:55:01,085 - INFO - Processing video: childrens_place_zaid_006 (Asset: 48385321)
+2025-09-23 17:55:01,085 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4
+2025-09-23 17:55:01,085 - INFO - Extracting audio from: childrens_place_zaid_006.mp4
+2025-09-23 17:55:01,433 - INFO - Audio extracted: 92.89 seconds
+2025-09-23 17:55:01,440 - INFO - Extracted clip: 48385321_q1.wav (5.00s)
+2025-09-23 17:55:01,446 - INFO - Extracted clip: 48385321_q2.wav (5.00s)
+2025-09-23 17:55:01,450 - INFO - Extracted clip: 48385321_q3.wav (5.00s)
+2025-09-23 17:55:01,454 - INFO - Extracted clip: 48385321_q4.wav (5.00s)
+2025-09-23 17:55:01,458 - INFO - Extracted clip: 48385321_q5.wav (5.00s)
+2025-09-23 17:55:01,462 - INFO - Extracted clip: 48385321_q6.wav (5.00s)
+2025-09-23 17:55:01,464 - INFO - Completed processing: childrens_place_zaid_006 - 6 clips extracted
+2025-09-23 17:55:01,464 - INFO - Processing video: Draw Results (Asset: 48386726)
+2025-09-23 17:55:01,464 - INFO - Found similar video file: /home/warrenjo/src/tmp2/secure data/Draw Results.mp4
+2025-09-23 17:55:01,464 - INFO - Extracting audio from: Draw Results.mp4
+2025-09-23 17:55:01,624 - INFO - Audio extracted: 35.37 seconds
+2025-09-23 17:55:01,638 - INFO - Extracted clip: 48386726_q1.wav (4.00s)
+2025-09-23 17:55:01,642 - INFO - Extracted clip: 48386726_q2.wav (5.00s)
+2025-09-23 17:55:01,646 - INFO - Extracted clip: 48386726_q3.wav (5.00s)
+2025-09-23 17:55:01,647 - INFO - Completed processing: Draw Results - 3 clips extracted
+2025-09-23 17:55:01,648 - ERROR - Failed to save manifest: Object of type bool is not JSON serializable
+2025-09-23 17:55:01,648 - INFO - Quality report saved: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio/validation/quality_report.json
+2025-09-23 17:55:01,648 - INFO - Success rate: 100.0% (98/98 clips)
+2025-09-23 17:55:01,648 - INFO - === Extraction Pipeline Complete ===
+2025-09-23 17:55:01,648 - INFO - Videos processed: 23
+2025-09-23 17:55:01,648 - INFO - Clips extracted: 98
+2025-09-23 17:55:01,648 - INFO - Failed extractions: 3
+2025-09-23 17:55:01,648 - INFO - Total duration: 483.00 seconds
+2025-09-23 17:55:01,648 - INFO - Output directory: /home/warrenjo/src/tmp2/cultivate-uw-ml-mvp/data/processed_audio
+2025-09-23 17:55:01,648 - WARNING - ⚠️  WARNING: Only 98/119 clips extracted
