@@ -4,13 +4,18 @@ import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
 import MockAnalysisTest from './components/MockAnalysisTest';
 import MockRecommendationsTest from './components/MockRecommendationsTest';
+import ScenarioSelection from './components/ScenarioSelection';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'results', 'recommendations'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'results', 'recommendations'
   const [analysisResults, setAnalysisResults] = useState(null);
 
   const handleTryDemo = () => {
     setCurrentView('demo');
+  };
+
+  const handleProfessionalDemo = () => {
+    setCurrentView('scenarios');
   };
 
   const handleAnalysisComplete = (results) => {
@@ -18,9 +23,70 @@ function App() {
     setCurrentView('results');
   };
 
+  const handleScenarioAnalyze = async (scenarioData) => {
+    // Simulate API call with scenario data
+    // In production, this would call the actual transcript analysis API
+    try {
+      const mockResults = {
+        analysis_id: 'scenario-' + Date.now(),
+        status: 'complete',
+        transcript_summary: {
+          conversational_turns: scenarioData.transcript.split('\n\n').length,
+          word_count: scenarioData.transcript.split(' ').length,
+          estimated_duration_minutes: scenarioData.metadata?.duration_minutes || 3
+        },
+        ml_predictions: {
+          question_quality: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 0.85 :
+                            scenarioData.scenarioContext.expectedQuality === 'proficient' ? 0.72 :
+                            scenarioData.scenarioContext.expectedQuality === 'developing' ? 0.58 : 0.42,
+          wait_time_appropriate: scenarioData.scenarioContext.focusAreas.includes('wait-time') ? 0.78 : 0.65,
+          scaffolding_present: scenarioData.scenarioContext.focusAreas.includes('scaffolding') ? 0.82 : 0.68,
+          open_ended_questions: scenarioData.scenarioContext.focusAreas.includes('questioning') ? 0.79 : 0.61
+        },
+        class_scores: {
+          emotional_support: scenarioData.scenarioContext.focusAreas.includes('emotional-support') ? 4.8 :
+                            scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.5 : 3.8,
+          classroom_organization: 4.2,
+          instructional_support: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.7 :
+                                 scenarioData.scenarioContext.expectedQuality === 'proficient' ? 3.9 : 3.2,
+          overall_score: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.5 :
+                        scenarioData.scenarioContext.expectedQuality === 'proficient' ? 3.97 : 3.4
+        },
+        scaffolding_analysis: {
+          total_scaffolding_instances: Math.floor(Math.random() * 8) + 3,
+          scaffolding_effectiveness: scenarioData.scenarioContext.focusAreas.includes('scaffolding') ? 0.85 : 0.72
+        },
+        recommendations: [
+          "Continue using excellent open-ended questioning techniques",
+          "Consider providing slightly longer wait times for complex questions",
+          "Strong emotional support evident throughout the interaction"
+        ],
+        enhanced_recommendations: [], // Will be populated by the recommendation engine
+        processing_time: 2.5,
+        created_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
+        original_transcript: scenarioData.transcript,
+        scenarioContext: scenarioData.scenarioContext // Pass scenario context for enhanced display
+      };
+
+      // Simulate processing delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+
+      handleAnalysisComplete(mockResults);
+    } catch (error) {
+      console.error('Scenario analysis failed:', error);
+      // Handle error state
+    }
+  };
+
   const handleStartNew = () => {
     setAnalysisResults(null);
     setCurrentView('demo');
+  };
+
+  const handleStartNewScenario = () => {
+    setAnalysisResults(null);
+    setCurrentView('scenarios');
   };
 
   const handleBackHome = () => {
@@ -31,6 +97,15 @@ function App() {
   // Render different views based on current state
   if (currentView === 'recommendations') {
     return <MockRecommendationsTest />;
+  }
+
+  if (currentView === 'scenarios') {
+    return (
+      <ScenarioSelection
+        onScenarioAnalyze={handleScenarioAnalyze}
+        onBackToHome={handleBackHome}
+      />
+    );
   }
 
   if (currentView === 'demo') {
@@ -81,7 +156,11 @@ function App() {
           </div>
         </header>
         <div className="py-8">
-          <AnalysisResults results={analysisResults} onStartNew={handleStartNew} />
+          <AnalysisResults
+            results={analysisResults}
+            onStartNew={handleStartNew}
+            onStartNewScenario={handleStartNewScenario}
+          />
         </div>
       </div>
     );
@@ -120,10 +199,16 @@ function App() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <button
-                onClick={handleTryDemo}
+                onClick={handleProfessionalDemo}
                 className="bg-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors"
               >
-                Try Demo
+                Professional Demo
+              </button>
+              <button
+                onClick={handleTryDemo}
+                className="bg-white text-indigo-600 border-2 border-indigo-600 px-8 py-3 rounded-lg font-semibold hover:bg-indigo-50 transition-colors"
+              >
+                Custom Analysis
               </button>
               <button className="border border-gray-300 text-gray-700 px-8 py-3 rounded-lg font-semibold hover:bg-gray-50 transition-colors">
                 View Research
@@ -183,22 +268,42 @@ function App() {
       <section id="demo" className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Interactive Demo</h2>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Interactive Demo Options</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              Experience our ML models in action with sample educator-child interaction data.
+              Choose between our professional scenario collection or upload your own educator-child interaction data.
             </p>
           </div>
 
           <div className="bg-white rounded-xl shadow-lg p-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Upload Interaction Data</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Professional Demo</h3>
+                <div className="border-2 border-solid border-indigo-200 rounded-lg p-6 text-center bg-indigo-50">
+                  <Users className="h-12 w-12 text-indigo-600 mx-auto mb-4" />
+                  <p className="text-gray-700 mb-2 font-medium">Curated Educator Scenarios</p>
+                  <p className="text-sm text-gray-600 mb-4">
+                    Professional scenarios across quality levels and age groups
+                  </p>
+                  <button
+                    onClick={handleProfessionalDemo}
+                    className="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+                  >
+                    Browse Scenarios
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Custom Analysis</h3>
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center">
                   <Camera className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-600 mb-2">Upload video or audio files</p>
-                  <p className="text-sm text-gray-500">MP4, WAV, MP3 up to 100MB</p>
-                  <button className="mt-4 bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
-                    Choose Files
+                  <p className="text-gray-600 mb-2">Upload your own transcripts</p>
+                  <p className="text-sm text-gray-500 mb-4">Paste educator-child interaction text</p>
+                  <button
+                    onClick={handleTryDemo}
+                    className="bg-white text-indigo-600 border-2 border-indigo-600 px-6 py-2 rounded-lg hover:bg-indigo-50 transition-colors"
+                  >
+                    Try Custom Analysis
                   </button>
                 </div>
               </div>
