@@ -50,12 +50,37 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Configure CORS
+# Configure CORS for both development and production
+import os
+
+# Production origins for Azure Static Web Apps and custom domains
+production_origins = [
+    "https://cultivate-ml-demo.azurewebsites.net",
+    "https://zealous-dune-*.westus2.2.azurestaticapps.net",
+    "https://zealous-mushroom-*.westus2.2.azurestaticapps.net",
+    "https://*.azurestaticapps.net"
+]
+
+# Development origins
+development_origins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "http://localhost:3001"  # Vite alternate port
+]
+
+# Combine origins based on environment
+allowed_origins = development_origins
+if os.getenv("ENVIRONMENT") == "production":
+    allowed_origins = production_origins + development_origins
+else:
+    # For development/staging, allow all localhost and azurestaticapps
+    allowed_origins = development_origins + production_origins
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # React dev servers
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
 )
 
