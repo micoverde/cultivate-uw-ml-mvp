@@ -312,109 +312,122 @@ const ExportManager = ({ results, scenarioContext, isOpen, onClose }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 z-50 md:flex md:items-center md:justify-center md:bg-black md:bg-opacity-50"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.95, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.95, opacity: 0 }}
-        className="bg-white rounded-xl shadow-2xl p-8 max-w-md w-full mx-4"
+        initial={{ y: '100%', opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        exit={{ y: '100%', opacity: 0 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 500 }}
+        className="bg-white w-full h-full md:max-w-md md:w-full md:h-auto md:rounded-xl md:shadow-2xl md:mx-4 overflow-y-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header */}
-        <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center">
-            <Download className="w-6 h-6 text-indigo-600 mr-3" />
-            <h2 className="text-2xl font-bold text-gray-900">Export Results</h2>
+        {/* Mobile-Optimized Header */}
+        <div className="sticky top-0 bg-white border-b border-gray-200 md:border-0 mobile-padding md:p-8 md:pb-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center">
+              <Download className="w-6 h-6 text-indigo-600 mr-3" />
+              <h2 className="mobile-text-xl md:text-2xl font-bold text-gray-900">Export Results</h2>
+            </div>
+            <button
+              onClick={onClose}
+              className="touch-feedback mobile-nav-button md:text-gray-400 md:hover:text-gray-600 md:transition-colors"
+              aria-label="Close export dialog"
+            >
+              <X className="w-6 h-6" />
+            </button>
           </div>
-          <button
-            onClick={onClose}
-            className="text-gray-400 hover:text-gray-600 transition-colors"
-          >
-            <X className="w-6 h-6" />
-          </button>
         </div>
 
-        {/* Status Messages */}
-        {exportStatus && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={`mb-6 p-4 rounded-lg flex items-center ${
-              exportStatus === 'success'
-                ? 'bg-green-100 text-green-800'
-                : exportStatus === 'error'
-                ? 'bg-red-100 text-red-800'
-                : 'bg-blue-100 text-blue-800'
-            }`}
-          >
-            {exportStatus === 'generating' && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
-            {exportStatus === 'success' && <CheckCircle className="w-5 h-5 mr-2" />}
-            {exportStatus === 'error' && <AlertCircle className="w-5 h-5 mr-2" />}
+        {/* Main Content Container */}
+        <div className="mobile-padding md:px-8 md:pb-8">
+          {/* Status Messages */}
+          {exportStatus && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              className={`mb-4 md:mb-6 mobile-padding md:p-4 rounded-lg flex items-center ${
+                exportStatus === 'success'
+                  ? 'bg-green-100 text-green-800'
+                  : exportStatus === 'error'
+                  ? 'bg-red-100 text-red-800'
+                  : 'bg-blue-100 text-blue-800'
+              }`}
+            >
+              {exportStatus === 'generating' && <Loader2 className="w-5 h-5 mr-2 animate-spin" />}
+              {exportStatus === 'success' && <CheckCircle className="w-5 h-5 mr-2" />}
+              {exportStatus === 'error' && <AlertCircle className="w-5 h-5 mr-2" />}
 
-            {exportStatus === 'generating' && `Generating ${exportType} report...`}
-            {exportStatus === 'success' && `${exportType} exported successfully!`}
-            {exportStatus === 'error' && `Failed to export ${exportType}. Please try again.`}
-          </motion.div>
-        )}
+              <span className="mobile-text-sm md:text-base">
+                {exportStatus === 'generating' && `Generating ${exportType} report...`}
+                {exportStatus === 'success' && `${exportType} exported successfully!`}
+                {exportStatus === 'error' && `Failed to export ${exportType}. Please try again.`}
+              </span>
+            </motion.div>
+          )}
 
-        {/* Export Options */}
-        <div className="space-y-4">
-          <p className="text-gray-600 mb-6">
-            Choose your preferred export format for the analysis results.
-          </p>
+          {/* Export Options */}
+          <div className="space-y-4">
+            <p className="text-gray-600 mb-4 md:mb-6 mobile-text-sm md:text-base">
+              Choose your preferred export format for the analysis results.
+            </p>
 
-          {/* PDF Export Button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={exportToPDF}
-            disabled={isExporting}
-            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <div className="flex items-center">
-              <FileDown className="w-5 h-5 mr-3" />
-              <div className="text-left">
-                <div className="font-semibold">PDF Report</div>
-                <div className="text-sm opacity-90">Professional formatted report</div>
+            {/* PDF Export Button - Mobile Optimized */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={exportToPDF}
+              disabled={isExporting}
+              className="w-full touch-target-lg flex items-center justify-between mobile-padding md:p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-lg hover:from-red-600 hover:to-red-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <div className="flex items-center min-w-0 flex-1">
+                <FileDown className="w-5 h-5 mr-3 flex-shrink-0" />
+                <div className="text-left min-w-0">
+                  <div className="font-semibold mobile-text-base md:text-base">PDF Report</div>
+                  <div className="mobile-text-sm md:text-sm opacity-90 truncate">Professional formatted report</div>
+                </div>
               </div>
-            </div>
-            {isExporting && exportType === 'PDF' ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <div className="text-sm opacity-75">~2-3 pages</div>
-            )}
-          </motion.button>
-
-          {/* CSV Export Button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={exportToCSV}
-            disabled={isExporting}
-            className="w-full flex items-center justify-between p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <div className="flex items-center">
-              <FileSpreadsheet className="w-5 h-5 mr-3" />
-              <div className="text-left">
-                <div className="font-semibold">CSV Data</div>
-                <div className="text-sm opacity-90">Raw data for analysis</div>
+              <div className="flex-shrink-0 ml-3">
+                {isExporting && exportType === 'PDF' ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <div className="mobile-text-xs md:text-sm opacity-75">~2-3 pages</div>
+                )}
               </div>
-            </div>
-            {isExporting && exportType === 'CSV' ? (
-              <Loader2 className="w-5 h-5 animate-spin" />
-            ) : (
-              <div className="text-sm opacity-75">Spreadsheet ready</div>
-            )}
-          </motion.button>
-        </div>
+            </motion.button>
 
-        {/* Footer Info */}
-        <div className="mt-6 pt-4 border-t border-gray-200">
-          <p className="text-sm text-gray-500 text-center">
-            Exports include Cultivate Learning branding and are suitable for stakeholder sharing
-          </p>
+            {/* CSV Export Button - Mobile Optimized */}
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={exportToCSV}
+              disabled={isExporting}
+              className="w-full touch-target-lg flex items-center justify-between mobile-padding md:p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg hover:from-green-600 hover:to-green-700 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <div className="flex items-center min-w-0 flex-1">
+                <FileSpreadsheet className="w-5 h-5 mr-3 flex-shrink-0" />
+                <div className="text-left min-w-0">
+                  <div className="font-semibold mobile-text-base md:text-base">CSV Data</div>
+                  <div className="mobile-text-sm md:text-sm opacity-90 truncate">Raw data for analysis</div>
+                </div>
+              </div>
+              <div className="flex-shrink-0 ml-3">
+                {isExporting && exportType === 'CSV' ? (
+                  <Loader2 className="w-5 h-5 animate-spin" />
+                ) : (
+                  <div className="mobile-text-xs md:text-sm opacity-75">Spreadsheet ready</div>
+                )}
+              </div>
+            </motion.button>
+          </div>
+
+          {/* Footer Info - Mobile Optimized */}
+          <div className="mt-6 pt-4 border-t border-gray-200">
+            <p className="mobile-text-xs md:text-sm text-gray-500 text-center">
+              Exports include Cultivate Learning branding and are suitable for stakeholder sharing
+            </p>
+          </div>
         </div>
       </motion.div>
     </motion.div>
