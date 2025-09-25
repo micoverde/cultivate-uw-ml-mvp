@@ -4,6 +4,7 @@
  */
 
 import { vi } from 'vitest'
+import '@testing-library/jest-dom'
 
 // Setup global DOM methods and objects for testing
 global.performance = {
