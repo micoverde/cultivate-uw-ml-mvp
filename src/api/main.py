@@ -116,7 +116,9 @@ class ConnectionManager:
             "session_id": session_id,
             "connected_at": datetime.now()
         }
-        logger.info(f"WebSocket connected: {session_id}")
+        # Security: Sanitize session_id for logging to prevent log injection
+        safe_session_id = session_id.replace('\n', '').replace('\r', '').replace('\t', ' ')[:50] if session_id else 'unknown'
+        logger.info(f"WebSocket connected: {safe_session_id}")
 
     def disconnect(self, websocket: WebSocket):
         if websocket in self.active_connections:
