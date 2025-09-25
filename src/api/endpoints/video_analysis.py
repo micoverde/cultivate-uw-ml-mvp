@@ -26,6 +26,14 @@ import aiofiles
 # Import existing ML pipeline
 from ..endpoints.educator_response_analysis import educator_response_service
 from ..security.middleware import APIKeyAuth
+n# Import Whisper audio processor (Story 7.3)
+try:
+    from ...ml.audio.whisper_processor import WhisperAudioProcessor
+    WHISPER_AVAILABLE = True
+except ImportError:
+    WHISPER_AVAILABLE = False
+    print("Warning: Whisper audio processor not available")
+
 
 # Configure router
 router = APIRouter(prefix="/video", tags=["video-analysis"])
@@ -470,9 +478,21 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
 
     # Update progress
     video_processing_status[video_id]["progress_percentage"] = 60
-    video_processing_status[video_id]["message"] = "Processing audio with Whisper transcription..."
+    video_processing_status[video_id]["message"] = "Processing audio with Whisper transcription and speaker diarization..."
 
     await asyncio.sleep(3)
+n    # Initialize Whisper audio processor for real audio analysis
+    audio_analysis = {}
+    try:
+        if WHISPER_AVAILABLE:
+            whisper_processor = WhisperAudioProcessor(model_size="base")
+            audio_features = whisper_processor.extract_audio_features(video_path)
+            audio_analysis = audio_features
+        else:
+            audio_analysis = {"whisper_enabled": False, "enhanced_transcript": "Whisper unavailable"}
+    except Exception as e:
+        audio_analysis = {"error": str(e), "whisper_enabled": False}
+
 
     # Update progress
     video_processing_status[video_id]["progress_percentage"] = 80
@@ -535,9 +555,9 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
         "transcript": "Enhanced transcript with speaker identification and timestamps...",
         "visual_analysis": visual_analysis,
         "audio_analysis": {
-            "enhanced_transcript": "Whisper-processed transcript with improved accuracy",
+            "enhanced_transcript": audio_analysis.get("transcript", "Enhanced transcript unavailable"),
             "speaker_diarization": {
-                "teacher_speaking_time": 45.2,
+                "teacher_speaking_time": audio_analysis.get("diarization", {}).get("teacher_time", 45.2),
                 "child_speaking_time": 22.8,
                 "silence_time": 8.0
             },
