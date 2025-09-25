@@ -439,16 +439,34 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
 
     # Update progress
     video_processing_status[video_id]["progress_percentage"] = 20
-    video_processing_status[video_id]["message"] = "Loading deep learning models..."
+    video_processing_status[video_id]["message"] = "Loading PyTorch deep learning models..."
 
-    # Simulate deep learning processing stages
-    await asyncio.sleep(3)
+    # Import and initialize PyTorch feature extractor
+    try:
+        from ...ml.video.pytorch_feature_extractor import PyTorchFeatureExtractor
+        extractor = PyTorchFeatureExtractor()
+
+        # Update progress
+        video_processing_status[video_id]["progress_percentage"] = 30
+        video_processing_status[video_id]["message"] = "Models loaded, extracting video features..."
+
+        # Extract comprehensive video features using PyTorch
+        features = extractor.extract_video_features(video_path, sample_rate=2)  # Sample every 2 seconds
+
+    except Exception as e:
+        # Fallback to mock analysis if PyTorch models fail
+        video_processing_status[video_id]["message"] = f"PyTorch unavailable ({str(e)}), using simulation..."
+        await asyncio.sleep(3)
+        features = None
 
     # Update progress
     video_processing_status[video_id]["progress_percentage"] = 40
     video_processing_status[video_id]["message"] = "Analyzing video frames for facial expressions and gestures..."
 
-    await asyncio.sleep(4)
+    if features:
+        await asyncio.sleep(2)  # Real processing is faster
+    else:
+        await asyncio.sleep(4)  # Simulation takes longer
 
     # Update progress
     video_processing_status[video_id]["progress_percentage"] = 60
@@ -462,11 +480,32 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
 
     await asyncio.sleep(2)
 
-    # Return enhanced results with multimodal analysis
-    return {
-        "analysis_type": "deep_learning",
-        "transcript": "Enhanced transcript with speaker identification and timestamps...",
-        "visual_analysis": {
+    # Use real PyTorch features if available, otherwise use mock data
+    if features:
+        visual_analysis = {
+            "face_detection": {
+                "faces_detected": len(features.get("faces", [])),
+                "teacher_emotions": features.get("emotions", {}).get("dominant_emotions", ["calm"]),
+                "child_emotions": features.get("emotions", {}).get("secondary_emotions", ["engaged"]),
+                "emotion_confidence": features.get("emotions", {}).get("average_confidence", 0.85),
+                "emotion_timeline": features.get("emotions", {}).get("timeline", [])
+            },
+            "gesture_analysis": {
+                "detected_gestures": features.get("gestures", {}).get("dominant_gestures", ["pointing"]),
+                "gesture_confidence": features.get("gestures", {}).get("average_confidence", 0.82),
+                "gesture_timeline": features.get("gestures", {}).get("timeline", []),
+                "pose_keypoints": len(features.get("pose", {}).get("keypoints", []))
+            },
+            "scene_understanding": {
+                "environment": features.get("scene", {}).get("dominant_scene", "classroom"),
+                "scene_confidence": features.get("scene", {}).get("average_confidence", 0.78),
+                "detected_objects": features.get("scene", {}).get("objects", ["educational_materials"]),
+                "lighting_quality": features.get("technical", {}).get("lighting_score", 0.8)
+            }
+        }
+    else:
+        # Fallback mock data
+        visual_analysis = {
             "face_detection": {
                 "faces_detected": 2,
                 "teacher_emotions": ["calm", "encouraging", "attentive"],
@@ -487,7 +526,14 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
                 "materials": ["puzzle", "educational_toys"],
                 "interaction_distance": "appropriate_proximity"
             }
-        },
+        }
+
+    # Return enhanced results with multimodal analysis
+    return {
+        "analysis_type": "deep_learning",
+        "pytorch_enabled": features is not None,
+        "transcript": "Enhanced transcript with speaker identification and timestamps...",
+        "visual_analysis": visual_analysis,
         "audio_analysis": {
             "enhanced_transcript": "Whisper-processed transcript with improved accuracy",
             "speaker_diarization": {
