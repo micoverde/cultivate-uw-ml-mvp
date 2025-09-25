@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Brain, ArrowLeft, Send, Clock, User, AlertCircle, CheckCircle, Lightbulb, Target, Sparkles, Camera, Mic, Heart, BarChart3, Zap, Star, Award, Shield } from 'lucide-react';
 import { mayaPuzzleScenario } from '../data/mayaScenario';
+import PerformanceMetrics from './PerformanceMetrics';
 
 /**
  * EducatorResponseInput Component
@@ -18,9 +19,10 @@ import { mayaPuzzleScenario } from '../data/mayaScenario';
  * Issue: #108 - PIVOT to User Response Evaluation
  */
 
-const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, analysisProgress }) => {
+const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, analysisProgress, analysisResults }) => {
   const [userResponse, setUserResponse] = useState('');
   const [responseValid, setResponseValid] = useState(false);
+  const [showMetrics, setShowMetrics] = useState(false);
   const [showHints, setShowHints] = useState(false);
 
   // Validate response meets minimum requirements
@@ -304,6 +306,20 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
                   </div>
                 </button>
               </div>
+
+              {/* Performance Metrics Toggle - Show after analysis */}
+              {!isAnalyzing && analysisResults && (
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={() => setShowMetrics(!showMetrics)}
+                    className="flex items-center px-6 py-3 bg-gradient-to-r from-slate-600 to-indigo-600 text-white rounded-xl font-medium hover:from-slate-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    <BarChart3 className="h-4 w-4 mr-2" />
+                    {showMetrics ? 'Hide' : 'Show'} Performance Metrics
+                    <Sparkles className="h-4 w-4 ml-2" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Analysis Progress */}
@@ -379,6 +395,13 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
                 </div>
               </div>
             )}
+
+            {/* Performance Metrics - Show when analysis is complete */}
+            <PerformanceMetrics
+              analysisResults={analysisResults}
+              isVisible={!isAnalyzing && analysisResults && showMetrics}
+            />
+
           </div>
 
           {/* Sidebar */}
