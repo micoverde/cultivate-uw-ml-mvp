@@ -20,6 +20,11 @@ from datetime import datetime
 
 # Import routers
 from .endpoints.transcript_analysis import router as transcript_router
+from .endpoints.educator_response_analysis import (
+    educator_response_service,
+    EducatorResponseRequest,
+    EducatorResponseAnalysisResult
+)
 
 # Configure logging
 logging.basicConfig(
@@ -92,6 +97,46 @@ app.add_middleware(
 
 # Include routers
 app.include_router(transcript_router, prefix="/api/v1")
+
+# Educator Response Analysis Endpoints (PIVOT for MVP Sprint 1)
+@app.post("/api/analyze/educator-response", response_model=dict)
+async def submit_educator_response(request: EducatorResponseRequest):
+    """
+    Submit educator response for AI coaching analysis.
+
+    PIVOT: Core endpoint for MVP Sprint 1 demo script requirements.
+    Users type responses to scenarios and receive structured coaching feedback.
+    """
+    try:
+        analysis_id = await educator_response_service.analyze_educator_response(request)
+        return {"analysis_id": analysis_id, "status": "submitted"}
+    except Exception as e:
+        logger.error(f"Failed to submit educator response: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/analyze/educator-response/status/{analysis_id}")
+async def get_educator_response_status(analysis_id: str):
+    """Get status of educator response analysis."""
+    try:
+        status = educator_response_service.get_analysis_status(analysis_id)
+        return status
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get analysis status: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/analyze/educator-response/results/{analysis_id}", response_model=EducatorResponseAnalysisResult)
+async def get_educator_response_results(analysis_id: str):
+    """Get completed educator response analysis results."""
+    try:
+        results = educator_response_service.get_analysis_results(analysis_id)
+        return results
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get analysis results: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/")
 async def root():

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maya Scenario Test Report</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; line-height: 1.6; }
+        .header { background: #2196F3; color: white; padding: 20px; border-radius: 8px; }
+        .summary { background: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0; }
+        .test-case { background: white; border: 1px solid #ddd; margin: 10px 0; border-radius: 4px; }
+        .test-header { padding: 10px 15px; background: #f8f9fa; border-bottom: 1px solid #ddd; }
+        .test-content { padding: 15px; }
+        .success { color: #4CAF50; font-weight: bold; }
+        .error { color: #f44336; font-weight: bold; }
+        .warning { color: #ff9800; font-weight: bold; }
+        .screenshot { max-width: 400px; border: 1px solid #ddd; margin: 10px 0; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; }
+        .metric-card { background: #e3f2fd; padding: 15px; border-radius: 4px; text-align: center; }
+        .log-section { background: #1e1e1e; color: #fff; padding: 15px; border-radius: 4px; }
+        pre { margin: 0; white-space: pre-wrap; font-size: 12px; }
+        .score-display { font-size: 24px; font-weight: bold; }
+        .feedback-section { background: #f0f8ff; padding: 10px; border-left: 4px solid #2196F3; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧩 Maya Scenario Test Report</h1>
+        <p>Cultivate Learning ML MVP - End-to-End Testing</p>
+        <p>Generated: 2025-09-25 11:09:03</p>
+    </div>
+
+    <div class="summary">
+        <h2>Test Execution Summary</h2>
+        <div class="metrics">
+
+            <div class="metric-card">
+                <div class="score-display error">0/3</div>
+                <div>Tests Passed</div>
+            </div>
+            <div class="metric-card">
+                <div class="score-display">66.4s</div>
+                <div>Total Duration</div>
+            </div>
+            <div class="metric-card">
+                <div class="score-display">0.0%</div>
+                <div>Success Rate</div>
+            </div>
+            <div class="metric-card">
+                <div class="score-display">❌</div>
+                <div>Overall Status</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="test-results">
+        <h2>Test Case Results</h2>
+
+        <div class="test-case">
+            <div class="test-header">
+                <h3 class="error">🧪 Homepage Navigation To Maya Scenario - FAILED</h3>
+                <p>Start: 2025-09-25T11:07:57.471766</p>
+            </div>
+            <div class="test-content">
+<div class="error">❌ Error: Message: invalid selector: Unable to locate an element with the xpath expression //h3[contains(text(), 'Maya\'s Puzzle Frustration') or contains(text(), 'Maya')] because of the following error:
+SyntaxError: Failed to execute 'evaluate' on 'Document': The string '//h3[contains(text(), 'Maya\'s Puzzle Frustration') or contains(text(), 'Maya')]' is not a valid XPath expression.
+  (Session info: chrome=140.0.7339.185); For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#invalidselectorexception
+Stacktrace:
+#0 0x610b53b18fba <unknown>
+#1 0x610b5359d6d0 <unknown>
+#2 0x610b535a4358 <unknown>
+#3 0x610b535a6be8 <unknown>
+#4 0x610b535a6c73 <unknown>
+#5 0x610b535eed85 <unknown>
+#6 0x610b535ef541 <unknown>
+#7 0x610b5363d6c4 <unknown>
+#8 0x610b53614e5d <unknown>
+#9 0x610b5363ab54 <unknown>
+#10 0x610b53614c03 <unknown>
+#11 0x610b535e17a8 <unknown>
+#12 0x610b535e2421 <unknown>
+#13 0x610b53addb28 <unknown>
+#14 0x610b53ae187f <unknown>
+#15 0x610b53ac5c49 <unknown>
+#16 0x610b53ae2405 <unknown>
+#17 0x610b53aab4ff <unknown>
+#18 0x610b53b06258 <unknown>
+#19 0x610b53b06432 <unknown>
+#20 0x610b53b17fa3 <unknown>
+#21 0x78d332a9caa4 <unknown>
+#22 0x78d332b29c6c <unknown>
+</div><h4>Screenshots:</h4><img src="../../test_screenshots/20250925_110759_01_homepage_loaded.png" alt="Test screenshot" class="screenshot"><br><img src="../../test_screenshots/20250925_110800_02_maya_button_clicked.png" alt="Test screenshot" class="screenshot"><br><img src="../../test_screenshots/20250925_110800_error_homepage_navigation_to_maya_scenario.png" alt="Test screenshot" class="screenshot"><br>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <div class="test-header">
+                <h3 class="error">🧪 Response Input Validation - FAILED</h3>
+                <p>Start: 2025-09-25T11:08:00.697695</p>
+            </div>
+            <div class="test-content">
+<div class="error">❌ Error: Message: 
+Stacktrace:
+#0 0x610b53b18fba <unknown>
+#1 0x610b5359d6d0 <unknown>
+#2 0x610b535ef2aa <unknown>
+#3 0x610b535ef541 <unknown>
+#4 0x610b5363d6c4 <unknown>
+#5 0x610b53614e5d <unknown>
+#6 0x610b5363ab54 <unknown>
+#7 0x610b53614c03 <unknown>
+#8 0x610b535e17a8 <unknown>
+#9 0x610b535e2421 <unknown>
+#10 0x610b53addb28 <unknown>
+#11 0x610b53ae187f <unknown>
+#12 0x610b53ac5c49 <unknown>
+#13 0x610b53ae2405 <unknown>
+#14 0x610b53aab4ff <unknown>
+#15 0x610b53b06258 <unknown>
+#16 0x610b53b06432 <unknown>
+#17 0x610b53b17fa3 <unknown>
+#18 0x78d332a9caa4 <unknown>
+#19 0x78d332b29c6c <unknown>
+</div><h4>Screenshots:</h4><img src="../../test_screenshots/20250925_110830_error_response_input_validation.png" alt="Test screenshot" class="screenshot"><br>
+            </div>
+        </div>
+
+        <div class="test-case">
+            <div class="test-header">
+                <h3 class="error">🧪 Complete Maya Scenario Analysis Moderate - FAILED</h3>
+                <p>Start: 2025-09-25T11:08:30.891749</p>
+            </div>
+            <div class="test-content">
+<div class="error">❌ Error: Message: 
+Stacktrace:
+#0 0x610b53b18fba <unknown>
+#1 0x610b5359d6d0 <unknown>
+#2 0x610b535ef2aa <unknown>
+#3 0x610b535ef541 <unknown>
+#4 0x610b5363d6c4 <unknown>
+#5 0x610b53614e5d <unknown>
+#6 0x610b5363ab54 <unknown>
+#7 0x610b53614c03 <unknown>
+#8 0x610b535e17a8 <unknown>
+#9 0x610b535e2421 <unknown>
+#10 0x610b53addb28 <unknown>
+#11 0x610b53ae187f <unknown>
+#12 0x610b53ac5c49 <unknown>
+#13 0x610b53ae2405 <unknown>
+#14 0x610b53aab4ff <unknown>
+#15 0x610b53b06258 <unknown>
+#16 0x610b53b06432 <unknown>
+#17 0x610b53b17fa3 <unknown>
+#18 0x78d332a9caa4 <unknown>
+#19 0x78d332b29c6c <unknown>
+</div><h4>Screenshots:</h4><img src="../../test_screenshots/20250925_110903_error_complete_maya_scenario_analysis_moderate.png" alt="Test screenshot" class="screenshot"><br>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="technical-details">
+        <h2>Technical Details</h2>
+        <div class="log-section">
+            <h3>Environment Information</h3>
+            <pre>
+Test Mode: headless
+Frontend URL: http://localhost:3002
+Backend URL: http://localhost:8000
+Output Directory: test_results/20250925_110754
+            </pre>
+        </div>
+    </div>
+</body>
+</html>

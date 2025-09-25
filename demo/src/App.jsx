@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { Brain, Users, Camera, Mic, BarChart3, Heart, Sparkles, Sun, Moon, ChevronRight, Star, Award, Zap, Target, Shield } from 'lucide-react';
 import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
+import EducatorResponseResults from './components/EducatorResponseResults';
 import MockAnalysisTest from './components/MockAnalysisTest';
 import MockRecommendationsTest from './components/MockRecommendationsTest';
 import ScenarioSelection from './components/ScenarioSelection';
+import EducatorResponseInput from './components/EducatorResponseInput';
 import { API_ENDPOINTS } from './config/api';
 
 function App() {
-  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'results', 'recommendations'
+  const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'educator-response', 'results', 'educator-response-results', 'recommendations'
   const [analysisResults, setAnalysisResults] = useState(null);
+  const [educatorResponseResults, setEducatorResponseResults] = useState(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -38,6 +41,11 @@ function App() {
 
   const handleProfessionalDemo = () => {
     setCurrentView('scenarios');
+  };
+
+  // PIVOT: Maya Scenario Handler (MVP Sprint 1)
+  const handleMayaScenario = () => {
+    setCurrentView('educator-response');
   };
 
   const handleAnalysisComplete = (results) => {
@@ -150,9 +158,105 @@ function App() {
     setCurrentView('scenarios');
   };
 
+  const handleStartNewEducatorResponse = () => {
+    setEducatorResponseResults(null);
+    setCurrentView('educator-response');
+  };
+
   const handleBackHome = () => {
     setCurrentView('home');
     setAnalysisResults(null);
+    setEducatorResponseResults(null);
+  };
+
+  // PIVOT: Educator Response Analysis Handler (MVP Sprint 1)
+  const handleEducatorResponseAnalysis = async (responseData) => {
+    setIsAnalyzing(true);
+    setAnalysisProgress({ status: 'submitting', message: 'Submitting your response for analysis...', progress: 0 });
+
+    try {
+      console.log('Starting educator response analysis...', responseData);
+
+      // Submit educator response to new analysis API
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/analyze/educator-response`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(responseData),
+      });
+
+      const submitData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(submitData.detail?.message || submitData.detail || 'Response analysis failed');
+      }
+
+      console.log('Response analysis submitted:', submitData.analysis_id);
+      setAnalysisProgress({ status: 'processing', message: 'Analyzing pedagogical quality...', progress: 10 });
+
+      // Poll for analysis results
+      const analysisId = submitData.analysis_id;
+      let attempts = 0;
+      const maxAttempts = 60; // 2 minutes maximum wait
+
+      while (attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+
+        const statusResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/analyze/educator-response/status/${analysisId}`);
+        const status = await statusResponse.json();
+
+        console.log(`Response analysis status (attempt ${attempts + 1}):`, status.status, status.progress || 'no progress');
+
+        // Update progress based on server status
+        if (status.progress !== undefined) {
+          setAnalysisProgress({
+            status: status.status,
+            message: status.message || 'Processing...',
+            progress: status.progress
+          });
+        } else {
+          // Fallback progress estimation
+          const estimatedProgress = Math.min(10 + (attempts * 3), 90);
+          setAnalysisProgress({
+            status: status.status,
+            message: status.message || 'Analyzing your response...',
+            progress: estimatedProgress
+          });
+        }
+
+        if (status.status === 'complete') {
+          setAnalysisProgress({ status: 'complete', message: 'Getting coaching feedback...', progress: 100 });
+
+          // Get final results
+          const resultsResponse = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/analyze/educator-response/results/${analysisId}`);
+          const results = await resultsResponse.json();
+
+          console.log('Response analysis completed:', results);
+
+          // Store educator response results and navigate
+          setEducatorResponseResults(results);
+          setIsAnalyzing(false);
+          setAnalysisProgress(null);
+          setCurrentView('educator-response-results');
+          return;
+        } else if (status.status === 'error') {
+          throw new Error(status.message || 'Response analysis failed on server');
+        }
+
+        attempts++;
+      }
+
+      throw new Error('Response analysis timed out after 2 minutes');
+
+    } catch (error) {
+      console.error('Educator response analysis failed:', error);
+      setIsAnalyzing(false);
+      setAnalysisProgress(null);
+
+      // Show user-friendly error message
+      alert(`Analysis failed: ${error.message}. Please try again.`);
+    }
   };
 
   // Render different views based on current state
@@ -164,6 +268,18 @@ function App() {
     return (
       <ScenarioSelection
         onScenarioAnalyze={handleScenarioAnalyze}
+        onBackToHome={handleBackHome}
+        isAnalyzing={isAnalyzing}
+        analysisProgress={analysisProgress}
+      />
+    );
+  }
+
+  // PIVOT: Educator Response Input View (MVP Sprint 1)
+  if (currentView === 'educator-response') {
+    return (
+      <EducatorResponseInput
+        onResponseAnalysis={handleEducatorResponseAnalysis}
         onBackToHome={handleBackHome}
         isAnalyzing={isAnalyzing}
         analysisProgress={analysisProgress}
@@ -195,6 +311,16 @@ function App() {
           <TranscriptSubmission onAnalysisComplete={handleAnalysisComplete} />
         </div>
       </div>
+    );
+  }
+
+  // PIVOT: Educator Response Results View (MVP Sprint 1)
+  if (currentView === 'educator-response-results') {
+    return (
+      <EducatorResponseResults
+        results={educatorResponseResults}
+        onStartNew={handleStartNewEducatorResponse}
+      />
     );
   }
 
@@ -523,7 +649,7 @@ function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4 sm:px-0">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 px-4 sm:px-0">
             {/* Professional Demo Card */}
             <div className="group relative">
               <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-3xl blur-lg opacity-20 group-hover:opacity-40 transition duration-1000"></div>
@@ -558,6 +684,44 @@ function App() {
                   className="w-full bg-gradient-to-r from-indigo-600 to-purple-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
                 >
                   Explore Scenarios
+                </button>
+              </div>
+            </div>
+
+            {/* PIVOT: Maya Scenario Response Coaching Card (MVP Sprint 1) */}
+            <div className="group relative">
+              <div className="absolute -inset-1 bg-gradient-to-r from-orange-500 to-red-600 rounded-3xl blur-lg opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+              <div className="relative bg-white/10 backdrop-blur-xl rounded-2xl p-8 border border-white/20 hover:bg-white/15 transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-orange-500 to-red-600 rounded-2xl mb-6 shadow-xl">
+                  <Brain className="h-10 w-10 text-white" />
+                </div>
+
+                <h3 className="text-2xl font-bold text-white mb-4">AI Coaching Demo</h3>
+                <p className="text-slate-300 mb-6 leading-relaxed text-lg">
+                  Type your response to Maya's puzzle frustration and receive personalized AI coaching
+                  based on evidence-based early childhood pedagogy.
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  <div className="flex items-center text-slate-300">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full mr-3"></div>
+                    <span>Official UW demo scenario</span>
+                  </div>
+                  <div className="flex items-center text-slate-300">
+                    <div className="w-2 h-2 bg-red-400 rounded-full mr-3"></div>
+                    <span>5-category coaching feedback</span>
+                  </div>
+                  <div className="flex items-center text-slate-300">
+                    <div className="w-2 h-2 bg-yellow-400 rounded-full mr-3"></div>
+                    <span>Evidence-based recommendations</span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={handleMayaScenario}
+                  className="w-full bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-orange-700 hover:to-red-700 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:scale-105"
+                >
+                  Try Maya Scenario
                 </button>
               </div>
             </div>
