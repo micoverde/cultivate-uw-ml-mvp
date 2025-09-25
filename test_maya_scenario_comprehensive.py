@@ -387,6 +387,7 @@ class MayaScenarioTests:
             logger.info("Verifying scenario content")
 
             # Check for context section
+            ui_elements_maya = self.test_data.get("ui_elements", {}).get("maya_scenario_page", {})
             context_xpath = ui_elements_maya.get("context_section", "//*[contains(text(), 'During free play time')]")
             try:
                 context_element = self.wait_for_element_safely(
