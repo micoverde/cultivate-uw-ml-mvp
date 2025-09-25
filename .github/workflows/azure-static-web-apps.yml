@@ -31,7 +31,20 @@ jobs:
         run: |
           cd demo
           npm ci
+        env:
+          NODE_ENV: production
+
+      - name: Build with Production Environment
+        run: |
+          cd demo
           npm run build
+        env:
+          NODE_ENV: production
+          VITE_API_BASE_URL: https://cultivate-ml-api-pag.westus2.azurecontainer.io:8000
+          VITE_ENVIRONMENT: production
+          VITE_ENABLE_WEBSOCKETS: true
+          VITE_ENABLE_ANALYTICS: true
+          VITE_DEMO_MODE: enhanced
 
       - name: Build And Deploy
         id: builddeploy

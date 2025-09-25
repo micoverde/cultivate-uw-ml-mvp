@@ -1,0 +1,62 @@
+name: Backend Container Deployment
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'src/**', 'requirements-api.txt', 'Dockerfile.api', 'run_api.py', '.github/workflows/backend-deploy.yml' ]
+  workflow_dispatch:
+
+jobs:
+  deploy_backend:
+    runs-on: ubuntu-latest
+    name: Deploy ML API Backend
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS_PAG }}
+
+      - name: Login to Azure Container Registry
+        run: |
+          az acr login --name cultivatemlapi
+
+      - name: Build and Push Docker Image
+        run: |
+          # Build with version tag
+          VERSION=$(date +%Y%m%d.%H%M%S)
+          docker build -f Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:$VERSION .
+          docker build -f Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:latest .
+
+          # Push both tags
+          docker push cultivatemlapi.azurecr.io/cultivate-ml-api:$VERSION
+          docker push cultivatemlapi.azurecr.io/cultivate-ml-api:latest
+
+      - name: Deploy to Container Instance
+        run: |
+          # Update container with latest image
+          az container create \
+            --resource-group rg-cultivate-ml-backend-pag \
+            --name cultivate-ml-api \
+            --image cultivatemlapi.azurecr.io/cultivate-ml-api:latest \
+            --registry-login-server cultivatemlapi.azurecr.io \
+            --cpu 1 \
+            --memory 1.5 \
+            --restart-policy Always \
+            --ports 8000 \
+            --dns-name-label cultivate-ml-api-pag \
+            --os-type Linux \
+            --environment-variables PYTHONPATH=/app PORT=8000 \
+            || echo "Container already exists, updating..."
+
+      - name: Verify Deployment
+        run: |
+          # Wait for container to be ready
+          sleep 30
+
+          # Test health endpoint
+          curl -f http://cultivate-ml-api-pag.westus2.azurecontainer.io:8000/api/health
+
+          echo "🎉 Backend deployment successful!"
+          echo "API URL: http://cultivate-ml-api-pag.westus2.azurecontainer.io:8000"
