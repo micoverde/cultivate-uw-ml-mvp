@@ -16,13 +16,12 @@ import {
 import CLASSDashboard from './CLASSDashboard';
 import ScaffoldingVisualization from './ScaffoldingVisualization';
 import EnhancedRecommendations from './EnhancedRecommendations';
-// import ProfessionalVisualization from './ProfessionalVisualization';
+import ProfessionalVisualization from './ProfessionalVisualization';
 import ExportManager from './ExportManager';
 
 const AnalysisResults = ({ results, onStartNew, onStartNewScenario }) => {
   const [showExportModal, setShowExportModal] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
   const {
     transcript_summary,
     ml_predictions,
@@ -166,7 +165,13 @@ const AnalysisResults = ({ results, onStartNew, onStartNewScenario }) => {
       )}
 
       {/* Main Content */}
-      {/* Note: ProfessionalVisualization will be integrated when merged from 3.2 branch */}
+      <div className="py-8">
+        {/* Professional Visualization Component */}
+        <ProfessionalVisualization
+          results={results}
+          scenarioContext={results.scenarioContext}
+        />
+      </div>
 
     <div className="max-w-6xl mx-auto mobile-padding sm:p-6 space-y-4 sm:space-y-6 lg:space-y-8">
       {/* Traditional Analysis Details - Mobile Optimized */}
