@@ -1,10 +1,16 @@
 name: Backend Container Deployment
 
 on:
-  push:
-    branches: [ main ]
-    paths: [ 'src/**', 'requirements-api.txt', 'Dockerfile.api', 'run_api.py', '.github/workflows/backend-deploy.yml' ]
+  # Disabled until Azure secrets are configured
+  # push:
+  #   branches: [ main ]
+  #   paths: [ 'src/**', 'requirements-api.txt', 'Dockerfile.api', 'run_api.py', '.github/workflows/backend-deploy.yml' ]
   workflow_dispatch:
+    inputs:
+      force_deploy:
+        description: 'Force deploy (requires Azure secrets)'
+        required: true
+        default: 'false'
 
 jobs:
   deploy_backend:
