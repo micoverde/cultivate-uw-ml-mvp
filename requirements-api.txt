@@ -39,3 +39,9 @@ mediapipe>=0.10.0
 Pillow>=10.0.0
 facenet-pytorch>=2.5.0
 joblib>=1.3.0
+
+# Audio Processing (Feature 7 - Story 7.3)
+openai-whisper>=20230314
+librosa>=0.10.0
+soundfile>=0.12.0
+pyannote.audio>=3.0.0
