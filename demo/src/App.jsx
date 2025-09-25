@@ -442,8 +442,8 @@ function App() {
               <div>
                 <h1 className={`text-xl font-bold transition-colors ${
                   isDarkMode ? 'text-white' : 'text-slate-900'
-                }`}>Cultivate</h1>
-                <p className="text-xs text-indigo-600 font-medium">University of Washington</p>
+                }`}>Cultivate Learning AI</h1>
+                <p className="text-xs text-indigo-600 font-medium">Early Childhood Education Intelligence</p>
               </div>
             </div>
 
@@ -588,11 +588,12 @@ function App() {
               <button
                 onClick={handleProfessionalDemo}
                 className="group relative inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:-translate-y-1 transition-all duration-300 hover:from-indigo-700 hover:to-blue-700"
+                data-testid="primary-cta-button"
               >
                 <span className="absolute inset-0 rounded-2xl bg-gradient-to-r from-indigo-400 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur"></span>
                 <span className="relative flex items-center">
-                  <span className="hidden sm:inline">Experience the Demo</span>
-                  <span className="sm:hidden">Try Demo</span>
+                  <span className="hidden sm:inline">See Teaching Analysis Demo</span>
+                  <span className="sm:hidden">Analyze Teaching</span>
                   <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" fill="currentColor" viewBox="0 0 20 20">
                     <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                   </svg>
@@ -602,9 +603,10 @@ function App() {
               <button
                 onClick={handleTryDemo}
                 className="group inline-flex items-center justify-center w-full sm:w-auto px-8 sm:px-10 py-4 bg-white/90 backdrop-blur-sm text-slate-700 rounded-2xl font-semibold text-lg border border-slate-200/50 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 hover:bg-white hover:border-slate-300/50"
+                data-testid="secondary-cta-button"
               >
-                <span className="hidden sm:inline">Try Your Own Data</span>
-                <span className="sm:hidden">Your Data</span>
+                <span className="hidden sm:inline">Analyze Your Classroom</span>
+                <span className="sm:hidden">Your Classroom</span>
                 <svg className="w-4 h-4 ml-2 group-hover:translate-x-0.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>

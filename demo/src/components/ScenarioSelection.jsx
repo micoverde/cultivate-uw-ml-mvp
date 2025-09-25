@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Brain, ArrowLeft, Play, FileText, Users, Clock, Loader2 } from 'lucide-react';
 import ScenarioGrid from './ScenarioGrid';
+import NavigationContext from './NavigationContext';
+import FriendlyErrorHandler from './FriendlyErrorHandler';
 import { getAgeGroupLabel, getInteractionTypeLabel } from '../data/scenarios';
 
 /**
@@ -63,26 +65,28 @@ const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome, isAnalyzing, analy
             <div className="flex justify-between items-center py-6">
               <div className="flex items-center">
                 <Brain className="h-8 w-8 text-indigo-600 mr-3" />
-                <h1 className="text-2xl font-bold text-gray-900">Scenario Preview</h1>
+                <h1 className="text-2xl font-bold text-gray-900">Teaching Scenario Analysis</h1>
               </div>
-              <div className="flex space-x-4">
-                <button
-                  onClick={handleBackToGrid}
-                  className="flex items-center text-gray-500 hover:text-gray-900 px-4 py-2 rounded-lg transition-colors"
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Back to Scenarios
-                </button>
-                <button
-                  onClick={onBackToHome}
-                  className="text-gray-500 hover:text-gray-900 px-4 py-2 rounded-lg transition-colors"
-                >
-                  ← Home
-                </button>
-              </div>
+              <button
+                onClick={onBackToHome}
+                className="text-gray-500 hover:text-gray-900 px-4 py-2 rounded-lg transition-colors"
+              >
+                ← Home
+              </button>
             </div>
           </div>
         </header>
+
+        {/* Navigation Context */}
+        <NavigationContext
+          currentStep={1}
+          totalSteps={3}
+          stepLabels={['Select Scenario', 'Review & Analyze', 'View Results']}
+          nextActionText="Analyze This Scenario"
+          onNext={handleAnalyzeScenario}
+          onBack={handleBackToGrid}
+          canProceed={!isAnalyzing}
+        />
 
         {/* Preview Content */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -298,7 +302,7 @@ const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome, isAnalyzing, analy
           <div className="flex justify-between items-center py-6">
             <div className="flex items-center">
               <Brain className="h-8 w-8 text-indigo-600 mr-3" />
-              <h1 className="text-2xl font-bold text-gray-900">Professional Demo</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Choose Teaching Scenario</h1>
             </div>
             <button
               onClick={onBackToHome}
@@ -310,8 +314,27 @@ const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome, isAnalyzing, analy
         </div>
       </header>
 
+      {/* Navigation Context */}
+      <NavigationContext
+        currentStep={0}
+        totalSteps={3}
+        stepLabels={['Select Scenario', 'Review & Analyze', 'View Results']}
+        nextActionText={null}
+        onNext={null}
+        onBack={onBackToHome}
+        canProceed={false}
+        showProgress={true}
+      />
+
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Select a Teaching Scenario to Analyze</h2>
+          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+            Choose from real classroom interactions to see how our AI identifies quality teaching practices
+            and provides actionable insights for professional development.
+          </p>
+        </div>
         <ScenarioGrid onScenarioSelect={handleScenarioSelect} />
       </div>
     </div>
