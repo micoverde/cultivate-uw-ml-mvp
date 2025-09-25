@@ -1,0 +1,203 @@
+{
+  "test_responses": {
+    "excellent": {
+      "text": "Maya, I can see you're feeling really frustrated with that puzzle. That's okay - puzzles can be tricky! I noticed you got three pieces to fit perfectly. Would you like to try finding one more piece that fits, or would you like to take a break and come back to it later?",
+      "description": "Includes emotion labeling, validation, scaffolding, and choice offering",
+      "expected_score_range": [7.5, 10.0],
+      "must_have_strengths": [
+        "emotional validation",
+        "scaffolding support",
+        "choice offering",
+        "specific praise"
+      ],
+      "should_avoid_growth_areas": [
+        "emotion labeling",
+        "validation"
+      ],
+      "expected_categories": {
+        "emotional_support": [7.0, 10.0],
+        "scaffolding_support": [7.0, 10.0],
+        "language_quality": [6.0, 10.0],
+        "developmental_appropriateness": [7.0, 10.0],
+        "overall_effectiveness": [7.0, 10.0]
+      }
+    },
+
+    "moderate": {
+      "text": "Maya, puzzles can be hard sometimes. Don't worry about it. Let's try to find the corner pieces first and build from there. You're doing great and I know you can do this!",
+      "description": "Some validation and scaffolding but lacks explicit emotion labeling",
+      "expected_score_range": [5.0, 7.4],
+      "must_have_strengths": [
+        "scaffolding support",
+        "encouragement"
+      ],
+      "likely_growth_areas": [
+        "explicit emotion labeling",
+        "more specific validation",
+        "offering choices"
+      ],
+      "expected_categories": {
+        "emotional_support": [4.0, 7.0],
+        "scaffolding_support": [6.0, 8.0],
+        "language_quality": [5.0, 8.0],
+        "developmental_appropriateness": [5.0, 8.0],
+        "overall_effectiveness": [5.0, 7.5]
+      }
+    },
+
+    "poor": {
+      "text": "Maya, stop being upset. Big kids don't cry over puzzles. You need to try harder and focus better. Just put the pieces together like I showed you before.",
+      "description": "Lacks empathy, dismisses emotions, uses developmentally inappropriate language",
+      "expected_score_range": [1.0, 4.0],
+      "must_have_growth_areas": [
+        "emotional validation",
+        "developmental appropriateness",
+        "supportive language",
+        "scaffolding approach"
+      ],
+      "unlikely_strengths": [
+        "emotional validation",
+        "choice offering",
+        "encouragement"
+      ],
+      "expected_categories": {
+        "emotional_support": [1.0, 3.0],
+        "scaffolding_support": [1.0, 4.0],
+        "language_quality": [2.0, 4.0],
+        "developmental_appropriateness": [1.0, 3.0],
+        "overall_effectiveness": [1.0, 3.5]
+      }
+    },
+
+    "minimal_length": {
+      "text": "That's okay Maya. Puzzles are hard. Let's try again. You can do it. I believe in you. Keep trying.",
+      "description": "Exactly 100 characters - minimum length test",
+      "expected_score_range": [3.0, 6.0],
+      "character_count": 100,
+      "test_purpose": "Validate minimum character requirement"
+    },
+
+    "too_short": {
+      "text": "It's okay Maya. Try again.",
+      "description": "Under 100 characters - should be rejected",
+      "character_count": 25,
+      "should_be_rejected": true,
+      "test_purpose": "Validate character minimum enforcement"
+    },
+
+    "special_characters": {
+      "text": "Maya, I see you're frustrated! 😔 That's totally normal - puzzles can be super tricky sometimes! 🧩 I noticed you got those corner pieces to fit perfectly. 👍 Would you like to try finding one more piece, or take a little break? 🤔",
+      "description": "Contains emojis and special characters",
+      "expected_score_range": [6.0, 9.0],
+      "test_purpose": "Validate special character handling",
+      "character_count": 245
+    },
+
+    "very_long": {
+      "text": "Maya, I can see that you are feeling really frustrated with this puzzle right now, and that's completely okay and normal - puzzles can definitely be very tricky and challenging, especially when we've been working on them for a while. I want you to know that your feelings are valid and it's perfectly fine to feel upset when something is difficult. I noticed that you were able to get three pieces to fit together perfectly, which shows that you have really good puzzle-solving skills and you were being very persistent. Would you like to try working on just one more piece together with me, or would you prefer to take a little break from the puzzle and come back to it later when you're feeling ready? Either choice is completely fine with me.",
+      "description": "Very long response to test system limits",
+      "expected_score_range": [7.0, 10.0],
+      "test_purpose": "Validate long response handling",
+      "character_count": 721
+    }
+  },
+
+  "api_test_scenarios": {
+    "successful_analysis": {
+      "scenario_id": "maya-puzzle-frustration",
+      "scenario_context": "During free play time, 4-year-old Maya is working on a 12-piece puzzle. She has been trying for 5 minutes and is showing signs of frustration.",
+      "audio_transcript": "Maya: \"This is stupid! I can't do it!\" *pushes puzzle pieces away*",
+      "analysis_categories": [
+        {"id": "emotional_support", "name": "Emotional Support & Validation"},
+        {"id": "scaffolding_support", "name": "Scaffolding & Learning Support"},
+        {"id": "language_quality", "name": "Language Quality & Communication"},
+        {"id": "developmental_appropriateness", "name": "Developmental Appropriateness"},
+        {"id": "overall_effectiveness", "name": "Overall Pedagogical Effectiveness"}
+      ],
+      "evidence_metrics": [
+        {
+          "strategy": "emotion_labeling_validation",
+          "name": "Emotion labeling and validation",
+          "effectiveness": 89,
+          "description": "Explicitly acknowledging and naming child's emotions"
+        }
+      ]
+    },
+
+    "malformed_request": {
+      "scenario_id": "maya-puzzle-frustration",
+      "educator_response": "Test response",
+      "analysis_categories": "invalid_format",
+      "test_purpose": "Validate error handling for malformed requests"
+    },
+
+    "missing_required_fields": {
+      "educator_response": "Test response without required fields",
+      "test_purpose": "Validate required field enforcement"
+    }
+  },
+
+  "ui_elements": {
+    "homepage": {
+      "maya_scenario_button": "//button[contains(text(), 'Try Maya') or contains(text(), 'Maya Scenario')]",
+      "try_demo_button": "//button[contains(text(), 'Try Demo')]",
+      "dark_mode_toggle": "//button[contains(@aria-label, 'dark mode') or contains(@aria-label, 'light mode')]"
+    },
+
+    "maya_scenario_page": {
+      "scenario_title": "//h3[contains(text(), 'Scenario: Maya') or contains(text(), 'Puzzle Frustration')]",
+      "context_section": "//*[contains(text(), 'During free play time') or contains(text(), '4-year-old Maya')]",
+      "audio_transcript": "//*[contains(text(), 'This is stupid') or contains(text(), 'can\\'t do it')]",
+      "response_textarea": "//textarea[contains(@placeholder, 'Type your thoughtful') or contains(@placeholder, 'Maya')]",
+      "character_counter": "//*[contains(text(), '100') or contains(text(), 'character')]",
+      "submit_button": "//button[contains(text(), 'Get AI Coaching') or contains(text(), 'Submit') or contains(text(), 'Analysis')]",
+      "coaching_tips": "//*[contains(text(), 'Acknowledge Maya') or contains(text(), 'feelings first')]"
+    },
+
+    "analysis_progress": {
+      "progress_indicator": "//*[contains(text(), 'Analyzing') or contains(text(), 'Analysis') or contains(text(), 'Progress')]",
+      "progress_bar": "//div[contains(@class, 'progress') or contains(@role, 'progressbar')]",
+      "progress_message": "//*[contains(text(), 'evidence-based') or contains(text(), 'pedagogy')]"
+    },
+
+    "results_page": {
+      "overall_score": "//*[contains(text(), '/10') or contains(text(), 'Overall') and contains(text(), 'Score')]",
+      "category_scores": "//*[contains(text(), 'Emotional Support') or contains(text(), 'Scaffolding')]",
+      "strengths_section": "//*[contains(text(), 'Strengths') or contains(text(), 'strength')]",
+      "growth_section": "//*[contains(text(), 'Growth') or contains(text(), 'opportunity') or contains(text(), 'Areas')]",
+      "recommendations": "//*[contains(text(), 'Recommendation') or contains(text(), 'Evidence-based')]",
+      "suggested_response": "//*[contains(text(), 'Suggested') or contains(text(), 'Enhanced')]",
+      "try_another_button": "//button[contains(text(), 'Try Another') or contains(text(), 'Start') or contains(text(), 'New')]"
+    }
+  },
+
+  "expected_feedback_elements": {
+    "categories_required": [
+      "Emotional Support & Validation",
+      "Scaffolding & Learning Support",
+      "Language Quality & Communication",
+      "Developmental Appropriateness",
+      "Overall Pedagogical Effectiveness"
+    ],
+
+    "score_format": {
+      "pattern": "^(\\d{1,2}(\\.\\d)?)/10$",
+      "range": [0.0, 10.0],
+      "description": "Score should be X.X/10 format"
+    },
+
+    "required_sections": [
+      "strengths_identified",
+      "growth_opportunities",
+      "coaching_recommendations",
+      "suggested_response"
+    ],
+
+    "evidence_based_indicators": [
+      "percentage effectiveness",
+      "research citations",
+      "interaction counts",
+      "evidence base references"
+    ]
+  }
+}
