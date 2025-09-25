@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { Brain, ArrowLeft, Send, Clock, User, AlertCircle, CheckCircle, Lightbulb, Target } from 'lucide-react';
+import { Brain, ArrowLeft, Send, Clock, User, AlertCircle, CheckCircle, Lightbulb, Target, Sparkles, Camera, Mic, Heart, BarChart3, Zap, Star, Award, Shield } from 'lucide-react';
 import { mayaPuzzleScenario } from '../data/mayaScenario';
+import PerformanceMetrics from './PerformanceMetrics';
 
 /**
  * EducatorResponseInput Component
@@ -18,9 +19,10 @@ import { mayaPuzzleScenario } from '../data/mayaScenario';
  * Issue: #108 - PIVOT to User Response Evaluation
  */
 
-const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, analysisProgress }) => {
+const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, analysisProgress, analysisResults }) => {
   const [userResponse, setUserResponse] = useState('');
   const [responseValid, setResponseValid] = useState(false);
+  const [showMetrics, setShowMetrics] = useState(false);
   const [showHints, setShowHints] = useState(false);
 
   // Validate response meets minimum requirements
@@ -100,25 +102,49 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
           {/* Main Content Area */}
           <div className="lg:col-span-2 space-y-8">
 
-            {/* Introduction */}
-            <div className="group bg-white/70 backdrop-blur-xl rounded-2xl shadow-xl shadow-indigo-100/20 border border-white/40 p-8 hover:shadow-2xl hover:shadow-indigo-100/30 transition-all duration-300">
-              <div className="flex items-center mb-4">
-                <div className="p-2 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl mr-4 shadow-lg">
-                  <Sparkles className="h-6 w-6 text-white" />
+            {/* ML Intelligence Showcase */}
+            <div className="group bg-gradient-to-br from-indigo-50 via-white to-purple-50 backdrop-blur-xl rounded-2xl shadow-xl shadow-indigo-100/20 border-2 border-indigo-100 p-8 hover:shadow-2xl hover:shadow-indigo-100/30 transition-all duration-300">
+              <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center">
+                  <div className="p-3 bg-gradient-to-br from-indigo-600 to-purple-700 rounded-xl mr-4 shadow-lg animate-pulse">
+                    <Brain className="h-7 w-7 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold bg-gradient-to-r from-indigo-900 to-purple-800 bg-clip-text text-transparent">
+                      AI-Powered Pedagogical Analysis
+                    </h2>
+                    <p className="text-sm text-indigo-600 font-medium mt-1">Real-time deep learning inference</p>
+                  </div>
                 </div>
-                <h2 className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
-                  Welcome to the Cultivate Learning Demo
-                </h2>
+                <div className="flex items-center space-x-2 bg-green-50 border border-green-200 rounded-lg px-3 py-1.5">
+                  <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-xs font-semibold text-green-700">ML Models Active</span>
+                </div>
               </div>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                This tool uses machine learning trained on thousands of hours of high-quality early education
-                interactions to provide evidence-based coaching. You'll practice responding to common classroom
-                scenarios and receive personalized feedback.
+
+              {/* Key ML Capabilities Highlight */}
+              <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="bg-white/80 rounded-lg p-4 border border-indigo-100">
+                  <div className="flex items-center mb-2">
+                    <BarChart3 className="h-4 w-4 text-indigo-600 mr-2" />
+                    <span className="text-sm font-semibold text-gray-800">Neural Analysis</span>
+                  </div>
+                  <p className="text-xs text-gray-600">2,847 high-quality interactions training set</p>
+                </div>
+                <div className="bg-white/80 rounded-lg p-4 border border-purple-100">
+                  <div className="flex items-center mb-2">
+                    <Zap className="h-4 w-4 text-purple-600 mr-2" />
+                    <span className="text-sm font-semibold text-gray-800">Real-time Inference</span>
+                  </div>
+                  <p className="text-xs text-gray-600">Evidence-based coaching in seconds</p>
+                </div>
+              </div>
+
+              <p className="text-gray-700 leading-relaxed text-base">
+                Experience how deep learning transforms educator feedback. Our models analyze your response across
+                <strong className="text-indigo-700">five evidence-based dimensions</strong>, providing personalized coaching
+                grounded in <strong className="text-purple-700">validated pedagogical research</strong>.
               </p>
-              <div className="mt-6 flex items-center text-indigo-600 text-sm font-medium">
-                <Target className="h-4 w-4 mr-2" />
-                <span>Powered by evidence-based pedagogical research</span>
-              </div>
             </div>
 
             {/* Scenario Presentation */}
@@ -244,20 +270,56 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
                   </span>
                 </div>
 
-                {/* Submit Button */}
+                {/* Enhanced ML-Powered Submit Button */}
                 <button
                   onClick={handleSubmitResponse}
                   disabled={!responseValid || isAnalyzing}
-                  className={`group px-8 py-3 rounded-2xl font-bold transition-all duration-300 flex items-center text-base shadow-lg ${
+                  className={`group relative overflow-hidden px-10 py-4 rounded-2xl font-bold transition-all duration-300 flex items-center text-base shadow-lg ${
                     responseValid && !isAnalyzing
-                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white hover:from-indigo-700 hover:to-purple-700 shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300/40 hover:-translate-y-0.5'
+                      ? 'bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 text-white hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 shadow-indigo-200 hover:shadow-xl hover:shadow-purple-300/50 hover:-translate-y-1 transform'
                       : 'bg-gray-200 text-gray-500 cursor-not-allowed shadow-gray-100'
                   }`}
                 >
-                  <Send className="h-5 w-5 mr-3 transition-transform group-hover:translate-x-0.5" />
-                  {isAnalyzing ? 'Analyzing...' : 'Get AI Coaching Feedback'}
+                  {/* Animated background for active state */}
+                  {responseValid && !isAnalyzing && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-indigo-400/20 via-purple-400/20 to-pink-400/20 animate-pulse"></div>
+                  )}
+
+                  <div className="relative flex items-center">
+                    {isAnalyzing ? (
+                      <>
+                        <Brain className="h-5 w-5 mr-3 animate-spin" />
+                        <span>Neural Analysis Running...</span>
+                        <div className="ml-3 flex space-x-1">
+                          <div className="w-1 h-1 bg-white rounded-full animate-bounce"></div>
+                          <div className="w-1 h-1 bg-white rounded-full animate-bounce delay-100"></div>
+                          <div className="w-1 h-1 bg-white rounded-full animate-bounce delay-200"></div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <Brain className="h-5 w-5 mr-3 transition-transform group-hover:scale-110" />
+                        <span>Analyze with Deep Learning</span>
+                        <Zap className="h-4 w-4 ml-3 transition-transform group-hover:translate-x-1" />
+                      </>
+                    )}
+                  </div>
                 </button>
               </div>
+
+              {/* Performance Metrics Toggle - Show after analysis */}
+              {!isAnalyzing && analysisResults && (
+                <div className="flex justify-center mt-4">
+                  <button
+                    onClick={() => setShowMetrics(!showMetrics)}
+                    className="flex items-center px-6 py-3 bg-gradient-to-r from-slate-600 to-indigo-600 text-white rounded-xl font-medium hover:from-slate-700 hover:to-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  >
+                    <BarChart3 className="h-4 w-4 mr-2" />
+                    {showMetrics ? 'Hide' : 'Show'} Performance Metrics
+                    <Sparkles className="h-4 w-4 ml-2" />
+                  </button>
+                </div>
+              )}
             </div>
 
             {/* Analysis Progress */}
@@ -272,8 +334,46 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
                   </h3>
                 </div>
 
-                <p className="text-gray-600 mb-6 text-lg">
-                  Analyzing your response using evidence-based early childhood pedagogy models trained on thousands of expert interactions.
+                {/* Real-time ML indicators */}
+                <div className="grid grid-cols-3 gap-4 mb-6">
+                  <div className="bg-gradient-to-r from-indigo-50 to-blue-50 rounded-lg p-3 border border-indigo-100">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-indigo-500 rounded-full animate-pulse mr-2"></div>
+                        <span className="text-xs font-semibold text-indigo-700">Neural Layers</span>
+                      </div>
+                      <Brain className="h-3 w-3 text-indigo-500" />
+                    </div>
+                    <p className="text-xs text-gray-600">Processing 2,847 training samples</p>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-3 border border-purple-100">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-purple-500 rounded-full animate-pulse mr-2"></div>
+                        <span className="text-xs font-semibold text-purple-700">Evidence Analysis</span>
+                      </div>
+                      <BarChart3 className="h-3 w-3 text-purple-500" />
+                    </div>
+                    <p className="text-xs text-gray-600">Validating pedagogical patterns</p>
+                  </div>
+
+                  <div className="bg-gradient-to-r from-emerald-50 to-green-50 rounded-lg p-3 border border-emerald-100">
+                    <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center">
+                        <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse mr-2"></div>
+                        <span className="text-xs font-semibold text-emerald-700">Real-time Inference</span>
+                      </div>
+                      <Zap className="h-3 w-3 text-emerald-500" />
+                    </div>
+                    <p className="text-xs text-gray-600">Generating coaching insights</p>
+                  </div>
+                </div>
+
+                <p className="text-gray-700 mb-6 text-base font-medium">
+                  <strong className="text-indigo-700">Deep learning models</strong> are analyzing your response across
+                  <strong className="text-purple-700"> five evidence-based dimensions</strong>, drawing from validated
+                  early childhood research to provide personalized coaching feedback.
                 </p>
 
                 <div className="space-y-4">
@@ -295,6 +395,13 @@ const EducatorResponseInput = ({ onBackToHome, onResponseAnalysis, isAnalyzing, 
                 </div>
               </div>
             )}
+
+            {/* Performance Metrics - Show when analysis is complete */}
+            <PerformanceMetrics
+              analysisResults={analysisResults}
+              isVisible={!isAnalyzing && analysisResults && showMetrics}
+            />
+
           </div>
 
           {/* Sidebar */}

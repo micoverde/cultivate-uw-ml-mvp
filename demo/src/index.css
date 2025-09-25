@@ -562,53 +562,324 @@ html.dark {
   border-color: rgba(51, 65, 85, 0.6);
 }
 
-/* Responsive design */
+/* ==================================================
+   MOBILE-FIRST RESPONSIVE DESIGN SYSTEM
+   Optimized for touch interfaces and stakeholder presentations
+   ================================================== */
+
+/* Mobile Base Styles (320px+) - Default */
+/* All base styles above are mobile-first by default */
+
+/* Touch Target Standards - Minimum 44px for accessibility */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.touch-target-lg {
+  min-height: 48px;
+  min-width: 48px;
+}
+
+/* Mobile Typography Scale */
+.mobile-text-xs { font-size: 0.75rem; line-height: 1rem; }
+.mobile-text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+.mobile-text-base { font-size: 1rem; line-height: 1.5rem; }
+.mobile-text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+.mobile-text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+.mobile-text-2xl { font-size: 1.5rem; line-height: 2rem; }
+
+/* Mobile Layout Utilities */
+.mobile-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-padding {
+  padding: 1rem;
+}
+
+.mobile-padding-x {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.mobile-padding-y {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+/* Mobile Navigation */
+.mobile-nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.mobile-nav-button:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.mobile-nav-button:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile Modal Styles */
+.mobile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: 50;
+}
+
+.mobile-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
+.mobile-modal-content {
+  padding: 1rem;
+  overflow-y: auto;
+  height: calc(100vh - 80px);
+}
+
+/* Touch Feedback */
+.touch-feedback {
+  transition: all 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.touch-feedback:active {
+  transform: scale(0.98);
+}
+
+/* Small Mobile (640px+) */
 @media (min-width: 640px) {
+  /* Navigation */
+  .sm\:mobile-nav-stack { flex-direction: row; gap: 1rem; }
+
+  /* Layout */
   .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .sm\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
-  .sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
-  .sm\:text-5xl { font-size: 3rem; line-height: 1; }
-  .sm\:px-0 { padding-left: 0; padding-right: 0; }
-  .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
-  .sm\:mb-4 { margin-bottom: 1rem; }
-  .sm\:mb-6 { margin-bottom: 1.5rem; }
-  .sm\:mb-16 { margin-bottom: 4rem; }
-  .sm\:mb-20 { margin-bottom: 5rem; }
-  .sm\:gap-8 { gap: 2rem; }
-  .sm\:space-x-0 > * + * { margin-left: 0; }
-  .sm\:space-y-0 > * + * { margin-top: 0; }
-  .sm\:space-x-8 > * + * { margin-left: 2rem; }
   .sm\:flex-row { flex-direction: row; }
-  .sm\:w-auto { width: auto; }
-  .sm\:inline { display: inline; }
-  .sm\:hidden { display: none; }
-  .sm\:block { display: block; }
+  .sm\:gap-4 { gap: 1rem; }
+  .sm\:gap-6 { gap: 1.5rem; }
+  .sm\:gap-8 { gap: 2rem; }
+
+  /* Typography */
   .sm\:text-sm { font-size: 0.875rem; line-height: 1.25rem; }
   .sm\:text-base { font-size: 1rem; line-height: 1.5rem; }
+  .sm\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .sm\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .sm\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .sm\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .sm\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .sm\:text-5xl { font-size: 3rem; line-height: 1; }
+
+  /* Spacing */
+  .sm\:px-0 { padding-left: 0; padding-right: 0; }
+  .sm\:px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .sm\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .sm\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .sm\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+
+  .sm\:py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+  .sm\:py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .sm\:py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .sm\:py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+
+  .sm\:mb-4 { margin-bottom: 1rem; }
+  .sm\:mb-6 { margin-bottom: 1.5rem; }
+  .sm\:mb-8 { margin-bottom: 2rem; }
+  .sm\:mb-12 { margin-bottom: 3rem; }
+  .sm\:mb-16 { margin-bottom: 4rem; }
+  .sm\:mb-20 { margin-bottom: 5rem; }
+
+  /* Display */
+  .sm\:block { display: block; }
+  .sm\:inline { display: inline; }
+  .sm\:hidden { display: none; }
+  .sm\:flex { display: flex; }
+  .sm\:w-auto { width: auto; }
+
+  /* Spacing between elements */
+  .sm\:space-x-0 > * + * { margin-left: 0; }
+  .sm\:space-x-2 > * + * { margin-left: 0.5rem; }
+  .sm\:space-x-4 > * + * { margin-left: 1rem; }
+  .sm\:space-x-6 > * + * { margin-left: 1.5rem; }
+  .sm\:space-x-8 > * + * { margin-left: 2rem; }
+  .sm\:space-y-0 > * + * { margin-top: 0; }
+  .sm\:space-y-2 > * + * { margin-top: 0.5rem; }
+  .sm\:space-y-4 > * + * { margin-top: 1rem; }
 }
 
+/* Tablet (768px+) - iPad and larger tablets */
 @media (min-width: 768px) {
+  /* Modal reverts to overlay style */
+  .md\:modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+  }
+
+  .md\:modal-content {
+    background: white;
+    border-radius: 0.75rem;
+    max-width: 28rem;
+    width: 100%;
+    margin: 1rem;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  /* Grid layouts */
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+  /* Layout */
+  .md\:flex { display: flex; }
+  .md\:flex-row { flex-direction: row; }
+  .md\:items-center { align-items: center; }
+  .md\:items-start { align-items: flex-start; }
+  .md\:justify-between { justify-content: space-between; }
+  .md\:justify-center { justify-content: center; }
+
+  /* Typography */
+  .md\:text-base { font-size: 1rem; line-height: 1.5rem; }
+  .md\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .md\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
   .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .md\:text-5xl { font-size: 3rem; line-height: 1; }
   .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
+
+  /* Spacing */
+  .md\:px-4 { padding-left: 1rem; padding-right: 1rem; }
+  .md\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .md\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .md\:py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .md\:py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .md\:py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+
+  .md\:mt-0 { margin-top: 0; }
+  .md\:mb-4 { margin-bottom: 1rem; }
+  .md\:mb-6 { margin-bottom: 1.5rem; }
   .md\:mb-8 { margin-bottom: 2rem; }
   .md\:mb-12 { margin-bottom: 3rem; }
-  .md\:flex { display: flex; }
-  .md\:items-center { align-items: center; }
-  .md\:justify-between { justify-content: space-between; }
-  .md\:flex-row { flex-direction: row; }
+
+  /* Spacing between elements */
+  .md\:space-x-2 > * + * { margin-left: 0.5rem; }
+  .md\:space-x-4 > * + * { margin-left: 1rem; }
+  .md\:space-x-6 > * + * { margin-left: 1.5rem; }
   .md\:space-x-8 > * + * { margin-left: 2rem; }
-  .md\:mt-0 { margin-top: 0; }
+  .md\:space-y-0 > * + * { margin-top: 0; }
+  .md\:space-y-4 > * + * { margin-top: 1rem; }
+  .md\:space-y-6 > * + * { margin-top: 1.5rem; }
+
+  /* Display */
+  .md\:block { display: block; }
+  .md\:hidden { display: none; }
+  .md\:max-w-md { max-width: 28rem; }
+  .md\:max-w-lg { max-width: 32rem; }
+  .md\:max-w-xl { max-width: 36rem; }
+  .md\:max-w-2xl { max-width: 42rem; }
+  .md\:max-w-3xl { max-width: 48rem; }
+  .md\:max-w-4xl { max-width: 56rem; }
+  .md\:max-w-5xl { max-width: 64rem; }
+  .md\:max-w-6xl { max-width: 72rem; }
+  .md\:max-w-7xl { max-width: 80rem; }
+
+  .md\:w-auto { width: auto; }
+  .md\:h-auto { height: auto; }
+  .md\:rounded-xl { border-radius: 0.75rem; }
+  .md\:shadow-2xl { box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); }
 }
 
+/* Desktop (1024px+) - Laptop and desktop */
 @media (min-width: 1024px) {
-  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Grid layouts */
   .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .lg\:text-8xl { font-size: 6rem; line-height: 1; }
-  .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
-  .lg\:space-x-12 > * + * { margin-left: 3rem; }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .lg\:col-span-2 { grid-column: span 2 / span 2; }
+  .lg\:col-span-3 { grid-column: span 3 / span 3; }
+
+  /* Typography */
+  .lg\:text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+  .lg\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+  .lg\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+  .lg\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+  .lg\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+  .lg\:text-5xl { font-size: 3rem; line-height: 1; }
+  .lg\:text-6xl { font-size: 3.75rem; line-height: 1; }
+  .lg\:text-7xl { font-size: 4.5rem; line-height: 1; }
+  .lg\:text-8xl { font-size: 6rem; line-height: 1; }
+
+  /* Spacing */
+  .lg\:px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+  .lg\:px-8 { padding-left: 2rem; padding-right: 2rem; }
+  .lg\:px-10 { padding-left: 2.5rem; padding-right: 2.5rem; }
+  .lg\:py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+  .lg\:py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+  .lg\:py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+
+  .lg\:gap-6 { gap: 1.5rem; }
+  .lg\:gap-8 { gap: 2rem; }
+  .lg\:gap-10 { gap: 2.5rem; }
+  .lg\:gap-12 { gap: 3rem; }
+
+  /* Spacing between elements */
+  .lg\:space-x-4 > * + * { margin-left: 1rem; }
+  .lg\:space-x-6 > * + * { margin-left: 1.5rem; }
+  .lg\:space-x-8 > * + * { margin-left: 2rem; }
+  .lg\:space-x-10 > * + * { margin-left: 2.5rem; }
+  .lg\:space-x-12 > * + * { margin-left: 3rem; }
+
+  /* Max widths for content */
+  .lg\:max-w-4xl { max-width: 56rem; }
+  .lg\:max-w-5xl { max-width: 64rem; }
+  .lg\:max-w-6xl { max-width: 72rem; }
+  .lg\:max-w-7xl { max-width: 80rem; }
+}
+
+/* Large Desktop (1280px+) */
+@media (min-width: 1280px) {
+  .xl\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .xl\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+  .xl\:text-8xl { font-size: 6rem; line-height: 1; }
+  .xl\:text-9xl { font-size: 8rem; line-height: 1; }
+  .xl\:px-12 { padding-left: 3rem; padding-right: 3rem; }
+  .xl\:py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+  .xl\:gap-12 { gap: 3rem; }
+  .xl\:space-x-12 > * + * { margin-left: 3rem; }
+  .xl\:max-w-6xl { max-width: 72rem; }
+  .xl\:max-w-7xl { max-width: 80rem; }
 }
 
 /* Header styles */

@@ -18,9 +18,9 @@ function App() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisProgress, setAnalysisProgress] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
-    // Check localStorage or default to dark mode
+    // Check localStorage or default to light mode for better visibility
     const saved = localStorage.getItem('darkMode');
-    return saved !== null ? saved === 'true' : true;
+    return saved !== null ? saved === 'true' : false;
   });
 
   useEffect(() => {
