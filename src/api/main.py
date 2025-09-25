@@ -117,7 +117,7 @@ class ConnectionManager:
             "connected_at": datetime.now()
         }
         # Security: Sanitize session_id for logging to prevent log injection
-        safe_session_id = session_id.replace('\n', '').replace('\r', '').replace('\t', ' ')[:50]
+        safe_session_id = session_id.replace('\n', '').replace('\r', '').replace('\t', ' ')[:50] if session_id else 'unknown'
         logger.info(f"WebSocket connected: {safe_session_id}")
 
     def disconnect(self, websocket: WebSocket):

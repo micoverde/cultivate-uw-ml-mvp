@@ -2,7 +2,8 @@
 const API_CONFIG = {
   // Use environment variable if available, fallback to relative paths for proxy
   BASE_URL: import.meta.env.VITE_API_BASE_URL || '',
-  // Production detection - Security: Use endsWith for safer hostname validation
+  // Production detection
+  // Security: Use endsWith for safer hostname validation to prevent subdomain attacks
   IS_PRODUCTION: import.meta.env.VITE_ENVIRONMENT === 'production' ||
                  window.location.hostname.endsWith('.azurestaticapps.net') ||
                  window.location.hostname === 'azurestaticapps.net',
