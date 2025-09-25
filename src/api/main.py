@@ -26,6 +26,7 @@ from .endpoints.educator_response_analysis import (
     EducatorResponseAnalysisResult
 )
 from .endpoints.admin import router as admin_router
+from .endpoints.video_analysis import router as video_router
 
 # Import security middleware
 from .security.middleware import SecurityMiddleware
@@ -106,6 +107,7 @@ app.add_middleware(
 # Include routers
 app.include_router(transcript_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
+app.include_router(video_router, prefix="/api/v1")
 
 # Educator Response Analysis Endpoints (PIVOT for MVP Sprint 1)
 @app.post("/api/analyze/educator-response", response_model=dict)
@@ -218,6 +220,43 @@ async def websocket_endpoint(websocket: WebSocket, session_id: str):
                     "event": message.get("event"),
                     "timestamp": datetime.now().isoformat()
                 }
+                await manager.send_personal_message(json.dumps(response), websocket)
+
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+
+@app.websocket("/ws/video/{video_id}")
+async def video_websocket_endpoint(websocket: WebSocket, video_id: str):
+    """WebSocket endpoint for real-time video processing updates"""
+    await manager.connect(websocket, video_id)
+    try:
+        while True:
+            data = await websocket.receive_text()
+            message = json.loads(data)
+
+            # Handle video processing status requests
+            if message.get("type") == "status_request":
+                # Import video processing status from video_analysis module
+                from .endpoints.video_analysis import video_processing_status
+
+                if video_id in video_processing_status:
+                    status_data = video_processing_status[video_id]
+                    response = {
+                        "type": "video_status_update",
+                        "video_id": video_id,
+                        "status": status_data["status"],
+                        "progress": status_data["progress_percentage"],
+                        "message": status_data["message"],
+                        "timestamp": datetime.now().isoformat()
+                    }
+                else:
+                    response = {
+                        "type": "video_status_error",
+                        "video_id": video_id,
+                        "error": "Video not found",
+                        "timestamp": datetime.now().isoformat()
+                    }
+
                 await manager.send_personal_message(json.dumps(response), websocket)
 
     except WebSocketDisconnect:
