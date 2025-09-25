@@ -28,10 +28,10 @@ class TestAdminAuthentication:
         self.app.include_router(admin_router, prefix="/api/v1")
         self.client = TestClient(self.app)
 
-        # Valid API keys for testing
-        self.valid_admin_key = "sk-admin-key-placeholder"
-        self.valid_monitor_key = "sk-monitor-key-placeholder"
-        self.invalid_key = "invalid-key-12345"
+        # Test API keys - generated for testing only
+        self.valid_admin_key = "sk-admin-test-AbCdEf123456789xYzTest"
+        self.valid_monitor_key = "sk-monitor-test-GhIjKl987654321pQrTest"
+        self.invalid_key = "sk-invalid-test-12345"
 
     def test_admin_endpoint_requires_auth(self):
         """Test that admin endpoints require authentication"""
@@ -106,7 +106,7 @@ class TestSecurityStatusEndpoint:
             "api_authentication": "enabled"
         }
 
-        headers = {"Authorization": f"Bearer sk-admin-key-placeholder"}
+        headers = {"Authorization": f"Bearer {self.valid_admin_key}"}
 
         # This would require proper FastAPI test setup
         # The actual test implementation depends on how dependencies are injected

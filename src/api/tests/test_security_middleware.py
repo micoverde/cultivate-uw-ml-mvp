@@ -7,6 +7,7 @@ import pytest
 import asyncio
 import json
 import time
+import os
 from unittest.mock import Mock, patch, AsyncMock
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.testclient import TestClient
@@ -259,7 +260,7 @@ class TestAPIKeyAuth:
         # Mock request with valid API key
         mock_request = Mock()
         mock_credentials = Mock()
-        mock_credentials.credentials = "sk-admin-key-placeholder"
+        mock_credentials.credentials = "sk-admin-test-AbCdEf123456789xYzTest"
 
         with patch.object(self.auth, '__class__.__bases__[0].__call__',
                          return_value=AsyncMock(return_value=mock_credentials)):

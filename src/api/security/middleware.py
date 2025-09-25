@@ -14,6 +14,8 @@ import time
 import json
 import hashlib
 import logging
+import os
+import secrets
 from typing import Dict, Optional, Any, Set
 from datetime import datetime, timedelta
 from collections import defaultdict, deque
@@ -324,11 +326,36 @@ class APIKeyAuth(HTTPBearer):
 
     def __init__(self, auto_error: bool = True):
         super().__init__(auto_error=auto_error)
-        # In production, this should come from environment variables or key vault
-        self.valid_api_keys = {
-            "admin": "sk-admin-key-placeholder",  # TODO: Use secure key generation
-            "monitor": "sk-monitor-key-placeholder"  # TODO: Use secure key generation
-        }
+        # Load API keys from environment variables with secure fallbacks
+        self.valid_api_keys = self._load_secure_api_keys()
+
+    def _load_secure_api_keys(self) -> Dict[str, str]:
+        """Load API keys securely from environment or generate for development"""
+        api_keys = {}
+
+        # Check for production environment variables first
+        admin_key = os.getenv("CULTIVATE_ADMIN_API_KEY")
+        monitor_key = os.getenv("CULTIVATE_MONITOR_API_KEY")
+
+        if admin_key and monitor_key:
+            # Production: Use environment variables
+            api_keys["admin"] = admin_key
+            api_keys["monitor"] = monitor_key
+            security_logger.info("Using production API keys from environment")
+        else:
+            # Development: Generate secure random keys
+            api_keys["admin"] = f"sk-admin-{secrets.token_urlsafe(32)}"
+            api_keys["monitor"] = f"sk-monitor-{secrets.token_urlsafe(32)}"
+
+            # Log the keys for development use (WARNING: Never do this in production)
+            if os.getenv("ENVIRONMENT") != "production":
+                security_logger.warning(f"Development Admin API Key: {api_keys['admin']}")
+                security_logger.warning(f"Development Monitor API Key: {api_keys['monitor']}")
+                security_logger.warning("⚠️  These are development keys only - set CULTIVATE_*_API_KEY env vars for production")
+            else:
+                security_logger.error("Production deployment missing required API keys!")
+
+        return api_keys
 
     async def __call__(self, request: Request) -> Optional[str]:
         """Validate API key"""
