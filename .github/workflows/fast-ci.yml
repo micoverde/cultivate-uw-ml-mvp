@@ -30,7 +30,8 @@ jobs:
     - name: Install Python dependencies
       run: |
         python -m pip install --upgrade pip
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        # Use lightweight API requirements for CI to avoid timeout
+        if [ -f requirements-api.txt ]; then pip install -r requirements-api.txt; fi
 
     - name: Python Code Quality
       run: |
