@@ -6,6 +6,7 @@ import MockAnalysisTest from './components/MockAnalysisTest';
 import MockRecommendationsTest from './components/MockRecommendationsTest';
 import ScenarioSelection from './components/ScenarioSelection';
 import { API_ENDPOINTS } from './config/api';
+import { monitoring } from './config/monitoring';
 
 function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'results', 'recommendations'
@@ -33,10 +34,18 @@ function App() {
   };
 
   const handleTryDemo = () => {
+    monitoring.trackDemoInteraction('custom_analysis', 'try_demo_clicked', {
+      currentView,
+      timestamp: new Date().toISOString()
+    });
     setCurrentView('demo');
   };
 
   const handleProfessionalDemo = () => {
+    monitoring.trackDemoInteraction('professional_scenarios', 'professional_demo_clicked', {
+      currentView,
+      timestamp: new Date().toISOString()
+    });
     setCurrentView('scenarios');
   };
 
@@ -47,6 +56,15 @@ function App() {
 
   const handleScenarioAnalyze = async (scenarioData) => {
     // Real API call to backend for scenario analysis (Milestone #108)
+    const analysisStartTime = Date.now();
+
+    // Track scenario analysis start
+    monitoring.trackDemoInteraction(scenarioData.scenarioContext?.title || 'scenario_analysis', 'analysis_started', {
+      scenarioType: scenarioData.scenarioContext?.category,
+      transcriptLength: scenarioData.transcript?.length,
+      hasMetadata: !!scenarioData.metadata
+    });
+
     setIsAnalyzing(true);
     setAnalysisProgress({ status: 'submitting', message: 'Submitting scenario for analysis...', progress: 0 });
 
@@ -54,6 +72,7 @@ function App() {
       console.log('Starting scenario analysis with real API...', scenarioData);
 
       // Submit transcript to analysis API
+      const apiCallStartTime = Date.now();
       const response = await fetch(API_ENDPOINTS.ANALYZE_TRANSCRIPT, {
         method: 'POST',
         headers: {
@@ -63,6 +82,15 @@ function App() {
           transcript: scenarioData.transcript,
           metadata: scenarioData.metadata
         }),
+      });
+      const apiCallDuration = Date.now() - apiCallStartTime;
+
+      // Track API call performance
+      monitoring.trackDependency('ANALYZE_TRANSCRIPT', API_ENDPOINTS.ANALYZE_TRANSCRIPT, apiCallDuration, response.status, response.ok);
+      monitoring.trackCostEvent('api', 'transcript_analysis_request', {
+        responseTime: apiCallDuration,
+        statusCode: response.status,
+        dataSize: JSON.stringify({transcript: scenarioData.transcript, metadata: scenarioData.metadata}).length
       });
 
       const submitData = await response.json();
@@ -117,6 +145,20 @@ function App() {
           results.scenarioContext = scenarioData.scenarioContext;
           results.original_transcript = scenarioData.transcript;
 
+          // Track successful analysis completion
+          const totalAnalysisTime = Date.now() - analysisStartTime;
+          monitoring.trackMLAnalysis('scenario_analysis', totalAnalysisTime, true, {
+            analysisId: analysisId,
+            scenarioType: scenarioData.scenarioContext?.category,
+            attempts: attempts + 1,
+            hasResults: !!results
+          });
+          monitoring.trackDemoInteraction(scenarioData.scenarioContext?.title || 'scenario_analysis', 'analysis_completed', {
+            duration: totalAnalysisTime,
+            success: true,
+            attempts: attempts + 1
+          });
+
           setIsAnalyzing(false);
           setAnalysisProgress(null);
           handleAnalysisComplete(results);
@@ -132,6 +174,20 @@ function App() {
 
     } catch (error) {
       console.error('Scenario analysis failed:', error);
+
+      // Track analysis failure
+      const totalAnalysisTime = Date.now() - analysisStartTime;
+      monitoring.trackException(error, {
+        function: 'handleScenarioAnalyze',
+        scenarioType: scenarioData.scenarioContext?.category,
+        duration: totalAnalysisTime,
+        errorType: 'analysis_failure'
+      });
+      monitoring.trackMLAnalysis('scenario_analysis', totalAnalysisTime, false, {
+        error: error.message,
+        scenarioType: scenarioData.scenarioContext?.category
+      });
+
       setIsAnalyzing(false);
       setAnalysisProgress(null);
 
