@@ -25,10 +25,13 @@
     }
   },
   "globalHeaders": {
-    "content-security-policy": "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'",
+    "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' https://js.monitor.azure.com https://*.azurestaticapps.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.azurestaticapps.net; connect-src 'self' https://dc.services.visualstudio.com https://*.azurestaticapps.net wss://*.azurestaticapps.net; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'",
     "x-content-type-options": "nosniff",
     "x-frame-options": "DENY",
-    "x-xss-protection": "1; mode=block"
+    "x-xss-protection": "1; mode=block",
+    "referrer-policy": "strict-origin-when-cross-origin",
+    "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
   },
   "mimeTypes": {
     ".json": "application/json",
