@@ -25,6 +25,10 @@ from .endpoints.educator_response_analysis import (
     EducatorResponseRequest,
     EducatorResponseAnalysisResult
 )
+from .endpoints.admin import router as admin_router
+
+# Import security middleware
+from .security.middleware import SecurityMiddleware
 
 # Configure logging
 logging.basicConfig(
@@ -87,16 +91,21 @@ else:
     # For development/staging, allow all localhost and azurestaticapps
     allowed_origins = development_origins + production_origins
 
+# Add security middleware first (before CORS)
+app.add_middleware(SecurityMiddleware)
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["X-RateLimit-Remaining", "X-RateLimit-Reset"]
 )
 
 # Include routers
 app.include_router(transcript_router, prefix="/api/v1")
+app.include_router(admin_router, prefix="/api/v1")
 
 # Educator Response Analysis Endpoints (PIVOT for MVP Sprint 1)
 @app.post("/api/analyze/educator-response", response_model=dict)

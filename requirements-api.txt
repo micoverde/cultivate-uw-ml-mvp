@@ -16,3 +16,7 @@ pyyaml>=6.0.0
 
 # Logging and monitoring
 python-json-logger>=2.0.0
+
+# Security
+bleach>=6.0.0
+python-multipart>=0.0.6
