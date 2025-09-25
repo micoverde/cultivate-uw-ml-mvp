@@ -67,8 +67,9 @@ jobs:
         echo "Checking security scan results..."
 
         # Get the latest security alerts (handle case when no alerts exist)
+        # Only check for alerts that actually have security_severity_level (actual security issues)
         CRITICAL_ALERTS=$(gh api repos/${{ github.repository }}/code-scanning/alerts \
-          --jq '[.[] | select(.rule.security_severity_level == "critical" or .rule.security_severity_level == "high") | select(.state == "open")] | length' 2>/dev/null || echo "0")
+          --jq '[.[] | select(.rule.security_severity_level? == "critical" or .rule.security_severity_level? == "high") | select(.state == "open")] | length' 2>/dev/null || echo "0")
 
         echo "Critical/High alerts found: $CRITICAL_ALERTS"
         echo "critical_count=$CRITICAL_ALERTS" >> $GITHUB_OUTPUT

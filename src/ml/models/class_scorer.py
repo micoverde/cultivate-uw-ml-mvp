@@ -12,7 +12,7 @@ CLASS Framework Domains:
 - Instructional Support: Concept development, quality feedback, language modeling
 """
 
-from typing import Dict, Any, List, Tuple, Optional
+from typing import Dict, Any, List, Optional
 import re
 import logging
 import os

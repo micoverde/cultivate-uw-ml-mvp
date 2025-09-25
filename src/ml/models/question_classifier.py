@@ -7,7 +7,7 @@ Author: Claude-4 (Partner-Level Microsoft SDE)
 Issue: #47 - Story 2.2: Question Quality Analysis Implementation
 """
 
-from typing import Dict, Any, List, Tuple
+from typing import Dict, Any, List
 import re
 import logging
 import joblib
