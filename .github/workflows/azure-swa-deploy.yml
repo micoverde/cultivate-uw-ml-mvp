@@ -52,11 +52,6 @@ jobs:
           npm install
           npm run build
 
-      - name: Install API dependencies
-        run: |
-          cd api
-          npm install
-
       - name: Build and Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -66,7 +61,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/demo" # App source code path
-          api_location: "/api" # API source code path
+          # api_location: "/api"  # Removed: API deployed separately via container deployment
           output_location: "dist" # Built app content directory
         env:
           # Environment variables for Azure SWA
