@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Brain, ArrowLeft, Send, Clock, User, AlertCircle, CheckCircle, Lightbulb, Target } from 'lucide-react';
+import { Brain, ArrowLeft, Send, Clock, User, AlertCircle, CheckCircle, Lightbulb, Target, Sparkles, Camera, Mic, Heart, BarChart3, Zap, Star, Award, Shield } from 'lucide-react';
 import { mayaPuzzleScenario } from '../data/mayaScenario';
 
 /**
