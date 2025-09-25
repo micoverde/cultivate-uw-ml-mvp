@@ -5,10 +5,13 @@ import AnalysisResults from './components/AnalysisResults';
 import MockAnalysisTest from './components/MockAnalysisTest';
 import MockRecommendationsTest from './components/MockRecommendationsTest';
 import ScenarioSelection from './components/ScenarioSelection';
+import { API_ENDPOINTS } from './config/api';
 
 function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'results', 'recommendations'
   const [analysisResults, setAnalysisResults] = useState(null);
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [analysisProgress, setAnalysisProgress] = useState(null);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     // Check localStorage or default to dark mode
     const saved = localStorage.getItem('darkMode');
@@ -43,58 +46,97 @@ function App() {
   };
 
   const handleScenarioAnalyze = async (scenarioData) => {
-    // Simulate API call with scenario data
-    // In production, this would call the actual transcript analysis API
+    // Real API call to backend for scenario analysis (Milestone #108)
+    setIsAnalyzing(true);
+    setAnalysisProgress({ status: 'submitting', message: 'Submitting scenario for analysis...', progress: 0 });
+
     try {
-      const mockResults = {
-        analysis_id: 'scenario-' + Date.now(),
-        status: 'complete',
-        transcript_summary: {
-          conversational_turns: scenarioData.transcript.split('\n\n').length,
-          word_count: scenarioData.transcript.split(' ').length,
-          estimated_duration_minutes: scenarioData.metadata?.duration_minutes || 3
-        },
-        ml_predictions: {
-          question_quality: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 0.85 :
-                            scenarioData.scenarioContext.expectedQuality === 'proficient' ? 0.72 :
-                            scenarioData.scenarioContext.expectedQuality === 'developing' ? 0.58 : 0.42,
-          wait_time_appropriate: scenarioData.scenarioContext.focusAreas.includes('wait-time') ? 0.78 : 0.65,
-          scaffolding_present: scenarioData.scenarioContext.focusAreas.includes('scaffolding') ? 0.82 : 0.68,
-          open_ended_questions: scenarioData.scenarioContext.focusAreas.includes('questioning') ? 0.79 : 0.61
-        },
-        class_scores: {
-          emotional_support: scenarioData.scenarioContext.focusAreas.includes('emotional-support') ? 4.8 :
-                            scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.5 : 3.8,
-          classroom_organization: 4.2,
-          instructional_support: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.7 :
-                                 scenarioData.scenarioContext.expectedQuality === 'proficient' ? 3.9 : 3.2,
-          overall_score: scenarioData.scenarioContext.expectedQuality === 'exemplary' ? 4.5 :
-                        scenarioData.scenarioContext.expectedQuality === 'proficient' ? 3.97 : 3.4
-        },
-        scaffolding_analysis: {
-          total_scaffolding_instances: Math.floor(Math.random() * 8) + 3,
-          scaffolding_effectiveness: scenarioData.scenarioContext.focusAreas.includes('scaffolding') ? 0.85 : 0.72
-        },
-        recommendations: [
-          "Continue using excellent open-ended questioning techniques",
-          "Consider providing slightly longer wait times for complex questions",
-          "Strong emotional support evident throughout the interaction"
-        ],
-        enhanced_recommendations: [], // Will be populated by the recommendation engine
-        processing_time: 2.5,
-        created_at: new Date().toISOString(),
-        completed_at: new Date().toISOString(),
-        original_transcript: scenarioData.transcript,
-        scenarioContext: scenarioData.scenarioContext // Pass scenario context for enhanced display
-      };
+      console.log('Starting scenario analysis with real API...', scenarioData);
 
-      // Simulate processing delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Submit transcript to analysis API
+      const response = await fetch(API_ENDPOINTS.ANALYZE_TRANSCRIPT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          transcript: scenarioData.transcript,
+          metadata: scenarioData.metadata
+        }),
+      });
 
-      handleAnalysisComplete(mockResults);
+      const submitData = await response.json();
+
+      if (!response.ok) {
+        throw new Error(submitData.detail?.message || submitData.detail || 'Analysis submission failed');
+      }
+
+      console.log('Analysis submitted successfully:', submitData.analysis_id);
+      setAnalysisProgress({ status: 'processing', message: 'Analysis submitted! Processing...', progress: 10 });
+
+      // Poll for analysis results
+      const analysisId = submitData.analysis_id;
+      let attempts = 0;
+      const maxAttempts = 60; // 2 minutes maximum wait
+
+      while (attempts < maxAttempts) {
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+
+        const statusResponse = await fetch(API_ENDPOINTS.ANALYZE_STATUS(analysisId));
+        const status = await statusResponse.json();
+
+        console.log(`Analysis status (attempt ${attempts + 1}):`, status.status, status.progress || 'no progress');
+
+        // Update progress based on server status
+        if (status.progress !== undefined) {
+          setAnalysisProgress({
+            status: status.status,
+            message: status.message || 'Processing...',
+            progress: status.progress
+          });
+        } else {
+          // Fallback progress estimation
+          const estimatedProgress = Math.min(10 + (attempts * 3), 90);
+          setAnalysisProgress({
+            status: status.status,
+            message: status.message || 'Analyzing scenario...',
+            progress: estimatedProgress
+          });
+        }
+
+        if (status.status === 'complete') {
+          setAnalysisProgress({ status: 'complete', message: 'Getting results...', progress: 100 });
+
+          // Get final results
+          const resultsResponse = await fetch(API_ENDPOINTS.ANALYZE_RESULTS(analysisId));
+          const results = await resultsResponse.json();
+
+          console.log('Analysis completed successfully:', results);
+
+          // Add scenario context for enhanced display
+          results.scenarioContext = scenarioData.scenarioContext;
+          results.original_transcript = scenarioData.transcript;
+
+          setIsAnalyzing(false);
+          setAnalysisProgress(null);
+          handleAnalysisComplete(results);
+          return;
+        } else if (status.status === 'error') {
+          throw new Error(status.message || 'Analysis failed on server');
+        }
+
+        attempts++;
+      }
+
+      throw new Error('Analysis timed out after 2 minutes');
+
     } catch (error) {
       console.error('Scenario analysis failed:', error);
-      // Handle error state
+      setIsAnalyzing(false);
+      setAnalysisProgress(null);
+
+      // Show user-friendly error message
+      alert(`Analysis failed: ${error.message}. Please try again.`);
     }
   };
 
@@ -123,6 +165,8 @@ function App() {
       <ScenarioSelection
         onScenarioAnalyze={handleScenarioAnalyze}
         onBackToHome={handleBackHome}
+        isAnalyzing={isAnalyzing}
+        analysisProgress={analysisProgress}
       />
     );
   }

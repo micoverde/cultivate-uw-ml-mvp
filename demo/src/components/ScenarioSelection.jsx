@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Brain, ArrowLeft, Play, FileText, Users, Clock } from 'lucide-react';
+import { Brain, ArrowLeft, Play, FileText, Users, Clock, Loader2 } from 'lucide-react';
 import ScenarioGrid from './ScenarioGrid';
 import { getAgeGroupLabel, getInteractionTypeLabel } from '../data/scenarios';
 
@@ -16,7 +16,7 @@ import { getAgeGroupLabel, getInteractionTypeLabel } from '../data/scenarios';
  * Issue: #48 - Scenario Selection Interface
  */
 
-const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome }) => {
+const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome, isAnalyzing, analysisProgress }) => {
   const [selectedScenario, setSelectedScenario] = useState(null);
   const [previewMode, setPreviewMode] = useState(false);
 
@@ -180,18 +180,56 @@ const ScenarioSelection = ({ onScenarioAnalyze, onBackToHome }) => {
 
               {/* Analysis Action */}
               <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Ready to Analyze</h3>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                  {isAnalyzing ? 'Analyzing Scenario...' : 'Ready to Analyze'}
+                </h3>
                 <p className="text-gray-600 mb-6 text-sm">
-                  Run our ML analysis on this scenario to see detailed insights about educational quality,
-                  questioning techniques, scaffolding, and recommendations for improvement.
+                  {isAnalyzing
+                    ? 'Running ML analysis with real models. This may take 15-30 seconds...'
+                    : 'Run our ML analysis on this scenario to see detailed insights about educational quality, questioning techniques, scaffolding, and recommendations for improvement.'
+                  }
                 </p>
+
+                {/* Progress Bar */}
+                {isAnalyzing && analysisProgress && (
+                  <div className="mb-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm font-medium text-indigo-800">
+                        {analysisProgress.message}
+                      </span>
+                      <span className="text-sm text-indigo-600">
+                        {analysisProgress.progress}%
+                      </span>
+                    </div>
+                    <div className="w-full bg-indigo-200 rounded-full h-2">
+                      <div
+                        className="bg-indigo-600 h-2 rounded-full transition-all duration-300 ease-out"
+                        style={{ width: `${analysisProgress.progress}%` }}
+                      />
+                    </div>
+                  </div>
+                )}
 
                 <button
                   onClick={handleAnalyzeScenario}
-                  className="w-full bg-indigo-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center justify-center"
+                  disabled={isAnalyzing}
+                  className={`w-full px-6 py-3 rounded-lg font-semibold transition-colors flex items-center justify-center ${
+                    isAnalyzing
+                      ? 'bg-gray-400 text-gray-300 cursor-not-allowed'
+                      : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                  }`}
                 >
-                  <Play className="h-5 w-5 mr-2" />
-                  Analyze This Scenario
+                  {isAnalyzing ? (
+                    <>
+                      <Loader2 className="h-5 w-5 mr-2 animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    <>
+                      <Play className="h-5 w-5 mr-2" />
+                      Analyze This Scenario
+                    </>
+                  )}
                 </button>
               </div>
 
