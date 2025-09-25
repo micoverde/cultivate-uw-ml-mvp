@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Send, AlertCircle, CheckCircle, Loader2, FileText, Clock, Users } from 'lucide-react';
+import { Send, AlertCircle, CheckCircle, Loader2, FileText, Clock, Users, Zap } from 'lucide-react';
+import { API_ENDPOINTS } from '../config/api';
 
 const TranscriptSubmission = ({ onAnalysisComplete }) => {
   const [transcript, setTranscript] = useState('');
@@ -8,6 +9,16 @@ const TranscriptSubmission = ({ onAnalysisComplete }) => {
   const [validationWarnings, setValidationWarnings] = useState([]);
   const [analysisId, setAnalysisId] = useState(null);
   const [analysisProgress, setAnalysisProgress] = useState(null);
+  const [isEnhancedMode, setIsEnhancedMode] = useState(false);
+  const [websocket, setWebsocket] = useState(null);
+  const [realTimeUpdates, setRealTimeUpdates] = useState([]);
+
+  // Check if enhanced demo mode is enabled (Milestone #106)
+  useEffect(() => {
+    const demoMode = import.meta.env.VITE_DEMO_MODE;
+    const enableWS = import.meta.env.VITE_ENABLE_WEBSOCKETS === 'true';
+    setIsEnhancedMode(demoMode === 'enhanced' && enableWS);
+  }, []);
 
   // Real-time validation
   const validateTranscriptRealTime = useCallback((text) => {
@@ -62,7 +73,7 @@ const TranscriptSubmission = ({ onAnalysisComplete }) => {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/v1/analyze/transcript', {
+      const response = await fetch(API_ENDPOINTS.ANALYZE_TRANSCRIPT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -91,14 +102,14 @@ const TranscriptSubmission = ({ onAnalysisComplete }) => {
   // Poll analysis status
   const pollAnalysisStatus = async (id) => {
     try {
-      const response = await fetch(`/api/v1/analyze/status/${id}`);
+      const response = await fetch(API_ENDPOINTS.ANALYZE_STATUS(id));
       const status = await response.json();
 
       setAnalysisProgress(status);
 
       if (status.status === 'complete') {
         // Get final results
-        const resultsResponse = await fetch(`/api/v1/analyze/results/${id}`);
+        const resultsResponse = await fetch(API_ENDPOINTS.ANALYZE_RESULTS(id));
         const results = await resultsResponse.json();
 
         setIsSubmitting(false);
@@ -256,6 +267,27 @@ Teacher: Great thinking! Let's try it and see what happens..."
               </ul>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Enhanced Demo Mode Indicator */}
+      {isEnhancedMode && (
+        <div className="mb-4 p-3 bg-gradient-to-r from-purple-50 to-indigo-50 border border-purple-200 rounded-lg">
+          <div className="flex items-center">
+            <Zap className="h-5 w-5 text-purple-600 mr-2" />
+            <span className="text-sm font-medium text-purple-800">
+              Enhanced Demo Mode: Real-time Analysis Ready
+            </span>
+          </div>
+          {realTimeUpdates.length > 0 && (
+            <div className="mt-2 max-h-20 overflow-y-auto">
+              {realTimeUpdates.slice(-3).map((update, index) => (
+                <div key={index} className="text-xs text-purple-700 mb-1">
+                  {update.message}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
 

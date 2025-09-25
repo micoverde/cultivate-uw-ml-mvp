@@ -38,7 +38,7 @@ class TranscriptMetadata(BaseModel):
     """Optional metadata for transcript submission"""
     educator_name: Optional[str] = None
     child_age: Optional[int] = Field(None, ge=2, le=8)
-    interaction_type: Optional[str] = Field(None, regex="^(lesson|playtime|reading|general)$")
+    interaction_type: Optional[str] = Field(None, pattern="^(lesson|playtime|reading|general)$")
     duration_minutes: Optional[int] = Field(None, ge=1, le=60)
 
 class TranscriptSubmission(BaseModel):
