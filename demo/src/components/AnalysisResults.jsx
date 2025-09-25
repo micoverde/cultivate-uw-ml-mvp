@@ -13,8 +13,9 @@ import {
 import CLASSDashboard from './CLASSDashboard';
 import ScaffoldingVisualization from './ScaffoldingVisualization';
 import EnhancedRecommendations from './EnhancedRecommendations';
+import ProfessionalVisualization from './ProfessionalVisualization';
 
-const AnalysisResults = ({ results, onStartNew }) => {
+const AnalysisResults = ({ results, onStartNew, onStartNewScenario }) => {
   const {
     transcript_summary,
     ml_predictions,
@@ -51,27 +52,57 @@ const AnalysisResults = ({ results, onStartNew }) => {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-6 space-y-8">
-      {/* Header */}
-      <div className="bg-white rounded-lg shadow-lg p-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <Brain className="h-8 w-8 text-indigo-600 mr-3" />
-            <div>
-              <h1 className="text-3xl font-bold text-gray-900">Analysis Results</h1>
-              <p className="text-gray-600 mt-1">
-                Completed in {processing_time.toFixed(1)}s • {new Date(completed_at).toLocaleTimeString()}
-              </p>
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50/30">
+      {/* Professional Header */}
+      <div className="bg-white shadow-sm border-b border-gray-200/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
+            <div className="flex items-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-xl flex items-center justify-center mr-3">
+                <Brain className="h-6 w-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-900">Cultivate Learning ML Analysis</h1>
+                <p className="text-gray-600 text-sm">Professional Demo Interface</p>
+              </div>
+            </div>
+            <div className="flex space-x-3">
+              <button
+                onClick={onStartNewScenario}
+                className="px-4 py-2 bg-white border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm"
+              >
+                ← Back to Scenarios
+              </button>
+              <button
+                onClick={onStartNew}
+                className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium text-sm"
+              >
+                Analyze Another
+              </button>
             </div>
           </div>
-          <button
-            onClick={onStartNew}
-            className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors"
-          >
-            Analyze Another
-          </button>
         </div>
       </div>
+
+      {/* Main Content */}
+      <div className="py-8">
+        {/* Professional Visualization Component */}
+        <ProfessionalVisualization
+          results={results}
+          scenarioContext={results.scenarioContext}
+        />
+      </div>
+
+    <div className="max-w-6xl mx-auto p-6 space-y-8">
+      {/* Traditional Analysis Details */}
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <div className="flex items-center mb-6">
+          <BarChart3 className="h-6 w-6 text-indigo-600 mr-3" />
+          <h2 className="text-xl font-semibold text-gray-900">Traditional Analysis Details</h2>
+          <div className="ml-auto text-sm text-gray-500">
+            Processing: {processing_time.toFixed(1)}s • {new Date(completed_at).toLocaleTimeString()}
+          </div>
+        </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Main Results Column */}
@@ -232,6 +263,7 @@ const AnalysisResults = ({ results, onStartNew }) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };
