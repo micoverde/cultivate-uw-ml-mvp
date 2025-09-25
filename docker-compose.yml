@@ -1,0 +1,190 @@
+version: '3.8'
+
+# Cultivate Learning ML MVP - Docker Compose Configuration
+# Issue #119: Production Docker Deployment Architecture
+#
+# Supports multiple deployment scenarios:
+# - Production (lightweight)
+# - Testing (with Selenium)
+# - Full ML (future upgrade)
+
+services:
+  # =============================================================================
+  # Production API Service (Default - Lightweight & Cost-Effective)
+  # =============================================================================
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: cultivate-api-prod
+    ports:
+      - "8000:8000"
+    environment:
+      - NODE_ENV=production
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    restart: unless-stopped
+    networks:
+      - cultivate-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.api.rule=PathPrefix(/api)"
+      - "com.cultivate.service=api"
+      - "com.cultivate.stage=production"
+
+  # =============================================================================
+  # Testing Service (E2E Tests with Selenium)
+  # =============================================================================
+  api-testing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: testing
+    container_name: cultivate-api-testing
+    ports:
+      - "8001:8000"
+    environment:
+      - NODE_ENV=testing
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - HEADLESS=true
+      - FRONTEND_URL=http://frontend:3000
+    volumes:
+      - ./test_screenshots:/app/test_screenshots
+      - ./test_results:/app/test_results
+      - ./performance_logs:/app/performance_logs
+    depends_on:
+      - api
+    networks:
+      - cultivate-network
+    labels:
+      - "com.cultivate.service=testing"
+      - "com.cultivate.stage=testing"
+    profiles:
+      - testing
+
+  # =============================================================================
+  # Full ML Service (Future Upgrade Path)
+  # =============================================================================
+  api-fullml:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: fullml
+    container_name: cultivate-api-fullml
+    ports:
+      - "8002:8000"
+    environment:
+      - NODE_ENV=production
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+      - ML_MODEL_PATH=/app/models
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 120s  # Longer startup for ML models
+    restart: unless-stopped
+    networks:
+      - cultivate-network
+    labels:
+      - "com.cultivate.service=api"
+      - "com.cultivate.stage=fullml"
+    profiles:
+      - fullml
+
+  # =============================================================================
+  # Frontend Development Service
+  # =============================================================================
+  frontend:
+    build:
+      context: ./demo
+      dockerfile: ../Dockerfile.frontend
+    container_name: cultivate-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - VITE_API_BASE_URL=http://api:8000
+    volumes:
+      - ./demo:/app
+      - /app/node_modules
+    depends_on:
+      - api
+    networks:
+      - cultivate-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(/)"
+      - "com.cultivate.service=frontend"
+    profiles:
+      - frontend
+
+  # =============================================================================
+  # Reverse Proxy for Production-like Setup
+  # =============================================================================
+  nginx:
+    image: nginx:alpine
+    container_name: cultivate-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+      - frontend
+    networks:
+      - cultivate-network
+    labels:
+      - "com.cultivate.service=proxy"
+    profiles:
+      - production
+      - proxy
+
+networks:
+  cultivate-network:
+    driver: bridge
+    name: cultivate-network
+    labels:
+      - "com.cultivate.network=main"
+
+volumes:
+  test_artifacts:
+    driver: local
+    labels:
+      - "com.cultivate.volume=testing"
+
+# =============================================================================
+# Usage Examples:
+# =============================================================================
+#
+# Development (API only):
+#   docker-compose up api
+#
+# Production with frontend:
+#   docker-compose --profile frontend up
+#
+# Full production with proxy:
+#   docker-compose --profile production up
+#
+# Testing mode:
+#   docker-compose --profile testing up api-testing
+#
+# Full ML capabilities:
+#   docker-compose --profile fullml up api-fullml
+#
+# Complete stack:
+#   docker-compose --profile frontend --profile testing up
+#
