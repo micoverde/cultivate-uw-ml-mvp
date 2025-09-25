@@ -18,6 +18,7 @@
   "author": "Warren & Claude",
   "license": "MIT",
   "dependencies": {
+    "@microsoft/applicationinsights-web": "^3.3.10",
     "@vitejs/plugin-react": "^4.0.3",
     "axios": "^1.4.0",
     "chromedriver": "^140.0.4",
