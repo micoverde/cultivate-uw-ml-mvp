@@ -10,8 +10,17 @@ Issue: #47 - Story 2.2: Question Quality Analysis Implementation
 from typing import Dict, Any, List, Tuple
 import re
 import logging
-# import numpy as np  # Not available in environment, using Python built-ins
+import joblib
+import time
+from pathlib import Path
 from abc import ABC, abstractmethod
+
+# Try to import numpy - available in venv
+try:
+    import numpy as np
+    NUMPY_AVAILABLE = True
+except ImportError:
+    NUMPY_AVAILABLE = False
 
 logger = logging.getLogger(__name__)
 
@@ -51,12 +60,25 @@ class ClassicalQuestionClassifier(BaseQuestionClassifier):
     """
     Classical ML question classifier for demo reliability.
 
-    Uses linguistic pattern matching and educational keyword analysis.
+    Now uses trained RandomForest model from Issue #109 with fallback to
+    rule-based patterns for maximum reliability.
     Optimized for consistent performance in stakeholder demonstrations.
     """
 
-    def __init__(self):
-        # Educational question patterns for classification
+    def __init__(self, model_path: str = None):
+        # Use CLAUDE-3's suggested path structure
+        if model_path is None:
+            import os
+            model_path = os.path.join(os.path.dirname(__file__), 'trained', 'question_classifier_model.pkl')
+        # Attempt to load trained model
+        self.model = None
+        self.feature_extractor = None
+        self.trained_model_available = False
+
+        if NUMPY_AVAILABLE:
+            self._load_trained_model(model_path)
+
+        # Educational question patterns for fallback classification
         self.open_ended_patterns = [
             # What questions (exploring understanding)
             r'\bwhat\s+(do\s+you\s+think|would\s+happen|might|could)',
@@ -127,29 +149,175 @@ class ClassicalQuestionClassifier(BaseQuestionClassifier):
             r'\b\w+\.\.\.',
         ]
 
+    def _load_trained_model(self, model_path: str):
+        """Load trained RandomForest model with error handling."""
+        try:
+            model_path = Path(model_path)
+            if model_path.exists():
+                # Load model bundle
+                model_bundle = joblib.load(model_path)
+
+                if isinstance(model_bundle, dict) and 'model' in model_bundle:
+                    # New format with metadata
+                    self.model = model_bundle['model']
+                    self.feature_extractor = model_bundle.get('feature_extractor')
+                    logger.info(f"✅ Loaded trained question classifier from {model_path}")
+                else:
+                    # Direct model format
+                    self.model = model_bundle
+                    logger.info(f"✅ Loaded trained question classifier (direct) from {model_path}")
+
+                # Import feature extractor if not in bundle
+                if self.feature_extractor is None:
+                    try:
+                        from ..training.feature_extractor import ExpertAnnotationFeatureExtractor
+                        self.feature_extractor = ExpertAnnotationFeatureExtractor()
+                        logger.info("✅ Loaded feature extractor for inference")
+                    except ImportError:
+                        logger.warning("⚠️ Could not import feature extractor")
+                        self.model = None
+                        return
+
+                self.trained_model_available = True
+                logger.info(f"🎯 Question Classifier ready - Model: {type(self.model).__name__}")
+
+            else:
+                logger.warning(f"⚠️ Trained model not found at {model_path}")
+
+        except Exception as e:
+            logger.warning(f"⚠️ Failed to load trained model: {e}")
+            self.model = None
+
     async def analyze(self, transcript: str) -> Dict[str, Any]:
         """
-        Analyze transcript using classical ML and pattern matching.
+        Analyze transcript using trained RandomForest model with fallback to pattern matching.
 
         Returns comprehensive question analysis for demo reliability.
         """
         try:
-            # Extract questions from transcript
-            questions = self._extract_questions(transcript)
-            logger.debug(f"Extracted {len(questions)} questions from transcript")
-
-            # Classify each question
-            classifications = []
-            for question in questions:
-                classification = self._classify_question(question)
-                classifications.append(classification)
-
-            # Aggregate analysis
-            return self._aggregate_analysis(questions, classifications, transcript)
+            # Use trained model if available (CLAUDE-3 integration)
+            if self.trained_model_available and self.model is not None:
+                return await self._analyze_with_trained_model(transcript)
+            else:
+                # Fallback to rule-based analysis
+                return await self._analyze_with_patterns(transcript)
 
         except Exception as e:
-            logger.error(f"Classical question analysis failed: {e}")
-            # Fallback for demo reliability
+            logger.error(f"❌ Question analysis failed: {str(e)}")
+            # Ultimate fallback
+            return self._create_fallback_response(transcript, str(e))
+
+    async def _analyze_with_trained_model(self, transcript: str) -> Dict[str, Any]:
+        """Analyze using trained RandomForest model."""
+        start_time = time.time()
+
+        try:
+            # Extract features for inference
+            features = self.feature_extractor.extract_single_sample(transcript)
+
+            # Model prediction
+            prediction = self.model.predict([features])[0]
+            probabilities = self.model.predict_proba([features])[0]
+
+            # Question type mapping
+            question_types = ['OEQ', 'CEQ', 'Rhetorical']
+            predicted_type = question_types[prediction]
+            confidence = float(probabilities[prediction])
+
+            inference_time = (time.time() - start_time) * 1000  # ms
+
+            return {
+                'version': 'trained_v1.0_issue_109',
+                'model_type': 'RandomForest',
+                'analysis_method': 'trained_model',
+                'questions_detected': 1,  # Single question analysis
+                'primary_analysis': {
+                    'question_type': predicted_type,
+                    'confidence': confidence,
+                    'probabilities': {
+                        question_types[i]: float(prob)
+                        for i, prob in enumerate(probabilities)
+                    },
+                    'educational_value': self._assess_educational_value(predicted_type, confidence)
+                },
+                'quality_indicators': {
+                    'promotes_thinking': predicted_type == 'OEQ',
+                    'scaffolding_present': confidence > 0.7,
+                    'wait_time_appropriate': None,  # Handled by wait_time_detector
+                },
+                'performance': {
+                    'inference_time_ms': round(inference_time, 2),
+                    'model_confidence': confidence,
+                    'feature_count': len(features) if hasattr(features, '__len__') else 79
+                },
+                'metadata': {
+                    'timestamp': time.time(),
+                    'transcript_length': len(transcript),
+                    'feature_extraction_success': True
+                }
+            }
+
+        except Exception as e:
+            logger.error(f"❌ Trained model inference failed: {e}")
+            # Fallback to patterns if trained model fails
+            return await self._analyze_with_patterns(transcript)
+
+    async def _analyze_with_patterns(self, transcript: str) -> Dict[str, Any]:
+        """Fallback analysis using rule-based patterns."""
+        # Extract questions from transcript
+        questions = self._extract_questions(transcript)
+        logger.debug(f"Extracted {len(questions)} questions from transcript")
+
+        # Classify each question
+        classifications = []
+        for question in questions:
+            classification = self._classify_question(question)
+            classifications.append(classification)
+
+        # Aggregate analysis
+        return self._aggregate_analysis(questions, classifications, transcript)
+
+    def _assess_educational_value(self, question_type: str, confidence: float) -> str:
+        """Assess educational value based on question type and confidence."""
+        if question_type == 'OEQ' and confidence > 0.8:
+            return 'high'
+        elif question_type == 'OEQ' and confidence > 0.6:
+            return 'medium'
+        elif question_type == 'CEQ' and confidence > 0.7:
+            return 'appropriate'
+        elif question_type == 'Rhetorical':
+            return 'limited'
+        else:
+            return 'uncertain'
+
+    def _create_fallback_response(self, transcript: str, error_message: str) -> Dict[str, Any]:
+        """Create minimal fallback response for demo reliability."""
+        return {
+            'version': 'fallback_v1.0',
+            'model_type': 'Rule-based',
+            'analysis_method': 'fallback',
+            'questions_detected': 1,
+            'primary_analysis': {
+                'question_type': 'Unknown',
+                'confidence': 0.5,
+                'educational_value': 'uncertain'
+            },
+            'quality_indicators': {
+                'promotes_thinking': False,
+                'scaffolding_present': False,
+                'wait_time_appropriate': None
+            },
+            'performance': {
+                'inference_time_ms': 0,
+                'model_confidence': 0.0,
+                'error': error_message
+            },
+            'metadata': {
+                'timestamp': time.time(),
+                'transcript_length': len(transcript),
+                'fallback_used': True
+            }
+        }
             return self._fallback_analysis_sync(transcript)
 
     def _extract_questions(self, transcript: str) -> List[str]:

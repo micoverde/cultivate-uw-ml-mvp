@@ -10,7 +10,9 @@ Issue: #47 - Story 2.2: Question Quality Analysis Implementation
 from typing import Dict, Any, List, Tuple, Optional
 import re
 import logging
-# import numpy as np  # Not available in environment, using Python built-ins
+import os
+import joblib
+import numpy as np
 from abc import ABC, abstractmethod
 
 logger = logging.getLogger(__name__)
@@ -50,6 +52,7 @@ class WaitTimeDetector:
 class ClassicalWaitTimeDetector(BaseWaitTimeDetector):
     """
     Classical wait time analysis using transcript structure and linguistic patterns.
+    Now enhanced with trained SVM model for improved accuracy.
 
     Analyzes:
     - Question-response timing patterns
@@ -58,7 +61,29 @@ class ClassicalWaitTimeDetector(BaseWaitTimeDetector):
     - Conversation flow appropriateness
     """
 
-    def __init__(self):
+    def __init__(self, model_path: str = None):
+        # Load trained model if available
+        if model_path is None:
+            model_path = os.path.join(os.path.dirname(__file__), 'trained', 'wait_time_detector_model.pkl')
+
+        self.trained_model = None
+        self.feature_extractor = None
+
+        try:
+            if os.path.exists(model_path):
+                self.trained_model = joblib.load(model_path)
+                # Load feature extractor for trained model
+                extractor_path = os.path.join(os.path.dirname(model_path), 'feature_extractor.pkl')
+                if os.path.exists(extractor_path):
+                    with open(extractor_path, 'rb') as f:
+                        import pickle
+                        self.feature_extractor = pickle.load(f)
+                logger.info(f"Loaded trained wait time detector from {model_path}")
+            else:
+                logger.warning(f"Trained model not found at {model_path}, using rule-based fallback")
+        except Exception as e:
+            logger.error(f"Failed to load trained model: {e}")
+            self.trained_model = None
         # Educational research indicates 3-5 seconds optimal wait time
         self.optimal_wait_indicators = [
             # Child processing time markers
@@ -111,26 +136,93 @@ class ClassicalWaitTimeDetector(BaseWaitTimeDetector):
     async def analyze(self, transcript: str) -> Dict[str, Any]:
         """
         Analyze wait time patterns in educational transcript.
+        Uses trained SVM model when available, falls back to rule-based analysis.
 
         Returns comprehensive wait time assessment for demo reliability.
         """
         try:
-            # Extract question-response pairs
-            qa_pairs = self._extract_qa_pairs(transcript)
-            logger.debug(f"Extracted {len(qa_pairs)} question-answer pairs")
+            # Try trained model first
+            if self.trained_model is not None and self.feature_extractor is not None:
+                trained_result = self._analyze_with_trained_model(transcript)
+                if trained_result is not None:
+                    return trained_result
 
-            # Analyze each interaction
-            wait_time_analyses = []
-            for pair in qa_pairs:
-                analysis = self._analyze_wait_time_interaction(pair)
-                wait_time_analyses.append(analysis)
-
-            # Aggregate analysis
-            return self._aggregate_wait_time_analysis(wait_time_analyses, transcript)
+            # Fallback to rule-based analysis
+            logger.info("Using rule-based wait time analysis")
+            return await self._analyze_rule_based(transcript)
 
         except Exception as e:
             logger.error(f"Wait time analysis failed: {e}")
             return self._fallback_analysis_sync(transcript)
+
+    def _analyze_with_trained_model(self, transcript: str) -> Optional[Dict[str, Any]]:
+        """
+        Analyze using trained SVM model.
+        Returns None if analysis fails, triggering rule-based fallback.
+        """
+        try:
+            # Extract features for trained model
+            features = self.feature_extractor.extract_features_from_transcript(transcript)
+
+            # Get prediction from trained SVM
+            prediction = self.trained_model.predict([features])[0]
+            probabilities = self.trained_model.predict_proba([features])[0]
+
+            # Map prediction to wait time categories (based on training data)
+            # 0: No wait time issues, 1: Some wait time issues, 2: Significant wait time issues
+            wait_time_labels = {
+                0: "appropriate",
+                1: "needs_improvement",
+                2: "insufficient"
+            }
+
+            # Convert to appropriateness score (higher is better)
+            appropriateness_mapping = {0: 0.85, 1: 0.65, 2: 0.35}
+            appropriateness_score = appropriateness_mapping[prediction]
+
+            # Add some variance based on confidence
+            max_prob = max(probabilities)
+            confidence_adjustment = (max_prob - 0.33) * 0.1  # 0.33 = random chance for 3 classes
+            appropriateness_score += confidence_adjustment
+            appropriateness_score = max(0.0, min(1.0, appropriateness_score))
+
+            return {
+                'model_type': 'trained_svm',
+                'appropriateness_score': float(appropriateness_score),
+                'predicted_category': wait_time_labels[prediction],
+                'category_probabilities': {
+                    'appropriate': float(probabilities[0]),
+                    'needs_improvement': float(probabilities[1]),
+                    'insufficient': float(probabilities[2])
+                },
+                'confidence': float(max_prob),
+                'total_questions_analyzed': transcript.count('?'),
+                'analysis_method': 'machine_learning'
+            }
+
+        except Exception as e:
+            logger.warning(f"Trained model analysis failed: {e}")
+            return None
+
+    async def _analyze_rule_based(self, transcript: str) -> Dict[str, Any]:
+        """
+        Original rule-based analysis method.
+        """
+        # Extract question-response pairs
+        qa_pairs = self._extract_qa_pairs(transcript)
+        logger.debug(f"Extracted {len(qa_pairs)} question-answer pairs")
+
+        # Analyze each interaction
+        wait_time_analyses = []
+        for pair in qa_pairs:
+            analysis = self._analyze_wait_time_interaction(pair)
+            wait_time_analyses.append(analysis)
+
+        # Aggregate analysis
+        result = self._aggregate_wait_time_analysis(wait_time_analyses, transcript)
+        result['model_type'] = 'rule_based'
+        result['analysis_method'] = 'pattern_matching'
+        return result
 
     def _extract_qa_pairs(self, transcript: str) -> List[Dict[str, Any]]:
         """Extract question-answer interaction pairs"""
