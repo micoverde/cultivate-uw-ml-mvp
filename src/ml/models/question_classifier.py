@@ -318,7 +318,6 @@ class ClassicalQuestionClassifier(BaseQuestionClassifier):
                 'fallback_used': True
             }
         }
-            return self._fallback_analysis_sync(transcript)
 
     def _extract_questions(self, transcript: str) -> List[str]:
         """Extract questions from transcript with context"""
