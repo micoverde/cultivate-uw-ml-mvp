@@ -1,0 +1,62 @@
+{
+  "suite_name": "maya_scenario_quick",
+  "start_time": "2025-09-25T11:14:14.131330",
+  "tests_run": 3,
+  "tests_passed": 0,
+  "tests_failed": 3,
+  "detailed_results": [
+    {
+      "test_name": "homepage_navigation_to_maya_scenario",
+      "status": "failed",
+      "start_time": "2025-09-25T11:14:14.131458",
+      "steps_completed": [
+        "homepage_loaded",
+        "maya_button_found",
+        "maya_button_clicked"
+      ],
+      "errors": [
+        "Message: \nStacktrace:\n#0 0x5eec61856fba <unknown>\n#1 0x5eec612db6d0 <unknown>\n#2 0x5eec6132d2aa <unknown>\n#3 0x5eec6132d541 <unknown>\n#4 0x5eec6137b6c4 <unknown>\n#5 0x5eec61352e5d <unknown>\n#6 0x5eec61378b54 <unknown>\n#7 0x5eec61352c03 <unknown>\n#8 0x5eec6131f7a8 <unknown>\n#9 0x5eec61320421 <unknown>\n#10 0x5eec6181bb28 <unknown>\n#11 0x5eec6181f87f <unknown>\n#12 0x5eec61803c49 <unknown>\n#13 0x5eec61820405 <unknown>\n#14 0x5eec617e94ff <unknown>\n#15 0x5eec61844258 <unknown>\n#16 0x5eec61844432 <unknown>\n#17 0x5eec61855fa3 <unknown>\n#18 0x77fde2e9caa4 <unknown>\n#19 0x77fde2f29c6c <unknown>\n"
+      ],
+      "screenshots": [
+        "test_screenshots/20250925_111414_01_homepage_loaded.png",
+        "test_screenshots/20250925_111416_02_maya_button_clicked.png",
+        "test_screenshots/20250925_111426_error_homepage_navigation_to_maya_scenario.png"
+      ],
+      "end_time": "2025-09-25T11:14:26.744709"
+    },
+    {
+      "test_name": "response_input_validation",
+      "status": "failed",
+      "start_time": "2025-09-25T11:14:26.806148",
+      "validation_tests": [],
+      "errors": [
+        "Message: \nStacktrace:\n#0 0x5eec61856fba <unknown>\n#1 0x5eec612db6d0 <unknown>\n#2 0x5eec6132d2aa <unknown>\n#3 0x5eec6132d541 <unknown>\n#4 0x5eec6137b6c4 <unknown>\n#5 0x5eec61352e5d <unknown>\n#6 0x5eec61378b54 <unknown>\n#7 0x5eec61352c03 <unknown>\n#8 0x5eec6131f7a8 <unknown>\n#9 0x5eec61320421 <unknown>\n#10 0x5eec6181bb28 <unknown>\n#11 0x5eec6181f87f <unknown>\n#12 0x5eec61803c49 <unknown>\n#13 0x5eec61820405 <unknown>\n#14 0x5eec617e94ff <unknown>\n#15 0x5eec61844258 <unknown>\n#16 0x5eec61844432 <unknown>\n#17 0x5eec61855fa3 <unknown>\n#18 0x77fde2e9caa4 <unknown>\n#19 0x77fde2f29c6c <unknown>\n"
+      ],
+      "screenshots": [
+        "test_screenshots/20250925_111458_error_response_input_validation.png"
+      ],
+      "end_time": "2025-09-25T11:14:58.616991"
+    },
+    {
+      "test_name": "complete_maya_scenario_analysis_moderate",
+      "status": "failed",
+      "start_time": "2025-09-25T11:14:58.677645",
+      "response_used": "moderate",
+      "steps_completed": [],
+      "api_validation": {},
+      "ui_validation": {},
+      "errors": [
+        "Message: \nStacktrace:\n#0 0x5eec61856fba <unknown>\n#1 0x5eec612db6d0 <unknown>\n#2 0x5eec6132d2aa <unknown>\n#3 0x5eec6132d541 <unknown>\n#4 0x5eec6137b6c4 <unknown>\n#5 0x5eec61352e5d <unknown>\n#6 0x5eec61378b54 <unknown>\n#7 0x5eec61352c03 <unknown>\n#8 0x5eec6131f7a8 <unknown>\n#9 0x5eec61320421 <unknown>\n#10 0x5eec6181bb28 <unknown>\n#11 0x5eec6181f87f <unknown>\n#12 0x5eec61803c49 <unknown>\n#13 0x5eec61820405 <unknown>\n#14 0x5eec617e94ff <unknown>\n#15 0x5eec61844258 <unknown>\n#16 0x5eec61844432 <unknown>\n#17 0x5eec61855fa3 <unknown>\n#18 0x77fde2e9caa4 <unknown>\n#19 0x77fde2f29c6c <unknown>\n"
+      ],
+      "screenshots": [
+        "test_screenshots/20250925_111530_error_complete_maya_scenario_analysis_moderate.png"
+      ],
+      "performance_metrics": {},
+      "end_time": "2025-09-25T11:15:30.490013"
+    }
+  ],
+  "overall_status": "failed",
+  "total_duration": 79.57892298698425,
+  "end_time": "2025-09-25T11:15:30.623673",
+  "success_rate": 0.0
+}

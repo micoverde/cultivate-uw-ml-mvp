@@ -55,7 +55,7 @@ jobs:
           action: "upload"
           app_location: "demo"
           output_location: "dist"
-          api_location: "api"
+          # api_location: "api"  # Removed: API deployed separately via container deployment
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
