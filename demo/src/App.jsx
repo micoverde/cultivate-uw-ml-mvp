@@ -9,6 +9,7 @@ import ScenarioSelection from './components/ScenarioSelection';
 import EducatorResponseInput from './components/EducatorResponseInput';
 import { API_ENDPOINTS } from './config/api';
 import { monitoring } from './config/monitoring';
+import SecurityManager from './config/security';
 
 function App() {
   const [currentView, setCurrentView] = useState('home'); // 'home', 'demo', 'scenarios', 'educator-response', 'results', 'educator-response-results', 'recommendations'
@@ -23,6 +24,14 @@ function App() {
   });
 
   useEffect(() => {
+    // Initialize security controls
+    try {
+      SecurityManager.initialize();
+      console.log('Security controls initialized');
+    } catch (error) {
+      console.error('Security initialization failed:', error);
+    }
+
     // Apply dark mode class to HTML element for Tailwind
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
