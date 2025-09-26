@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO 1: Child Scenario OEQ/CEQ Classifier</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Child Scenario Classifier Demo</h1>
+            <p>Practice your questioning skills with real ML feedback</p>
+        </header>
+
+        <div class="demo-content">
+            <!-- Scenario Display -->
+            <div class="scenario-card" id="scenarioCard">
+                <div class="scenario-header">
+                    <span class="scenario-counter" id="scenarioCounter">Scenario 1/10</span>
+                    <span class="age-badge" id="ageBadge">TODDLER</span>
+                </div>
+
+                <h2 class="scenario-title" id="scenarioTitle">Loading scenario...</h2>
+
+                <div class="scenario-context" id="scenarioContext">
+                    Loading scenario details...
+                </div>
+
+                <div class="child-behavior">
+                    <strong>🧒 Child Behavior:</strong>
+                    <span id="childBehavior">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Response Input -->
+            <div class="response-section">
+                <label for="userResponse" class="response-label">
+                    💬 What would you say to this child?
+                </label>
+                <textarea
+                    id="userResponse"
+                    class="response-input"
+                    placeholder="Type your response here..."
+                    rows="4"
+                ></textarea>
+
+                <div class="button-group">
+                    <button id="analyzeBtn" class="btn btn-primary">🔍 Analyze Response</button>
+                    <button id="nextBtn" class="btn btn-secondary" disabled>➡️ Next Scenario</button>
+                </div>
+            </div>
+
+            <!-- ML Results -->
+            <div class="results-section" id="resultsSection" style="display: none;">
+                <h3>🤖 ML Classification Results</h3>
+
+                <div class="classification-display">
+                    <div class="classification-bar">
+                        <div class="oeq-section">
+                            <span class="label">OEQ (Open-Ended)</span>
+                            <div class="probability-bar">
+                                <div class="oeq-fill" id="oeqFill"></div>
+                            </div>
+                            <span class="percentage" id="oeqPercentage">0%</span>
+                        </div>
+
+                        <div class="ceq-section">
+                            <span class="label">CEQ (Closed-Ended)</span>
+                            <div class="probability-bar">
+                                <div class="ceq-fill" id="ceqFill"></div>
+                            </div>
+                            <span class="percentage" id="ceqPercentage">0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feedback-section" id="feedbackSection">
+                    <div class="feedback-content" id="feedbackContent">
+                        <!-- ML feedback will be inserted here -->
+                    </div>
+                </div>
+
+                <div class="examples-section" id="examplesSection">
+                    <h4>💡 Example Questions for This Scenario:</h4>
+                    <div class="example-questions">
+                        <div class="example-oeq">
+                            <strong>OEQ Example:</strong> <span id="exampleOEQ"></span>
+                        </div>
+                        <div class="example-ceq">
+                            <strong>CEQ Example:</strong> <span id="exampleCEQ"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress and Stats -->
+            <div class="progress-section">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="stats">
+                    <span>Completed: <span id="completedCount">0</span>/10</span>
+                    <span>OEQ Responses: <span id="oeqCount">0</span></span>
+                    <span>CEQ Responses: <span id="ceqCount">0</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing with ML model...</p>
+        </div>
+
+        <!-- Demo Complete -->
+        <div class="demo-complete" id="demoComplete" style="display: none;">
+            <h2>🎉 Demo Complete!</h2>
+            <div class="final-stats">
+                <p>You've completed all 10 scenarios!</p>
+                <div class="summary-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="finalOEQCount">0</span>
+                        <span class="stat-label">Open-Ended Questions</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="finalCEQCount">0</span>
+                        <span class="stat-label">Closed-Ended Questions</span>
+                    </div>
+                </div>
+                <button id="restartBtn" class="btn btn-primary">🔄 Start Over</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
