@@ -37,6 +37,7 @@ class QuestionClassifier:
     Question classifier supporting multiple model types.
 
     Demo Reliable: Classical ML using linguistic patterns and rule-based analysis
+    Ensemble: Multi-model voting (NN + RF + LR) for superior accuracy (Issues #118, #120)
     Future AR: BERT-based semantic understanding (foundation for <10ms optimization)
     """
 
@@ -46,6 +47,20 @@ class QuestionClassifier:
 
         if model_type == 'classical':
             self.classifier = ClassicalQuestionClassifier()
+        elif model_type == 'ensemble':
+            # NEW: Ensemble classifier with NN + RF + LR voting
+            try:
+                from .ensemble_question_classifier import EnsembleQuestionClassifier
+                ensemble_path = Path(__file__).parent.parent / 'trained_models' / 'ensemble_question_classifier.pkl'
+                if ensemble_path.exists():
+                    self.classifier = EnsembleQuestionClassifier.load_ensemble(str(ensemble_path))
+                    logger.info("✅ Loaded ensemble classifier with multi-model voting")
+                else:
+                    logger.warning("⚠️ Ensemble model not found, falling back to classical")
+                    self.classifier = ClassicalQuestionClassifier()
+            except ImportError:
+                logger.warning("⚠️ Ensemble classifier not available, falling back to classical")
+                self.classifier = ClassicalQuestionClassifier()
         elif model_type == 'bert':
             # TODO: Implement for future AR deployment
             self.classifier = BERTQuestionClassifier()
@@ -54,7 +69,12 @@ class QuestionClassifier:
 
     async def analyze(self, transcript: str) -> Dict[str, Any]:
         """Main analysis entry point"""
-        return await self.classifier.analyze(transcript)
+        if self.model_type == 'ensemble' and hasattr(self.classifier, 'predict'):
+            # Use ensemble's predict method for single questions
+            return self.classifier.predict(transcript)
+        else:
+            # Use traditional analyze method
+            return await self.classifier.analyze(transcript)
 
 class ClassicalQuestionClassifier(BaseQuestionClassifier):
     """
