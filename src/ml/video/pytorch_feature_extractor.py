@@ -701,7 +701,7 @@ class PyTorchFeatureExtractor:
         try:
             visibilities = [lm.visibility for lm in landmarks]
             return sum(visibilities) / len(visibilities)
-        except:
+        except (AttributeError, ZeroDivisionError):
             return 0.0
 
     def extract_video_features(self, video_path: str, sample_rate: int = 3) -> Dict[str, Any]:

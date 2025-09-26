@@ -168,7 +168,29 @@ const FriendlyErrorHandler = ({
 
 // Quick error message component for inline use
 export const InlineErrorMessage = ({ message, context = 'general', className = "" }) => {
-  const errorInfo = new FriendlyErrorHandler({ error: message, context }).getFriendlyErrorMessage(message, context);
+  // Create a utility function to get friendly error messages
+  const getFriendlyErrorMessage = (error, context) => {
+    const errorString = typeof error === 'string' ? error.toLowerCase() :
+                       error?.message?.toLowerCase() || 'something unexpected happened';
+
+    if (errorString.includes('required') || errorString.includes('empty') || errorString.includes('missing')) {
+      return {
+        title: "We need a bit more information",
+        message: "Please fill in the highlighted field so we can provide you with the best analysis possible.",
+        suggestion: "Each piece of information helps us give you more personalized insights.",
+        type: 'guidance'
+      };
+    }
+
+    return {
+      title: "Something went wrong",
+      message: "We encountered an issue while processing your request.",
+      suggestion: "Please try again or contact support if the problem persists.",
+      type: 'error'
+    };
+  };
+
+  const errorInfo = getFriendlyErrorMessage(message, context);
 
   return (
     <div className={`flex items-center space-x-2 text-sm text-red-600 mt-2 ${className}`}>

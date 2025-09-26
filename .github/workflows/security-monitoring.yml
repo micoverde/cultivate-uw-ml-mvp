@@ -74,18 +74,28 @@ jobs:
         echo "Critical/High alerts found: $CRITICAL_ALERTS"
         echo "critical_count=$CRITICAL_ALERTS" >> $GITHUB_OUTPUT
 
-        if [ "$CRITICAL_ALERTS" -gt 0 ]; then
+        # Check if a security issue already exists for this commit/branch
+        EXISTING_ISSUE=$(gh issue list --label "security,critical,alert" --state open --json title,body \
+          --jq '.[] | select(.body | contains("${{ github.sha }}")) | .title' || echo "")
+
+        if [ -n "$EXISTING_ISSUE" ]; then
+          echo "Security issue already exists for this commit: $EXISTING_ISSUE"
+          echo "security_breach=false" >> $GITHUB_OUTPUT
+          echo "duplicate_issue=true" >> $GITHUB_OUTPUT
+        elif [ "$CRITICAL_ALERTS" -gt 0 ]; then
           echo "🚨 CRITICAL SECURITY ISSUES DETECTED!"
           echo "security_breach=true" >> $GITHUB_OUTPUT
+          echo "duplicate_issue=false" >> $GITHUB_OUTPUT
         else
           echo "✅ No critical security issues found"
           echo "security_breach=false" >> $GITHUB_OUTPUT
+          echo "duplicate_issue=false" >> $GITHUB_OUTPUT
         fi
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Create Security Alert Issue
-      if: steps.security-check.outputs.security_breach == 'true'
+      if: steps.security-check.outputs.security_breach == 'true' && steps.security-check.outputs.duplicate_issue == 'false'
       run: |
         gh issue create \
           --title "🚨 CRITICAL SECURITY ALERT - Immediate Action Required" \
@@ -100,6 +110,9 @@ jobs:
 
         ### Summary
         CodeQL has detected **${{ steps.security-check.outputs.critical_count }}** critical/high severity security issues.
+
+        ### Detected Issues
+        $(gh api repos/${{ github.repository }}/code-scanning/alerts --jq '[.[] | select(.rule.security_severity_level? == "critical" or .rule.security_severity_level? == "high") | select(.state == "open")] | map("- **\(.rule.description)** (\(.rule.security_severity_level // "unknown")) in `\(.most_recent_instance.location.path)`") | join("\n")')
 
         ### Immediate Actions Required
         1. 🔍 Review security alerts: https://github.com/${{ github.repository }}/security/code-scanning
