@@ -30,6 +30,11 @@ from ..security.middleware import APIKeyAuth
 # Import Whisper audio processor (Story 7.3)
 try:
     from ...ml.audio.whisper_processor import WhisperAudioProcessor
+    WHISPER_AVAILABLE = True
+except ImportError:
+    WHISPER_AVAILABLE = False
+    print("Warning: Whisper audio processor not available")
+
 # Import Multimodal Fusion Engine (Story 7.4)
 try:
     from ...ml.multimodal.multimodal_fusion import MultimodalFusionEngine
@@ -37,11 +42,6 @@ try:
 except ImportError:
     MULTIMODAL_AVAILABLE = False
     print('Warning: Multimodal fusion engine not available')
-
-    WHISPER_AVAILABLE = True
-except ImportError:
-    WHISPER_AVAILABLE = False
-    print("Warning: Whisper audio processor not available")
 
 
 # Configure router
