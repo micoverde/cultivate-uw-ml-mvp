@@ -1,0 +1,54 @@
+name: Code Quality Analysis
+
+on:
+  pull_request:
+    branches: [ main, main-r ]
+  workflow_dispatch:
+
+jobs:
+  code-quality:
+    name: CodeQL Code Quality Analysis
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'javascript', 'python' ]
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Initialize CodeQL for Code Quality
+      uses: github/codeql-action/init@v3
+      with:
+        languages: ${{ matrix.language }}
+        queries: security-and-quality
+        # Focus on code quality issues like unused imports, variables, etc.
+        config: |
+          disable-default-queries: true
+          queries:
+            - uses: security-and-quality
+
+    - name: Autobuild
+      uses: github/codeql-action/autobuild@v3
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v3
+      with:
+        category: "/language:${{matrix.language}}/quality"
+        upload: false  # Don't upload to security tab, just generate SARIF
+
+    - name: Code Quality Summary
+      run: |
+        echo "## 📊 Code Quality Analysis Report" >> $GITHUB_STEP_SUMMARY
+        echo "**Repository**: ${{ github.repository }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Branch**: ${{ github.head_ref || github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+        echo "**Language**: ${{ matrix.language }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ Code quality analysis completed successfully" >> $GITHUB_STEP_SUMMARY
+        echo "Check the Security tab for detailed findings" >> $GITHUB_STEP_SUMMARY

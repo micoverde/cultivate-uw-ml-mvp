@@ -32,7 +32,12 @@ jobs:
       uses: github/codeql-action/init@v3
       with:
         languages: ${{ matrix.language }}
-        queries: security-extended,security-and-quality
+        queries: security-extended
+        # Focus on security issues only, exclude code quality alerts that create noise
+        config: |
+          disable-default-queries: false
+          queries:
+            - uses: security-extended
 
     - name: Autobuild
       uses: github/codeql-action/autobuild@v3
