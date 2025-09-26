@@ -1,0 +1,265 @@
+{
+  "demo_start": "2025-09-25T19:28:40.452986",
+  "container_url": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io",
+  "video_directory": "/home/warrenjo/src/tmp2/secure data",
+  "video_analyses": [
+    {
+      "video_info": {
+        "filename": "Draw Results.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Draw Results.mp4",
+        "size_bytes": 5069736,
+        "size_mb": 4.8,
+        "category": "classroom_general"
+      },
+      "analysis_status": "ERROR",
+      "processing_duration": 2.33,
+      "error": "Expecting ',' delimiter: line 58 column 4 (char 1725)",
+      "timestamp": "2025-09-25T19:28:44.781017"
+    },
+    {
+      "video_info": {
+        "filename": "Offer Resources AIAN_SUBS.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4",
+        "size_bytes": 60052951,
+        "size_mb": 57.3,
+        "category": "classroom_general"
+      },
+      "analysis_status": "ERROR",
+      "processing_duration": 4.52,
+      "error": "Expecting ',' delimiter: line 58 column 4 (char 1758)",
+      "timestamp": "2025-09-25T19:28:52.307424"
+    }
+  ],
+  "video_library": {
+    "discovery_status": "SUCCESS",
+    "total_videos_found": 27,
+    "total_size_gb": 5.0,
+    "available_videos": [
+      {
+        "filename": "Draw Results.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Draw Results.mp4",
+        "size_bytes": 5069736,
+        "size_mb": 4.8,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "childrens_place_zaid_006.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4",
+        "size_bytes": 10560519,
+        "size_mb": 10.1,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "CDCSA Sunset Ridge Khani 011.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4",
+        "size_bytes": 12704129,
+        "size_mb": 12.1,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Puddle Jumpers - Debra 054.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4",
+        "size_bytes": 20650997,
+        "size_mb": 19.7,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "CDCSA Wenatchee Center Yasmin 035.MP4",
+        "path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4",
+        "size_bytes": 28490412,
+        "size_mb": 27.2,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Snoqualmie_Ridge_ELC-Linda-001.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4",
+        "size_bytes": 29017845,
+        "size_mb": 27.7,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Clarke County School District Lynn 007.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4",
+        "size_bytes": 32947846,
+        "size_mb": 31.4,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "CDCSA Wenatchee Center Karina 021.MP4",
+        "path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4",
+        "size_bytes": 37838943,
+        "size_mb": 36.1,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Launch Highland Park 004.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Launch Highland Park 004.mp4",
+        "size_bytes": 40725155,
+        "size_mb": 38.8,
+        "category": "program_activity"
+      },
+      {
+        "filename": "ACAP_Marty_005.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4",
+        "size_bytes": 41387917,
+        "size_mb": 39.5,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Offer Resources AIAN_SUBS.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4",
+        "size_bytes": 60052951,
+        "size_mb": 57.3,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "CDCSA Wenatchee Center Karina 017.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4",
+        "size_bytes": 62560580,
+        "size_mb": 59.7,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Launch Cascade Vista Breanna 013.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4",
+        "size_bytes": 69553707,
+        "size_mb": 66.3,
+        "category": "program_activity"
+      },
+      {
+        "filename": "Being Aware of a Toddler&#39;s Needs.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Being Aware of a Toddler&#39;s Needs.mp4",
+        "size_bytes": 73840872,
+        "size_mb": 70.4,
+        "category": "toddler_interaction"
+      },
+      {
+        "filename": "Building Blocks Little School Ladybugs Kaylee 027.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4",
+        "size_bytes": 91222183,
+        "size_mb": 87.0,
+        "category": "toddler_interaction"
+      },
+      {
+        "filename": "YWCA Bessie T Draper Jeanette 099.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/YWCA Bessie T Draper Jeanette 099.mp4",
+        "size_bytes": 115531911,
+        "size_mb": 110.2,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Building Blocks Little School Ladybugs Kaylee 013.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4",
+        "size_bytes": 120788193,
+        "size_mb": 115.2,
+        "category": "toddler_interaction"
+      },
+      {
+        "filename": "What Can We Measure_ESP SUBS.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4",
+        "size_bytes": 172387395,
+        "size_mb": 164.4,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Conflict Management during Outdoor Play.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4",
+        "size_bytes": 187295588,
+        "size_mb": 178.6,
+        "category": "behavior_guidance"
+      },
+      {
+        "filename": "Fiddleheads Sarah 038 (1).MP4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038 (1).MP4",
+        "size_bytes": 209734624,
+        "size_mb": 200.0,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Fiddleheads Sarah 038.MP4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038.MP4",
+        "size_bytes": 209734624,
+        "size_mb": 200.0,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Edgewater Early Head Start Martha 036.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4",
+        "size_bytes": 266473098,
+        "size_mb": 254.1,
+        "category": "program_activity"
+      },
+      {
+        "filename": "Book about Flowers SOM SUBS (1).mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Book about Flowers SOM SUBS (1).mp4",
+        "size_bytes": 300465501,
+        "size_mb": 286.5,
+        "category": "reading_activity"
+      },
+      {
+        "filename": "Book about Flowers SOM SUBS.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Book about Flowers SOM SUBS.mp4",
+        "size_bytes": 300465501,
+        "size_mb": 286.5,
+        "category": "reading_activity"
+      },
+      {
+        "filename": "Structure Activity Video_SUBS.mp4",
+        "path": "/home/warrenjo/src/tmp2/secure data/Structure Activity Video_SUBS.mp4",
+        "size_bytes": 434670404,
+        "size_mb": 414.5,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Little Teddys - Jeanette First Walkthrough 015.mov",
+        "path": "/home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov",
+        "size_bytes": 916406322,
+        "size_mb": 874.0,
+        "category": "classroom_general"
+      },
+      {
+        "filename": "Center Street Nancy Coach iPhone 010.MOV",
+        "path": "/home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV",
+        "size_bytes": 1520268848,
+        "size_mb": 1449.8,
+        "category": "classroom_general"
+      }
+    ],
+    "size_distribution": {
+      "small": 10,
+      "medium": 9,
+      "large": 8
+    },
+    "timestamp": "2025-09-25T19:28:40.453279"
+  },
+  "container_integration": {
+    "integration_status": "SUCCESS",
+    "response_time_ms": 263.1,
+    "http_status": 200,
+    "container_apps_responsive": true,
+    "ready_for_ml_integration": true,
+    "timestamp": "2025-09-25T19:28:52.570720"
+  },
+  "performance_analysis": {
+    "status": "SUCCESS",
+    "processing_performance": {
+      "videos_processed": 0,
+      "total_processing_time": 0,
+      "total_features_extracted": 0,
+      "avg_features_per_video": 0,
+      "processing_efficiency": 0
+    },
+    "cost_analysis": {
+      "estimated_container_cost": 0.004,
+      "local_processing_cost": 0.0,
+      "total_estimated_cost": 0.004,
+      "cost_per_video": 0.002
+    },
+    "scalability_assessment": {
+      "container_apps_ready": true,
+      "auto_scaling_capable": true,
+      "production_ready": false
+    }
+  },
+  "demo_end": "2025-09-25T19:28:52.571105"
+}

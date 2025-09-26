@@ -1,0 +1,77 @@
+{
+  "demo_start": "2025-09-25T19:26:42.793126",
+  "container_url": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io",
+  "ml_tests": [
+    {
+      "test": "root_api",
+      "status": "SUCCESS",
+      "response_time_ms": 296.0,
+      "http_status": 200,
+      "json_response": false,
+      "api_info": null,
+      "content_preview": "<html lang=\"en\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Azure Container Apps</title>\n    <link href=\"https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css\" rel=\"stylesheet\">\n    <link rel=\"stylesheet",
+      "timestamp": "2025-09-25T19:26:43.089235"
+    },
+    {
+      "test": "educator_response_analysis",
+      "status": "PARTIAL",
+      "response_time_ms": 267.5,
+      "http_status": 404,
+      "endpoint": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/analyze/educator-response",
+      "analysis_submitted": false,
+      "response_data": null,
+      "ml_processing_triggered": false,
+      "timestamp": "2025-09-25T19:26:45.359104"
+    },
+    {
+      "test": "video_analysis",
+      "status": "PARTIAL",
+      "response_time_ms": 286.3,
+      "http_status": 404,
+      "endpoint": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/videos/analyze",
+      "ml_processing_started": false,
+      "response_data": null,
+      "pytorch_pipeline_ready": false,
+      "timestamp": "2025-09-25T19:26:49.669435"
+    },
+    {
+      "test": "websocket_connection",
+      "status": "ERROR",
+      "error": "404, message='Invalid response status', url=URL('wss://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/ws/realtime/demo_session_001')",
+      "websocket_url": "wss://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/ws/realtime/demo_session_001",
+      "timestamp": "2025-09-25T19:26:51.925739"
+    },
+    {
+      "test": "concurrent_processing",
+      "status": "FAILED",
+      "total_duration_ms": 288.7,
+      "total_requests": 3,
+      "successful_requests": 0,
+      "success_rate": 0.0,
+      "concurrent_capability": false,
+      "endpoint": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/analyze/educator-response",
+      "request_results": [
+        {
+          "request_id": 0,
+          "status": 404,
+          "success": false,
+          "response_data": null
+        },
+        {
+          "request_id": 1,
+          "status": 404,
+          "success": false,
+          "response_data": null
+        },
+        {
+          "request_id": 2,
+          "status": 404,
+          "success": false,
+          "response_data": null
+        }
+      ],
+      "timestamp": "2025-09-25T19:26:54.215388"
+    }
+  ],
+  "demo_end": "2025-09-25T19:26:54.215534"
+}

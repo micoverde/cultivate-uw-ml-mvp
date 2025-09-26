@@ -1,0 +1,45 @@
+{
+  "demo_start": "2025-09-25T19:21:37.324581",
+  "container_url": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io",
+  "tests": [
+    {
+      "test": "cold_start",
+      "status": "SUCCESS",
+      "response_time_ms": 308.9,
+      "http_status": 200,
+      "content_length": 4201,
+      "scaling_triggered": false,
+      "timestamp": "2025-09-25T19:21:37.633532"
+    },
+    {
+      "test": "warm_response",
+      "status": "SUCCESS",
+      "response_time_ms": 288.3,
+      "http_status": 200,
+      "content_length": 4201,
+      "performance": "excellent",
+      "timestamp": "2025-09-25T19:21:41.844318"
+    },
+    {
+      "test": "api_docs",
+      "status": "FAILED",
+      "response_time_ms": 261.4,
+      "http_status": 404,
+      "docs_url": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/docs",
+      "swagger_detected": false,
+      "content_length": 19,
+      "timestamp": "2025-09-25T19:21:44.108306"
+    },
+    {
+      "test": "health_endpoint",
+      "status": "PARTIAL",
+      "response_time_ms": 279.8,
+      "http_status": 404,
+      "health_url": "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/health",
+      "json_response": false,
+      "content_preview": "404 page not found\n",
+      "timestamp": "2025-09-25T19:21:46.390713"
+    }
+  ],
+  "demo_end": "2025-09-25T19:21:46.390820"
+}

@@ -1,0 +1,39 @@
+{
+  "video": "Draw Results",
+  "asset_number": 48386726,
+  "age_group": "PK",
+  "duration": "35 seconds",
+  "actual_questions": [
+    {
+      "time": "0:01",
+      "text": "What is different...?",
+      "type": "OEQ",
+      "wait_time": false
+    },
+    {
+      "time": "0:03",
+      "text": "How do they look different?",
+      "type": "OEQ",
+      "wait_time": true
+    },
+    {
+      "time": "0:22",
+      "text": "CEQ (yes/no)",
+      "type": "CEQ",
+      "wait_time": true
+    }
+  ],
+  "metrics": {
+    "total_questions": 3,
+    "oeq_count": 2,
+    "ceq_count": 1,
+    "wait_time_percentage": 67,
+    "question_density_per_minute": 5.14
+  },
+  "quality_scores": {
+    "question_quality": 7.0,
+    "wait_time": 6.7,
+    "overall": 6.85
+  },
+  "source": "VideosAskingQuestions CSV.csv Row 26"
+}

@@ -1,0 +1,98 @@
+{
+  "video": "Draw Results",
+  "timestamp": 1758859228.440679,
+  "ml_model": "RandomForest (98.2% accuracy)",
+  "individual_question_results": [
+    {
+      "version": "trained_v1.0_issue_109",
+      "model_type": "RandomForest",
+      "analysis_method": "trained_model",
+      "questions_detected": 1,
+      "primary_analysis": {
+        "question_type": "OEQ",
+        "confidence": 0.5524918962036964,
+        "probabilities": {
+          "OEQ": 0.5524918962036964,
+          "CEQ": 0.44750810379630346
+        },
+        "educational_value": "uncertain"
+      },
+      "quality_indicators": {
+        "promotes_thinking": true,
+        "scaffolding_present": false,
+        "wait_time_appropriate": null
+      },
+      "performance": {
+        "inference_time_ms": 27.28,
+        "model_confidence": 0.5524918962036964,
+        "feature_count": 79
+      },
+      "metadata": {
+        "timestamp": 1758859228.3877962,
+        "transcript_length": 21,
+        "feature_extraction_success": true
+      }
+    },
+    {
+      "version": "trained_v1.0_issue_109",
+      "model_type": "RandomForest",
+      "analysis_method": "trained_model",
+      "questions_detected": 1,
+      "primary_analysis": {
+        "question_type": "OEQ",
+        "confidence": 0.5455886234525642,
+        "probabilities": {
+          "OEQ": 0.5455886234525642,
+          "CEQ": 0.4544113765474358
+        },
+        "educational_value": "uncertain"
+      },
+      "quality_indicators": {
+        "promotes_thinking": true,
+        "scaffolding_present": false,
+        "wait_time_appropriate": null
+      },
+      "performance": {
+        "inference_time_ms": 26.43,
+        "model_confidence": 0.5455886234525642,
+        "feature_count": 79
+      },
+      "metadata": {
+        "timestamp": 1758859228.414269,
+        "transcript_length": 27,
+        "feature_extraction_success": true
+      }
+    }
+  ],
+  "overall_analysis": {
+    "version": "trained_v1.0_issue_109",
+    "model_type": "RandomForest",
+    "analysis_method": "trained_model",
+    "questions_detected": 1,
+    "primary_analysis": {
+      "question_type": "OEQ",
+      "confidence": 0.6565428114368776,
+      "probabilities": {
+        "OEQ": 0.6565428114368776,
+        "CEQ": 0.34345718856312213
+      },
+      "educational_value": "medium"
+    },
+    "quality_indicators": {
+      "promotes_thinking": true,
+      "scaffolding_present": false,
+      "wait_time_appropriate": null
+    },
+    "performance": {
+      "inference_time_ms": 26.3,
+      "model_confidence": 0.6565428114368776,
+      "feature_count": 79
+    },
+    "metadata": {
+      "timestamp": 1758859228.440625,
+      "transcript_length": 46,
+      "feature_extraction_success": true
+    }
+  },
+  "note": "Raw ML model outputs only - no human scoring"
+}

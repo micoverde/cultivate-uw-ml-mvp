@@ -1,0 +1,50 @@
+{
+  "video": "Draw Results.mp4",
+  "analysis_timestamp": 1758858808.0432029,
+  "ml_model": "Trained RandomForest (98.2% accuracy)",
+  "transcript_length": 811,
+  "questions_detected": 4,
+  "wait_time_present": true,
+  "ml_analysis": {
+    "version": "trained_v1.0_issue_109",
+    "model_type": "RandomForest",
+    "analysis_method": "trained_model",
+    "questions_detected": 1,
+    "primary_analysis": {
+      "question_type": "OEQ",
+      "confidence": 0.6287324454448489,
+      "probabilities": {
+        "OEQ": 0.6287324454448489,
+        "CEQ": 0.3712675545551509
+      },
+      "educational_value": "medium"
+    },
+    "quality_indicators": {
+      "promotes_thinking": true,
+      "scaffolding_present": false,
+      "wait_time_appropriate": null
+    },
+    "performance": {
+      "inference_time_ms": 27.01,
+      "model_confidence": 0.6287324454448489,
+      "feature_count": 79
+    },
+    "metadata": {
+      "timestamp": 1758858807.9387884,
+      "transcript_length": 811,
+      "feature_extraction_success": true
+    }
+  },
+  "individual_questions": [
+    "Can everyone see the board?",
+    "What shape do you see here?",
+    "And how many sides does a circle have?",
+    "Now, who wants to come up and draw a circle on the board?"
+  ],
+  "overall_rating": {
+    "question_quality": 7.5,
+    "wait_time": 9.0,
+    "engagement": 8.0,
+    "class_score": 6.2
+  }
+}

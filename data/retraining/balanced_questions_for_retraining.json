@@ -1,0 +1,1417 @@
+[
+  {
+    "video": "Structure Activity Video_SUBS.mp4",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and teaches pauses for a response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Structure Activity Video_SUBS.mp4",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ and teacher gives a child an opportunity to respond",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Structure Activity Video_SUBS.mp4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) that seems rhetorical teacher doesn't pause for a response continues talking",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Structure Activity Video_SUBS.mp4",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ teacher does not pause for a response continues sharing",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Structure Activity Video_SUBS.mp4",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ teacher pauses and listens to a child response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Book about Flowers SOM SUBS .mp4",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ with a pause allowing one child to respond",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Book about Flowers SOM SUBS .mp4",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "Teacher repeats same OEQ allowing another child to respond",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Book about Flowers SOM SUBS .mp4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) with no pause for response teacher continues talking",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Book about Flowers SOM SUBS .mp4",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": "what is this called?",
+    "full_description": "CEQ \"what is this called?\" with pause for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ with brief pause for child to confirm yes",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ brief pause for child to confirm yes",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but teacher does not stop for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but teacher does not pause for a response and adds another comment instead",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) with no pause for a response teacher continues talking",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ  (yes/no) pauses for a response when child doesn't answer teacher repeats the question",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ  (yes/no) rhetorical teacher doesn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ  (yes/no) rhetorical teacher do esn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ  (yes/no) rhetorical teacher do esn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+    "question_num": 6,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ  (yes/no) rhetorical teacher do esn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Highland Park 004.mp4",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ with a pause but child shrugs ",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Launch Highland Park 004.mp4",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "Teacher gets more specific with her 1st question by turning it into a CEQ (yes/no)",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Highland Park 004.mp4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "Teacher repeats child's CEQ (yes/no) and pauses for children to respond",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Highland Park 004.mp4",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "Teacher asks OEQ but before getting a response she restates her question to a CEQ (yes/no) and waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Highland Park 004.mp4",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) without a pause for response teacher keeps talking",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "YWCA Bessie T Draper Jeanette 099.mp4",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but teacher doesn't wait for a response begins redirecting a child",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "YWCA Bessie T Draper Jeanette 099.mp4",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but doesn't pause for a response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Cascade Vista Breanna 013.MP4",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but teacher answers her own question",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Launch Cascade Vista Breanna 013.MP4",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": "which one is the bottom?",
+    "full_description": "CEQ \"which one is the bottom?\" and waits for child to respond",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Launch Cascade Vista Breanna 013.MP4",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": "how many\u2026?",
+    "full_description": "CEQ \"how many\u2026?\" teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Conflict Management during Outdoor Play",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": "whose hat is it?",
+    "full_description": "CEQ \"whose hat is it?\" brief pause before teacher restates the question in different words",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Conflict Management during Outdoor Play",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Conflict Management during Outdoor Play",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher listens for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Conflict Management during Outdoor Play",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) to confirm child heard",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Yasmin 035",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Yasmin 035",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "how",
+    "full_description": "OEQ, good \"how\" question, teacher listens for a response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Wenatchee Center Yasmin 035",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no,) question that makes child use thinking skills and teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Yasmin 035",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ but teacher says it under her breath almost like it was a question to herself",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher in background asks a question sound is much lower, harder to hear",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher in background asks a question sound is much lower, harder to hear",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 021",
+    "question_num": 6,
+    "label": "CEQ",
+    "question_text": "how is the toast today?",
+    "full_description": "CEQ (yes/no) teacher waits for response, worded sort of open-ended but doesn't call for open-ended response, \"how is the toast today?\"",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ \"what would you like to do? And teacher waits for response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but teacher answers her own question without waiting for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and listens for child response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": "what can we do about it?",
+    "full_description": "OEQ \"what can we do about it?\" and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) teacher pauses for a response ",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 6,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and pauses for a response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Being Aware of a Toddler's Needs",
+    "question_num": 7,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": " CEQ (yes/no) and pauses for a response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": "what song could we sing?",
+    "full_description": "CEQ \"what song could we sing?\" requires only one word response but questions allows for a broad range of responses",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": "what?",
+    "full_description": "CEQ, Teacher asks \"what?\" for the child to repeat what he said",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": "what song do you want to sing?",
+    "full_description": "CEQ \"what song do you want to sing?\" requires only one word response but questions allows for a broad range of responses",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) sort or rhetorical teacher doesn't listen for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) more rhetorical just stating what happened",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Wenatchee Center Karina 017",
+    "question_num": 6,
+    "label": "OEQ",
+    "question_text": "then what happens?",
+    "full_description": "OEQ \"then what happens?\" but looking for a specific answer",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Sunset Ridge Khani 011",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": "how can...",
+    "full_description": "OEQ, \"how can...\" and brief pause for child response ",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Sunset Ridge Khani 011",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": "how many\u2026",
+    "full_description": "CEQ, \"how many\u2026\" but doesn\u2019t pause for response and continues talking",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Sunset Ridge Khani 011",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and listens for response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "CDCSA Sunset Ridge Khani 011",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": "why\u2026",
+    "full_description": "OEQ, \"why\u2026\" and pauses for child to respond",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "CDCSA Sunset Ridge Khani 011",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": "how come\u2026",
+    "full_description": "OEQ, \"how come\u2026\" teacher rephrases previous question when child does not respond and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Center Street Nancy Coach iPhone 010",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) seemed more rhetorical not really waiting for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Center Street Nancy Coach iPhone 010",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "what do I do?",
+    "full_description": "OEQ, \"what do I do?\" teacher waits for children to shoutout response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Center Street Nancy Coach iPhone 010",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Center Street Nancy Coach iPhone 010",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": "how about\u2026",
+    "full_description": "OEQ, \"how about\u2026\" looks and listens to multiple children respond",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Center Street Nancy Coach iPhone 010",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": "what goes on the top?",
+    "full_description": "OEQ, \"what goes on the top?\" questions allows for more than one word response but teacher looking for a specific response, waits for responses",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Edgewater Early Head Start Martha 036",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) waits intently for child response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Edgewater Early Head Start Martha 036",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "what else is yellow",
+    "full_description": "OEQ, \"what else is yellow\" doesn't encourage more than one word but promotes deeper thinking",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Fiddleheads Sarah 038",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ teacher looking for a specific answer, pauses for a response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Fiddleheads Sarah 038",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) brief pause for response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Fiddleheads Sarah 038",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": "what kind of feet are we gonna use?",
+    "full_description": "CEQ \"what kind of feet are we gonna use?\" teacher looking for a specific answer, brief pause for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Fiddleheads Sarah 038",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ teacher looking for specific response, pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Little Teddys - Jeanette First Walkthrough 015",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) pause for child response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Little Teddys - Jeanette First Walkthrough 015",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "what happens when\u2026",
+    "full_description": "OEQ, \"what happens when\u2026\" teacher pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Little Teddys - Jeanette First Walkthrough 015",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ, asks children to finish the line but teacher responsds for them",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Little Teddys - Jeanette First Walkthrough 015",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) more rhetorical doesn't really wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Little Teddys - Jeanette First Walkthrough 015",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ but doesn't encourage free thought looking for a specific answer",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "What Can We Measure_ESP SUBS",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ promotoes deeper thinking but not more than one word response, teacher listens to response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "What Can We Measure_ESP SUBS",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "what else?",
+    "full_description": "OEQ, \"what else?\" promotoes deeper thinking but not more than one word response, teacher listens to response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Puddle Jumpers - Debra 054",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) but doesn't pause for a response and goes right into her next question",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Puddle Jumpers - Debra 054",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) listens to responses",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Puddle Jumpers - Debra 054",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ looking for a specific response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Offer Resources AIAN_SUBS",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) rhetorical dooesn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) waits for child to respond",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ, \"how full is it? Teacher pauses for child to respond",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": " CEQ (yes/no) waits for child response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": "what does it say?",
+    "full_description": "CEQ \"what does it say?\" teacher looking for a specific answer, but doesn't pause to answer before firing offthe next question",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) pauses for child response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 6,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) doesn't wait for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Snoqualmie_Ridge_ELC-Linda-001",
+    "question_num": 7,
+    "label": "CEQ",
+    "question_text": "what about yours?",
+    "full_description": "CEQ \"what about yours?\" teacher pauses for a specific response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": "what do you need help with?",
+    "full_description": "OEQ, \"what do you need help with?\" and teacher listens intently to response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) listens to responses",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 3,
+    "label": "OEQ",
+    "question_text": "what do you need?",
+    "full_description": "OEQ, \"what do you need?\" and teacher pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 4,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) seemed rhetorical more like pointing out a positive behavior",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": "How\u2026what...?",
+    "full_description": "Good OEQ, \"How\u2026what...?\" and listens for response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 6,
+    "label": "OEQ",
+    "question_text": "How\u2026?",
+    "full_description": "OEQ, \"How\u2026?\" teacher listens for response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 7,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ teacher rephrasing previous questions brief pauses but answers her own question",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Clarke County School District Lynn 007",
+    "question_num": 8,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) seems more like the teacher is thinking out loud than actually looking for a response",
+    "has_wait_time": false,
+    "is_yes_no": true
+  },
+  {
+    "video": "ACAP_Marty_005",
+    "question_num": 1,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ and listens for a response",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "ACAP_Marty_005",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "What do you think\u2026?",
+    "full_description": "OEQ, \"What do you think\u2026?\" but doesn't pause before repeating the question",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "ACAP_Marty_005",
+    "question_num": 3,
+    "label": "OEQ",
+    "question_text": "What do you think\u2026?",
+    "full_description": "OEQ, \"What do you think\u2026?\" pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "ACAP_Marty_005",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": null,
+    "full_description": "OEQ repeats same question again but doesn't pause and goes right into another question",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "ACAP_Marty_005",
+    "question_num": 5,
+    "label": "OEQ",
+    "question_text": "what is she going to see?",
+    "full_description": "OEQ, \"what is she going to see?\" and waits for a response ",
+    "has_wait_time": false,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": "what did we learn?",
+    "full_description": "OEQ, \"what did we learn?\" but teacher does not pause for response before continuing to talk",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 2,
+    "label": "CEQ",
+    "question_text": "some tihngs what?",
+    "full_description": "CEQ, \"some tihngs what?\" and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 3,
+    "label": "OEQ",
+    "question_text": "why\u2026?",
+    "full_description": "OEQ, \"why\u2026?\" pauses and listens intently to response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 4,
+    "label": "OEQ",
+    "question_text": "how\u2026?",
+    "full_description": "OEQ, \"how\u2026?\" but doesnot pause for response and restates the question in a close ended way",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 5,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ with only two options for response, teacher pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "childrens_place_zaid_006",
+    "question_num": 6,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ with only two options for response, teacher pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Draw Results",
+    "question_num": 1,
+    "label": "OEQ",
+    "question_text": "what is different\u2026?",
+    "full_description": "OEQ, \"what is different\u2026?\" but doesn't pause for response before rewording her question",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Draw Results",
+    "question_num": 2,
+    "label": "OEQ",
+    "question_text": "how do they look different?",
+    "full_description": "Good OEQ, \"how do they look different?\", and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": false
+  },
+  {
+    "video": "Draw Results",
+    "question_num": 3,
+    "label": "CEQ",
+    "question_text": null,
+    "full_description": "CEQ (yes/no) and pauses for response",
+    "has_wait_time": true,
+    "is_yes_no": true
+  },
+  {
+    "question_text": "How might the blocks change if we turn it upside down?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How might the blocks change if we turn it upside down? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_001",
+    "question_num": 1
+  },
+  {
+    "question_text": "How do the blocks and the animals look different?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How do the blocks and the animals look different? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_002",
+    "question_num": 1
+  },
+  {
+    "question_text": "How might the water change if we add water?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How might the water change if we add water? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_003",
+    "question_num": 1
+  },
+  {
+    "question_text": "How might the water change if we add water?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How might the water change if we add water? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_004",
+    "question_num": 1
+  },
+  {
+    "question_text": "Describe what you see when we add water.?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "thinking_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Describe what you see when we add water.? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_005",
+    "question_num": 1
+  },
+  {
+    "question_text": "How are the plants and the puzzle similar?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How are the plants and the puzzle similar? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_006",
+    "question_num": 1
+  },
+  {
+    "question_text": "What might happen next?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What might happen next? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_007",
+    "question_num": 1
+  },
+  {
+    "question_text": "How do your drawing and the tower look different?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How do your drawing and the tower look different? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_008",
+    "question_num": 1
+  },
+  {
+    "question_text": "Why is the colors soft?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "why_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Why is the colors soft? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_009",
+    "question_num": 1
+  },
+  {
+    "question_text": "How could we solve this problem?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How could we solve this problem? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_010",
+    "question_num": 1
+  },
+  {
+    "question_text": "How would you change?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How would you change? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_011",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you notice about the colors?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you notice about the colors? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_012",
+    "question_num": 1
+  },
+  {
+    "question_text": "What if we sink?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What if we sink? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_013",
+    "question_num": 1
+  },
+  {
+    "question_text": "What might happen next?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What might happen next? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_014",
+    "question_num": 1
+  },
+  {
+    "question_text": "What patterns do you see?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What patterns do you see? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_015",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you think about trying new things?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "thinking_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you think about trying new things? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_016",
+    "question_num": 1
+  },
+  {
+    "question_text": "What would happen if we mix them together?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What would happen if we mix them together? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_017",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you notice about the water?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you notice about the water? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_018",
+    "question_num": 1
+  },
+  {
+    "question_text": "How do the sand and the puzzle look different?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How do the sand and the puzzle look different? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_019",
+    "question_num": 1
+  },
+  {
+    "question_text": "How are the tower and your drawing similar?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How are the tower and your drawing similar? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_020",
+    "question_num": 1
+  },
+  {
+    "question_text": "Can you explain why it works that way?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "why_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Can you explain why it works that way? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_021",
+    "question_num": 1
+  },
+  {
+    "question_text": "What might happen next?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What might happen next? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_022",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you notice about the colors?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you notice about the colors? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_023",
+    "question_num": 1
+  },
+  {
+    "question_text": "Why do you think the plants make that sound?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "why_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Why do you think the plants make that sound? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_024",
+    "question_num": 1
+  },
+  {
+    "question_text": "How might the tower change if we share with friends?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How might the tower change if we share with friends? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_025",
+    "question_num": 1
+  },
+  {
+    "question_text": "What else could we look that way?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "thinking_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What else could we look that way? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_026",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you think about learning?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "thinking_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you think about learning? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_027",
+    "question_num": 1
+  },
+  {
+    "question_text": "What might happen next?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What might happen next? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_028",
+    "question_num": 1
+  },
+  {
+    "question_text": "How could we build something new?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How could we build something new? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_029",
+    "question_num": 1
+  },
+  {
+    "question_text": "Why did that happen when we take it apart?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "why_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Why did that happen when we take it apart? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_030",
+    "question_num": 1
+  },
+  {
+    "question_text": "What patterns do you see?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What patterns do you see? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_031",
+    "question_num": 1
+  },
+  {
+    "question_text": "What do you notice about the story?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "comparison_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What do you notice about the story? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_032",
+    "question_num": 1
+  },
+  {
+    "question_text": "Can you explain why that happened?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "why_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: Can you explain why that happened? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_033",
+    "question_num": 1
+  },
+  {
+    "question_text": "What might happen next?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What might happen next? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_034",
+    "question_num": 1
+  },
+  {
+    "question_text": "How might the animals change if we share with friends?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "how_questions",
+    "has_wait_time": true,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: How might the animals change if we share with friends? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_035",
+    "question_num": 1
+  },
+  {
+    "question_text": "What if we look that way?",
+    "label": "OEQ",
+    "synthetic": true,
+    "template_category": "what_if_questions",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Synthetic OEQ: What if we look that way? - Generated for training balance",
+    "video": "SYNTHETIC_OEQ_036",
+    "question_num": 1
+  },
+  {
+    "question_text": "Tell me more about how",
+    "label": "OEQ",
+    "synthetic": true,
+    "augmented_from": "how",
+    "has_wait_time": false,
+    "is_yes_no": false,
+    "full_description": "Augmented OEQ from: how",
+    "video": "AUGMENTED_CDCSA Wenatchee Cent",
+    "question_num": 2
+  }
+]
