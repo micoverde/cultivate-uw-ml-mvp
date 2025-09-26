@@ -105,6 +105,8 @@ class ChildScenarioDemo {
 
     async classifyWithML(text) {
         try {
+            console.log('🚀 Sending text to ML API:', text);
+
             const response = await fetch(`${this.apiBaseUrl}/classify_response`, {
                 method: 'POST',
                 headers: {
@@ -120,9 +122,34 @@ class ChildScenarioDemo {
                 throw new Error(`HTTP ${response.status}`);
             }
 
-            return await response.json();
+            const result = await response.json();
+
+            console.log('🧠 ML Prediction Result:', result);
+            console.log(`📊 Method: ${result.method}`);
+            console.log(`🎯 Classification: ${result.classification}`);
+            console.log(`📈 Confidence: ${result.confidence?.toFixed(3)}`);
+            console.log(`🔍 OEQ: ${result.oeq_probability?.toFixed(3)}, CEQ: ${result.ceq_probability?.toFixed(3)}`);
+
+            // DEBUG MODE: Show actual ML model internals
+            if (result.debug_info) {
+                console.log('🔬 ===== NEURAL NETWORK DEBUG MODE =====');
+                console.log('🎯 Raw Neural Network Outputs (Logits):', result.debug_info.raw_outputs);
+                console.log('📈 Softmax Probabilities:', result.debug_info.softmax_probs);
+
+                if (result.debug_info.feature_vector) {
+                    console.log('🔢 Full 56-Feature Vector Input:', result.debug_info.feature_vector);
+                    console.log('📊 Feature Breakdown:', result.debug_info.feature_breakdown);
+                    console.log(`📝 Input Features: ${result.features_used} dimensions`);
+                }
+
+                console.log('🏗️ Model Architecture: 4-layer neural network [56→64→32→16→2]');
+                console.log('⚡ Framework: PyTorch');
+                console.log('🔬 ===== END DEBUG MODE =====');
+            }
+
+            return result;
         } catch (error) {
-            console.warn('ML API unavailable, using fallback classification');
+            console.warn('⚠️ ML API unavailable, using fallback classification');
             throw error;
         }
     }

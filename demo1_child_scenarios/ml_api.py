@@ -14,8 +14,13 @@ import logging
 from pathlib import Path
 from typing import Dict, Any, Optional
 
-import torch
-import torch.nn as nn
+try:
+    import torch
+    import torch.nn as nn
+    PYTORCH_AVAILABLE = True
+except ImportError:
+    PYTORCH_AVAILABLE = False
+    print("PyTorch not available, using rule-based classification")
 import numpy as np
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -64,7 +69,8 @@ class ClassificationResponse(BaseModel):
     method: str
     features_used: int
 
-class OEQCEQClassifier(nn.Module):
+if PYTORCH_AVAILABLE:
+    class OEQCEQClassifier(torch.nn.Module):
     """PyTorch model architecture - matches training"""
     def __init__(self, input_size=56, hidden_sizes=[64, 32, 16], dropout_rate=0.3):
         super(OEQCEQClassifier, self).__init__()
@@ -129,17 +135,26 @@ class MLClassificationService:
             return self.classify_with_rules(text)
 
     async def classify_with_pytorch(self, text: str) -> Dict[str, Any]:
-        """Use the trained PyTorch model for classification"""
+        """Use the trained PyTorch model for classification with detailed debug logging"""
         try:
-            # Extract features
+            logger.info(f"🧠 PyTorch ML Classification for: '{text[:50]}...'")
+
+            # Extract features with debug info
             features = self.feature_extractor.extract_features(text)
             features_array = np.array(list(features.values())).reshape(1, -1)
             features_tensor = torch.FloatTensor(features_array)
 
+            logger.info(f"📊 Features extracted: {len(features)} dimensions")
+            logger.info(f"🔢 Input tensor shape: {features_tensor.shape}")
+            logger.info(f"📈 Feature values (first 10): {features_array[0][:10]}")
+
             # Get model prediction
             with torch.no_grad():
-                outputs = self.model(features_tensor)
-                probabilities = torch.softmax(outputs, dim=1)
+                raw_outputs = self.model(features_tensor)
+                probabilities = torch.softmax(raw_outputs, dim=1)
+
+                logger.info(f"🎯 Raw model outputs: {raw_outputs[0].numpy()}")
+                logger.info(f"📈 Softmax probabilities: {probabilities[0].numpy()}")
 
                 oeq_prob = probabilities[0][1].item()  # Index 1 for OEQ
                 ceq_prob = probabilities[0][0].item()  # Index 0 for CEQ
@@ -147,13 +162,21 @@ class MLClassificationService:
             classification = 'OEQ' if oeq_prob > ceq_prob else 'CEQ'
             confidence = abs(oeq_prob - ceq_prob)
 
+            logger.info(f"✅ Final prediction: {classification} (confidence: {confidence:.3f})")
+            logger.info(f"🔍 OEQ: {oeq_prob:.3f}, CEQ: {ceq_prob:.3f}")
+
             return {
                 'oeq_probability': oeq_prob,
                 'ceq_probability': ceq_prob,
                 'classification': classification,
                 'confidence': confidence,
                 'method': 'pytorch-ml',
-                'features_used': len(features)
+                'features_used': len(features),
+                'debug_info': {
+                    'raw_outputs': raw_outputs[0].numpy().tolist(),
+                    'softmax_probs': probabilities[0].numpy().tolist(),
+                    'feature_sample': features_array[0][:10].tolist()
+                }
             }
 
         except Exception as e:
