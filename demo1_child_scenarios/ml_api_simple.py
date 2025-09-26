@@ -12,6 +12,7 @@ from typing import Dict, Any
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from human_feedback_storage import HumanFeedbackStorage
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -204,8 +205,9 @@ class EnhancedRuleBased:
             }
         }
 
-# Initialize classifier
+# Initialize classifier and feedback storage
 classifier = EnhancedRuleBased()
+feedback_storage = HumanFeedbackStorage()
 
 @app.get("/")
 async def root():
@@ -250,6 +252,78 @@ async def get_stats():
         "oeq_starters": len(classifier.oeq_starters),
         "ceq_starters": len(classifier.ceq_starters)
     }
+
+# Human Feedback API Endpoints
+class FeedbackRequest(BaseModel):
+    scenario_id: int
+    user_response: str
+    ml_prediction: str
+    ml_confidence: float
+    human_label: str
+    session_id: str = None
+    additional_notes: str = None
+
+@app.post("/submit_feedback")
+async def submit_feedback(request: FeedbackRequest):
+    """Submit human feedback for ML model training"""
+    try:
+        feedback_id = feedback_storage.store_feedback(
+            scenario_id=request.scenario_id,
+            user_response=request.user_response,
+            ml_prediction=request.ml_prediction,
+            ml_confidence=request.ml_confidence,
+            human_label=request.human_label,
+            session_id=request.session_id,
+            additional_notes=request.additional_notes
+        )
+
+        logger.info(f"📝 Feedback stored with ID: {feedback_id}")
+
+        return {
+            "success": True,
+            "feedback_id": feedback_id,
+            "message": "Feedback stored successfully"
+        }
+    except Exception as e:
+        logger.error(f"Feedback storage error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to store feedback: {str(e)}")
+
+@app.get("/feedback_summary")
+async def get_feedback_summary():
+    """Get summary of all human feedback"""
+    try:
+        summary = feedback_storage.get_feedback_summary()
+        return summary
+    except Exception as e:
+        logger.error(f"Feedback summary error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get feedback summary: {str(e)}")
+
+@app.get("/training_data")
+async def get_training_data():
+    """Get all feedback data for model retraining"""
+    try:
+        training_data = feedback_storage.get_training_data()
+        return {
+            "data": training_data,
+            "total_records": len(training_data)
+        }
+    except Exception as e:
+        logger.error(f"Training data error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to get training data: {str(e)}")
+
+@app.post("/export_training_data")
+async def export_training_data(format: str = "json"):
+    """Export training data to file"""
+    try:
+        filename = feedback_storage.export_for_retraining(format=format)
+        return {
+            "success": True,
+            "filename": filename,
+            "message": f"Training data exported to {filename}"
+        }
+    except Exception as e:
+        logger.error(f"Export error: {e}")
+        raise HTTPException(status_code=500, detail=f"Failed to export training data: {str(e)}")
 
 if __name__ == "__main__":
     import uvicorn

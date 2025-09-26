@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO 1: Child Scenario OEQ/CEQ Classifier</title>
+    <link rel="stylesheet" href="styles.css?v=2025-09-26-rebuilt-simple">
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 18.5C15.59 18.5 18.5 15.59 18.5 12C18.5 8.41 15.59 5.5 12 5.5C8.41 5.5 5.5 8.41 5.5 12C5.5 15.59 8.41 18.5 12 18.5ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5C11.16 5 10.35 5.15 9.61 5.42L12 2ZM3.34 7L6.76 4.61C6.15 5.85 5.85 7.15 5.85 8.5C5.85 9.85 6.15 11.15 6.76 12.39L3.34 17ZM3.34 17L6.76 19.39C6.15 18.15 5.85 16.85 5.85 15.5C5.85 14.15 6.15 12.85 6.76 11.61L3.34 7ZM12 22L9.61 18.58C10.35 18.85 11.16 19 12 19C12.84 19 13.65 18.85 14.39 18.58L12 22ZM20.66 17L17.24 19.39C17.85 18.15 18.15 16.85 18.15 15.5C18.15 14.15 17.85 12.85 17.24 11.61L20.66 7ZM20.66 7L17.24 4.61C17.85 5.85 18.15 7.15 18.15 8.5C18.15 9.85 17.85 11.15 17.24 12.39L20.66 17Z"/>
+        </svg>
+        <div class="theme-toggle-switch" id="themeSwitch">
+            <div class="theme-toggle-knob"></div>
+        </div>
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.4 6.35,17.41C9.37,20.43 14,20.54 17.33,17.97Z"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <header>
+            <h1>ECE Question Classification System</h1>
+            <p>AI-powered assessment tool for early childhood education questioning techniques</p>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" onclick="showTab('demo')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Live Demo
+                </button>
+                <button class="tab-btn" onclick="showTab('synthetic')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                    Synthetic Data
+                </button>
+                <button class="tab-btn" onclick="showTab('metrics')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                    </svg>
+                    Performance
+                </button>
+                <button class="tab-btn" onclick="showTab('retraining')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                    </svg>
+                    Model Training
+                </button>
+            </div>
+        </header>
+
+        <!-- Live Demo Tab - KEEP EXACTLY AS IS (IT WORKS) -->
+        <div id="demo-tab" class="tab-content active">
+            <div class="demo-content">
+                <!-- Scenario Display -->
+                <div class="scenario-card" id="scenarioCard">
+                    <div class="scenario-header">
+                        <span class="scenario-counter" id="scenarioCounter">Scenario 1/10</span>
+                        <span class="age-badge" id="ageBadge">TODDLER</span>
+                    </div>
+
+                    <h2 class="scenario-title" id="scenarioTitle">Block Tower Collapse</h2>
+
+                    <div class="scenario-context" id="scenarioContext">
+                        A toddler was building with blocks and the tower fell down. The child appears frustrated.
+                    </div>
+
+                    <div class="child-behavior">
+                        <strong>Child Behavior:</strong>
+                        <span id="childBehavior">Looking upset, starting to tear up, pointing at fallen blocks</span>
+                    </div>
+                </div>
+
+                <!-- Response Input -->
+                <div class="input-section">
+                    <h3>Your Response to the Child</h3>
+                    <div class="input-group">
+                        <textarea
+                            id="userResponse"
+                            class="text-input"
+                            placeholder="Type your response here..."
+                            rows="3"
+                            style="resize: vertical; min-height: 80px;"
+                        ></textarea>
+                    </div>
+
+                    <div class="button-group">
+                        <button id="analyzeBtn" class="btn btn-primary" onclick="analyzeUserResponse()">
+                            Analyze Response
+                        </button>
+                        <button id="nextBtn" class="btn btn-secondary" onclick="nextScenario()" disabled>
+                            Next Scenario
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Results Section -->
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <h3>Analysis Results</h3>
+                    <div class="classification-result">
+                        <div class="classification-meter">
+                            <div class="meter-section oeq">
+                                <div class="meter-label">Open-Ended Question</div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill oeq-fill" id="oeqMeter"></div>
+                                </div>
+                                <div class="meter-percentage" id="oeqPercentage">0%</div>
+                            </div>
+                            <div class="meter-section ceq">
+                                <div class="meter-label">Closed-Ended Question</div>
+                                <div class="meter-bar">
+                                    <div class="meter-fill ceq-fill" id="ceqMeter"></div>
+                                </div>
+                                <div class="meter-percentage" id="ceqPercentage">0%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Synthetic Data Tab - REBUILT SIMPLE -->
+        <div id="synthetic-tab" class="tab-content">
+            <div class="demo-content">
+                <!-- Generation Section -->
+                <div class="scenario-card">
+                    <h2>🤖 Synthetic Data Generation</h2>
+                    <p>Generate synthetic training examples to improve model performance</p>
+
+                    <div class="input-group">
+                        <label for="syntheticCount">Number of examples to generate:</label>
+                        <input type="number" id="syntheticCount" value="100" min="10" max="1000" class="text-input" style="width: 120px; margin: 0 10px;">
+                        <button class="btn btn-primary">🎲 Generate Examples</button>
+                    </div>
+                </div>
+
+                <!-- Feedback Summary -->
+                <div class="scenario-card">
+                    <h3>Human Feedback Summary</h3>
+                    <div class="classification-result">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0;">
+                            <div style="background: var(--success-50); padding: 16px; border-radius: 8px; border: 1px solid var(--success-500);">
+                                <div style="font-weight: 600; color: var(--success-text);">Total Feedback</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success-text);">3</div>
+                            </div>
+                            <div style="background: var(--success-50); padding: 16px; border-radius: 8px; border: 1px solid var(--success-500);">
+                                <div style="font-weight: 600; color: var(--success-text);">True Positives</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success-text);">1</div>
+                            </div>
+                            <div style="background: var(--error-50); padding: 16px; border-radius: 8px; border: 1px solid var(--error-500);">
+                                <div style="font-weight: 600; color: var(--error-text);">False Positives</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--error-text);">2</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">🔄 Refresh Feedback</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Performance Tab - REBUILT SIMPLE -->
+        <div id="metrics-tab" class="tab-content">
+            <div class="demo-content">
+                <!-- Current Metrics -->
+                <div class="scenario-card">
+                    <h2>📊 Model Performance Metrics</h2>
+                    <div class="classification-result">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0;">
+                            <div style="background: var(--primary-50); padding: 16px; border-radius: 8px; border: 1px solid var(--primary-500);">
+                                <div style="font-weight: 600; color: var(--primary-700);">F1-Score</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-700);">0.500</div>
+                            </div>
+                            <div style="background: var(--primary-50); padding: 16px; border-radius: 8px; border: 1px solid var(--primary-500);">
+                                <div style="font-weight: 600; color: var(--primary-700);">Accuracy</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-700);">0.333</div>
+                            </div>
+                            <div style="background: var(--primary-50); padding: 16px; border-radius: 8px; border: 1px solid var(--primary-500);">
+                                <div style="font-weight: 600; color: var(--primary-700);">Precision</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-700);">0.333</div>
+                            </div>
+                            <div style="background: var(--primary-50); padding: 16px; border-radius: 8px; border: 1px solid var(--primary-500);">
+                                <div style="font-weight: 600; color: var(--primary-700);">Recall</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-700);">1.000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary">🔄 Refresh Metrics</button>
+                </div>
+
+                <!-- Confusion Matrix -->
+                <div class="scenario-card">
+                    <h3>Confusion Matrix</h3>
+                    <div style="overflow-x: auto;">
+                        <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+                            <thead>
+                                <tr style="background: var(--surface-200);">
+                                    <th style="padding: 12px; border: 1px solid var(--surface-400); text-align: left;"></th>
+                                    <th style="padding: 12px; border: 1px solid var(--surface-400); text-align: center;">Predicted OEQ</th>
+                                    <th style="padding: 12px; border: 1px solid var(--surface-400); text-align: center;">Predicted CEQ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th style="padding: 12px; border: 1px solid var(--surface-400); background: var(--surface-200);">Actual OEQ</th>
+                                    <td style="padding: 12px; border: 1px solid var(--surface-400); text-align: center; background: var(--success-50); color: var(--success-text); font-weight: 600;">1</td>
+                                    <td style="padding: 12px; border: 1px solid var(--surface-400); text-align: center;">0</td>
+                                </tr>
+                                <tr>
+                                    <th style="padding: 12px; border: 1px solid var(--surface-400); background: var(--surface-200);">Actual CEQ</th>
+                                    <td style="padding: 12px; border: 1px solid var(--surface-400); text-align: center; background: var(--error-50); color: var(--error-text); font-weight: 600;">2</td>
+                                    <td style="padding: 12px; border: 1px solid var(--surface-400); text-align: center;">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Model Training Tab - REBUILT SIMPLE -->
+        <div id="retraining-tab" class="tab-content">
+            <div class="demo-content">
+                <!-- Feedback Overview -->
+                <div class="scenario-card">
+                    <h2>🔧 Model Retraining Center</h2>
+                    <p>Retrain the model using collected human feedback</p>
+
+                    <div class="classification-result">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0;">
+                            <div style="background: var(--primary-50); padding: 16px; border-radius: 8px; border: 1px solid var(--primary-500);">
+                                <div style="font-weight: 600; color: var(--primary-700);">Total Feedback</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--primary-700);">3</div>
+                            </div>
+                            <div style="background: var(--success-50); padding: 16px; border-radius: 8px; border: 1px solid var(--success-500);">
+                                <div style="font-weight: 600; color: var(--success-text);">Correct Predictions</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--success-text);">1</div>
+                                <div style="font-size: 12px; opacity: 0.8;">TP: 1 | TN: 0</div>
+                            </div>
+                            <div style="background: var(--error-50); padding: 16px; border-radius: 8px; border: 1px solid var(--error-500);">
+                                <div style="font-weight: 600; color: var(--error-text);">Incorrect Predictions</div>
+                                <div style="font-size: 24px; font-weight: 700; color: var(--error-text);">2</div>
+                                <div style="font-size: 12px; opacity: 0.8;">FP: 2 | FN: 0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Training Controls -->
+                <div class="scenario-card">
+                    <h3>Training Configuration</h3>
+                    <div style="margin: 20px 0;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Learning Rate:</label>
+                                <input type="number" value="0.001" step="0.0001" class="text-input" style="width: 100%;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Training Epochs:</label>
+                                <input type="number" value="50" min="1" max="500" class="text-input" style="width: 100%;">
+                            </div>
+                            <div>
+                                <label style="display: block; margin-bottom: 8px; font-weight: 600;">Batch Size:</label>
+                                <input type="number" value="32" min="1" max="256" class="text-input" style="width: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin: 20px 0;">
+                        <button class="btn btn-primary" style="padding: 12px 24px; font-size: 16px;">🚀 Start Retraining</button>
+                        <span style="margin-left: 16px; color: var(--success-text); font-weight: 600;">✅ Ready for Retraining</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Simple JavaScript -->
+    <script>
+        // Simple tab switching - GUARANTEED TO WORK
+        function showTab(tabName) {
+            console.log('🔄 Switching to tab:', tabName);
+
+            // Hide all tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            // Remove active from all buttons
+            const allBtns = document.querySelectorAll('.tab-btn');
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show selected tab
+            const selectedTab = document.getElementById(tabName + '-tab');
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+                selectedTab.style.display = 'block';
+                console.log('✅ Tab switched successfully');
+            }
+
+            // Activate corresponding button
+            const buttons = document.querySelectorAll('.tab-btn');
+            if (tabName === 'demo' && buttons[0]) buttons[0].classList.add('active');
+            if (tabName === 'synthetic' && buttons[1]) buttons[1].classList.add('active');
+            if (tabName === 'metrics' && buttons[2]) buttons[2].classList.add('active');
+            if (tabName === 'retraining' && buttons[3]) buttons[3].classList.add('active');
+        }
+
+        // Demo functionality stubs
+        function analyzeUserResponse() {
+            const resultsSection = document.getElementById('resultsSection');
+            if (resultsSection) {
+                resultsSection.style.display = 'block';
+                document.getElementById('oeqMeter').style.width = '75%';
+                document.getElementById('ceqMeter').style.width = '25%';
+                document.getElementById('oeqPercentage').textContent = '75%';
+                document.getElementById('ceqPercentage').textContent = '25%';
+                document.getElementById('nextBtn').disabled = false;
+            }
+        }
+
+        function nextScenario() {
+            document.getElementById('resultsSection').style.display = 'none';
+            document.getElementById('userResponse').value = '';
+            document.getElementById('nextBtn').disabled = true;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('🚀 Rebuilt system initialized');
+            showTab('demo');
+        });
+    </script>
+
+    <!-- Theme System -->
+    <script src="app.js?v=2025-09-26-theme-system"></script>
+</body>
+</html>

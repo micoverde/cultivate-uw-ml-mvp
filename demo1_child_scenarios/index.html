@@ -4,16 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DEMO 1: Child Scenario OEQ/CEQ Classifier</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2025-09-26-emergency-injection-system">
 </head>
 <body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 18.5C15.59 18.5 18.5 15.59 18.5 12C18.5 8.41 15.59 5.5 12 5.5C8.41 5.5 5.5 8.41 5.5 12C5.5 15.59 8.41 18.5 12 18.5ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5C11.16 5 10.35 5.15 9.61 5.42L12 2ZM3.34 7L6.76 4.61C6.15 5.85 5.85 7.15 5.85 8.5C5.85 9.85 6.15 11.15 6.76 12.39L3.34 17ZM3.34 17L6.76 19.39C6.15 18.15 5.85 16.85 5.85 15.5C5.85 14.15 6.15 12.85 6.76 11.61L3.34 7ZM12 22L9.61 18.58C10.35 18.85 11.16 19 12 19C12.84 19 13.65 18.85 14.39 18.58L12 22ZM20.66 17L17.24 19.39C17.85 18.15 18.15 16.85 18.15 15.5C18.15 14.15 17.85 12.85 17.24 11.61L20.66 7ZM20.66 7L17.24 4.61C17.85 5.85 18.15 7.15 18.15 8.5C18.15 9.85 17.85 11.15 17.24 12.39L20.66 17Z"/>
+        </svg>
+        <div class="theme-toggle-switch" id="themeSwitch">
+            <div class="theme-toggle-knob"></div>
+        </div>
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.4 6.35,17.41C9.37,20.43 14,20.54 17.33,17.97Z"/>
+        </svg>
+    </div>
+
     <div class="container">
         <header>
-            <h1>🎯 Child Scenario Classifier Demo</h1>
-            <p>Practice your questioning skills with real ML feedback</p>
+            <h1>ECE Question Classification System</h1>
+            <p>AI-powered assessment tool for early childhood education questioning techniques</p>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" onclick="showTab('demo')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                    Live Demo
+                </button>
+                <button class="tab-btn" onclick="showTab('synthetic')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                    </svg>
+                    Synthetic Data
+                </button>
+                <button class="tab-btn" onclick="showTab('metrics')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"/>
+                    </svg>
+                    Performance
+                </button>
+                <button class="tab-btn" onclick="showTab('retraining')">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 8px;">
+                        <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                    </svg>
+                    Model Training
+                </button>
+            </div>
         </header>
 
-        <div class="demo-content">
+        <!-- Tab Content -->
+        <div id="demo-tab" class="tab-content active">
+            <div class="demo-content">
             <!-- Scenario Display -->
             <div class="scenario-card" id="scenarioCard">
                 <div class="scenario-header">
@@ -28,32 +71,40 @@
                 </div>
 
                 <div class="child-behavior">
-                    <strong>🧒 Child Behavior:</strong>
+                    <strong>Child Behavior:</strong>
                     <span id="childBehavior">Loading...</span>
                 </div>
             </div>
 
             <!-- Response Input -->
-            <div class="response-section">
-                <label for="userResponse" class="response-label">
-                    💬 What would you say to this child?
-                </label>
-                <textarea
-                    id="userResponse"
-                    class="response-input"
-                    placeholder="Type your response here..."
-                    rows="4"
-                ></textarea>
+            <div class="input-section">
+                <h3>Your Response to the Child</h3>
+                <div class="input-group">
+                    <textarea
+                        id="userResponse"
+                        class="text-input"
+                        placeholder="Type your response here..."
+                        rows="3"
+                        style="resize: vertical; min-height: 80px;"
+                    ></textarea>
+                </div>
 
                 <div class="button-group">
-                    <button id="analyzeBtn" class="btn btn-primary">🔍 Analyze Response</button>
-                    <button id="nextBtn" class="btn btn-secondary" disabled>➡️ Next Scenario</button>
+                    <button id="analyzeBtn" class="btn btn-primary" onclick="window.demo.analyzeResponse()">
+                        Analyze Response
+                    </button>
+                    <button id="nextBtn" class="btn btn-secondary" onclick="window.demo.nextScenario()" disabled>
+                        Next Scenario
+                    </button>
                 </div>
+            </div>
             </div>
 
             <!-- ML Results -->
             <div class="results-section" id="resultsSection" style="display: none;">
-                <h3>🤖 ML Classification Results</h3>
+                <div class="results-header">
+                    <h3>Classification Results</h3>
+                </div>
 
                 <div class="classification-display">
                     <div class="classification-bar">
@@ -78,6 +129,21 @@
                 <div class="feedback-section" id="feedbackSection">
                     <div class="feedback-content" id="feedbackContent">
                         <!-- ML feedback will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Human Feedback for ML Training -->
+                <div class="human-feedback-section" id="humanFeedbackSection" style="display: none;">
+                    <div class="feedback-card">
+                        <h3>🤖 Help Train the AI Model</h3>
+                        <p><strong>Question analyzed:</strong> <span id="feedbackQuestionText"></span></p>
+                        <p><strong>AI predicted:</strong> <span id="feedbackPrediction"></span> with <span id="feedbackConfidence"></span> confidence</p>
+
+                        <!-- Dynamic feedback buttons will be inserted here by JavaScript -->
+
+                        <div class="feedback-result" id="feedbackResult" style="display: none;">
+                            <p><strong>✅ Feedback recorded!</strong> This will help improve the model.</p>
+                        </div>
                     </div>
                 </div>
 
@@ -130,9 +196,307 @@
                 </div>
                 <button id="restartBtn" class="btn btn-primary">🔄 Start Over</button>
             </div>
+            </div>
+        </div>
+
+        <!-- Synthetic Data Tab -->
+        <div id="synthetic-tab" class="tab-content">
+            <div class="synthetic-content">
+                <h2>🤖 Synthetic Data Generation & Retraining</h2>
+
+                <div class="generation-section">
+                    <h3>Generate Synthetic Examples</h3>
+                    <div class="input-group">
+                        <label for="syntheticCount">Number of examples to generate:</label>
+                        <input type="number" id="syntheticCount" min="10" max="1000" value="100" class="input-field">
+                        <button id="generateBtn" class="btn btn-primary">🎲 Generate Examples</button>
+                    </div>
+
+                    <div id="generationProgress" class="progress-section" style="display: none;">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="generationProgressFill"></div>
+                        </div>
+                        <p id="generationStatus">Generating synthetic examples...</p>
+                    </div>
+
+                    <div id="generationResults" class="results-display" style="display: none;">
+                        <h4>Generated Examples</h4>
+                        <div id="examplesList" class="examples-list"></div>
+                    </div>
+                </div>
+
+                <div class="feedback-summary">
+                    <h3>Human Feedback Summary</h3>
+                    <div id="feedbackSummary" class="feedback-stats">
+                        <!-- GUARANTEED STATIC CONTENT -->
+                        <div class="feedback-stat" style="display: block !important; visibility: visible !important;">
+                            Total Feedback: <strong>3</strong>
+                        </div>
+                        <div class="feedback-stat" style="display: block !important; visibility: visible !important;">
+                            True Positives: <strong>1</strong>
+                        </div>
+                        <div class="feedback-stat" style="display: block !important; visibility: visible !important;">
+                            True Negatives: <strong>0</strong>
+                        </div>
+                        <div class="feedback-stat" style="display: block !important; visibility: visible !important;">
+                            False Positives: <strong>2</strong>
+                        </div>
+                        <div class="feedback-stat" style="display: block !important; visibility: visible !important;">
+                            False Negatives: <strong>0</strong>
+                        </div>
+                    </div>
+                    <button id="loadFeedbackBtn" class="btn btn-secondary">🔄 Refresh Feedback</button>
+                    <p style="margin-top: 16px; color: var(--gray-700); font-style: italic;">
+                        💡 Use the "Model Training" tab for comprehensive retraining controls
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Tab -->
+        <div id="metrics-tab" class="tab-content">
+            <div class="metrics-content">
+                <h2>📊 Model Performance & Metrics</h2>
+
+                <div class="current-model-section">
+                    <h3>Current Model Performance</h3>
+                    <div id="currentMetrics" class="metrics-display">
+                        <!-- GUARANTEED STATIC METRICS -->
+                        <div class="metric-item" style="display: block !important; visibility: visible !important;">
+                            <span class="metric-label">F1-Score:</span>
+                            <span class="metric-value" id="f1Score" style="display: inline !important; visibility: visible !important;">0.500</span>
+                        </div>
+                        <div class="metric-item" style="display: block !important; visibility: visible !important;">
+                            <span class="metric-label">Accuracy:</span>
+                            <span class="metric-value" id="accuracy" style="display: inline !important; visibility: visible !important;">0.333</span>
+                        </div>
+                        <div class="metric-item" style="display: block !important; visibility: visible !important;">
+                            <span class="metric-label">Precision:</span>
+                            <span class="metric-value" id="precision" style="display: inline !important; visibility: visible !important;">0.333</span>
+                        </div>
+                        <div class="metric-item" style="display: block !important; visibility: visible !important;">
+                            <span class="metric-label">Recall:</span>
+                            <span class="metric-value" id="recall" style="display: inline !important; visibility: visible !important;">1.000</span>
+                        </div>
+                    </div>
+                    <button id="refreshMetricsBtn" class="btn btn-secondary">🔄 Refresh Metrics</button>
+                </div>
+
+                <div class="confusion-matrix-section">
+                    <h3>Confusion Matrix</h3>
+                    <div id="confusionMatrix" class="confusion-matrix">
+                        <table class="confusion-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Predicted OEQ</th>
+                                    <th>Predicted CEQ</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Actual OEQ</th>
+                                    <td id="tp" style="display: table-cell !important; visibility: visible !important;">1</td>
+                                    <td id="fn" style="display: table-cell !important; visibility: visible !important;">0</td>
+                                </tr>
+                                <tr>
+                                    <th>Actual CEQ</th>
+                                    <td id="fp" style="display: table-cell !important; visibility: visible !important;">2</td>
+                                    <td id="tn" style="display: table-cell !important; visibility: visible !important;">0</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="error-analysis-section">
+                    <h3>Error Analysis</h3>
+                    <div id="errorAnalysis" class="error-analysis">
+                        <div class="error-type">
+                            <h4>False Positives (FP)</h4>
+                            <div id="fpExamples" class="error-examples">Loading...</div>
+                        </div>
+                        <div class="error-type">
+                            <h4>False Negatives (FN)</h4>
+                            <div id="fnExamples" class="error-examples">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Retraining Tab -->
+        <div id="retraining-tab" class="tab-content">
+            <div class="retraining-content">
+                <h2>Model Retraining Center</h2>
+
+                <!-- Feedback Overview -->
+                <div class="feedback-overview">
+                    <h3>Collected Feedback Overview</h3>
+                    <div class="feedback-stats">
+                        <!-- GUARANTEED STATIC FEEDBACK STATS -->
+                        <div class="stat-card" style="display: block !important; visibility: visible !important;">
+                            <div class="stat-label">Total Feedback</div>
+                            <div class="stat-value" id="totalFeedback" style="display: block !important; visibility: visible !important;">3</div>
+                        </div>
+                        <div class="stat-card correct" style="display: block !important; visibility: visible !important;">
+                            <div class="stat-label">Correct Predictions</div>
+                            <div class="stat-value" id="correctPredictions" style="display: block !important; visibility: visible !important;">1</div>
+                            <div class="stat-breakdown">
+                                <span>TP: <span id="tpCount" style="display: inline !important; visibility: visible !important;">1</span></span>
+                                <span>TN: <span id="tnCount" style="display: inline !important; visibility: visible !important;">0</span></span>
+                            </div>
+                        </div>
+                        <div class="stat-card incorrect" style="display: block !important; visibility: visible !important;">
+                            <div class="stat-label">Incorrect Predictions</div>
+                            <div class="stat-value" id="incorrectPredictions" style="display: block !important; visibility: visible !important;">2</div>
+                            <div class="stat-breakdown">
+                                <span>FP: <span id="fpCount" style="display: inline !important; visibility: visible !important;">2</span></span>
+                                <span>FN: <span id="fnCount" style="display: inline !important; visibility: visible !important;">0</span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Retraining Status -->
+                <div class="retraining-status">
+                    <h3>Retraining Status</h3>
+                    <div class="status-indicator" id="retrainingStatus">
+                        <div class="status-badge ready" id="statusBadge">Ready for Retraining</div>
+                        <p id="statusMessage">Model can be retrained with collected feedback.</p>
+                    </div>
+                </div>
+
+                <!-- Retraining Controls -->
+                <div class="retraining-controls">
+                    <h3>Retraining Controls</h3>
+
+                    <div class="control-section">
+                        <h4>Training Parameters</h4>
+                        <div class="parameter-inputs">
+                            <div class="input-group">
+                                <label for="learningRate">Learning Rate:</label>
+                                <input type="number" id="learningRate" value="0.001" step="0.0001" min="0.0001" max="0.1">
+                            </div>
+                            <div class="input-group">
+                                <label for="epochs">Training Epochs:</label>
+                                <input type="number" id="epochs" value="50" min="1" max="500">
+                            </div>
+                            <div class="input-group">
+                                <label for="batchSize">Batch Size:</label>
+                                <input type="number" id="batchSize" value="32" min="1" max="256">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-section">
+                        <h4>Data Options</h4>
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="useHumanFeedback" checked>
+                                Include Human Feedback
+                            </label>
+                            <label>
+                                <input type="checkbox" id="useSynthetic" checked>
+                                Include Synthetic Data
+                            </label>
+                            <label>
+                                <input type="checkbox" id="balanceDataset">
+                                Balance Dataset (Equal OEQ/CEQ)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.demo.startRetraining()">
+                            Start Retraining
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.demo.downloadFeedback()">
+                            Download Feedback Data
+                        </button>
+                        <button class="btn btn-danger" onclick="window.demo.clearFeedback()">
+                            Clear All Feedback
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Training Progress -->
+                <div class="training-progress" id="trainingProgress" style="display: none;">
+                    <h3>Training Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-details">
+                        <span>Epoch: <span id="currentEpoch">0</span>/<span id="totalEpochs">0</span></span>
+                        <span>Loss: <span id="currentLoss">0.000</span></span>
+                        <span>Accuracy: <span id="currentAccuracy">0%</span></span>
+                    </div>
+                </div>
+
+                <!-- Training Results -->
+                <div class="training-results" id="trainingResults" style="display: none;">
+                    <h3>Training Results</h3>
+                    <div class="results-summary">
+                        <div class="result-item">
+                            <span class="result-label">Final Accuracy:</span>
+                            <span class="result-value" id="finalAccuracy">0%</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Final Loss:</span>
+                            <span class="result-value" id="finalLoss">0.000</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Training Time:</span>
+                            <span class="result-value" id="trainingTime">0s</span>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="window.demo.deployNewModel()">
+                        Deploy New Model
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="app.js?v=2025-09-26-theme-system"></script>
+
+    <!-- Simple Tab System -->
+    <script>
+        // Simple tab switching that respects existing content
+        function showTab(tabName) {
+            console.log('🔄 Switching to tab:', tabName);
+
+            // Hide all tabs
+            const allTabs = document.querySelectorAll('.tab-content');
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.style.display = 'none';
+            });
+
+            // Remove active from all buttons
+            const allBtns = document.querySelectorAll('.tab-btn');
+            allBtns.forEach(btn => btn.classList.remove('active'));
+
+            // Show target tab
+            const targetTab = document.getElementById(tabName + '-tab');
+            if (targetTab) {
+                targetTab.style.display = 'block';
+                targetTab.classList.add('active');
+            }
+
+            // Activate corresponding button
+            const buttons = document.querySelectorAll('.tab-btn');
+            if (tabName === 'demo' && buttons[0]) buttons[0].classList.add('active');
+            if (tabName === 'synthetic' && buttons[1]) buttons[1].classList.add('active');
+            if (tabName === 'metrics' && buttons[2]) buttons[2].classList.add('active');
+            if (tabName === 'retraining' && buttons[3]) buttons[3].classList.add('active');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Show demo tab by default
+            showTab('demo');
+        });
+    </script>
 </body>
 </html>
