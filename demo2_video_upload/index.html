@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEMO 2: Video Upload with Human-in-Loop Training</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎬 Video Analysis & ML Training Demo</h1>
+            <p>Upload educator videos, validate ML predictions, and improve the model</p>
+        </header>
+
+        <!-- Upload Section -->
+        <div class="upload-section" id="uploadSection">
+            <div class="upload-card">
+                <h2>📹 Upload Educator Video</h2>
+                <p>Supported formats: MP4, MOV, AVI (max 100MB)</p>
+
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📁</div>
+                    <div class="upload-text">
+                        <h3>Drag & Drop or Click to Upload</h3>
+                        <p>Select an educator video for analysis</p>
+                    </div>
+                    <input type="file" id="fileInput" accept=".mp4,.mov,.avi" hidden>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <h3>📄 File Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <span class="label">Filename:</span>
+                            <span id="fileName">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Size:</span>
+                            <span id="fileSize">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Format:</span>
+                            <span id="fileFormat">-</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">Status:</span>
+                            <span id="fileStatus">Ready to process</span>
+                        </div>
+                    </div>
+
+                    <button id="processBtn" class="btn btn-primary">🚀 Process Video</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Processing Section -->
+        <div class="processing-section" id="processingSection" style="display: none;">
+            <div class="processing-card">
+                <h2>⚡ Processing Pipeline</h2>
+
+                <div class="pipeline-steps">
+                    <div class="step" id="step1">
+                        <div class="step-icon">📤</div>
+                        <div class="step-content">
+                            <h3>Upload Complete</h3>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="uploadProgress"></div>
+                            </div>
+                        </div>
+                        <div class="step-status" id="status1">✅</div>
+                    </div>
+
+                    <div class="step" id="step2">
+                        <div class="step-icon">🎵</div>
+                        <div class="step-content">
+                            <h3>Audio Transcription</h3>
+                            <p>Using Whisper for speech-to-text</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="transcribeProgress"></div>
+                            </div>
+                        </div>
+                        <div class="step-status" id="status2">⏳</div>
+                    </div>
+
+                    <div class="step" id="step3">
+                        <div class="step-icon">🔍</div>
+                        <div class="step-content">
+                            <h3>Question Detection</h3>
+                            <p>Finding questions in transcript</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="detectionProgress"></div>
+                            </div>
+                        </div>
+                        <div class="step-status" id="status3">⏳</div>
+                    </div>
+
+                    <div class="step" id="step4">
+                        <div class="step-icon">🤖</div>
+                        <div class="step-content">
+                            <h3>ML Classification</h3>
+                            <p>PyTorch OEQ/CEQ analysis</p>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="classificationProgress"></div>
+                            </div>
+                        </div>
+                        <div class="step-status" id="status4">⏳</div>
+                    </div>
+                </div>
+
+                <div class="processing-results" id="processingResults" style="display: none;">
+                    <h3>📊 Processing Complete</h3>
+                    <div class="results-summary">
+                        <div class="result-item">
+                            <span class="result-number" id="transcriptLength">0</span>
+                            <span class="result-label">Words Transcribed</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-number" id="questionsFound">0</span>
+                            <span class="result-label">Questions Found</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-number" id="processingTime">0</span>
+                            <span class="result-label">Seconds</span>
+                        </div>
+                    </div>
+                    <button id="validateBtn" class="btn btn-primary">✅ Validate Predictions</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validation Section -->
+        <div class="validation-section" id="validationSection" style="display: none;">
+            <div class="validation-card">
+                <h2>🔍 Human Validation</h2>
+                <p>Help improve our ML model by validating predictions</p>
+
+                <div class="validation-header">
+                    <span class="validation-counter" id="validationCounter">Question 1 of 3</span>
+                    <span class="validation-score">Accuracy: <span id="validationAccuracy">85%</span></span>
+                </div>
+
+                <div class="question-validation" id="questionValidation">
+                    <div class="transcript-section">
+                        <h3>📝 Transcript Context</h3>
+                        <div class="transcript-text" id="transcriptContext">
+                            Loading transcript context...
+                        </div>
+                    </div>
+
+                    <div class="question-analysis">
+                        <h3>❓ Question Analysis</h3>
+                        <div class="question-display">
+                            <div class="question-text" id="questionText">
+                                "What do you see in this picture?"
+                            </div>
+                            <div class="ml-prediction">
+                                <h4>🤖 ML Prediction:</h4>
+                                <div class="prediction-display">
+                                    <span class="prediction-type" id="predictionType">OEQ</span>
+                                    <span class="prediction-confidence" id="predictionConfidence">87% confidence</span>
+                                </div>
+                                <div class="prediction-bars">
+                                    <div class="prediction-bar oeq">
+                                        <span>OEQ:</span>
+                                        <div class="bar"><div class="fill" id="oeqBar"></div></div>
+                                        <span id="oeqPercent">87%</span>
+                                    </div>
+                                    <div class="prediction-bar ceq">
+                                        <span>CEQ:</span>
+                                        <div class="bar"><div class="fill" id="ceqBar"></div></div>
+                                        <span id="ceqPercent">13%</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="validation-controls">
+                            <h4>✋ Is this prediction correct?</h4>
+                            <div class="validation-buttons">
+                                <button class="btn btn-correct" id="correctBtn">✅ Correct</button>
+                                <button class="btn btn-incorrect" id="incorrectBtn">❌ Incorrect</button>
+                            </div>
+
+                            <div class="correction-section" id="correctionSection" style="display: none;">
+                                <h4>🔧 What should it be?</h4>
+                                <div class="correction-buttons">
+                                    <button class="btn btn-oeq" id="correctOEQ">OEQ (Open-Ended)</button>
+                                    <button class="btn btn-ceq" id="correctCEQ">CEQ (Closed-Ended)</button>
+                                </div>
+                            </div>
+
+                            <div class="navigation-buttons">
+                                <button id="prevBtn" class="btn btn-secondary" disabled>⬅️ Previous</button>
+                                <button id="nextBtn" class="btn btn-primary" disabled>Next ➡️</button>
+                                <button id="finishBtn" class="btn btn-success" style="display: none;">🏁 Finish Validation</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Training Section -->
+        <div class="training-section" id="trainingSection" style="display: none;">
+            <div class="training-card">
+                <h2>🧠 Model Retraining</h2>
+                <p>Updating the model with your feedback</p>
+
+                <div class="training-progress">
+                    <div class="training-step">
+                        <span class="step-number">1</span>
+                        <span class="step-name">Preparing training data</span>
+                        <div class="training-spinner" id="spinner1"></div>
+                    </div>
+                    <div class="training-step">
+                        <span class="step-number">2</span>
+                        <span class="step-name">Updating model weights</span>
+                        <div class="training-spinner" id="spinner2"></div>
+                    </div>
+                    <div class="training-step">
+                        <span class="step-number">3</span>
+                        <span class="step-name">Calculating metrics</span>
+                        <div class="training-spinner" id="spinner3"></div>
+                    </div>
+                </div>
+
+                <div class="training-results" id="trainingResults" style="display: none;">
+                    <h3>📊 Training Complete!</h3>
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value" id="precisionValue">0.89</div>
+                            <div class="metric-label">Precision</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="recallValue">0.84</div>
+                            <div class="metric-label">Recall</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="f1Value">0.86</div>
+                            <div class="metric-label">F1-Score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="accuracyValue">0.87</div>
+                            <div class="metric-label">Accuracy</div>
+                        </div>
+                    </div>
+
+                    <div class="confusion-matrix" id="confusionMatrix">
+                        <h4>🔢 Confusion Matrix</h4>
+                        <div class="matrix-grid">
+                            <div class="matrix-header"></div>
+                            <div class="matrix-header">Predicted OEQ</div>
+                            <div class="matrix-header">Predicted CEQ</div>
+                            <div class="matrix-header">Actual OEQ</div>
+                            <div class="matrix-cell tp" id="tpValue">45</div>
+                            <div class="matrix-cell fn" id="fnValue">8</div>
+                            <div class="matrix-header">Actual CEQ</div>
+                            <div class="matrix-cell fp" id="fpValue">7</div>
+                            <div class="matrix-cell tn" id="tnValue">52</div>
+                        </div>
+                    </div>
+
+                    <div class="loss-chart">
+                        <h4>📈 Training Loss</h4>
+                        <canvas id="lossChart" width="400" height="200"></canvas>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button id="resetBtn" class="btn btn-secondary">🔄 Process Another Video</button>
+                        <button id="downloadBtn" class="btn btn-primary">💾 Download Updated Model</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading Overlay -->
+        <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3 id="loadingMessage">Processing...</h3>
+                <p id="loadingDetail">Please wait while we analyze your video</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="upload_handler.js"></script>
+    <script src="validation.js"></script>
+    <script src="training.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
