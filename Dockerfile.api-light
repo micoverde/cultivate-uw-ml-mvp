@@ -13,14 +13,7 @@ COPY requirements-api-light.txt .
 RUN pip install --no-cache-dir -r requirements-api-light.txt
 
 # Copy application code
-COPY src/api /app/api
-COPY unified-demos/demo1/ml_api_real.py /app/api/ml_endpoint.py
-
-# Create simple health check endpoint
-RUN echo 'from fastapi import FastAPI\napp = FastAPI()\n@app.get("/health")\ndef health():\n    return {"status": "healthy", "service": "cultivate-ml-api"}' > /app/api/health.py
-
-# Create simple main app
-RUN echo 'from fastapi import FastAPI\nfrom fastapi.middleware.cors import CORSMiddleware\n\napp = FastAPI(title="Cultivate ML API")\n\napp.add_middleware(\n    CORSMiddleware,\n    allow_origins=["*"],\n    allow_methods=["*"],\n    allow_headers=["*"],\n)\n\n@app.get("/")\ndef root():\n    return {"message": "Cultivate ML API v3.0"}\n\n@app.get("/health")\ndef health():\n    return {"status": "healthy"}\n\n@app.post("/api/classify")\ndef classify(text: str):\n    # Simple mock classification for now\n    return {"classification": "OEQ", "confidence": 0.85}' > /app/main.py
+COPY api_real.py /app/main.py
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
