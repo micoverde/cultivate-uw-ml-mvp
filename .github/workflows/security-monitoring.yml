@@ -2,9 +2,9 @@ name: Security Monitoring (Async)
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ main ]
   pull_request:
-    branches: [ main, dev ]
+    branches: [ main ]
   schedule:
     # Run CodeQL analysis twice daily
     - cron: '0 6,18 * * *'
