@@ -22,5 +22,29 @@
     "correct_class": "CEQ",
     "error_type": "FP",
     "scenario_id": 2
+  },
+  {
+    "timestamp": "2025-09-27T00:10:35.507Z",
+    "text": "did it break?",
+    "predicted_class": "OEQ",
+    "correct_class": "CEQ",
+    "error_type": "FP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T00:12:30.548Z",
+    "text": "fall/",
+    "predicted_class": "CEQ",
+    "correct_class": "CEQ",
+    "error_type": "TN",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T00:12:41.400Z",
+    "text": "why not?",
+    "predicted_class": "CEQ",
+    "correct_class": "OEQ",
+    "error_type": "FN",
+    "scenario_id": 2
   }
 ]
