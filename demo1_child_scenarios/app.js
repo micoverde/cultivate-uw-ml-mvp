@@ -366,16 +366,33 @@ class ChildScenarioDemo {
         try {
             console.log('🚀 Sending text to ML API:', text);
 
-            const response = await fetch(`${this.apiBaseUrl}/classify_response`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    text: text,
-                    scenario_id: this.scenarios[this.currentScenarioIndex].id
-                })
-            });
+            // Determine API format based on environment
+            const isProduction = !this.apiBaseUrl.includes('localhost');
+            let response;
+
+            if (isProduction) {
+                // Production API uses /api/classify with query parameter
+                const endpoint = `${this.apiBaseUrl}/api/classify?text=${encodeURIComponent(text)}`;
+                console.log('📡 Using production API endpoint:', endpoint);
+
+                response = await fetch(endpoint, {
+                    method: 'POST'
+                });
+            } else {
+                // Local development uses /classify_response with JSON body
+                console.log('📡 Using local API endpoint:', `${this.apiBaseUrl}/classify_response`);
+
+                response = await fetch(`${this.apiBaseUrl}/classify_response`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        text: text,
+                        scenario_id: this.scenarios[this.currentScenarioIndex].id
+                    })
+                });
+            }
 
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);

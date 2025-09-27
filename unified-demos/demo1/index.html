@@ -927,27 +927,46 @@
                 // Call REAL ML API
                 const currentScenario = scenarios[currentScenarioIndex];
                 const apiBase = getApiBaseUrl();
-                console.log('\n🌐 API REQUEST:');
-                console.log(`🎯 Endpoint: ${apiBase}/classify_response`);
-                console.log(`📋 Scenario ID: ${currentScenario.id}`);
-                console.log(`🧠 Model: PyTorch Neural Network (4-layer, 56 features)`);
 
-                const apiRequest = {
-                    text: response,
-                    scenario_id: currentScenario.id,
-                    debug_mode: true
-                };
+                // Determine API format based on environment
+                const isProduction = !apiBase.includes('localhost');
+                let apiResponse;
 
-                console.log('\n📤 REQUEST PAYLOAD:');
-                console.log(JSON.stringify(apiRequest, null, 2));
+                if (isProduction) {
+                    // Production API uses /api/classify with query parameter
+                    const endpoint = `${apiBase}/api/classify?text=${encodeURIComponent(response)}`;
+                    console.log('\n🌐 API REQUEST (Production):');
+                    console.log(`🎯 Endpoint: ${endpoint}`);
+                    console.log(`📋 Text: "${response}"`);
+                    console.log(`🧠 Model: Production ML Model`);
 
-                const apiResponse = await fetch(`${apiBase}/classify_response`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(apiRequest)
-                });
+                    apiResponse = await fetch(endpoint, {
+                        method: 'POST'
+                    });
+                } else {
+                    // Local development uses /classify_response with JSON body
+                    console.log('\n🌐 API REQUEST (Local):');
+                    console.log(`🎯 Endpoint: ${apiBase}/classify_response`);
+                    console.log(`📋 Scenario ID: ${currentScenario.id}`);
+                    console.log(`🧠 Model: PyTorch Neural Network (4-layer, 56 features)`);
+
+                    const apiRequest = {
+                        text: response,
+                        scenario_id: currentScenario.id,
+                        debug_mode: true
+                    };
+
+                    console.log('\n📤 REQUEST PAYLOAD:');
+                    console.log(JSON.stringify(apiRequest, null, 2));
+
+                    apiResponse = await fetch(`${apiBase}/classify_response`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(apiRequest)
+                    });
+                }
 
                 if (!apiResponse.ok) {
                     throw new Error(`API Error: ${apiResponse.status} ${apiResponse.statusText}`);

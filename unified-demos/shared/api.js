@@ -22,8 +22,11 @@ class UnifiedMLAPI {
     constructor() {
         // Dynamic API endpoint configuration based on environment
         const apiBase = getApiBaseUrl();
+        const isProduction = !apiBase.includes('localhost');
+
         this.endpoints = {
-            demo1: `${apiBase}/classify_response`,
+            // Use correct endpoint based on environment
+            demo1: isProduction ? `${apiBase}/api/classify` : `${apiBase}/classify_response`,
             demo2: {
                 classify: '/api/v1/classify/question',
                 feedback: '/api/v1/save_feedback'
@@ -73,19 +76,34 @@ class UnifiedMLAPI {
      * Demo 1 classification - Child Scenarios pattern
      */
     async classifyDemo1(text, options) {
-        const request = {
-            text: text,
-            scenario_id: options.scenario_id || 1,
-            debug_mode: true
-        };
+        const apiBase = getApiBaseUrl();
+        const isProduction = !apiBase.includes('localhost');
+        let response;
 
-        console.log(`🎭 Demo 1 API Request:`, request);
+        if (isProduction) {
+            // Production API uses query parameter
+            console.log(`🎭 Demo 1 API Request (Production): text="${text}"`);
+            const endpoint = `${this.endpoints.demo1}?text=${encodeURIComponent(text)}`;
 
-        const response = await fetch(this.endpoints.demo1, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(request)
-        });
+            response = await fetch(endpoint, {
+                method: 'POST'
+            });
+        } else {
+            // Local API uses JSON body
+            const request = {
+                text: text,
+                scenario_id: options.scenario_id || 1,
+                debug_mode: true
+            };
+
+            console.log(`🎭 Demo 1 API Request (Local):`, request);
+
+            response = await fetch(this.endpoints.demo1, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(request)
+            });
+        }
 
         if (!response.ok) {
             throw new Error(`Demo 1 API Error: ${response.status} ${response.statusText}`);
