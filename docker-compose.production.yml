@@ -1,0 +1,439 @@
+version: '3.9'
+
+# Production-Ready Docker Compose Configuration
+# Designed for Azure Container Apps & AKS Deployment
+
+services:
+  # ========== FRONTEND SERVICES ==========
+
+  # Unified Demos Web Application
+  web-demos:
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        NODE_ENV: production
+    image: cultivate.azurecr.io/web-demos:latest
+    ports:
+      - "3000:80"
+    environment:
+      - API_GATEWAY_URL=http://api-gateway:8080
+      - ENVIRONMENT=production
+      - AZURE_INSIGHTS_KEY=${AZURE_INSIGHTS_KEY}
+    depends_on:
+      - api-gateway
+    networks:
+      - frontend-network
+      - monitoring-network
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+      restart_policy:
+        condition: any
+        delay: 5s
+        max_attempts: 3
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+
+  # ========== API GATEWAY ==========
+
+  api-gateway:
+    image: cultivate.azurecr.io/api-gateway:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.gateway
+    ports:
+      - "8080:8080"
+    environment:
+      - REDIS_URL=redis://redis-cache:6379
+      - AUTH_SERVICE_URL=http://auth-service:8002
+      - ML_API_URL=http://ml-api-light:8000
+      - ML_HEAVY_URL=http://ml-api-heavy:8001
+      - VIDEO_PROCESSOR_URL=http://video-processor:8003
+      - RATE_LIMIT_ENABLED=true
+      - CORS_ENABLED=true
+    depends_on:
+      - redis-cache
+      - ml-api-light
+      - ml-api-heavy
+    networks:
+      - frontend-network
+      - backend-network
+      - monitoring-network
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+  # ========== ML SERVICES ==========
+
+  # Lightweight ML API (FastAPI + Small Models)
+  ml-api-light:
+    image: cultivate.azurecr.io/ml-api-light:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.mlapi
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/models/light
+      - CACHE_ENABLED=true
+      - REDIS_URL=redis://redis-cache:6379
+      - DATABASE_URL=postgresql://user:${DB_PASSWORD}@postgres-db:5432/cultivate
+      - MAX_WORKERS=4
+      - LOG_LEVEL=info
+    volumes:
+      - ./models/light:/models/light:ro
+      - ml-cache:/cache
+    depends_on:
+      - redis-cache
+      - postgres-db
+    networks:
+      - backend-network
+      - data-network
+      - monitoring-network
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "python", "-c", "import requests; requests.get('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Heavy ML Service (PyTorch Deep Learning)
+  ml-api-heavy:
+    image: cultivate.azurecr.io/ml-api-heavy:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.ml
+    ports:
+      - "8001:8001"
+    environment:
+      - MODEL_PATH=/models/heavy
+      - PYTORCH_CUDA_ENABLED=${CUDA_ENABLED:-false}
+      - REDIS_URL=redis://redis-cache:6379
+      - BATCH_SIZE=32
+      - MODEL_CACHE_SIZE=5
+    volumes:
+      - ./models/heavy:/models/heavy:ro
+      - pytorch-cache:/root/.cache/torch
+    depends_on:
+      - redis-cache
+    networks:
+      - backend-network
+      - monitoring-network
+    deploy:
+      replicas: 2
+      placement:
+        constraints:
+          - node.labels.gpu == true  # Deploy only on GPU nodes if available
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+
+  # ========== VIDEO PROCESSING ==========
+
+  video-processor:
+    image: cultivate.azurecr.io/video-processor:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.whisper
+    ports:
+      - "8003:8003"
+    environment:
+      - WHISPER_MODEL=${WHISPER_MODEL:-base}
+      - MAX_VIDEO_SIZE=500MB
+      - STORAGE_BACKEND=azure
+      - AZURE_STORAGE_CONNECTION=${AZURE_STORAGE_CONNECTION}
+      - QUEUE_CONNECTION=amqp://admin:${RABBITMQ_PASSWORD}@rabbitmq:5672
+      - FFMPEG_THREADS=4
+    depends_on:
+      - rabbitmq
+      - blob-storage
+    networks:
+      - backend-network
+      - storage-network
+      - monitoring-network
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '3'
+          memory: 4G
+
+  # ========== DATA LAYER ==========
+
+  # PostgreSQL Database (Primary)
+  postgres-db:
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=cultivate
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_MAX_CONNECTIONS=200
+      - POSTGRES_SHARED_BUFFERS=256MB
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+    networks:
+      - data-network
+      - monitoring-network
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d cultivate"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (High Performance)
+  redis-cache:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=${REDIS_PASSWORD}
+    volumes:
+      - redis-data:/data
+      - ./redis.conf:/usr/local/etc/redis/redis.conf:ro
+    networks:
+      - backend-network
+      - data-network
+      - monitoring-network
+    command: redis-server /usr/local/etc/redis/redis.conf --requirepass ${REDIS_PASSWORD}
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # ========== MESSAGE QUEUE ==========
+
+  rabbitmq:
+    image: rabbitmq:3.12-management-alpine
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=${RABBITMQ_PASSWORD}
+      - RABBITMQ_VM_MEMORY_HIGH_WATERMARK=0.4
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+      - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf:ro
+    networks:
+      - backend-network
+      - monitoring-network
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+  # ========== STORAGE ==========
+
+  # Azure Blob Storage Emulator (Azurite)
+  blob-storage:
+    image: mcr.microsoft.com/azure-storage/azurite:latest
+    ports:
+      - "10000:10000"  # Blob service
+      - "10001:10001"  # Queue service
+      - "10002:10002"  # Table service
+    environment:
+      - AZURITE_ACCOUNTS=${AZURITE_ACCOUNTS}
+    volumes:
+      - blob-data:/data
+    networks:
+      - storage-network
+      - monitoring-network
+    command: azurite --loose --blobHost 0.0.0.0 --queueHost 0.0.0.0 --tableHost 0.0.0.0
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # ========== MONITORING STACK ==========
+
+  # Prometheus Metrics Collection
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    networks:
+      - monitoring-network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+
+  # Grafana Visualization
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - GF_INSTALL_PLUGINS=redis-datasource,azure-monitor-datasource
+      - GF_SERVER_ROOT_URL=http://localhost:3001
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # Jaeger Distributed Tracing
+  jaeger:
+    image: jaegertracing/all-in-one:latest
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # Collector
+    environment:
+      - COLLECTOR_ZIPKIN_HOST_PORT=:9411
+      - SPAN_STORAGE_TYPE=badger
+      - BADGER_EPHEMERAL=false
+      - BADGER_DIRECTORY_VALUE=/badger/data
+      - BADGER_DIRECTORY_KEY=/badger/key
+    volumes:
+      - jaeger-data:/badger
+    networks:
+      - monitoring-network
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+
+  # ========== LOAD BALANCER ==========
+
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/certs:/etc/nginx/certs:ro
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+    depends_on:
+      - web-demos
+      - api-gateway
+    networks:
+      - frontend-network
+      - monitoring-network
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+
+# ========== NETWORKS ==========
+networks:
+  frontend-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+  backend-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.21.0.0/24
+
+  data-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.0.0/24
+
+  storage-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
+
+  monitoring-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.24.0.0/24
+
+# ========== VOLUMES ==========
+volumes:
+  postgres-data:
+    driver: local
+  redis-data:
+    driver: local
+  rabbitmq-data:
+    driver: local
+  blob-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+  jaeger-data:
+    driver: local
+  ml-cache:
+    driver: local
+  pytorch-cache:
+    driver: local
