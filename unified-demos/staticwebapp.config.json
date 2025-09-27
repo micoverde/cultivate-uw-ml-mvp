@@ -21,7 +21,7 @@
     }
   ],
   "globalHeaders": {
-    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8001 https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io; connect-src 'self' http://localhost:8001 https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:;",
+    "content-security-policy": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://localhost:8001 https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io https://cdn.jsdelivr.net; connect-src 'self' http://localhost:8001 https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self' https://cultivatemlvideos.blob.core.windows.net;",
     "X-Content-Type-Options": "nosniff",
     "X-Frame-Options": "DENY",
     "X-XSS-Protection": "1; mode=block"
