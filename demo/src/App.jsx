@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Brain, Users, Camera, Mic, BarChart3, Heart, Sparkles, Sun, Moon, ChevronRight, Star, Award, Zap, Target, Shield } from 'lucide-react';
+import { Brain, Users, Camera, Mic, BarChart3, Heart, Sparkles, Sun, Moon, ChevronRight, Star, Award, Zap, Target, Shield, Settings } from 'lucide-react';
 import TranscriptSubmission from './components/TranscriptSubmission';
 import AnalysisResults from './components/AnalysisResults';
 import EducatorResponseResults from './components/EducatorResponseResults';
@@ -7,6 +7,7 @@ import MockAnalysisTest from './components/MockAnalysisTest';
 import MockRecommendationsTest from './components/MockRecommendationsTest';
 import ScenarioSelection from './components/ScenarioSelection';
 import EducatorResponseInput from './components/EducatorResponseInput';
+import MLSettingsModal from './components/MLSettingsModal';
 import { API_ENDPOINTS } from './config/api';
 import { monitoring } from './config/monitoring';
 import SecurityManager from './config/security';
@@ -22,6 +23,7 @@ function App() {
     const saved = localStorage.getItem('darkMode');
     return saved !== null ? saved === 'true' : false;
   });
+  const [isMLSettingsOpen, setIsMLSettingsOpen] = useState(false);
 
   useEffect(() => {
     // Initialize security controls
@@ -449,6 +451,20 @@ function App() {
 
             {/* Enhanced Navigation */}
             <nav className="hidden md:flex items-center space-x-8">
+              {/* ML Settings button */}
+              <button
+                onClick={() => setIsMLSettingsOpen(true)}
+                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  isDarkMode
+                    ? 'bg-slate-800 hover:bg-slate-700 text-blue-400'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                }`}
+                aria-label="ML Model Settings"
+                title="ML Model Settings"
+              >
+                <Settings className="w-5 h-5" />
+              </button>
+
               {/* Dark mode toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -524,6 +540,20 @@ function App() {
 
             {/* Mobile menu button */}
             <div className="md:hidden flex items-center space-x-3">
+              {/* Mobile ML Settings button */}
+              <button
+                onClick={() => setIsMLSettingsOpen(true)}
+                className={`w-10 h-10 rounded-xl flex items-center justify-center transition-colors ${
+                  isDarkMode
+                    ? 'bg-slate-800 hover:bg-slate-700 text-blue-400'
+                    : 'bg-slate-100 hover:bg-slate-200 text-slate-600'
+                }`}
+                aria-label="ML Model Settings"
+                title="ML Model Settings"
+              >
+                <Settings className="w-5 h-5" />
+              </button>
+
               {/* Mobile dark mode toggle */}
               <button
                 onClick={toggleDarkMode}
@@ -1121,6 +1151,12 @@ const PremiumFeatureCard = React.memo(function PremiumFeatureCard({ icon, title,
           </svg>
         </div>
       </div>
+
+      {/* ML Settings Modal */}
+      <MLSettingsModal
+        isOpen={isMLSettingsOpen}
+        onClose={() => setIsMLSettingsOpen(false)}
+      />
     </div>
   );
 });
