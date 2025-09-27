@@ -1,0 +1,27 @@
+{
+  "timestamp": "2025-09-27T09:13:24.055108",
+  "training_data": {
+    "samples": 98,
+    "features": 19,
+    "classes": [
+      "OEQ",
+      "CEQ"
+    ]
+  },
+  "ensemble_performance": {
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "training_time": 48.92
+  },
+  "classic_performance": {
+    "accuracy": 1.0,
+    "f1_score": 1.0,
+    "training_time": 0.73
+  },
+  "recommendation": "DEPLOY ENSEMBLE - Similar performance, more robust",
+  "azure_deployment": {
+    "status": "pending",
+    "container": "ml-models",
+    "blob_names": []
+  }
+}
