@@ -56,6 +56,15 @@
     --border-radius-large: 12px;
     --transition-fast: 0.2s ease;
     --transition-medium: 0.3s ease;
+
+    /* Professional Spacing System */
+    --space-xs: 8px;
+    --space-sm: 12px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
 }
 
 /* DARK THEME OVERRIDES */
