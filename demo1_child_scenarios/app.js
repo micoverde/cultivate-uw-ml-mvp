@@ -400,8 +400,20 @@ class ChildScenarioDemo {
 
             const result = await response.json();
 
+            // Normalize production API response
+            if (isProduction && !result.oeq_probability) {
+                // Calculate probabilities from confidence
+                if (result.classification === 'OEQ') {
+                    result.oeq_probability = result.confidence;
+                    result.ceq_probability = 1 - result.confidence;
+                } else {
+                    result.ceq_probability = result.confidence;
+                    result.oeq_probability = 1 - result.confidence;
+                }
+            }
+
             console.log('🧠 ML Prediction Result:', result);
-            console.log(`📊 Method: ${result.method}`);
+            console.log(`📊 Method: ${result.method || 'ML Ensemble'}`);
             console.log(`🎯 Classification: ${result.classification}`);
             console.log(`📈 Confidence: ${result.confidence?.toFixed(3)}`);
             console.log(`🔍 OEQ: ${result.oeq_probability?.toFixed(3)}, CEQ: ${result.ceq_probability?.toFixed(3)}`);
@@ -474,8 +486,8 @@ class ChildScenarioDemo {
         console.log('🎨 displayResults called:', { classification, responseText });
 
         try {
-            const oeqPercent = Math.round(classification.oeq_probability * 100);
-            const ceqPercent = Math.round(classification.ceq_probability * 100);
+            const oeqPercent = Math.round((classification.oeq_probability || 0) * 100);
+            const ceqPercent = Math.round((classification.ceq_probability || 0) * 100);
 
             console.log('📊 Updating UI with percentages:', { oeqPercent, ceqPercent });
 

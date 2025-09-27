@@ -974,12 +974,24 @@
 
                 const mlResult = await apiResponse.json();
 
+                // Production API returns simplified format, normalize it
+                if (isProduction && !mlResult.oeq_probability) {
+                    // Calculate probabilities from confidence
+                    if (mlResult.classification === 'OEQ') {
+                        mlResult.oeq_probability = mlResult.confidence;
+                        mlResult.ceq_probability = 1 - mlResult.confidence;
+                    } else {
+                        mlResult.ceq_probability = mlResult.confidence;
+                        mlResult.oeq_probability = 1 - mlResult.confidence;
+                    }
+                }
+
                 console.log('\n📥 REAL ML API RESPONSE:');
                 console.log(JSON.stringify(mlResult, null, 2));
 
                 console.log('\n🧠 NEURAL NETWORK DETAILS:');
                 console.log(`🔢 Features Extracted: ${mlResult.features_used || 56}`);
-                console.log(`🎯 Classification Method: ${mlResult.method}`);
+                console.log(`🎯 Classification Method: ${mlResult.method || 'ML Ensemble'}`);
                 console.log(`📊 Raw Neural Outputs: [${mlResult.debug_info?.raw_outputs?.join(', ') || 'N/A'}]`);
                 console.log(`🧮 Softmax Probabilities: [${mlResult.debug_info?.softmax_probs?.join(', ') || 'N/A'}]`);
 
@@ -991,10 +1003,10 @@
                 }
 
                 console.log('\n🎯 FINAL CLASSIFICATION:');
-                console.log(`📈 OEQ Probability: ${(mlResult.oeq_probability * 100).toFixed(1)}%`);
-                console.log(`📉 CEQ Probability: ${(mlResult.ceq_probability * 100).toFixed(1)}%`);
+                console.log(`📈 OEQ Probability: ${((mlResult.oeq_probability || 0) * 100).toFixed(1)}%`);
+                console.log(`📉 CEQ Probability: ${((mlResult.ceq_probability || 0) * 100).toFixed(1)}%`);
                 console.log(`🏆 Winner: ${mlResult.classification}`);
-                console.log(`🎖️  Confidence: ${(mlResult.confidence * 100).toFixed(1)}%`);
+                console.log(`🎖️  Confidence: ${((mlResult.confidence || 0) * 100).toFixed(1)}%`);
 
                 console.log('\n🏗️ SCENARIO CONTEXT:');
                 console.log(`📋 Scenario: ${currentScenario.title}`);
@@ -1018,9 +1030,9 @@
                     });
                 }
 
-                // Update display with real results
-                const oeqPercent = Math.round(mlResult.oeq_probability * 100);
-                const ceqPercent = Math.round(mlResult.ceq_probability * 100);
+                // Update display with real results (use normalized probabilities)
+                const oeqPercent = Math.round((mlResult.oeq_probability || 0) * 100);
+                const ceqPercent = Math.round((mlResult.ceq_probability || 0) * 100);
 
                 // Restore results HTML structure with human feedback
                 resultsDiv.innerHTML = `

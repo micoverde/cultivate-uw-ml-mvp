@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Production API Fix</title>
+</head>
+<body>
+    <h1>Testing Production API Fix</h1>
+    <button onclick="testAPI()">Test API Call</button>
+    <div id="result"></div>
+
+    <script>
+        async function testAPI() {
+            const apiBase = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+            const text = 'What happened to make you feel that way?';
+            const endpoint = `${apiBase}/api/classify?text=${encodeURIComponent(text)}`;
+
+            console.log('Testing:', endpoint);
+            document.getElementById('result').innerHTML = 'Testing...';
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST'
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json();
+                console.log('Success:', result);
+                document.getElementById('result').innerHTML = `
+                    <h2>✅ Success!</h2>
+                    <pre>${JSON.stringify(result, null, 2)}</pre>
+                `;
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `
+                    <h2>❌ Error</h2>
+                    <pre>${error.message}</pre>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

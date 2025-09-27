@@ -963,10 +963,10 @@
                 }
 
                 console.log('\n🎯 FINAL CLASSIFICATION:');
-                console.log(`📈 OEQ Probability: ${(mlResult.oeq_probability * 100).toFixed(1)}%`);
-                console.log(`📉 CEQ Probability: ${(mlResult.ceq_probability * 100).toFixed(1)}%`);
+                console.log(`📈 OEQ Probability: ${((mlResult.oeq_probability || 0) * 100).toFixed(1)}%`);
+                console.log(`📉 CEQ Probability: ${((mlResult.ceq_probability || 0) * 100).toFixed(1)}%`);
                 console.log(`🏆 Winner: ${mlResult.classification}`);
-                console.log(`🎖️  Confidence: ${(mlResult.confidence * 100).toFixed(1)}%`);
+                console.log(`🎖️  Confidence: ${((mlResult.confidence || 0) * 100).toFixed(1)}%`);
 
                 console.log('\n🏗️ SCENARIO CONTEXT:');
                 console.log(`📋 Scenario: ${currentScenario.title}`);
@@ -977,8 +977,8 @@
                 console.log('=' * 60);
 
                 // Update display with real results
-                const oeqPercent = Math.round(mlResult.oeq_probability * 100);
-                const ceqPercent = Math.round(mlResult.ceq_probability * 100);
+                const oeqPercent = Math.round((mlResult.oeq_probability || 0) * 100);
+                const ceqPercent = Math.round((mlResult.ceq_probability || 0) * 100);
 
                 // Restore results HTML structure with human feedback
                 resultsDiv.innerHTML = `

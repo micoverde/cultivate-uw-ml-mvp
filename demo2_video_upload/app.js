@@ -315,9 +315,9 @@ class VideoUploadDemo {
         document.getElementById('predictionType').className = `prediction-type ${prediction.classification}`;
         document.getElementById('predictionConfidence').textContent = `${Math.round(prediction.confidence * 100)}% confidence`;
 
-        // Update prediction bars
-        const oeqPercent = Math.round(prediction.oeq_probability * 100);
-        const ceqPercent = Math.round(prediction.ceq_probability * 100);
+        // Update prediction bars (handle missing probabilities)
+        const oeqPercent = Math.round((prediction.oeq_probability || 0) * 100);
+        const ceqPercent = Math.round((prediction.ceq_probability || 0) * 100);
 
         document.getElementById('oeqBar').style.width = `${oeqPercent}%`;
         document.getElementById('ceqBar').style.width = `${ceqPercent}%`;
