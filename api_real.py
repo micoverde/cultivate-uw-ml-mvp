@@ -4,12 +4,13 @@ REAL ML API for Cultivate Learning - NO HARDCODED VALUES
 Warren's requirement: REAL ML models only, no simulations or hardcoded values
 """
 
-from fastapi import FastAPI, Query
+from fastapi import FastAPI, Query, Body
 from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
 import random
 import hashlib
 import re
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 app = FastAPI(title="Cultivate ML API - Real Classification")
 
@@ -19,6 +20,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Request models for JSON body
+class FeedbackRequest(BaseModel):
+    text: str
+    classification: Optional[str] = None
+    predicted_class: Optional[str] = None
+    feedback: Optional[str] = None
+    correct_class: Optional[str] = None
+    scenario_id: Optional[int] = None
+    confidence: Optional[float] = None
+    error_type: Optional[str] = None
+
+class FeedbackV1Request(BaseModel):
+    text: str
+    predicted_class: str
+    correct_class: str
+    confidence: float
+    error_type: Optional[str] = None
 
 def extract_features(text: str) -> Dict:
     """Extract real linguistic features from text"""
@@ -152,18 +171,36 @@ def classify_detailed(text: str = Query(..., description="Text to classify")):
 
 @app.post("/save_feedback")
 async def save_feedback(
-    text: str = Query(..., description="Text that was classified"),
-    classification: str = Query(..., description="ML classification result"),
-    feedback: str = Query(..., description="Human feedback (correct/incorrect)"),
+    request: FeedbackRequest = Body(None),
+    text: str = Query(None, description="Text that was classified"),
+    classification: str = Query(None, description="ML classification result"),
+    feedback: str = Query(None, description="Human feedback (correct/incorrect)"),
     scenario_id: int = Query(None, description="Optional scenario ID")
 ):
     """
     Save human feedback for ML training improvement
     Warren's requirement: Persist feedback in Azure Blob Storage for ground truth loss evaluation
+    Accepts both JSON body and query parameters for compatibility
     """
     import json
     import os
     from datetime import datetime
+
+    # Handle both JSON body and query parameters
+    if request:
+        # Request came as JSON body
+        text = request.text
+        classification = request.classification or request.predicted_class
+        feedback = request.feedback or ("correct" if request.predicted_class == request.correct_class else "incorrect")
+        scenario_id = request.scenario_id
+    else:
+        # Request came as query parameters
+        if not text or not classification:
+            return {
+                "success": False,
+                "message": "Missing required fields: text and classification",
+                "error": "Bad Request"
+            }
 
     # Create feedback record
     feedback_record = {
@@ -280,25 +317,45 @@ async def save_feedback(
 
 @app.post("/api/v1/feedback/save")
 async def save_feedback_v1(
-    text: str = Query(..., description="Text that was classified"),
-    predicted_class: str = Query(..., description="ML classification result"),
-    correct_class: str = Query(..., description="Human corrected classification"),
-    confidence: float = Query(..., description="Model confidence"),
+    request: FeedbackV1Request = Body(None),
+    text: str = Query(None, description="Text that was classified"),
+    predicted_class: str = Query(None, description="ML classification result"),
+    correct_class: str = Query(None, description="Human corrected classification"),
+    confidence: float = Query(None, description="Model confidence"),
     error_type: str = Query(None, description="Error type (FP/FN)")
 ):
     """
     Save feedback from Demo 2 - v1 API format
     Warren's requirement: Support Demo 2 feedback format
+    Accepts both JSON body and query parameters
     """
+    # Handle both JSON body and query parameters
+    if request:
+        # Request came as JSON body
+        text = request.text
+        predicted_class = request.predicted_class
+        correct_class = request.correct_class
+    else:
+        # Request came as query parameters
+        if not text or not predicted_class or not correct_class:
+            return {
+                "success": False,
+                "message": "Missing required fields",
+                "error": "Bad Request"
+            }
+
     # Convert to standard feedback format and call main handler
     feedback_value = "correct" if predicted_class == correct_class else "incorrect"
 
-    return await save_feedback(
+    # Create a FeedbackRequest object for consistency
+    feedback_req = FeedbackRequest(
         text=text,
         classification=predicted_class,
         feedback=feedback_value,
         scenario_id=None
     )
+
+    return await save_feedback(request=feedback_req)
 
 @app.get("/api/feedback/stats")
 def get_feedback_stats():
