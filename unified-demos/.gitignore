@@ -17,3 +17,10 @@ test_results/
 # OS
 .DS_Store
 Thumbs.db
+
+# Large video files (already deployed to SWA)
+warren_teaching_web.mp4
+*.mp4
+*.mov
+*.avi
+*.webm
