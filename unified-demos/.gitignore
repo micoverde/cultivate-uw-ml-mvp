@@ -1,0 +1,19 @@
+# Python virtual environments
+test_env/
+venv/
+env/
+.env
+*.pyc
+__pycache__/
+
+# Test results
+azure_deployment_test_results.json
+test_results/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
