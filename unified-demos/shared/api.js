@@ -4,11 +4,26 @@
  * Warren's requirement: REAL ML APIs only, no simulation
  */
 
+// Helper function to get the correct API base URL
+function getApiBaseUrl() {
+    // Check if we're running locally or in production
+    const hostname = window.location.hostname;
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // Local development - use local ML API
+        return 'http://localhost:8001';
+    } else {
+        // Production - use Azure Container Apps API
+        return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+    }
+}
+
 class UnifiedMLAPI {
     constructor() {
-        // API endpoint configuration
+        // Dynamic API endpoint configuration based on environment
+        const apiBase = getApiBaseUrl();
         this.endpoints = {
-            demo1: 'http://localhost:8001/classify_response',
+            demo1: `${apiBase}/classify_response`,
             demo2: {
                 classify: '/api/v1/classify/question',
                 feedback: '/api/v1/save_feedback'
@@ -137,8 +152,9 @@ class UnifiedMLAPI {
         };
 
         try {
-            // Use demo1's feedback endpoint for now
-            const response = await fetch('http://localhost:8001/save_feedback', {
+            // Use dynamic API URL based on environment
+            const apiBase = getApiBaseUrl();
+            const response = await fetch(`${apiBase}/save_feedback`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackData)

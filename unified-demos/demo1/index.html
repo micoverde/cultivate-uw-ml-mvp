@@ -800,6 +800,20 @@
     </div>
 
     <script>
+        // Helper function to get the correct API base URL
+        function getApiBaseUrl() {
+            // Check if we're running locally or in production
+            const hostname = window.location.hostname;
+
+            if (hostname === 'localhost' || hostname === '127.0.0.1') {
+                // Local development - use local ML API
+                return 'http://localhost:8001';
+            } else {
+                // Production - use Azure Container Apps API
+                return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+            }
+        }
+
         // Child Scenarios Data
         const scenarios = [
             {
@@ -912,8 +926,9 @@
             try {
                 // Call REAL ML API
                 const currentScenario = scenarios[currentScenarioIndex];
+                const apiBase = getApiBaseUrl();
                 console.log('\n🌐 API REQUEST:');
-                console.log(`🎯 Endpoint: http://localhost:8001/classify_response`);
+                console.log(`🎯 Endpoint: ${apiBase}/classify_response`);
                 console.log(`📋 Scenario ID: ${currentScenario.id}`);
                 console.log(`🧠 Model: PyTorch Neural Network (4-layer, 56 features)`);
 
@@ -926,7 +941,7 @@
                 console.log('\n📤 REQUEST PAYLOAD:');
                 console.log(JSON.stringify(apiRequest, null, 2));
 
-                const apiResponse = await fetch('http://localhost:8001/classify_response', {
+                const apiResponse = await fetch(`${apiBase}/classify_response`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1027,12 +1042,16 @@
                 console.log('💡 Start with: python3 ml_api_real.py');
 
                 // Show error instead of fallback
+                const apiBase = getApiBaseUrl();
+                const hostname = window.location.hostname;
                 resultsDiv.innerHTML = `
                     <h4 style="margin-bottom: 16px; color: var(--error-500);">❌ Real ML API Not Available</h4>
                     <div style="color: var(--error-text); margin-bottom: 16px; background: var(--error-50); padding: 12px; border-radius: 6px;">
-                        <strong>Error:</strong> Cannot connect to neural network API at localhost:8001<br>
+                        <strong>Error:</strong> Cannot connect to neural network API at ${apiBase}<br>
                         <strong>Required:</strong> Real PyTorch model with 56-feature extraction<br>
-                        <strong>Solution:</strong> Start the ML API with <code>python3 ml_api_real.py</code>
+                        <strong>Solution:</strong> ${hostname === 'localhost' || hostname === '127.0.0.1' ?
+                            'Start the ML API with <code>python3 ml_api_real.py</code>' :
+                            'Check that the Azure Container App is running'}
                     </div>
                     <div style="font-size: 14px; color: var(--text-secondary);">
                         🚫 No simulation or fallback - only real ML models allowed
@@ -1073,7 +1092,8 @@
                 console.log('📝 SUBMITTING HUMAN FEEDBACK:');
                 console.log(JSON.stringify(feedbackRequest, null, 2));
 
-                const apiResponse = await fetch('http://localhost:8001/save_feedback', {
+                const apiBase = getApiBaseUrl();
+                const apiResponse = await fetch(`${apiBase}/save_feedback`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

@@ -84,6 +84,24 @@ class ThemeManager {
 // Duplicate showTab function removed - using the proper one at line 916
 
 // ========================================
+// HELPER FUNCTIONS
+// ========================================
+
+// Helper function to get the correct API base URL
+function getApiBaseUrl() {
+    // Check if we're running locally or in production
+    const hostname = window.location.hostname;
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+        // Local development - use local ML API
+        return 'http://localhost:8001';
+    } else {
+        // Production - use Azure Container Apps API
+        return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+    }
+}
+
+// ========================================
 // MAIN DEMO CLASS
 // ========================================
 
@@ -94,7 +112,7 @@ class ChildScenarioDemo {
         this.completedScenarios = 0;
         this.oeqCount = 0;
         this.ceqCount = 0;
-        this.apiBaseUrl = 'http://localhost:8001'; // ML API endpoint
+        this.apiBaseUrl = getApiBaseUrl(); // Dynamic ML API endpoint based on environment
 
         this.initializeDemo();
     }
@@ -971,7 +989,7 @@ function displayGeneratedExamples(examples) {
 async function loadFeedbackSummary() {
     try {
         // Get API base URL - fallback if window.demo not ready
-        const apiBaseUrl = (window.demo && window.demo.apiBaseUrl) || 'http://localhost:8001';
+        const apiBaseUrl = (window.demo && window.demo.apiBaseUrl) || getApiBaseUrl();
         console.log('Loading feedback summary from:', apiBaseUrl);
 
         const response = await fetch(`${apiBaseUrl}/feedback_summary`);
