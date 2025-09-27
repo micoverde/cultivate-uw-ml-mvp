@@ -725,6 +725,35 @@
 
         console.log('Demo 2: Warren Video Analysis - Microsoft Fluent Design Template Ready!');
         console.log('Waiting for VM processing results to populate real data...');
+
+        // Function to export ground truth data for model retraining
+        function exportGroundTruth() {
+            const groundTruth = JSON.parse(localStorage.getItem('warren_video_ground_truth') || '[]');
+
+            if (groundTruth.length === 0) {
+                alert('No ground truth data collected yet. Submit some ratings first!');
+                return;
+            }
+
+            // Create downloadable JSON file
+            const dataStr = JSON.stringify(groundTruth, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
+
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `warren_video_ground_truth_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
+
+            console.log(`📊 Exported ${groundTruth.length} ground truth samples for retraining`);
+        }
+
+        // Add keyboard shortcut for exporting ground truth (Ctrl+Shift+E)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                exportGroundTruth();
+            }
+        });
     </script>
 
     <!-- Professional Rating Modal -->
@@ -845,8 +874,20 @@
                 source: 'demo2_rating'
             };
 
+            // Save to local storage for ground truth dataset
+            const groundTruth = JSON.parse(localStorage.getItem('warren_video_ground_truth') || '[]');
+            groundTruth.push({
+                ...feedbackData,
+                timestamp: new Date().toISOString(),
+                video_file: 'warren_teaching_web.mp4'
+            });
+            localStorage.setItem('warren_video_ground_truth', JSON.stringify(groundTruth));
+            console.log('💾 Saved to ground truth dataset:', feedbackData);
+
             try {
-                const response = await fetch('http://localhost:8001/save_feedback', {
+                // Use Azure Container Apps API endpoint
+                const apiEndpoint = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/feedback/save';
+                const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
