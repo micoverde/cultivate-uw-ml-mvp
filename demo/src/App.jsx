@@ -1102,6 +1102,12 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* ML Settings Modal */}
+      <MLSettingsModal
+        isOpen={isMLSettingsOpen}
+        onClose={() => setIsMLSettingsOpen(false)}
+      />
     </div>
   );
 }
@@ -1151,12 +1157,6 @@ const PremiumFeatureCard = React.memo(function PremiumFeatureCard({ icon, title,
           </svg>
         </div>
       </div>
-
-      {/* ML Settings Modal */}
-      <MLSettingsModal
-        isOpen={isMLSettingsOpen}
-        onClose={() => setIsMLSettingsOpen(false)}
-      />
     </div>
   );
 });

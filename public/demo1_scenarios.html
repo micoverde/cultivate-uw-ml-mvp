@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 1 - Cultivate Learning ML Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #fff, #e0e0ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .demo-card {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+        }
+
+        .demo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #ffd700;
+        }
+
+        .demo-card p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: 0;
+        }
+
+        .settings-cog {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .settings-cog:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .back-link {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .back-link:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-5px);
+        }
+
+        /* ML Settings Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        .close:hover {
+            opacity: 1;
+        }
+
+        .model-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .model-option:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .model-option.selected {
+            background: rgba(255, 215, 0, 0.2);
+            border-color: #ffd700;
+        }
+
+        .save-button {
+            background: #ffd700;
+            color: #333;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+
+        .save-button:hover {
+            background: #ffed4e;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Back to Hub -->
+    <a href="/" class="back-link">
+        ← Back to Hub
+    </a>
+
+    <!-- Settings Cog -->
+    <div class="settings-cog" onclick="openMLSettings()" title="ML Model Settings">
+        ⚙️
+    </div>
+
+    <div class="container">
+        <h1>Demo 1: Scenario Collection</h1>
+        <p>
+            Choose from our professionally crafted educator-child interaction scenarios
+            to explore how our AI analyzes and provides constructivist pedagogy feedback.
+        </p>
+
+        <div class="demo-grid">
+            <a href="/demo2_warren_fluent.html" class="demo-card">
+                <h3>Warren's Demo</h3>
+                <p>Interactive showcase of ML-powered analysis with real educator scenarios and instant feedback.</p>
+            </a>
+
+            <a href="/demo2_video_upload.html" class="demo-card">
+                <h3>Video Analysis</h3>
+                <p>Upload classroom videos for comprehensive AI analysis of educator-child interactions.</p>
+            </a>
+
+            <a href="/demo2_whisper_showcase.html" class="demo-card">
+                <h3>Audio Transcription</h3>
+                <p>Advanced speech-to-text analysis using Whisper AI for classroom conversations.</p>
+            </a>
+
+            <a href="/" class="demo-card">
+                <h3>Main Hub</h3>
+                <p>Return to the main platform to explore all features and demos.</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- ML Settings Modal -->
+    <div id="mlSettingsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeMLSettings()">&times;</span>
+            <h2 style="margin-bottom: 20px;">ML Model Settings</h2>
+
+            <div class="model-option" id="classic-option" onclick="selectModel('classic')">
+                <h3>Classic ML Model</h3>
+                <p>Traditional machine learning approach with proven reliability.</p>
+            </div>
+
+            <div class="model-option" id="ensemble-option" onclick="selectModel('ensemble')">
+                <h3>Ensemble Model (7-Model Voting)</h3>
+                <p>Advanced ensemble using 7 specialized models for higher accuracy.</p>
+            </div>
+
+            <button class="save-button" onclick="saveMLSettings()">Save Settings</button>
+        </div>
+    </div>
+
+    <script>
+        // ML Settings functionality
+        let selectedModel = localStorage.getItem('ml_model') || 'classic';
+
+        function openMLSettings() {
+            document.getElementById('mlSettingsModal').classList.add('show');
+            updateModelSelection();
+        }
+
+        function closeMLSettings() {
+            document.getElementById('mlSettingsModal').classList.remove('show');
+        }
+
+        function selectModel(model) {
+            selectedModel = model;
+            updateModelSelection();
+        }
+
+        function updateModelSelection() {
+            document.querySelectorAll('.model-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            document.getElementById(selectedModel + '-option').classList.add('selected');
+        }
+
+        function saveMLSettings() {
+            localStorage.setItem('ml_model', selectedModel);
+
+            // Call API to update model selection
+            fetch('/api/v1/models/select', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ model: selectedModel })
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Model selection updated:', selectedModel);
+                }
+            }).catch(error => {
+                console.error('Error updating model selection:', error);
+            });
+
+            closeMLSettings();
+
+            // Show confirmation
+            const confirmation = document.createElement('div');
+            confirmation.style.cssText = 'position: fixed; bottom: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 25px; border-radius: 5px; z-index: 10000;';
+            confirmation.textContent = `ML Model switched to ${selectedModel === 'ensemble' ? 'Ensemble (7-Model)' : 'Classic'}`;
+            document.body.appendChild(confirmation);
+            setTimeout(() => confirmation.remove(), 3000);
+        }
+
+        // Initialize model selection on load
+        updateModelSelection();
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('mlSettingsModal');
+            if (event.target == modal) {
+                closeMLSettings();
+            }
+        }
+    </script>
+</body>
+</html>
