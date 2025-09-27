@@ -1,0 +1,178 @@
+version: '3.8'
+
+# Docker Compose for Local Ensemble Testing
+# Issue #192: Containerize Ensemble ML Models
+#
+# Usage:
+#   docker-compose -f docker-compose.ensemble.yml up --build
+#   docker-compose -f docker-compose.ensemble.yml down
+
+services:
+  # Main ML API with Ensemble Models
+  ml-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: fullml  # Use the fullml stage with ensemble support
+    image: cultivate-ml:ensemble-local
+    container_name: cultivate-ml-ensemble
+    ports:
+      - "8000:8000"
+    environment:
+      # Model Configuration
+      MODEL_TYPE: ensemble
+      USE_AZURE_STORAGE: ${USE_AZURE_STORAGE:-false}  # Set to true if using Azure
+      MODEL_CACHE_DIR: /app/models
+      ENSEMBLE_VOTING_STRATEGY: soft
+      MODEL_DOWNLOAD_ON_STARTUP: ${MODEL_DOWNLOAD_ON_STARTUP:-false}
+
+      # Azure Storage (optional - for model download)
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-}
+      AZURE_STORAGE_ACCOUNT: ${AZURE_STORAGE_ACCOUNT:-cultivatemldata}
+
+      # Redis Configuration
+      REDIS_ENABLED: true
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 0
+
+      # API Configuration
+      API_HOST: 0.0.0.0
+      API_PORT: 8000
+      LOG_LEVEL: INFO
+      WORKERS: 1  # Single worker for local testing
+
+      # Performance
+      MAX_WORKERS: 4
+      REQUEST_TIMEOUT: 60
+
+    volumes:
+      # Mount models directory for persistence
+      - ./models:/app/models
+      # Mount data for training
+      - ./data:/app/data
+      # Mount logs
+      - ./logs:/app/logs
+      # Hot-reload for development (optional)
+      # - ./src:/app/src
+    depends_on:
+      - redis
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - ml-network
+    restart: unless-stopped
+
+  # Redis Cache for Predictions
+  redis:
+    image: redis:7-alpine
+    container_name: cultivate-redis
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --save ""
+      --appendonly no
+    volumes:
+      - redis-data:/data
+    networks:
+      - ml-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # Optional: Redis Commander for monitoring
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-ui
+    environment:
+      REDIS_HOSTS: local:redis:6379
+    ports:
+      - "8081:8081"
+    depends_on:
+      - redis
+    networks:
+      - ml-network
+    profiles:
+      - debug  # Only start with --profile debug
+
+  # Optional: Training Container (one-off)
+  trainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: fullml
+    image: cultivate-ml:ensemble-trainer
+    container_name: cultivate-trainer
+    command: python train_ensemble_production.py
+    environment:
+      AZURE_STORAGE_CONNECTION_STRING: ${AZURE_STORAGE_CONNECTION_STRING:-}
+      MODEL_OUTPUT_DIR: /app/models
+    volumes:
+      - ./models:/app/models
+      - ./data:/app/data
+      - ./logs/training:/app/logs
+    networks:
+      - ml-network
+    profiles:
+      - train  # Only run with --profile train
+
+  # Optional: Model Testing Container
+  tester:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: fullml
+    image: cultivate-ml:ensemble-tester
+    container_name: cultivate-tester
+    command: python test_ensemble_api.py
+    environment:
+      API_URL: http://ml-api:8000
+    depends_on:
+      ml-api:
+        condition: service_healthy
+    networks:
+      - ml-network
+    profiles:
+      - test  # Only run with --profile test
+
+networks:
+  ml-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local
+
+# Usage Examples:
+#
+# 1. Start ensemble API with Redis:
+#    docker-compose -f docker-compose.ensemble.yml up
+#
+# 2. Build and start fresh:
+#    docker-compose -f docker-compose.ensemble.yml up --build
+#
+# 3. Train models first, then start API:
+#    docker-compose -f docker-compose.ensemble.yml --profile train up trainer
+#    docker-compose -f docker-compose.ensemble.yml up ml-api redis
+#
+# 4. Run with Redis monitoring UI:
+#    docker-compose -f docker-compose.ensemble.yml --profile debug up
+#
+# 5. Run tests against the API:
+#    docker-compose -f docker-compose.ensemble.yml --profile test up tester
+#
+# 6. View logs:
+#    docker-compose -f docker-compose.ensemble.yml logs -f ml-api
+#
+# 7. Clean up everything:
+#    docker-compose -f docker-compose.ensemble.yml down -v

@@ -117,6 +117,18 @@ LABEL purpose="Complete ML stack with 7-model ensemble (NN, XGBoost, RF, SVM, LR
 LABEL cost_optimization="compute_intensive"
 LABEL architecture="ensemble_ml_models"
 LABEL models="neural_network,xgboost,random_forest,svm,logistic_regression,lightgbm,gradient_boost"
+LABEL issue="192-ensemble-containerization"
+
+# Install system dependencies for XGBoost and LightGBM
+RUN apt-get update && apt-get install -y \
+    libgomp1 \
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get clean
+
+# Copy and install ensemble ML dependencies first (for better caching)
+COPY requirements-ensemble.txt ./
+RUN pip install --no-cache-dir -r requirements-ensemble.txt \
+    && pip cache purge
 
 # Copy and install full ML dependencies
 COPY requirements.txt ./
@@ -126,14 +138,24 @@ RUN pip install --no-cache-dir -r requirements.txt \
 # Copy application source code
 COPY src/ ./src/
 COPY run_api.py ./
+# Training script will be in src/ml/training/ or downloaded separately
+# COPY train_ensemble_production.py ./
 
-# Copy pre-trained models if they exist (optional - can load from Azure)
-COPY models/*.pkl ./models/ 2>/dev/null || true
+# Note: Pre-trained models will be downloaded from Azure Blob Storage on startup
+# If you have local models, uncomment and modify the following:
+# COPY models/*.pkl ./models/
+
+# Create directories for model storage and caching
+RUN mkdir -p /app/models /app/cache /app/logs/training
 
 # Set environment variables for model management
 ENV MODEL_TYPE=ensemble
 ENV USE_AZURE_STORAGE=true
 ENV MODEL_CACHE_DIR=/app/models
+ENV REDIS_ENABLED=true
+ENV ENSEMBLE_VOTING_STRATEGY=soft
+ENV MODEL_DOWNLOAD_ON_STARTUP=true
+ENV MAX_WORKERS=4
 
 # Set ownership and switch to non-root user
 RUN chown -R apiuser:apiuser /app
