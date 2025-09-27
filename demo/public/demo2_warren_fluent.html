@@ -138,6 +138,174 @@
             border-color: var(--fluent-brand-primary);
         }
 
+        /* Settings Button */
+        .settings-btn {
+            background: var(--fluent-neutral-bg-secondary);
+            border: 1px solid var(--fluent-border-secondary);
+            border-radius: var(--fluent-radius-md);
+            padding: var(--fluent-space-sm) var(--fluent-space-md);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+            font-size: var(--fluent-font-size-sm);
+        }
+
+        .settings-btn:hover {
+            background: var(--fluent-neutral-bg-tertiary);
+            border-color: var(--fluent-brand-primary);
+        }
+
+        /* ML Settings Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: var(--fluent-neutral-surface);
+            border-radius: var(--fluent-radius-lg);
+            padding: var(--fluent-space-xxl);
+            width: 90%;
+            max-width: 600px;
+            box-shadow: var(--fluent-shadow-lg);
+            animation: slideUp 0.3s ease-out;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--fluent-space-xl);
+        }
+
+        .modal-title {
+            font-size: var(--fluent-font-size-xl);
+            font-weight: 600;
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--fluent-text-secondary);
+        }
+
+        .model-selection {
+            margin: var(--fluent-space-xl) 0;
+        }
+
+        .model-option {
+            display: flex;
+            align-items: center;
+            padding: var(--fluent-space-md);
+            margin: var(--fluent-space-md) 0;
+            border: 1px solid var(--fluent-border-primary);
+            border-radius: var(--fluent-radius-md);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+        }
+
+        .model-option:hover {
+            background: var(--fluent-neutral-bg-secondary);
+            border-color: var(--fluent-brand-primary);
+        }
+
+        .model-option.selected {
+            background: var(--fluent-neutral-bg-tertiary);
+            border-color: var(--fluent-brand-primary);
+        }
+
+        .model-option input[type="radio"] {
+            margin-right: var(--fluent-space-md);
+        }
+
+        .model-info {
+            flex: 1;
+        }
+
+        .model-name {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .model-description {
+            font-size: var(--fluent-font-size-sm);
+            color: var(--fluent-text-secondary);
+        }
+
+        .performance-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: var(--fluent-space-xl) 0;
+        }
+
+        .performance-table th,
+        .performance-table td {
+            padding: var(--fluent-space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--fluent-border-primary);
+        }
+
+        .performance-table th {
+            font-weight: 600;
+            background: var(--fluent-neutral-bg-secondary);
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--fluent-space-md);
+            margin-top: var(--fluent-space-xl);
+        }
+
+        .modal-btn {
+            padding: var(--fluent-space-sm) var(--fluent-space-lg);
+            border-radius: var(--fluent-radius-md);
+            border: 1px solid var(--fluent-border-secondary);
+            background: var(--fluent-neutral-surface);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+        }
+
+        .modal-btn-primary {
+            background: var(--fluent-brand-primary);
+            color: white;
+            border-color: var(--fluent-brand-primary);
+        }
+
+        .modal-btn-primary:hover {
+            background: var(--fluent-brand-secondary);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
         /* Main Container */
         .fluent-container {
             max-width: 1400px;
@@ -431,9 +599,14 @@
                 <h1 class="fluent-title">Demo 2: Warren's Teaching Video Analysis</h1>
                 <p class="fluent-subtitle">AI-Powered Question Classification with Whisper + Ensemble ML</p>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span id="theme-icon">🌙</span> Toggle Theme
-            </button>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <button class="settings-btn" onclick="openMLSettings()" title="ML Model Settings">
+                    ⚙️ ML Settings
+                </button>
+                <button class="theme-toggle" onclick="toggleTheme()">
+                    <span id="theme-icon">🌙</span> Toggle Theme
+                </button>
+            </div>
         </div>
     </header>
 
@@ -824,6 +997,199 @@
 
         console.log('Demo 2: Warren Video Analysis - Microsoft Fluent Design Template Ready!');
         console.log('Waiting for VM processing results to populate real data...');
+    </script>
+
+    <!-- ML Settings Modal -->
+    <div id="mlSettingsModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">ML Model Settings</h2>
+                <button class="modal-close" onclick="closeMLSettings()">✕</button>
+            </div>
+
+            <div class="model-selection">
+                <label class="model-option" id="classic-option">
+                    <input type="radio" name="model" value="classic" checked>
+                    <div class="model-info">
+                        <div class="model-name">Classic ML Model</div>
+                        <div class="model-description">Faster response time, proven in production</div>
+                    </div>
+                </label>
+
+                <label class="model-option" id="ensemble-option">
+                    <input type="radio" name="model" value="ensemble">
+                    <div class="model-info">
+                        <div class="model-name">Ensemble ML Model</div>
+                        <div class="model-description">Higher accuracy with 7-model voting system</div>
+                    </div>
+                </label>
+            </div>
+
+            <h3 style="margin-top: 24px; margin-bottom: 12px;">Performance Comparison</h3>
+            <table class="performance-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Classic ML</th>
+                        <th>Ensemble ML</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td id="classic-accuracy">92%</td>
+                        <td id="ensemble-accuracy">98%</td>
+                    </tr>
+                    <tr>
+                        <td>F1 Score</td>
+                        <td id="classic-f1">0.91</td>
+                        <td id="ensemble-f1">0.97</td>
+                    </tr>
+                    <tr>
+                        <td>Response Time</td>
+                        <td id="classic-speed">45ms</td>
+                        <td id="ensemble-speed">125ms</td>
+                    </tr>
+                    <tr>
+                        <td>Total Predictions</td>
+                        <td id="classic-usage">15K</td>
+                        <td id="ensemble-usage">3K</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div id="model-status" style="margin-top: 16px; padding: 12px; background: #f0f9ff; border-radius: 4px; display: none;">
+                <span id="status-message"></span>
+            </div>
+
+            <div class="modal-actions">
+                <button class="modal-btn" onclick="closeMLSettings()">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="applyMLSettings()">Apply Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ML Settings Functions
+        let currentModel = localStorage.getItem('ml_model') || 'classic';
+
+        function openMLSettings() {
+            const modal = document.getElementById('mlSettingsModal');
+            modal.classList.add('active');
+
+            // Set current selection
+            document.querySelector(`input[name="model"][value="${currentModel}"]`).checked = true;
+            updateSelectedOption();
+
+            // Load performance metrics
+            loadPerformanceMetrics();
+        }
+
+        function closeMLSettings() {
+            const modal = document.getElementById('mlSettingsModal');
+            modal.classList.remove('active');
+        }
+
+        async function applyMLSettings() {
+            const selected = document.querySelector('input[name="model"]:checked').value;
+
+            if (selected === currentModel) {
+                closeMLSettings();
+                return;
+            }
+
+            // Show loading status
+            const statusDiv = document.getElementById('model-status');
+            const statusMsg = document.getElementById('status-message');
+            statusDiv.style.display = 'block';
+            statusMsg.textContent = 'Switching models...';
+
+            try {
+                const response = await fetch('/api/v1/models/select', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ model_type: selected })
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    currentModel = selected;
+                    localStorage.setItem('ml_model', selected);
+
+                    statusMsg.textContent = `✅ Successfully switched to ${selected === 'ensemble' ? 'Ensemble' : 'Classic'} ML model`;
+                    statusDiv.style.background = '#d4edda';
+
+                    // Update UI
+                    updateUIForNewModel(selected);
+
+                    setTimeout(() => {
+                        closeMLSettings();
+                    }, 2000);
+                } else {
+                    statusMsg.textContent = '❌ Failed to switch model. Please try again.';
+                    statusDiv.style.background = '#f8d7da';
+                }
+            } catch (error) {
+                console.error('Error switching model:', error);
+                statusMsg.textContent = '❌ Network error. Please check your connection.';
+                statusDiv.style.background = '#f8d7da';
+            }
+        }
+
+        function updateSelectedOption() {
+            document.querySelectorAll('.model-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            const selected = document.querySelector('input[name="model"]:checked').value;
+            document.getElementById(`${selected}-option`).classList.add('selected');
+        }
+
+        function updateUIForNewModel(modelType) {
+            // Update any UI elements that show current model
+            const modelIndicators = document.querySelectorAll('.current-model-indicator');
+            modelIndicators.forEach(indicator => {
+                indicator.textContent = modelType === 'ensemble' ? 'Ensemble ML' : 'Classic ML';
+            });
+        }
+
+        async function loadPerformanceMetrics() {
+            try {
+                const response = await fetch('/api/v1/models/comparison');
+                if (response.ok) {
+                    const data = await response.json();
+
+                    // Update classic metrics
+                    if (data.classic) {
+                        document.getElementById('classic-accuracy').textContent = `${Math.round(data.classic.accuracy * 100)}%`;
+                        document.getElementById('classic-f1').textContent = data.classic.f1_score.toFixed(2);
+                        document.getElementById('classic-speed').textContent = `${data.classic.avg_response_ms || 45}ms`;
+                        document.getElementById('classic-usage').textContent = `${Math.round(data.classic.total_predictions / 1000)}K`;
+                    }
+
+                    // Update ensemble metrics
+                    if (data.ensemble) {
+                        document.getElementById('ensemble-accuracy').textContent = `${Math.round(data.ensemble.accuracy * 100)}%`;
+                        document.getElementById('ensemble-f1').textContent = data.ensemble.f1_score.toFixed(2);
+                        document.getElementById('ensemble-speed').textContent = `${data.ensemble.avg_response_ms || 125}ms`;
+                        document.getElementById('ensemble-usage').textContent = `${Math.round(data.ensemble.total_predictions / 1000)}K`;
+                    }
+                }
+            } catch (error) {
+                console.error('Error loading performance metrics:', error);
+            }
+        }
+
+        // Add event listeners
+        document.querySelectorAll('input[name="model"]').forEach(radio => {
+            radio.addEventListener('change', updateSelectedOption);
+        });
+
+        // Close modal on outside click
+        document.getElementById('mlSettingsModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeMLSettings();
+            }
+        });
     </script>
 </body>
 </html>
