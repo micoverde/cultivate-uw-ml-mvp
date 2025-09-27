@@ -16,6 +16,12 @@ class AdvancedAnalytics {
         };
 
         this.realTimeCharts = {};
+
+        // Feature Flags
+        this.featureFlags = {
+            showAnalyticsDashboard: false  // Disabled per Warren's request
+        };
+
         this.initialize();
     }
 
@@ -124,6 +130,12 @@ class AdvancedAnalytics {
      * Create rich analytics dashboard
      */
     createAnalyticsDashboard() {
+        // Check feature flag - disabled per Warren's request
+        if (!this.featureFlags.showAnalyticsDashboard) {
+            console.log('📊 Analytics dashboard disabled via feature flag');
+            return;
+        }
+
         if (document.getElementById('analytics-dashboard')) return;
 
         const dashboard = document.createElement('div');
@@ -625,14 +637,25 @@ class AdvancedAnalytics {
     }
 
     updateDashboard() {
-        document.getElementById('total-predictions').textContent = this.sessionData.mlPredictions.length;
-        document.getElementById('avg-confidence').textContent = `${(this.calculateAverageConfidence(this.sessionData.mlPredictions) * 100).toFixed(1)}%`;
-        document.getElementById('avg-processing').textContent = `${this.calculateAverageProcessingTime(this.sessionData.mlPredictions).toFixed(0)}ms`;
-        document.getElementById('session-duration').textContent = `${this.getSessionDuration()}m`;
+        // Skip dashboard updates if analytics dashboard is disabled
+        if (!this.featureFlags.showAnalyticsDashboard) {
+            return;
+        }
+
+        const totalPredictionsEl = document.getElementById('total-predictions');
+        const avgConfidenceEl = document.getElementById('avg-confidence');
+        const avgProcessingEl = document.getElementById('avg-processing');
+        const sessionDurationEl = document.getElementById('session-duration');
+
+        if (totalPredictionsEl) totalPredictionsEl.textContent = this.sessionData.mlPredictions.length;
+        if (avgConfidenceEl) avgConfidenceEl.textContent = `${(this.calculateAverageConfidence(this.sessionData.mlPredictions) * 100).toFixed(1)}%`;
+        if (avgProcessingEl) avgProcessingEl.textContent = `${this.calculateAverageProcessingTime(this.sessionData.mlPredictions).toFixed(0)}ms`;
+        if (sessionDurationEl) sessionDurationEl.textContent = `${this.getSessionDuration()}m`;
 
         // Update AI insights
         const insights = this.generateAIInsights();
-        document.getElementById('ai-insights').innerHTML = insights.map(insight => `<p>${insight}</p>`).join('');
+        const aiInsightsEl = document.getElementById('ai-insights');
+        if (aiInsightsEl) aiInsightsEl.innerHTML = insights.map(insight => `<p>${insight}</p>`).join('');
 
         // Add to activity feed
         const feed = document.getElementById('activity-feed');

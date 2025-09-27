@@ -840,41 +840,7 @@
             loadScenario(nextIndex);
         }
 
-        // Theme Management System
-        class ThemeManager {
-            constructor() {
-                this.theme = localStorage.getItem('theme') || 'light';
-                this.init();
-            }
-
-            init() {
-                document.body.setAttribute('data-theme', this.theme);
-                this.updateToggle();
-                this.bindEvents();
-            }
-
-            toggle() {
-                this.theme = this.theme === 'light' ? 'dark' : 'light';
-                document.body.setAttribute('data-theme', this.theme);
-                localStorage.setItem('theme', this.theme);
-                this.updateToggle();
-            }
-
-            updateToggle() {
-                const themeSwitch = document.getElementById('themeSwitch');
-                if (this.theme === 'dark') {
-                    themeSwitch.classList.add('active');
-                } else {
-                    themeSwitch.classList.remove('active');
-                }
-            }
-
-            bindEvents() {
-                document.getElementById('themeToggle').addEventListener('click', () => {
-                    this.toggle();
-                });
-            }
-        }
+        // Theme Management System is now handled by shared/theme.js
 
         // Tab Management System
         function showTab(tabName) {
