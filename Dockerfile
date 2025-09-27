@@ -108,14 +108,15 @@ HEALTHCHECK --interval=15s --timeout=10s --start-period=30s --retries=3 \
 CMD ["python", "-u", "run_api.py"]
 
 # =============================================================================
-# Stage 4: Full ML Stage - Future upgrade path for complete ML capabilities
+# Stage 4: Full ML Stage - Complete ML capabilities with Ensemble Models
 # =============================================================================
 FROM builder as fullml
 
 LABEL stage=fullml
-LABEL purpose="Complete ML stack with torch, tensorflow, transformers"
+LABEL purpose="Complete ML stack with 7-model ensemble (NN, XGBoost, RF, SVM, LR, LGBM, GB)"
 LABEL cost_optimization="compute_intensive"
-LABEL architecture="full_ml_models"
+LABEL architecture="ensemble_ml_models"
+LABEL models="neural_network,xgboost,random_forest,svm,logistic_regression,lightgbm,gradient_boost"
 
 # Copy and install full ML dependencies
 COPY requirements.txt ./
@@ -125,6 +126,14 @@ RUN pip install --no-cache-dir -r requirements.txt \
 # Copy application source code
 COPY src/ ./src/
 COPY run_api.py ./
+
+# Copy pre-trained models if they exist (optional - can load from Azure)
+COPY models/*.pkl ./models/ 2>/dev/null || true
+
+# Set environment variables for model management
+ENV MODEL_TYPE=ensemble
+ENV USE_AZURE_STORAGE=true
+ENV MODEL_CACHE_DIR=/app/models
 
 # Set ownership and switch to non-root user
 RUN chown -R apiuser:apiuser /app
