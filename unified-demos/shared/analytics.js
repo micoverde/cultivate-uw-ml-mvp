@@ -66,6 +66,39 @@ class AdvancedAnalytics {
     }
 
     /**
+     * Analyze user behavior patterns
+     */
+    analyzeUserBehavior() {
+        const interactions = this.sessionData.interactions;
+        if (interactions.length < 2) return;
+
+        // Analyze interaction patterns
+        const recentInteractions = interactions.slice(-10);
+        const interactionTypes = recentInteractions.map(i => i.action);
+        const uniqueActions = [...new Set(interactionTypes)];
+
+        // Track engagement metrics
+        const sessionDuration = (new Date() - this.sessionData.startTime) / 1000;
+        const interactionRate = interactions.length / (sessionDuration / 60); // interactions per minute
+
+        console.log(`👤 User behavior: ${uniqueActions.length} unique actions, ${interactionRate.toFixed(1)} interactions/min`);
+    }
+
+    /**
+     * Analyze performance trends
+     */
+    analyzePerformanceTrends() {
+        const predictions = this.sessionData.mlPredictions;
+        if (predictions.length < 3) return;
+
+        const recentPredictions = predictions.slice(-5);
+        const confidenceValues = recentPredictions.map(p => p.confidence);
+        const avgConfidence = confidenceValues.reduce((sum, c) => sum + c, 0) / confidenceValues.length;
+
+        console.log(`📈 Performance trend: ${recentPredictions.length} recent predictions, avg confidence: ${(avgConfidence * 100).toFixed(1)}%`);
+    }
+
+    /**
      * Real-time performance metrics calculation
      */
     updateRealTimeMetrics() {
@@ -369,6 +402,81 @@ class AdvancedAnalytics {
     }
 
     /**
+     * Calculate demo-specific statistics
+     */
+    calculateDemoStats(predictions) {
+        if (predictions.length === 0) {
+            return {
+                count: 0,
+                avgConfidence: 0,
+                avgProcessingTime: 0
+            };
+        }
+
+        return {
+            count: predictions.length,
+            avgConfidence: this.calculateAverageConfidence(predictions),
+            avgProcessingTime: this.calculateAverageProcessingTime(predictions)
+        };
+    }
+
+    /**
+     * Compare performance between demos
+     */
+    compareDemoPerformance(demo1Predictions, demo2Predictions) {
+        const demo1Stats = this.calculateDemoStats(demo1Predictions);
+        const demo2Stats = this.calculateDemoStats(demo2Predictions);
+
+        return {
+            demo1: demo1Stats,
+            demo2: demo2Stats,
+            confidenceDiff: demo1Stats.avgConfidence - demo2Stats.avgConfidence,
+            speedDiff: demo1Stats.avgProcessingTime - demo2Stats.avgProcessingTime
+        };
+    }
+
+    /**
+     * Calculate confidence distribution
+     */
+    calculateConfidenceDistribution(predictions) {
+        if (predictions.length === 0) return { high: 0, medium: 0, low: 0 };
+
+        const distribution = { high: 0, medium: 0, low: 0 };
+        predictions.forEach(p => {
+            if (p.confidence >= 0.8) distribution.high++;
+            else if (p.confidence >= 0.6) distribution.medium++;
+            else distribution.low++;
+        });
+
+        return distribution;
+    }
+
+    /**
+     * Calculate performance trends
+     */
+    calculatePerformanceTrends(predictions) {
+        if (predictions.length < 5) return { trend: 'insufficient_data' };
+
+        const recent = predictions.slice(-5);
+        const earlier = predictions.slice(-10, -5);
+
+        if (earlier.length === 0) return { trend: 'insufficient_data' };
+
+        const recentAvg = this.calculateAverageConfidence(recent);
+        const earlierAvg = this.calculateAverageConfidence(earlier);
+
+        const trend = recentAvg > earlierAvg ? 'improving' :
+                     recentAvg < earlierAvg ? 'declining' : 'stable';
+
+        return {
+            trend,
+            recentConfidence: recentAvg,
+            earlierConfidence: earlierAvg,
+            change: recentAvg - earlierAvg
+        };
+    }
+
+    /**
      * Helper methods
      */
     calculateAverageConfidence(predictions) {
@@ -385,6 +493,122 @@ class AdvancedAnalytics {
         if (values.length === 0) return 0;
         const mean = values.reduce((sum, val) => sum + val, 0) / values.length;
         return values.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / values.length;
+    }
+
+    calculateDemoStats(predictions) {
+        if (predictions.length === 0) {
+            return {
+                count: 0,
+                avgConfidence: 0,
+                avgProcessingTime: 0,
+                confidenceRange: { min: 0, max: 0 }
+            };
+        }
+
+        const confidences = predictions.map(p => p.confidence);
+        const processingTimes = predictions.map(p => p.processingTime || 0);
+
+        return {
+            count: predictions.length,
+            avgConfidence: this.calculateAverageConfidence(predictions),
+            avgProcessingTime: this.calculateAverageProcessingTime(predictions),
+            confidenceRange: {
+                min: Math.min(...confidences),
+                max: Math.max(...confidences)
+            }
+        };
+    }
+
+    compareDemoPerformance(demo1Predictions, demo2Predictions) {
+        const demo1Stats = this.calculateDemoStats(demo1Predictions);
+        const demo2Stats = this.calculateDemoStats(demo2Predictions);
+
+        return {
+            demo1: demo1Stats,
+            demo2: demo2Stats,
+            confidenceDifference: demo1Stats.avgConfidence - demo2Stats.avgConfidence,
+            speedDifference: demo1Stats.avgProcessingTime - demo2Stats.avgProcessingTime,
+            volumeDifference: demo1Stats.count - demo2Stats.count
+        };
+    }
+
+    calculateConfidenceDistribution(predictions) {
+        if (predictions.length === 0) return { high: 0, medium: 0, low: 0 };
+
+        const distribution = { high: 0, medium: 0, low: 0 };
+
+        predictions.forEach(p => {
+            if (p.confidence >= 0.8) distribution.high++;
+            else if (p.confidence >= 0.6) distribution.medium++;
+            else distribution.low++;
+        });
+
+        return {
+            high: (distribution.high / predictions.length) * 100,
+            medium: (distribution.medium / predictions.length) * 100,
+            low: (distribution.low / predictions.length) * 100
+        };
+    }
+
+    calculatePerformanceTrends(predictions) {
+        if (predictions.length < 2) return { trend: 'insufficient_data', slope: 0 };
+
+        // Calculate confidence trend over time
+        const recentPredictions = predictions.slice(-10);
+        const confidences = recentPredictions.map(p => p.confidence);
+
+        if (confidences.length < 2) return { trend: 'insufficient_data', slope: 0 };
+
+        // Simple linear regression slope
+        const n = confidences.length;
+        const sumX = Array.from({length: n}, (_, i) => i).reduce((a, b) => a + b, 0);
+        const sumY = confidences.reduce((a, b) => a + b, 0);
+        const sumXY = confidences.reduce((sum, y, i) => sum + (i * y), 0);
+        const sumXX = Array.from({length: n}, (_, i) => i * i).reduce((a, b) => a + b, 0);
+
+        const slope = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+
+        let trend = 'stable';
+        if (slope > 0.01) trend = 'improving';
+        else if (slope < -0.01) trend = 'declining';
+
+        return { trend, slope };
+    }
+
+    generateRecommendations() {
+        const predictions = this.sessionData.mlPredictions;
+        const interactions = this.sessionData.interactions;
+
+        if (predictions.length === 0) {
+            return ['Continue using the demos to generate ML performance insights.'];
+        }
+
+        const recommendations = [];
+        const avgConfidence = this.calculateAverageConfidence(predictions);
+        const trends = this.calculatePerformanceTrends(predictions);
+
+        // Confidence-based recommendations
+        if (avgConfidence < 0.7) {
+            recommendations.push('Consider reviewing edge cases where confidence is low.');
+            recommendations.push('Additional training data may improve model performance.');
+        } else if (avgConfidence > 0.9) {
+            recommendations.push('Excellent model performance! Consider expanding to new domains.');
+        }
+
+        // Trend-based recommendations
+        if (trends.trend === 'declining') {
+            recommendations.push('Model confidence is declining - investigate recent data quality.');
+        } else if (trends.trend === 'improving') {
+            recommendations.push('Positive performance trend detected - current approach is working well.');
+        }
+
+        // Usage pattern recommendations
+        const sessionMinutes = (new Date() - this.sessionData.startTime) / 60000;
+        if (sessionMinutes > 10 && interactions.length > 20) {
+            recommendations.push('High engagement session - consider exporting detailed analytics.');
+        }
+
+        return recommendations.length > 0 ? recommendations : ['Continue exploring to unlock more insights!'];
     }
 
     getSessionId() {
