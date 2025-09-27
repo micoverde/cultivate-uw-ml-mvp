@@ -1,0 +1,24 @@
+# Azure Blob Storage Dependencies for Training Data Management
+# Issue #184 - Production ML Training Data Pipeline
+
+# Azure Storage SDK
+azure-storage-blob==12.19.0
+azure-identity==1.15.0
+azure-core==1.29.6
+
+# Security and Authentication
+bcrypt==4.1.2
+redis==5.0.1
+cryptography==41.0.7
+
+# Monitoring and Metrics
+azure-monitor-opentelemetry==1.2.0
+opencensus-ext-azure==1.1.13
+
+# Async support
+aiofiles==23.2.1
+aioboto3==12.1.0  # For S3 compatibility if needed
+
+# Data processing
+pandas==2.1.4
+pyarrow==14.0.2  # For Parquet file support
