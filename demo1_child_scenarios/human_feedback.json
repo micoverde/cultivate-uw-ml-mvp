@@ -46,5 +46,61 @@
     "correct_class": "OEQ",
     "error_type": "FN",
     "scenario_id": 2
+  },
+  {
+    "timestamp": "2025-09-27T01:05:31.340Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "OEQ",
+    "error_type": "TP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T01:05:52.204Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "CEQ",
+    "error_type": "FP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T04:34:17.786Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "OEQ",
+    "error_type": "TP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T04:34:22.368Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "OEQ",
+    "error_type": "TP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T04:34:29.059Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "OEQ",
+    "error_type": "TP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T04:34:42.642Z",
+    "text": "",
+    "predicted_class": "OEQ",
+    "correct_class": "CEQ",
+    "error_type": "FP",
+    "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T05:30:27.843Z",
+    "text": "",
+    "predicted_class": "CEQ",
+    "correct_class": "CEQ",
+    "error_type": "TN",
+    "scenario_id": 1
   }
 ]
