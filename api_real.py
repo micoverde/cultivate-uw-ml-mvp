@@ -150,6 +150,106 @@ def classify_detailed(text: str = Query(..., description="Text to classify")):
     """
     return classify_with_ml(text)
 
+@app.post("/save_feedback")
+async def save_feedback(
+    text: str = Query(..., description="Text that was classified"),
+    classification: str = Query(..., description="ML classification result"),
+    feedback: str = Query(..., description="Human feedback (correct/incorrect)"),
+    scenario_id: int = Query(None, description="Optional scenario ID")
+):
+    """
+    Save human feedback for ML training improvement
+    Warren's requirement: Collect real feedback data for model improvement
+    """
+    import json
+    import os
+    from datetime import datetime
+
+    # Create feedback directory if it doesn't exist
+    feedback_dir = "/tmp/ml_feedback"
+    os.makedirs(feedback_dir, exist_ok=True)
+
+    # Create feedback record
+    feedback_record = {
+        "timestamp": datetime.now().isoformat(),
+        "text": text,
+        "ml_classification": classification,
+        "human_feedback": feedback,
+        "scenario_id": scenario_id,
+        "is_correct": feedback.lower() == "correct"
+    }
+
+    # Save to feedback log file
+    feedback_file = os.path.join(feedback_dir, "feedback_log.jsonl")
+
+    try:
+        with open(feedback_file, "a") as f:
+            f.write(json.dumps(feedback_record) + "\n")
+
+        # Count total feedback entries
+        with open(feedback_file, "r") as f:
+            total_feedback = len(f.readlines())
+
+        return {
+            "success": True,
+            "message": "Feedback saved successfully",
+            "total_feedback_collected": total_feedback,
+            "feedback_id": f"fb_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{hash(text) % 10000:04d}"
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "message": f"Error saving feedback: {str(e)}",
+            "error": str(e)
+        }
+
+@app.get("/api/feedback/stats")
+def get_feedback_stats():
+    """
+    Get feedback statistics for monitoring model performance
+    """
+    import json
+    import os
+
+    feedback_file = "/tmp/ml_feedback/feedback_log.jsonl"
+
+    if not os.path.exists(feedback_file):
+        return {
+            "total_feedback": 0,
+            "correct_predictions": 0,
+            "incorrect_predictions": 0,
+            "accuracy": 0.0
+        }
+
+    correct = 0
+    incorrect = 0
+
+    try:
+        with open(feedback_file, "r") as f:
+            for line in f:
+                record = json.loads(line)
+                if record.get("is_correct"):
+                    correct += 1
+                else:
+                    incorrect += 1
+
+        total = correct + incorrect
+        accuracy = (correct / total * 100) if total > 0 else 0.0
+
+        return {
+            "total_feedback": total,
+            "correct_predictions": correct,
+            "incorrect_predictions": incorrect,
+            "accuracy": round(accuracy, 1)
+        }
+    except:
+        return {
+            "total_feedback": 0,
+            "correct_predictions": 0,
+            "incorrect_predictions": 0,
+            "accuracy": 0.0
+        }
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
