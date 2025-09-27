@@ -1,0 +1,1 @@
+- we are not using dev going forward our new CI/CD is to use fix feature branches for all updates then merge to main and push for prod deploy

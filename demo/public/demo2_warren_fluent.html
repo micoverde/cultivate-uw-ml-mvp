@@ -402,6 +402,77 @@
             100% { transform: rotate(360deg); }
         }
 
+        /* Model Selection Toggle */
+        .model-selector {
+            display: flex;
+            align-items: center;
+            gap: var(--fluent-space-md);
+            padding: var(--fluent-space-md);
+            background: var(--fluent-neutral-bg-secondary);
+            border-radius: var(--fluent-radius-md);
+            margin-bottom: var(--fluent-space-lg);
+        }
+
+        .model-selector-label {
+            font-weight: 600;
+            color: var(--fluent-text-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--fluent-space-sm);
+        }
+
+        .model-selector-toggle {
+            display: flex;
+            background: var(--fluent-neutral-surface);
+            border: 1px solid var(--fluent-border-primary);
+            border-radius: var(--fluent-radius-md);
+            overflow: hidden;
+        }
+
+        .model-option {
+            padding: var(--fluent-space-sm) var(--fluent-space-lg);
+            background: transparent;
+            border: none;
+            color: var(--fluent-text-secondary);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+            font-size: var(--fluent-font-size-base);
+            font-weight: 500;
+            position: relative;
+        }
+
+        .model-option:hover {
+            background: var(--fluent-neutral-bg-tertiary);
+        }
+
+        .model-option.active {
+            background: var(--fluent-brand-primary);
+            color: white;
+        }
+
+        .model-info {
+            font-size: var(--fluent-font-size-sm);
+            color: var(--fluent-text-tertiary);
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: var(--fluent-space-sm);
+        }
+
+        .model-status {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--fluent-accent-success);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             .fluent-container {
@@ -419,6 +490,11 @@
             .fluent-tab {
                 padding: var(--fluent-space-sm) var(--fluent-space-md);
                 font-size: var(--fluent-font-size-sm);
+            }
+
+            .model-selector {
+                flex-direction: column;
+                align-items: stretch;
             }
         }
     </style>
@@ -439,6 +515,25 @@
 
     <!-- Main Container -->
     <div class="fluent-container">
+        <!-- Model Selection Toggle -->
+        <div class="model-selector">
+            <div class="model-selector-label">
+                ⚙️ ML Model:
+            </div>
+            <div class="model-selector-toggle">
+                <button class="model-option" id="classic-model-btn" onclick="selectModel('classic')">
+                    Classic ML
+                </button>
+                <button class="model-option active" id="ensemble-model-btn" onclick="selectModel('ensemble')">
+                    Ensemble (7 Models)
+                </button>
+            </div>
+            <div class="model-info">
+                <span class="model-status"></span>
+                <span id="model-description">Using advanced ensemble with Neural Network, XGBoost, Random Forest, SVM, and more</span>
+            </div>
+        </div>
+
         <!-- Tab Navigation -->
         <div class="fluent-tabs">
             <button class="fluent-tab active" onclick="showTab('video-player')">📹 Video Player</button>
@@ -534,6 +629,42 @@
     </div>
 
     <script>
+        // Global model selection state
+        let selectedModel = localStorage.getItem('selectedModel') || 'ensemble';
+
+        // Model Selection Management
+        function selectModel(modelType) {
+            selectedModel = modelType;
+            localStorage.setItem('selectedModel', modelType);
+
+            // Update UI
+            const classicBtn = document.getElementById('classic-model-btn');
+            const ensembleBtn = document.getElementById('ensemble-model-btn');
+            const modelDesc = document.getElementById('model-description');
+
+            if (modelType === 'classic') {
+                classicBtn.classList.add('active');
+                ensembleBtn.classList.remove('active');
+                modelDesc.textContent = 'Using classic Random Forest + Logistic Regression (faster, simpler)';
+            } else {
+                classicBtn.classList.remove('active');
+                ensembleBtn.classList.add('active');
+                modelDesc.textContent = 'Using advanced ensemble with Neural Network, XGBoost, Random Forest, SVM, and more';
+            }
+
+            console.log(`🔄 Switched to ${modelType} model`);
+
+            // Reload data with new model if data is already loaded
+            if (window.warrenVideoData) {
+                loadWarrenVideoData();
+            }
+        }
+
+        // Initialize model selection on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            selectModel(selectedModel);
+        });
+
         // Theme Management
         function toggleTheme() {
             const body = document.body;
@@ -590,8 +721,12 @@
                 console.log('🎬 Video metadata:', {
                     teacher: staticData.metadata.teacher,
                     duration: staticData.metadata.duration_formatted,
-                    processing_pipeline: staticData.metadata.processing_pipeline
+                    processing_pipeline: staticData.metadata.processing_pipeline,
+                    selected_model: selectedModel
                 });
+
+                // Store data globally for model switching
+                window.warrenVideoData = staticData;
 
                 // Step 2: Call REAL ML API for each question (Claude-4's implementation)
                 console.log('🧠 Step 2: Calling REAL ML API for live classification...');
@@ -616,7 +751,7 @@
 
                     const batchPromises = batch.map(async (question) => {
                         try {
-                            // REAL API CALL to Claude-4's ML endpoint
+                            // REAL API CALL to Claude-4's ML endpoint with model selection
                             const apiResponse = await fetch(`${API_BASE_URL}/api/v1/classify/question`, {
                                 method: 'POST',
                                 headers: {
@@ -625,7 +760,8 @@
                                 body: JSON.stringify({
                                     text: question.text,
                                     context: `Warren's gravity lesson - timestamp: ${question.timestamp}s`,
-                                    timestamp: question.timestamp
+                                    timestamp: question.timestamp,
+                                    model_type: selectedModel  // Send selected model type
                                 })
                             });
 
