@@ -792,7 +792,11 @@
         <!-- Footer with version info -->
         <div style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary); border-top: 1px solid var(--border-color); padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-secondary); z-index: 100;">
             <div>© 2025 Cultivate Learning, University of Washington</div>
-            <div style="display: flex; gap: 15px;">
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <span id="apiHealthStatus" style="display: flex; align-items: center; gap: 5px;">
+                    <span id="apiHealthIndicator" style="width: 8px; height: 8px; border-radius: 50%; background: #ffa500;"></span>
+                    <span id="apiHealthText">API: Checking...</span>
+                </span>
                 <span class="build-number" id="buildNumber">BUILD v1.2.0-demo1</span>
                 <span style="color: var(--primary-color); font-weight: 500;">Demo v2.0.2</span>
             </div>
@@ -1384,6 +1388,32 @@
             console.log(`📥 Downloaded ${feedbackData.length} training samples`);
         }
 
+        // API Health Check Function
+        async function checkApiHealth() {
+            const indicator = document.getElementById('apiHealthIndicator');
+            const text = document.getElementById('apiHealthText');
+            const apiBase = getApiBaseUrl();
+
+            try {
+                const response = await fetch(`${apiBase}/health`, {
+                    method: 'GET',
+                    mode: 'cors'
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    indicator.style.background = '#28a745';  // Green
+                    text.textContent = `API: Healthy (${data.real_ml ? 'Real ML' : 'Mock'})`;
+                } else {
+                    indicator.style.background = '#ffc107';  // Yellow
+                    text.textContent = 'API: Limited';
+                }
+            } catch (error) {
+                indicator.style.background = '#dc3545';  // Red
+                text.textContent = 'API: Offline';
+            }
+        }
+
         // Initialize theme manager and load first scenario on page load
         document.addEventListener('DOMContentLoaded', () => {
             new ThemeManager();
@@ -1393,6 +1423,10 @@
             const buildDate = new Date().toISOString().split('T')[0].replace(/-/g, '');
             const buildTime = new Date().toTimeString().split(' ')[0].replace(/:/g, '');
             document.getElementById('buildNumber').textContent = `BUILD v1.2.0-demo1.${buildDate}.${buildTime}`;
+
+            // Check API health on load and periodically
+            checkApiHealth();
+            setInterval(checkApiHealth, 30000);  // Check every 30 seconds
 
             // Console welcome message
             console.log('%c🎭 ECE Question Classification System - Demo 1', 'font-size: 20px; font-weight: bold; color: #0078D4;');
