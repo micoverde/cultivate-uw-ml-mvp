@@ -1,0 +1,183 @@
+/**
+ * Professional Theme System CSS
+ * Elegant Microsoft Fluent Design with Dark/Light Mode Support
+ * Warren's Vision: Professional, sleek, no silly icons
+ */
+
+/* THEME SYSTEM - CSS CUSTOM PROPERTIES */
+:root {
+    /* LIGHT THEME (DEFAULT) - Microsoft Fluent Colors */
+
+    /* Primary Colors */
+    --primary-50: #F3F9FF;
+    --primary-100: #E1F1FF;
+    --primary-500: #0078D4;
+    --primary-600: #106EBE;
+    --primary-700: #005A9E;
+    --primary-900: #003D6B;
+
+    /* Surface Hierarchy - Light Mode (Professional & Comfortable) */
+    --surface-50: #F4F1EE;     /* Cards - warm linen, like quality paper */
+    --surface-100: #EFEBE8;    /* Page background - soft parchment */
+    --surface-200: #E8E3DF;    /* Secondary backgrounds - warm beige */
+    --surface-300: #DFD9D4;    /* Subtle borders - warm sand */
+    --surface-400: #D4CDC7;    /* Medium borders - soft taupe */
+    --surface-500: #C7BEB6;    /* Strong borders - warm stone */
+    --surface-600: #AFA59D;    /* Disabled elements - muted brown */
+
+    /* Text Hierarchy - Light Mode */
+    --text-primary: #1F1F1F;   /* High contrast text */
+    --text-secondary: #424242; /* Medium contrast text */
+    --text-tertiary: #6B6B6B;  /* Low contrast text */
+    --text-disabled: #A6A6A6;  /* Disabled text */
+    --text-inverse: #FFFFFF;   /* Text on dark backgrounds */
+
+    /* Semantic Colors - Light Theme (Professional & Friendly) */
+    --success-50: #F4FAF4;
+    --success-500: #107C10;
+    --success-600: #0E6B0E;
+    --success-text: #0E6B0E;
+
+    --warning-50: #FFF9F2;
+    --warning-500: #FF8C00;
+    --warning-600: #E67A00;
+    --warning-text: #CC6900;
+
+    --error-50: #FDF4F5;
+    --error-500: #D13438;
+    --error-600: #B71C1C;
+    --error-text: #A91E22;
+
+    /* Microsoft Fluent Effects */
+    --elevation-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+    --elevation-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.12);
+    --border-radius-small: 4px;
+    --border-radius-medium: 8px;
+    --border-radius-large: 12px;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+}
+
+/* DARK THEME OVERRIDES */
+[data-theme="dark"] {
+    /* Primary Colors - Dark Mode Optimized */
+    --primary-50: #001529;
+    --primary-100: #002040;
+    --primary-500: #60CDFF;
+    --primary-600: #4FC3F7;
+    --primary-700: #29B6F6;
+
+    /* Surface Hierarchy - Dark Mode */
+    --surface-50: #2D2D2D;     /* Cards, elevated surfaces */
+    --surface-100: #1C1C1C;    /* Page background */
+    --surface-200: #202020;    /* Secondary backgrounds */
+    --surface-300: #383838;    /* Subtle borders */
+    --surface-400: #484848;    /* Medium borders */
+    --surface-500: #5C5C5C;    /* Strong borders */
+    --surface-600: #6B6B6B;    /* Disabled elements */
+
+    /* Text Hierarchy - Dark Mode */
+    --text-primary: #FFFFFF;   /* High contrast text */
+    --text-secondary: #E1E1E1; /* Medium contrast text */
+    --text-tertiary: #BFBFBF;  /* Low contrast text */
+    --text-disabled: #8A8A8A;  /* Disabled text */
+    --text-inverse: #1F1F1F;   /* Text on light backgrounds */
+
+    /* Semantic Colors - Dark Theme */
+    --success-50: #1C2A1C;
+    --success-500: #6BB26B;
+    --success-600: #5A9E5A;
+    --success-text: #6BB26B;
+
+    --warning-50: #2A1F0D;
+    --warning-500: #D18B47;
+    --warning-600: #C17A36;
+    --warning-text: #D18B47;
+
+    --error-50: #2A1418;
+    --error-500: #E74856;
+    --error-600: #D83441;
+    --error-text: #E74856;
+
+    /* Dark Mode Effects */
+    --elevation-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.3);
+    --elevation-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* PROFESSIONAL THEME TOGGLE COMPONENT */
+.theme-toggle {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: var(--surface-50);
+    border: 2px solid var(--surface-400);
+    border-radius: var(--border-radius-large);
+    padding: 10px 14px;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--elevation-shadow-large);
+    transition: all var(--transition-medium);
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    background: var(--surface-200);
+    border-color: var(--primary-500);
+    transform: translateY(-1px);
+    box-shadow: var(--elevation-shadow-large), 0 0 0 1px var(--primary-500);
+}
+
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    transition: color var(--transition-fast);
+    opacity: 0.7;
+}
+
+.theme-toggle:hover .theme-icon {
+    opacity: 1;
+    color: var(--primary-500);
+}
+
+.theme-toggle-switch {
+    width: 40px;
+    height: 20px;
+    background: var(--surface-300);
+    border-radius: 10px;
+    position: relative;
+    transition: background-color var(--transition-fast);
+}
+
+.theme-toggle-switch.active {
+    background: var(--primary-500);
+}
+
+.theme-toggle-knob {
+    width: 16px;
+    height: 16px;
+    background: var(--surface-50);
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform var(--transition-fast);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-switch.active .theme-toggle-knob {
+    transform: translateX(20px);
+}
+
+/* Professional body styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--surface-100);
+    color: var(--text-primary);
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-medium), color var(--transition-medium);
+    line-height: 1.6;
+}

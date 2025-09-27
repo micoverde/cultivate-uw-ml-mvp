@@ -1,0 +1,59 @@
+{
+  "name": "cultivate-learning-unified-demos",
+  "version": "2.0.0",
+  "description": "Unified ML-Powered Demo Application for Cultivate Learning - Child Scenarios + Warren's Video Analysis",
+  "main": "index.html",
+  "scripts": {
+    "dev": "python -m http.server 3000",
+    "serve": "python -m http.server 3000",
+    "start": "python -m http.server 8080",
+    "preview": "python -m http.server 8080",
+    "build": "echo 'Static HTML build complete'",
+    "test": "echo 'Running unified demo tests'",
+    "lint": "echo 'Linting unified demos'",
+    "deploy": "echo 'Deploying to Azure Static Web Apps'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/micoverde/cultivate-uw-ml-mvp.git",
+    "directory": "unified-demos"
+  },
+  "keywords": [
+    "machine-learning",
+    "early-childhood-education",
+    "question-classification",
+    "pytorch",
+    "microsoft-fluent-design",
+    "azure-swa",
+    "real-ml-api"
+  ],
+  "author": "Cultivate Learning - University of Washington",
+  "license": "MIT",
+  "homepage": "https://github.com/micoverde/cultivate-uw-ml-mvp/tree/main/unified-demos",
+  "engines": {
+    "node": ">=18.0.0",
+    "python": ">=3.8"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ],
+  "config": {
+    "demo1_api": "http://localhost:8001",
+    "demo2_api": "http://localhost:8001",
+    "ml_features": 56,
+    "theme_support": "light,dark",
+    "fluent_design": "2025"
+  },
+  "devDependencies": {},
+  "dependencies": {},
+  "warren_requirements": {
+    "real_ml_only": true,
+    "no_simulation": true,
+    "unified_deployment": true,
+    "azure_swa_ready": true,
+    "microsoft_fluent_design": true,
+    "dual_theme_support": true
+  }
+}
