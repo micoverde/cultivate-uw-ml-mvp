@@ -1121,32 +1121,122 @@
             }
         }
 
+        // Password Modal for Retraining
+        async function showRetrainPasswordModal() {
+            return new Promise((resolve, reject) => {
+                // Create modal overlay
+                const modalOverlay = document.createElement('div');
+                modalOverlay.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.5);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 10000;
+                `;
+
+                // Create modal content
+                const modalContent = document.createElement('div');
+                modalContent.style.cssText = `
+                    background: var(--bg-primary);
+                    border-radius: 12px;
+                    padding: 32px;
+                    max-width: 400px;
+                    width: 90%;
+                    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+                `;
+
+                modalContent.innerHTML = `
+                    <h3 style="margin-top: 0; color: var(--text-primary);">🔐 Model Retraining Authorization</h3>
+                    <p style="color: var(--text-secondary);">Enter password to initiate model retraining with Azure Blob Storage data:</p>
+                    <input type="password" id="retrainPasswordInput"
+                           placeholder="Enter password"
+                           autocomplete="off"
+                           style="width: 100%; padding: 12px; font-size: 16px; border: 1px solid var(--border-color); border-radius: 6px; margin-bottom: 20px;">
+                    <div id="passwordError" style="color: var(--error-color); margin-bottom: 16px; display: none;"></div>
+                    <div style="display: flex; gap: 12px;">
+                        <button id="submitPassword" class="btn btn-primary" style="flex: 1;">Submit</button>
+                        <button id="cancelPassword" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+                    </div>
+                `;
+
+                modalOverlay.appendChild(modalContent);
+                document.body.appendChild(modalOverlay);
+
+                // Focus password input
+                const passwordInput = document.getElementById('retrainPasswordInput');
+                passwordInput.focus();
+
+                // Handle submit
+                document.getElementById('submitPassword').onclick = async () => {
+                    const password = passwordInput.value;
+
+                    if (!password) {
+                        document.getElementById('passwordError').textContent = 'Please enter a password';
+                        document.getElementById('passwordError').style.display = 'block';
+                        return;
+                    }
+
+                    // Validate password (check if it's 'lev')
+                    if (password === 'lev') {
+                        document.body.removeChild(modalOverlay);
+                        resolve(password);
+                    } else {
+                        document.getElementById('passwordError').textContent = 'Invalid password. Please try again.';
+                        document.getElementById('passwordError').style.display = 'block';
+                        passwordInput.value = '';
+                        passwordInput.focus();
+                    }
+                };
+
+                // Handle cancel
+                document.getElementById('cancelPassword').onclick = () => {
+                    document.body.removeChild(modalOverlay);
+                    reject('cancelled');
+                };
+
+                // Handle Enter key
+                passwordInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        document.getElementById('submitPassword').click();
+                    }
+                });
+            });
+        }
+
         // Model Retraining Functions
         async function startModelRetraining() {
-            const statusDiv = document.getElementById('retrainingStatus');
-            const spinner = document.getElementById('retrainingSpinner');
-            const message = document.getElementById('retrainingMessage');
-            const progressDiv = document.getElementById('retrainingProgress');
-            const progressBar = document.getElementById('retrainingProgressBar');
-
-            // Get human feedback data
-            const feedbackData = JSON.parse(localStorage.getItem('humanFeedback') || '[]');
-
-            if (feedbackData.length < 10) {
-                alert('Need at least 10 feedback samples for retraining. Current: ' + feedbackData.length);
-                return;
-            }
-
-            // Show status
-            statusDiv.style.display = 'block';
-            spinner.style.display = 'inline-block';
-            progressDiv.style.display = 'block';
-
-            // Simulate retraining progress
-            message.textContent = 'Preparing training data...';
-            progressBar.style.width = '10%';
-
             try {
+                // Show password modal first
+                const password = await showRetrainPasswordModal();
+
+                const statusDiv = document.getElementById('retrainingStatus');
+                const spinner = document.getElementById('retrainingSpinner');
+                const message = document.getElementById('retrainingMessage');
+                const progressDiv = document.getElementById('retrainingProgress');
+                const progressBar = document.getElementById('retrainingProgressBar');
+
+                // Get human feedback data
+                const feedbackData = JSON.parse(localStorage.getItem('humanFeedback') || '[]');
+
+                if (feedbackData.length < 10) {
+                    alert('Need at least 10 feedback samples for retraining. Current: ' + feedbackData.length);
+                    return;
+                }
+
+                // Show status
+                statusDiv.style.display = 'block';
+                spinner.style.display = 'inline-block';
+                progressDiv.style.display = 'block';
+
+                // Simulate retraining progress
+                message.textContent = 'Preparing training data...';
+                progressBar.style.width = '10%';
+
                 // Step 1: Prepare data
                 await new Promise(resolve => setTimeout(resolve, 1000));
                 message.textContent = 'Initializing PyTorch model...';
@@ -1157,16 +1247,20 @@
                 message.textContent = 'Training model (this may take a few moments)...';
                 progressBar.style.width = '50%';
 
-                // Call actual retraining API
+                // Call actual retraining API with password header
                 const apiEndpoint = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/model/retrain';
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Retrain-Password': password
+                    },
                     body: JSON.stringify({
                         training_data: feedbackData,
                         model_type: 'oeq_ceq_classifier',
                         epochs: 10,
-                        learning_rate: 0.001
+                        learning_rate: 0.001,
+                        data_source: 'azure_blob'
                     })
                 });
 
@@ -1197,6 +1291,10 @@
                 }, 2000);
 
             } catch (error) {
+                if (error === 'cancelled') {
+                    console.log('Retraining cancelled by user');
+                    return;
+                }
                 console.error('Retraining error:', error);
                 message.textContent = '⚠️ Retraining completed with warnings. Using fallback model.';
                 progressBar.style.width = '100%';
