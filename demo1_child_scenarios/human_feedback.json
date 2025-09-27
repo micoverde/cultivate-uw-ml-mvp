@@ -110,5 +110,13 @@
     "correct_class": "CEQ",
     "error_type": "TN",
     "scenario_id": 1
+  },
+  {
+    "timestamp": "2025-09-27T21:51:18.360Z",
+    "text": "",
+    "predicted_class": "CEQ",
+    "correct_class": "CEQ",
+    "error_type": "TN",
+    "scenario_id": 1
   }
 ]

@@ -582,9 +582,17 @@
     </div>
 
     <div class="container">
-        <header>
+        <header style="position: relative;">
             <h1>ECE Question Classification System</h1>
             <p>AI-powered assessment tool for early childhood education questioning techniques</p>
+
+            <!-- Settings Icon (Hidden by Feature Flag) -->
+            <button id="settingsBtn" class="settings-btn" onclick="openSettings()" style="display: none; position: absolute; top: 20px; right: 20px; background: transparent; border: none; cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.3s;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="3"></circle>
+                    <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 1.54l4.24 4.24M20.46 20.46l-4.24-4.24M1.54 20.46l4.24-4.24M23 12h-6m-6 0H1"></path>
+                </svg>
+            </button>
 
             <!-- Tab Navigation -->
             <div class="tab-navigation">
@@ -799,6 +807,31 @@
         </div>
     </div>
 
+    <!-- Model Selection Modal (Hidden by Feature Flag) -->
+    <div id="settingsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
+        <div class="modal-content" style="background-color: var(--bg-color); margin: 5% auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <span class="close" onclick="closeSettings()" style="color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
+            <h2 style="color: var(--primary-color); margin-bottom: 20px;">🎛️ Model Selection Settings</h2>
+
+            <div style="margin-bottom: 20px;">
+                <h3 style="color: var(--text-color); margin-bottom: 15px;">Select ML Model</h3>
+                <div id="modelOptions" style="display: grid; gap: 10px;">
+                    <!-- Model options will be dynamically populated -->
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(0,0,0,0.1);">
+                <h3 style="color: var(--text-color); margin-bottom: 10px;">Current Selection</h3>
+                <div id="currentModelInfo" style="padding: 15px; background: rgba(0,0,0,0.05); border-radius: 8px;">
+                    <strong id="currentModelName">Loading...</strong>
+                    <p id="currentModelDesc" style="margin: 5px 0; opacity: 0.8;">Loading description...</p>
+                </div>
+            </div>
+
+            <button onclick="closeSettings()" style="margin-top: 20px; padding: 10px 20px; background: var(--primary-color); color: white; border: none; border-radius: 8px; cursor: pointer;">Apply Settings</button>
+        </div>
+    </div>
+
     <script>
         // Feature Flags Configuration
         const featureFlags = {
@@ -807,6 +840,13 @@
             debugMode: false,       // Enable debug logging
             showMetrics: true       // Show model metrics tab
         };
+
+        // Initialize settings visibility based on feature flag
+        window.addEventListener('DOMContentLoaded', () => {
+            if (featureFlags.modelSelection) {
+                document.getElementById('settingsBtn').style.display = 'block';
+            }
+        });
 
         // Model Configuration (Issue #196)
         const modelConfig = {
@@ -1355,6 +1395,66 @@
             link.click();
 
             console.log(`📥 Downloaded ${feedbackData.length} training samples`);
+        }
+
+        // Settings Modal Functions
+        function openSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.style.display = 'block';
+            populateModelOptions();
+            updateCurrentModelDisplay();
+        }
+
+        function closeSettings() {
+            const modal = document.getElementById('settingsModal');
+            modal.style.display = 'none';
+        }
+
+        function populateModelOptions() {
+            const container = document.getElementById('modelOptions');
+            container.innerHTML = '';
+
+            modelConfig.availableModels.forEach(model => {
+                const option = document.createElement('div');
+                option.style.cssText = 'padding: 15px; background: rgba(0,0,0,0.05); border-radius: 8px; cursor: pointer; transition: all 0.3s;';
+                option.innerHTML = `
+                    <label style="display: flex; align-items: center; cursor: pointer;">
+                        <input type="radio" name="modelSelection" value="${model.id}"
+                               ${model.id === modelConfig.selectedModel ? 'checked' : ''}
+                               onchange="selectModel('${model.id}')"
+                               style="margin-right: 10px;">
+                        <div>
+                            <strong>${model.name}</strong>
+                            <div style="font-size: 0.9em; opacity: 0.7; margin-top: 4px;">${model.description}</div>
+                        </div>
+                    </label>
+                `;
+                option.onmouseover = () => option.style.background = 'rgba(0,0,0,0.08)';
+                option.onmouseout = () => option.style.background = 'rgba(0,0,0,0.05)';
+                container.appendChild(option);
+            });
+        }
+
+        function selectModel(modelId) {
+            modelConfig.selectedModel = modelId;
+            updateCurrentModelDisplay();
+            console.log(`🎯 Model selected: ${modelId}`);
+        }
+
+        function updateCurrentModelDisplay() {
+            const model = modelConfig.availableModels.find(m => m.id === modelConfig.selectedModel);
+            if (model) {
+                document.getElementById('currentModelName').textContent = model.name;
+                document.getElementById('currentModelDesc').textContent = model.description;
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('settingsModal');
+            if (event.target === modal) {
+                closeSettings();
+            }
         }
 
         // Initialize theme manager and load first scenario on page load
