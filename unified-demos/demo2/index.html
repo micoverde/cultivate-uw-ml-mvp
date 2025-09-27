@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 2: Warren's Teaching Video Analysis - Microsoft Fluent Design</title>
+
+    <!-- Professional Theme System -->
+    <link rel="stylesheet" href="../shared/theme.css">
+
+    <!-- Microsoft Fluent Design System 2025 -->
+    <style>
+        :root {
+            /* Fluent Design Color Tokens */
+            --fluent-neutral-bg: #faf9f8;
+            --fluent-neutral-bg-secondary: #f3f2f1;
+            --fluent-neutral-bg-tertiary: #edebe9;
+            --fluent-neutral-surface: #ffffff;
+            --fluent-brand-primary: #0078d4;
+            --fluent-brand-secondary: #106ebe;
+            --fluent-text-primary: #323130;
+            --fluent-text-secondary: #605e5c;
+            --fluent-text-tertiary: #8a8886;
+            --fluent-border-primary: #edebe9;
+            --fluent-border-secondary: #d2d0ce;
+            --fluent-accent-success: #107c10;
+            --fluent-accent-warning: #ff8c00;
+            --fluent-accent-error: #d13438;
+
+            /* Dark Theme */
+            --fluent-dark-bg: #1e1e1e;
+            --fluent-dark-bg-secondary: #2d2d30;
+            --fluent-dark-bg-tertiary: #3e3e42;
+            --fluent-dark-surface: #252526;
+            --fluent-dark-text-primary: #cccccc;
+            --fluent-dark-text-secondary: #969696;
+            --fluent-dark-border: #464647;
+
+            /* Fluent Typography */
+            --fluent-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --fluent-font-size-xs: 10px;
+            --fluent-font-size-sm: 12px;
+            --fluent-font-size-base: 14px;
+            --fluent-font-size-lg: 16px;
+            --fluent-font-size-xl: 20px;
+            --fluent-font-size-xxl: 28px;
+
+            /* Fluent Spacing */
+            --fluent-space-xs: 4px;
+            --fluent-space-sm: 8px;
+            --fluent-space-md: 12px;
+            --fluent-space-lg: 16px;
+            --fluent-space-xl: 20px;
+            --fluent-space-xxl: 24px;
+
+            /* Fluent Radius */
+            --fluent-radius-sm: 2px;
+            --fluent-radius-md: 4px;
+            --fluent-radius-lg: 8px;
+
+            /* Fluent Shadows */
+            --fluent-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12);
+            --fluent-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.14);
+            --fluent-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.18);
+
+            /* Animation */
+            --fluent-transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
+        }
+
+        /* Dark theme overrides */
+        [data-theme="dark"] {
+            --fluent-neutral-bg: var(--fluent-dark-bg);
+            --fluent-neutral-bg-secondary: var(--fluent-dark-bg-secondary);
+            --fluent-neutral-bg-tertiary: var(--fluent-dark-bg-tertiary);
+            --fluent-neutral-surface: var(--fluent-dark-surface);
+            --fluent-text-primary: var(--fluent-dark-text-primary);
+            --fluent-text-secondary: var(--fluent-dark-text-secondary);
+            --fluent-border-primary: var(--fluent-dark-border);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--fluent-font-family);
+            font-size: var(--fluent-font-size-base);
+            background: var(--fluent-neutral-bg);
+            color: var(--fluent-text-primary);
+            line-height: 1.5;
+            transition: var(--fluent-transition);
+        }
+
+        /* Header */
+        .fluent-header {
+            background: var(--fluent-neutral-surface);
+            border-bottom: 1px solid var(--fluent-border-primary);
+            padding: var(--fluent-space-lg) var(--fluent-space-xl);
+            box-shadow: var(--fluent-shadow-sm);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .fluent-header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .fluent-title {
+            font-size: var(--fluent-font-size-xxl);
+            font-weight: 600;
+            color: var(--fluent-brand-primary);
+            margin: 0;
+        }
+
+        .fluent-subtitle {
+            font-size: var(--fluent-font-size-base);
+            color: var(--fluent-text-secondary);
+            margin: 0;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            background: var(--fluent-neutral-bg-secondary);
+            border: 1px solid var(--fluent-border-secondary);
+            border-radius: var(--fluent-radius-md);
+            padding: var(--fluent-space-sm) var(--fluent-space-md);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+            font-size: var(--fluent-font-size-sm);
+        }
+
+        .theme-toggle:hover {
+            background: var(--fluent-neutral-bg-tertiary);
+            border-color: var(--fluent-brand-primary);
+        }
+
+        /* Main Container */
+        .fluent-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--fluent-space-xl);
+        }
+
+        /* Tab Navigation */
+        .fluent-tabs {
+            display: flex;
+            gap: var(--fluent-space-sm);
+            margin-bottom: var(--fluent-space-xl);
+            border-bottom: 1px solid var(--fluent-border-primary);
+        }
+
+        .fluent-tab {
+            background: transparent;
+            border: none;
+            padding: var(--fluent-space-md) var(--fluent-space-lg);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+            font-size: var(--fluent-font-size-base);
+            color: var(--fluent-text-secondary);
+            border-bottom: 2px solid transparent;
+            position: relative;
+        }
+
+        .fluent-tab:hover {
+            color: var(--fluent-brand-primary);
+            background: var(--fluent-neutral-bg-secondary);
+        }
+
+        .fluent-tab.active {
+            color: var(--fluent-brand-primary);
+            border-bottom-color: var(--fluent-brand-primary);
+            font-weight: 600;
+        }
+
+        /* Tab Content */
+        .fluent-tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .fluent-tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .fluent-card {
+            background: var(--fluent-neutral-surface);
+            border: 1px solid var(--fluent-border-primary);
+            border-radius: var(--fluent-radius-lg);
+            padding: var(--fluent-space-xl);
+            margin-bottom: var(--fluent-space-lg);
+            box-shadow: var(--fluent-shadow-sm);
+            transition: var(--fluent-transition);
+        }
+
+        .fluent-card:hover {
+            box-shadow: var(--fluent-shadow-md);
+            border-color: var(--fluent-brand-primary);
+        }
+
+        .fluent-card-title {
+            font-size: var(--fluent-font-size-xl);
+            font-weight: 600;
+            margin-bottom: var(--fluent-space-md);
+            color: var(--fluent-text-primary);
+        }
+
+        .fluent-card-subtitle {
+            font-size: var(--fluent-font-size-base);
+            color: var(--fluent-text-secondary);
+            margin-bottom: var(--fluent-space-lg);
+        }
+
+        /* Grid Layout */
+        .fluent-grid {
+            display: grid;
+            gap: var(--fluent-space-lg);
+        }
+
+        .fluent-grid-2 {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .fluent-grid-3 {
+            grid-template-columns: 1fr 1fr 1fr;
+        }
+
+        @media (max-width: 768px) {
+            .fluent-grid-2,
+            .fluent-grid-3 {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Video Player Styles */
+        .video-container {
+            position: relative;
+            background: #000;
+            border-radius: var(--fluent-radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--fluent-space-lg);
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: var(--fluent-space-lg);
+            color: white;
+        }
+
+        /* Transcript Styles */
+        .transcript-container {
+            max-height: 400px;
+            overflow-y: auto;
+            background: var(--fluent-neutral-bg-secondary);
+            border-radius: var(--fluent-radius-md);
+            padding: var(--fluent-space-lg);
+        }
+
+        .transcript-segment {
+            margin-bottom: var(--fluent-space-md);
+            padding: var(--fluent-space-sm);
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            transition: var(--fluent-transition);
+        }
+
+        .transcript-segment:hover {
+            background: var(--fluent-neutral-surface);
+            border-left-color: var(--fluent-brand-primary);
+        }
+
+        .transcript-segment.question {
+            border-left-color: var(--fluent-accent-success);
+            background: var(--fluent-neutral-surface);
+        }
+
+        .transcript-timestamp {
+            font-size: var(--fluent-font-size-sm);
+            color: var(--fluent-text-tertiary);
+            margin-bottom: var(--fluent-space-xs);
+        }
+
+        .transcript-text {
+            color: var(--fluent-text-primary);
+        }
+
+        /* Question Analysis */
+        .question-analysis {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--fluent-space-md);
+            background: var(--fluent-neutral-bg-secondary);
+            border-radius: var(--fluent-radius-md);
+            margin-top: var(--fluent-space-sm);
+        }
+
+        .ml-prediction {
+            background: var(--fluent-brand-primary);
+            color: white;
+            padding: var(--fluent-space-xs) var(--fluent-space-sm);
+            border-radius: var(--fluent-radius-sm);
+            font-size: var(--fluent-font-size-sm);
+            font-weight: 600;
+        }
+
+        .confidence-score {
+            font-size: var(--fluent-font-size-sm);
+            color: var(--fluent-text-secondary);
+        }
+
+        /* Statistics */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--fluent-space-md);
+            margin-top: var(--fluent-space-lg);
+        }
+
+        .stat-card {
+            background: var(--fluent-neutral-surface);
+            border: 1px solid var(--fluent-border-primary);
+            border-radius: var(--fluent-radius-md);
+            padding: var(--fluent-space-lg);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: var(--fluent-font-size-xxl);
+            font-weight: 700;
+            color: var(--fluent-brand-primary);
+            margin-bottom: var(--fluent-space-xs);
+        }
+
+        .stat-label {
+            font-size: var(--fluent-font-size-sm);
+            color: var(--fluent-text-secondary);
+        }
+
+        /* Buttons */
+        .fluent-button {
+            background: var(--fluent-brand-primary);
+            color: white;
+            border: none;
+            border-radius: var(--fluent-radius-md);
+            padding: var(--fluent-space-md) var(--fluent-space-lg);
+            cursor: pointer;
+            transition: var(--fluent-transition);
+            font-size: var(--fluent-font-size-base);
+            font-weight: 600;
+        }
+
+        .fluent-button:hover {
+            background: var(--fluent-brand-secondary);
+            transform: translateY(-1px);
+            box-shadow: var(--fluent-shadow-md);
+        }
+
+        .fluent-button-secondary {
+            background: var(--fluent-neutral-bg-secondary);
+            color: var(--fluent-text-primary);
+            border: 1px solid var(--fluent-border-secondary);
+        }
+
+        .fluent-button-secondary:hover {
+            background: var(--fluent-neutral-bg-tertiary);
+        }
+
+        /* Loading States */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--fluent-border-primary);
+            border-top: 2px solid var(--fluent-brand-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: var(--fluent-space-sm);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fluent-container {
+                padding: var(--fluent-space-md);
+            }
+
+            .fluent-header {
+                padding: var(--fluent-space-md);
+            }
+
+            .fluent-tabs {
+                flex-wrap: wrap;
+            }
+
+            .fluent-tab {
+                padding: var(--fluent-space-sm) var(--fluent-space-md);
+                font-size: var(--fluent-font-size-sm);
+            }
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Header -->
+    <header class="fluent-header">
+        <div class="fluent-header-content">
+            <div>
+                <h1 class="fluent-title">Demo 2: Warren's Teaching Video Analysis</h1>
+                <p class="fluent-subtitle">AI-Powered Question Classification with Whisper + Ensemble ML</p>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span id="theme-icon">🌙</span> Toggle Theme
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="fluent-container">
+        <!-- Tab Navigation -->
+        <div class="fluent-tabs">
+            <button class="fluent-tab active" onclick="showTab('video-player')">📹 Video Player</button>
+            <button class="fluent-tab" onclick="showTab('transcript')">📝 Transcript & Analysis</button>
+            <button class="fluent-tab" onclick="showTab('questions')">❓ Question Classification</button>
+            <button class="fluent-tab" onclick="showTab('comparison')">⚖️ ML vs Manual</button>
+        </div>
+
+        <!-- Video Player Tab -->
+        <div id="video-player" class="fluent-tab-content active">
+            <div class="fluent-card">
+                <h2 class="fluent-card-title">Warren's Teaching Video - Real Classroom Analysis</h2>
+                <p class="fluent-card-subtitle">14m 45s • 1080p • Processed with OpenAI Whisper + Ensemble Classifier</p>
+
+                <div class="video-container">
+                    <video class="video-player" controls id="mainVideo">
+                        <source src="warren_teaching_web.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalQuestions">--</div>
+                        <div class="stat-label">Questions Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="oeqCount">--</div>
+                        <div class="stat-label">Open-Ended Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="ceqCount">--</div>
+                        <div class="stat-label">Closed-Ended Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="avgConfidence">--</div>
+                        <div class="stat-label">Avg ML Confidence</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Transcript Tab -->
+        <div id="transcript" class="fluent-tab-content">
+            <div class="fluent-card">
+                <h2 class="fluent-card-title">Real-Time Transcript</h2>
+                <p class="fluent-card-subtitle">Powered by OpenAI Whisper with word-level timestamps</p>
+
+                <div class="transcript-container" id="transcriptContainer">
+                    <div class="loading-spinner"></div>
+                    Loading Warren's video transcript...
+                </div>
+            </div>
+        </div>
+
+        <!-- Questions Tab -->
+        <div id="questions" class="fluent-tab-content">
+            <div class="fluent-card">
+                <h2 class="fluent-card-title">Question Analysis Dashboard</h2>
+                <p class="fluent-card-subtitle">Ensemble ML Classification: Neural Network + Random Forest + Logistic Regression</p>
+
+                <div id="questionsContainer">
+                    <div class="loading-spinner"></div>
+                    Analyzing questions with ensemble classifier...
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Tab -->
+        <div id="comparison" class="fluent-tab-content">
+            <div class="fluent-card">
+                <h2 class="fluent-card-title">ML Predictions vs Manual Annotations</h2>
+                <p class="fluent-card-subtitle">Compare ensemble AI results with human expert analysis</p>
+
+                <div class="fluent-grid fluent-grid-2">
+                    <div>
+                        <h3>🤖 Machine Learning Results</h3>
+                        <div id="mlResults">
+                            <div class="loading-spinner"></div>
+                            Processing ML classifications...
+                        </div>
+                    </div>
+                    <div>
+                        <h3>👨‍🏫 Manual Annotations</h3>
+                        <div id="manualAnnotations">
+                            <p>Manual annotations can be added here for comparison with ML predictions.</p>
+                            <button class="fluent-button-secondary">Add Annotation</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Management
+        function toggleTheme() {
+            const body = document.body;
+            const themeIcon = document.getElementById('theme-icon');
+            const currentTheme = body.getAttribute('data-theme');
+
+            if (currentTheme === 'light') {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+        // Tab Management
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.fluent-tab-content');
+            tabContents.forEach(tab => tab.classList.remove('active'));
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.fluent-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+        }
+
+        // Warren's Real Video Processing Data
+        async function loadWarrenVideoData() {
+            try {
+                console.log('Loading Warren\'s real video processing results...');
+
+                // Load Warren's processed data from VM
+                const response = await fetch('./warren_teaching_demo_data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load Warren\'s data');
+                }
+                const data = await response.json();
+
+                console.log(`Loaded Warren's gravity lesson: ${data.questions.length} questions, ${data.metadata.duration_formatted}`);
+
+                // Calculate real statistics from Warren's data
+                const oeqQuestions = data.questions.filter(q => q.ml_classification?.type === 'OEQ');
+                const ceqQuestions = data.questions.filter(q => q.ml_classification?.type === 'CEQ');
+                const avgConfidence = data.questions
+                    .filter(q => q.ml_classification?.confidence !== undefined)
+                    .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
+                    data.questions.filter(q => q.ml_classification?.confidence !== undefined).length;
+
+                // Update statistics with real data
+                document.getElementById('totalQuestions').textContent = data.questions.length;
+                document.getElementById('oeqCount').textContent = oeqQuestions.length;
+                document.getElementById('ceqCount').textContent = ceqQuestions.length;
+                document.getElementById('avgConfidence').textContent = (avgConfidence * 100).toFixed(1) + '%';
+
+                // Track each ML prediction in analytics
+                if (window.analytics) {
+                    data.questions.forEach((question, index) => {
+                        if (question.ml_classification) {
+                            const prediction = {
+                                classification: question.ml_classification.type,
+                                confidence: question.ml_classification.confidence || 0,
+                                processing_time_ms: question.ml_classification.processing_time_ms || 0,
+                                features_extracted: question.ml_classification.features_extracted || 56
+                            };
+                            analytics.trackMLPrediction('demo2', prediction, {
+                                userContext: {
+                                    question_length: question.text?.length || 0,
+                                    video_timestamp: question.timestamp || 0,
+                                    question_index: index
+                                },
+                                scenarioId: `warren_video_${index}`
+                            });
+                        }
+                    });
+                }
+
+                // Load real transcript
+                document.getElementById('transcriptContainer').innerHTML = `
+                    <div class="transcript-text">
+                        <h3>Warren's Gravity Lesson Transcript</h3>
+                        <p style="margin-bottom: 1rem; color: var(--fluent-text-secondary);">
+                            <strong>Subject:</strong> Physics - Gravity |
+                            <strong>Duration:</strong> ${data.metadata.duration_formatted} |
+                            <strong>Questions Detected:</strong> ${data.questions.length}
+                        </p>
+                        <div style="background: var(--fluent-neutral-bg-secondary); padding: 1rem; border-radius: 4px; max-height: 400px; overflow-y: auto;">
+                            ${data.metadata.transcript}
+                        </div>
+                    </div>
+                `;
+
+                // Load real questions with clickable timestamps
+                const questionsHtml = data.questions.map((q, index) => `
+                    <div class="question-item" style="margin-bottom: 1rem; padding: 1rem; background: var(--fluent-neutral-surface); border-radius: 8px; border: 1px solid var(--fluent-border-primary);">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                            <strong style="color: var(--fluent-brand-primary); cursor: pointer;" onclick="jumpToTimestamp(${q.timestamp})">
+                                ${formatTime(q.timestamp)} ⏯️
+                            </strong>
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span class="ml-prediction ${q.ml_classification?.type === 'OEQ' ? 'oeq' : 'ceq'}" style="padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; background: ${q.ml_classification?.type === 'OEQ' ? '#107c10' : '#0078d4'}; color: white;">
+                                    ${q.ml_classification?.type || 'Unknown'}
+                                </span>
+                                <button class="rate-button" onclick="showRatingModal(${index}, '${q.text?.replace(/'/g, "\\'")}', '${q.ml_classification?.type}', ${q.ml_classification?.confidence})" style="padding: 4px 10px; font-size: 11px; font-weight: 500; background: var(--surface-200); border: 1px solid var(--surface-400); border-radius: 6px; cursor: pointer; color: var(--text-secondary); transition: all 0.2s ease;">
+                                    RATE
+                                </button>
+                            </div>
+                        </div>
+                        <div style="margin-bottom: 0.5rem; font-style: italic;">
+                            "${q.text}"
+                        </div>
+                        <div style="font-size: 12px; color: var(--fluent-text-secondary);">
+                            <strong>ML Confidence:</strong> ${((q.ml_classification?.confidence || 0) * 100).toFixed(1)}% |
+                            <strong>Features:</strong> ${q.ml_classification?.features_extracted || 'N/A'} |
+                            <strong>Reasoning:</strong> ${q.ml_classification?.reasoning || 'N/A'}
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('questionsContainer').innerHTML = questionsHtml;
+
+                // Update ML vs Manual comparison
+                document.getElementById('mlResults').innerHTML = `
+                    <div style="background: var(--fluent-neutral-bg-secondary); padding: 1rem; border-radius: 8px;">
+                        <h4>Ensemble Classifier Results</h4>
+                        <p><strong>Total Questions:</strong> ${data.questions.length}</p>
+                        <p><strong>Open-Ended (OEQ):</strong> ${oeqQuestions.length}</p>
+                        <p><strong>Closed-Ended (CEQ):</strong> ${ceqQuestions.length}</p>
+                        <p><strong>Average Confidence:</strong> ${(avgConfidence * 100).toFixed(1)}%</p>
+                        <p><strong>Model Architecture:</strong> Neural Network + Random Forest + Logistic Regression</p>
+                        <p><strong>Features per Question:</strong> 56</p>
+                    </div>
+                `;
+
+            } catch (error) {
+                console.error('Error loading Warren\'s video data:', error);
+                // Fallback display
+                document.getElementById('transcriptContainer').innerHTML = `
+                    <p style="color: var(--fluent-accent-error);">
+                        Error loading transcript. Please ensure warren_teaching_demo_data.json is available.
+                    </p>
+                `;
+            }
+        }
+
+        // Time formatting helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadWarrenVideoData();
+
+            // Setup video event listeners
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.addEventListener('loadedmetadata', function() {
+                    console.log('Video loaded:', video.duration + 's');
+                });
+            }
+        });
+
+        // Video Timeline Navigation (will be populated with real data)
+        function jumpToTimestamp(seconds) {
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.currentTime = seconds;
+                video.play();
+            }
+        }
+
+        console.log('Demo 2: Warren Video Analysis - Microsoft Fluent Design Template Ready!');
+        console.log('Waiting for VM processing results to populate real data...');
+    </script>
+
+    <!-- Professional Rating Modal -->
+    <div id="ratingModal" class="rating-modal">
+        <div class="rating-modal-content">
+            <h3>Rate ML Classification</h3>
+            <div id="ratingQuestion" class="rating-question"></div>
+            <div class="rating-current">
+                <span>Current Classification:</span>
+                <span id="currentClassification" style="font-weight: 600; margin-left: 8px;"></span>
+                <span id="currentConfidence" style="margin-left: 8px; color: var(--text-secondary);"></span>
+            </div>
+            <div class="rating-options">
+                <div class="rating-option" data-type="correct">
+                    <div class="label">✓ Correct</div>
+                    <div class="desc">The ML classification is accurate</div>
+                </div>
+                <div class="rating-option" data-type="incorrect">
+                    <div class="label">✗ Incorrect</div>
+                    <div class="desc">The ML classification needs correction</div>
+                </div>
+            </div>
+            <div id="correctionOptions" style="display: none; margin-bottom: 20px;">
+                <h4 style="margin-bottom: 12px; color: var(--text-primary);">Correct Classification:</h4>
+                <div style="display: flex; gap: 12px;">
+                    <button class="rating-option" data-correct-type="OEQ" style="flex: 1; padding: 12px;">
+                        <div class="label">OEQ</div>
+                        <div class="desc">Open-Ended Question</div>
+                    </button>
+                    <button class="rating-option" data-correct-type="CEQ" style="flex: 1; padding: 12px;">
+                        <div class="label">CEQ</div>
+                        <div class="desc">Closed-Ended Question</div>
+                    </button>
+                </div>
+            </div>
+            <div class="rating-actions">
+                <button class="rating-btn secondary" onclick="closeRatingModal()">Cancel</button>
+                <button id="submitRating" class="rating-btn primary" onclick="submitRating()" disabled>Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Unified Navigation and API -->
+    <script src="../shared/theme.js"></script>
+    <script src="../shared/navigation.js"></script>
+    <script src="../shared/api.js"></script>
+    <script src="../shared/analytics.js"></script>
+
+    <script>
+        // Professional Rating System
+        let currentRatingData = null;
+
+        function showRatingModal(questionIndex, questionText, currentClassification, confidence) {
+            currentRatingData = {
+                index: questionIndex,
+                text: questionText,
+                classification: currentClassification,
+                confidence: confidence
+            };
+
+            document.getElementById('ratingQuestion').textContent = `"${questionText}"`;
+            document.getElementById('currentClassification').textContent = currentClassification;
+            document.getElementById('currentConfidence').textContent = `(${(confidence * 100).toFixed(1)}% confidence)`;
+
+            document.getElementById('ratingModal').classList.add('show');
+
+            // Reset selections
+            document.querySelectorAll('.rating-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('correctionOptions').style.display = 'none';
+            document.getElementById('submitRating').disabled = true;
+        }
+
+        function closeRatingModal() {
+            document.getElementById('ratingModal').classList.remove('show');
+            currentRatingData = null;
+        }
+
+        // Handle rating selection
+        document.querySelectorAll('.rating-option[data-type]').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.rating-option[data-type]').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+
+                const isIncorrect = this.dataset.type === 'incorrect';
+                document.getElementById('correctionOptions').style.display = isIncorrect ? 'block' : 'none';
+
+                if (!isIncorrect) {
+                    document.getElementById('submitRating').disabled = false;
+                } else {
+                    document.getElementById('submitRating').disabled = true;
+                    document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
+                }
+            });
+        });
+
+        // Handle correction selection
+        document.querySelectorAll('.rating-option[data-correct-type]').forEach(option => {
+            option.addEventListener('click', function() {
+                document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('submitRating').disabled = false;
+            });
+        });
+
+        async function submitRating() {
+            if (!currentRatingData) return;
+
+            const isCorrect = document.querySelector('.rating-option[data-type].selected')?.dataset.type === 'correct';
+            const correctedType = document.querySelector('.rating-option[data-correct-type].selected')?.dataset.correctType;
+
+            const feedbackData = {
+                text: currentRatingData.text,
+                predicted_class: currentRatingData.classification,
+                correct_class: isCorrect ? currentRatingData.classification : correctedType,
+                error_type: isCorrect ? 'TP' : (correctedType === 'OEQ' ? 'FP' : 'FN'),
+                confidence: currentRatingData.confidence,
+                scenario_id: `warren_video_${currentRatingData.index}`,
+                source: 'demo2_rating'
+            };
+
+            try {
+                const response = await fetch('http://localhost:8001/save_feedback', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(feedbackData)
+                });
+
+                if (response.ok) {
+                    console.log('✅ Rating submitted successfully:', feedbackData);
+
+                    // Track in analytics
+                    if (window.analytics) {
+                        analytics.trackUserInteraction('rating_submitted', 'demo2', {
+                            question_index: currentRatingData.index,
+                            is_correct: isCorrect,
+                            original_classification: currentRatingData.classification,
+                            corrected_classification: correctedType || currentRatingData.classification,
+                            confidence: currentRatingData.confidence
+                        });
+                    }
+
+                    // Show success feedback
+                    alert('Thank you! Your rating has been submitted and will help improve the ML model.');
+                } else {
+                    console.error('Failed to submit rating:', response.statusText);
+                    alert('Failed to submit rating. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error submitting rating:', error);
+                alert('Error submitting rating. Please check that the ML API is running.');
+            }
+
+            closeRatingModal();
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('ratingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeRatingModal();
+            }
+        });
+
+        // Add modal styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .rating-modal {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: none;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+            }
+
+            .rating-modal.show {
+                display: flex;
+            }
+
+            .rating-modal-content {
+                background: var(--surface-50);
+                border-radius: var(--border-radius-large);
+                padding: 24px;
+                max-width: 500px;
+                width: 90%;
+                box-shadow: var(--elevation-shadow-large);
+                position: relative;
+            }
+
+            .rating-modal h3 {
+                color: var(--text-primary);
+                margin-bottom: 16px;
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+
+            .rating-question {
+                background: var(--surface-200);
+                padding: 12px;
+                border-radius: 8px;
+                margin-bottom: 16px;
+                font-style: italic;
+                color: var(--text-secondary);
+            }
+
+            .rating-current {
+                display: flex;
+                align-items: center;
+                margin-bottom: 16px;
+                gap: 8px;
+                color: var(--text-primary);
+            }
+
+            .rating-options {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+                margin-bottom: 16px;
+            }
+
+            .rating-option {
+                padding: 12px;
+                border: 2px solid var(--surface-300);
+                border-radius: 8px;
+                cursor: pointer;
+                text-align: center;
+                transition: all 0.2s ease;
+                background: var(--surface-50);
+                color: var(--text-primary);
+            }
+
+            .rating-option:hover {
+                border-color: var(--primary-500);
+                background: var(--surface-100);
+            }
+
+            .rating-option.selected {
+                border-color: var(--primary-500);
+                background: var(--primary-50);
+                color: var(--primary-600);
+            }
+
+            .rating-option .label {
+                font-weight: 600;
+                margin-bottom: 4px;
+            }
+
+            .rating-option .desc {
+                font-size: 0.85rem;
+                color: var(--text-secondary);
+            }
+
+            .rating-actions {
+                display: flex;
+                gap: 12px;
+                justify-content: flex-end;
+            }
+
+            .rating-btn {
+                padding: 10px 20px;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-weight: 500;
+                transition: background-color 0.2s ease;
+            }
+
+            .rating-btn.primary {
+                background: var(--primary-500);
+                color: white;
+            }
+
+            .rating-btn.primary:hover {
+                background: var(--primary-600);
+            }
+
+            .rating-btn.secondary {
+                background: var(--surface-300);
+                color: var(--text-primary);
+            }
+
+            .rating-btn.secondary:hover {
+                background: var(--surface-400);
+            }
+
+            .rating-btn:disabled {
+                opacity: 0.5;
+                cursor: not-allowed;
+            }
+
+            .rate-button:hover {
+                background: var(--surface-300) !important;
+                border-color: var(--primary-500) !important;
+                color: var(--primary-500) !important;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
