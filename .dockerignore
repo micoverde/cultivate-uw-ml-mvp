@@ -1,0 +1,59 @@
+# Ignore large directories and files that don't belong in Docker image
+node_modules/
+.venv/
+venv/
+demo_env/
+test_env/
+*_env/
+__pycache__/
+*.pyc
+.pytest_cache/
+test_output/
+test_results/
+test_screenshots/
+test_data/
+logs/
+*.log
+validation_reports/
+
+# Ignore Git and IDE files
+.git/
+.gitignore
+.vscode/
+.claude/
+
+# Ignore documentation and development files
+*.md
+*.png
+*.jpg
+*.jpeg
+TESTING.md
+PRODUCTION.md
+azure-*.md
+phase2-*.md
+
+# Ignore temporary and cache files
+.cache/
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# Ignore development scripts
+*.sh
+docker-compose.yml
+deploy-*.sh
+
+# Ignore large data files
+demo/
+data/
+models/
+*.wav
+*.mp4
+*.avi
+
+# Keep only essential files for ML container
+!src/
+!run_api.py
+!requirements-*.txt
+!Dockerfile.ml
