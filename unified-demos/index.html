@@ -538,12 +538,40 @@
         </div>
     </section>
 
-    <!-- Footer with version info -->
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: rgba(248, 249, 250, 0.98); border-top: 1px solid rgba(0, 0, 0, 0.1); padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: #6c757d; z-index: 100; backdrop-filter: blur(10px);">
+    <!-- Footer with version info (Dark Mode Compatible) -->
+    <style>
+        #mainFooter {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--surface-100);
+            border-top: 1px solid var(--surface-300);
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: var(--text-secondary);
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        [data-theme="dark"] #mainFooter {
+            background: rgba(28, 28, 28, 0.98);
+            border-top: 1px solid var(--surface-400);
+        }
+
+        #mainFooter .version-info {
+            color: var(--primary-500);
+            font-weight: 500;
+        }
+    </style>
+    <div id="mainFooter">
         <div>© 2025 Cultivate Learning, University of Washington</div>
         <div style="display: flex; gap: 15px;">
             <span>BUILD v2.1.0-polished</span>
-            <span style="color: #0078d4; font-weight: 500;">Platform v2.0.2</span>
+            <span class="version-info">Platform v2.0.2</span>
         </div>
     </div>
 
