@@ -587,10 +587,10 @@
             <p>AI-powered assessment tool for early childhood education questioning techniques</p>
 
             <!-- Settings Icon (Hidden by Feature Flag) -->
-            <button id="settingsBtn" class="settings-btn" onclick="openSettings()" style="display: none; position: absolute; top: 20px; right: 20px; background: transparent; border: none; cursor: pointer; padding: 8px; border-radius: 8px; transition: background 0.3s;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="3"></circle>
-                    <path d="M12 1v6m0 6v6m4.22-13.22l4.24 4.24M1.54 1.54l4.24 4.24M20.46 20.46l-4.24-4.24M1.54 20.46l4.24-4.24M23 12h-6m-6 0H1"></path>
+            <button id="settingsBtn" class="settings-btn" onclick="openSettings()" style="display: none; position: absolute; top: 20px; right: 20px; background: var(--bg-secondary); border: 1px solid var(--border-color); cursor: pointer; padding: 10px; border-radius: 8px; transition: all 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.1);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary-color)" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6m4.22-13.22l1.42 1.42m-9.9 9.9l1.42 1.42M20.46 20.46l-1.42-1.42m-9.9-9.9l-1.42-1.42M23 12h-6m-6 0H1M1.54 1.54l1.42 1.42m9.9 9.9l1.42 1.42M20.46 1.54l-1.42 1.42m-9.9 9.9l-1.42 1.42"/>
                 </svg>
             </button>
 
@@ -802,16 +802,22 @@
             <div>© 2025 Cultivate Learning, University of Washington</div>
             <div style="display: flex; gap: 15px;">
                 <span class="build-number" id="buildNumber">BUILD v1.2.0-demo1</span>
-                <span style="color: var(--primary-color); font-weight: 500;">Demo v2.0.2</span>
             </div>
         </div>
     </div>
 
     <!-- Model Selection Modal (Hidden by Feature Flag) -->
-    <div id="settingsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5);">
-        <div class="modal-content" style="background-color: var(--bg-color); margin: 5% auto; padding: 30px; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-            <span class="close" onclick="closeSettings()" style="color: var(--text-color); float: right; font-size: 28px; font-weight: bold; cursor: pointer;">&times;</span>
-            <h2 style="color: var(--primary-color); margin-bottom: 20px;">🎛️ Model Selection Settings</h2>
+    <div id="settingsModal" class="modal" style="display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px);">
+        <div class="modal-content" style="background-color: var(--bg-color); margin: 5% auto; padding: 30px; border-radius: 16px; width: 90%; max-width: 600px; box-shadow: 0 10px 40px rgba(0,0,0,0.4); border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: var(--primary-color); margin: 0;">🎛️ Model Selection Settings</h2>
+                <button onclick="closeSettings()" style="background: transparent; border: none; cursor: pointer; padding: 5px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--text-secondary)" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+            </div>
 
             <div style="margin-bottom: 20px;">
                 <h3 style="color: var(--text-color); margin-bottom: 15px;">Select ML Model</h3>
@@ -835,7 +841,7 @@
     <script>
         // Feature Flags Configuration
         const featureFlags = {
-            modelSelection: false,  // Dark deployed - set to true to enable model selection UI
+            modelSelection: true,   // ENABLED FOR TESTING - set to false for production
             ensembleAPI: true,      // Use ensemble API endpoint when available
             debugMode: false,       // Enable debug logging
             showMetrics: true       // Show model metrics tab
@@ -851,17 +857,24 @@
         // Model Configuration (Issue #196)
         const modelConfig = {
             availableModels: [
-                { id: 'ensemble', name: '🎯 7-Model Ensemble', description: 'Neural Network + XGBoost + RF + SVM + LR + LightGBM + GB' },
-                { id: 'neural', name: '🧠 Neural Network', description: 'PyTorch 4-layer NN with 56 features' },
-                { id: 'xgboost', name: '⚡ XGBoost', description: 'Gradient boosting with optimized hyperparameters' },
-                { id: 'random_forest', name: '🌲 Random Forest', description: '100 trees with feature importance' },
-                { id: 'svm', name: '📊 SVM', description: 'Support Vector Machine with RBF kernel' },
-                { id: 'logistic', name: '📈 Logistic Regression', description: 'L2 regularized logistic classifier' },
-                { id: 'lightgbm', name: '💡 LightGBM', description: 'Light Gradient Boosting Machine' },
-                { id: 'gradient_boost', name: '🚀 Gradient Boost', description: 'Classic gradient boosting' }
+                {
+                    id: 'classic',
+                    name: '🎓 Classic ML',
+                    description: 'Original lightweight heuristic-based classifier optimized for speed',
+                    endpoint: '/api/classify'
+                },
+                {
+                    id: 'ensemble',
+                    name: '🎯 Ensemble ML (7 Models)',
+                    description: 'Advanced voting ensemble: Neural Network + XGBoost + Random Forest + SVM + Logistic Regression + LightGBM + Gradient Boosting',
+                    endpoint: '/api/v2/classify/ensemble'
+                }
             ],
-            selectedModel: 'ensemble',  // Default to ensemble
-            apiEndpoint: null  // Will be set dynamically
+            selectedModel: 'classic',  // Default to classic for now
+            getEndpoint: function() {
+                const model = this.availableModels.find(m => m.id === this.selectedModel);
+                return model ? model.endpoint : '/api/classify';
+            }
         };
 
         // Child Scenarios Data
@@ -976,21 +989,29 @@
             try {
                 // Call REAL ML API
                 const currentScenario = scenarios[currentScenarioIndex];
+                // Use model settings from shared component
+                const apiEndpoint = window.modelSettings
+                    ? window.modelSettings.getModelEndpoint()
+                    : 'http://localhost:8001/api/classify';
+                const selectedModel = window.modelSettings?.getSelectedModel() || 'classic';
+
                 console.log('\n🌐 API REQUEST:');
-                console.log(`🎯 Endpoint: http://localhost:8001/classify_response`);
+                console.log(`🎯 Endpoint: ${apiEndpoint}`);
                 console.log(`📋 Scenario ID: ${currentScenario.id}`);
-                console.log(`🧠 Model: PyTorch Neural Network (4-layer, 56 features)`);
+                console.log(`🧠 Model: ${selectedModel === 'ensemble' ? '🎯 Ensemble (7 Models)' : '🎓 Classic ML'}`);
+                console.log(`📝 Description: ${selectedModel === 'ensemble' ? 'Advanced voting ensemble' : 'Fast, lightweight model'}`);
 
                 const apiRequest = {
                     text: response,
                     scenario_id: currentScenario.id,
+                    model_type: selectedModel,  // Include selected model
                     debug_mode: true
                 };
 
                 console.log('\n📤 REQUEST PAYLOAD:');
                 console.log(JSON.stringify(apiRequest, null, 2));
 
-                const apiResponse = await fetch('http://localhost:8001/classify_response', {
+                const apiResponse = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1137,7 +1158,10 @@
                 console.log('📝 SUBMITTING HUMAN FEEDBACK:');
                 console.log(JSON.stringify(feedbackRequest, null, 2));
 
-                const apiResponse = await fetch('http://localhost:8001/save_feedback', {
+                const apiBaseUrl = window.modelSettings
+                    ? window.modelSettings.apiBaseUrl
+                    : 'http://localhost:8001';
+                const apiResponse = await fetch(`${apiBaseUrl}/save_feedback`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1312,7 +1336,10 @@
                 progressBar.style.width = '50%';
 
                 // Call actual retraining API with password header
-                const apiEndpoint = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/model/retrain';
+                const apiBaseUrl = window.modelSettings
+                    ? window.modelSettings.apiBaseUrl
+                    : 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+                const apiEndpoint = `${apiBaseUrl}/api/v1/model/retrain`;
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
