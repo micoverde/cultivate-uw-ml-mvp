@@ -1,13 +1,14 @@
 name: Deploy Ensemble ML to Azure (Cost-Optimized)
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'Dockerfile'
-      - 'requirements*.txt'
-      - 'src/**'
-      - '.github/workflows/deploy-ensemble.yml'
+  # Disabled - using lightweight API deployment instead
+  # push:
+  #   branches: [main]
+  #   paths:
+  #     - 'Dockerfile'
+  #     - 'requirements*.txt'
+  #     - 'src/**'
+  #     - '.github/workflows/deploy-ensemble.yml'
   workflow_dispatch:
     inputs:
       environment:
@@ -20,9 +21,9 @@ on:
           - production
 
 env:
-  REGISTRY: cultivatemlacr.azurecr.io
+  REGISTRY: cultivatemlregistry.azurecr.io
   IMAGE_NAME: cultivate-ml-api
-  RESOURCE_GROUP: cultivate-rg
+  RESOURCE_GROUP: cultivate-ml-rg
 
 jobs:
   build-and-push:
@@ -80,13 +81,13 @@ jobs:
 
           # Create Container App Environment if it doesn't exist
           ENV_EXISTS=$(az containerapp env show \
-            --name cultivate-env \
+            --name cultivate-ml-env \
             --resource-group ${{ env.RESOURCE_GROUP }} \
             --query name -o tsv 2>/dev/null || echo "")
 
           if [ -z "$ENV_EXISTS" ]; then
             az containerapp env create \
-              --name cultivate-env \
+              --name cultivate-ml-env \
               --resource-group ${{ env.RESOURCE_GROUP }} \
               --location eastus
           fi
@@ -95,7 +96,7 @@ jobs:
           az containerapp create \
             --name ${APP_NAME} \
             --resource-group ${{ env.RESOURCE_GROUP }} \
-            --environment cultivate-env \
+            --environment cultivate-ml-env \
             --image ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }} \
             --target-port 8000 \
             --ingress external \
