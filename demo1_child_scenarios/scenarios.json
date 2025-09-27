@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "title": "Block Tower Collapse",
+    "age_group": "TODDLER",
+    "context": "A 2-year-old has been carefully stacking wooden blocks into a tall tower. Just as they place the final block on top, the entire tower comes crashing down. The child stares at the fallen blocks with wide eyes, their lower lip starting to quiver, showing signs of frustration and disappointment.",
+    "child_behavior": "Looking upset, starting to tear up, pointing at fallen blocks",
+    "educational_focus": "Problem-solving, emotional regulation, cause and effect",
+    "example_ceq": "Did your tower fall down?",
+    "example_oeq": "What happened to your tower?",
+    "learning_opportunity": "Encourage reflection on what happened and how to rebuild"
+  },
+  {
+    "id": 2,
+    "title": "Lunch Resistance",
+    "age_group": "TODDLER",
+    "context": "During lunchtime, a 3-year-old is sitting at the table with their meal. They've eaten their favorite parts (crackers and fruit) but are now pushing their plate away, refusing to try the vegetables. They shake their head vigorously and cross their arms when you point to the green beans.",
+    "child_behavior": "Pushing plate away, shaking head, crossing arms",
+    "educational_focus": "Healthy eating habits, communication, autonomy",
+    "example_ceq": "Are you all done eating?",
+    "example_oeq": "How are you feeling about your lunch?",
+    "learning_opportunity": "Explore child's feelings about food and encourage communication"
+  },
+  {
+    "id": 3,
+    "title": "Sensory Table Exploration",
+    "age_group": "TODDLER",
+    "context": "At the sensory table filled with dried beans and scoops, a 2.5-year-old is enthusiastically exploring. They're running their hands through the beans, filling containers, and inevitably spilling beans on the floor. They seem delighted by the textures and sounds but are making quite a mess.",
+    "child_behavior": "Touching everything, spilling materials, laughing and exploring",
+    "educational_focus": "Sensory development, fine motor skills, exploration",
+    "example_ceq": "Do you like how the beans feel?",
+    "example_oeq": "What do you notice about the beans?",
+    "learning_opportunity": "Support sensory exploration while introducing descriptive language"
+  },
+  {
+    "id": 4,
+    "title": "Flower Book Discovery",
+    "age_group": "PK",
+    "context": "A 4-year-old is looking through a picture book about flowers during quiet reading time. They point excitedly at a page showing different flower parts - petals, stems, and leaves. They seem particularly interested in the bright colors and are making connections to flowers they've seen outside.",
+    "child_behavior": "Pointing at pictures, making excited sounds, turning pages eagerly",
+    "educational_focus": "Scientific observation, vocabulary development, nature connection",
+    "example_ceq": "Is that a flower?",
+    "example_oeq": "What do you notice about this flower?",
+    "learning_opportunity": "Expand vocabulary and encourage detailed observation"
+  },
+  {
+    "id": 5,
+    "title": "Melon Investigation",
+    "age_group": "PK",
+    "context": "During a small group activity, a 4-year-old is examining a cut melon with seeds visible. They're tentatively touching the seeds with one finger, then pulling their hand back. Their expression shows curiosity mixed with slight hesitation about the slippery texture and unusual appearance of the inside of the fruit.",
+    "child_behavior": "Touching carefully, pulling hand back, looking curious but cautious",
+    "educational_focus": "Scientific inquiry, sensory exploration, healthy foods",
+    "example_ceq": "Are the seeds slippery?",
+    "example_oeq": "What do you think about these seeds?",
+    "learning_opportunity": "Encourage scientific thinking and hypothesis formation"
+  },
+  {
+    "id": 6,
+    "title": "Construction Challenge",
+    "age_group": "PK",
+    "context": "A 5-year-old is working with various building materials - blocks, tubes, and connectors. They're trying to build a structure they have in mind but keep running into engineering problems. One section keeps falling over, and they're getting increasingly focused and determined to solve the problem.",
+    "child_behavior": "Concentrating intensely, rebuilding sections, showing determination",
+    "educational_focus": "STEM learning, problem-solving, persistence",
+    "example_ceq": "Is this part too heavy?",
+    "example_oeq": "How could you make this part stronger?",
+    "learning_opportunity": "Support engineering thinking and encourage experimentation"
+  },
+  {
+    "id": 7,
+    "title": "Playground Hesitation",
+    "age_group": "MIXED",
+    "context": "A 3.5-year-old is standing at the bottom of the climbing structure, looking up at the monkey bars that the older children are using. They take a step toward the ladder, then step back. They clearly want to try but seem uncertain about their ability to navigate this more challenging equipment safely.",
+    "child_behavior": "Stepping forward and back, looking up at equipment, watching older children",
+    "educational_focus": "Risk assessment, physical development, confidence building",
+    "example_ceq": "Do you want to try climbing?",
+    "example_oeq": "What are you thinking about the climbing bars?",
+    "learning_opportunity": "Support self-assessment and appropriate risk-taking"
+  },
+  {
+    "id": 8,
+    "title": "Color Mixing Surprise",
+    "age_group": "MIXED",
+    "context": "During art time, a 4-year-old is painting with watercolors. They've just dipped their brush in blue paint and then accidentally touched it to the yellow on their paper. Their eyes widen as they watch the green color appear where the two colors mixed. They look surprised and intrigued by this unexpected result.",
+    "child_behavior": "Eyes widening, stopping painting to observe, looking surprised",
+    "educational_focus": "Scientific discovery, art exploration, cause and effect",
+    "example_ceq": "Did the colors change?",
+    "example_oeq": "What happened when the blue and yellow touched?",
+    "learning_opportunity": "Encourage scientific observation and experimentation"
+  },
+  {
+    "id": 9,
+    "title": "Story Time Interruption",
+    "age_group": "MIXED",
+    "context": "During group story time, you're reading a book about animals. A 3-year-old suddenly raises their hand and starts talking about their pet cat at home, making connections between the story and their personal experience. Other children start to get distracted, but the child is clearly making meaningful connections.",
+    "child_behavior": "Raising hand excitedly, talking about personal experience, making connections",
+    "educational_focus": "Language development, personal connections, group dynamics",
+    "example_ceq": "Does your cat look like this one?",
+    "example_oeq": "How is your cat similar to the cat in our story?",
+    "learning_opportunity": "Validate connections while maintaining group focus"
+  },
+  {
+    "id": 10,
+    "title": "Clean-up Avoidance",
+    "age_group": "MIXED",
+    "context": "Clean-up time has been announced, and while most children are putting away toys, one 4-year-old has crawled under a table with a few small toys. They're not being defiant exactly, but seem to be hoping that if they're out of sight, they won't have to participate in clean-up. They peek out occasionally to see if anyone notices them.",
+    "child_behavior": "Hiding under table, clutching toys, peeking out occasionally",
+    "educational_focus": "Responsibility, community participation, transition management",
+    "example_ceq": "Are you hiding under there?",
+    "example_oeq": "What's your plan for those toys you have with you?",
+    "learning_opportunity": "Address avoidance while maintaining relationship and encouraging responsibility"
+  }
+]
