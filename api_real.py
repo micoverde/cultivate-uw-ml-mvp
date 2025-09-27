@@ -159,15 +159,11 @@ async def save_feedback(
 ):
     """
     Save human feedback for ML training improvement
-    Warren's requirement: Collect real feedback data for model improvement
+    Warren's requirement: Persist feedback in Azure Blob Storage for ground truth loss evaluation
     """
     import json
     import os
     from datetime import datetime
-
-    # Create feedback directory if it doesn't exist
-    feedback_dir = "/tmp/ml_feedback"
-    os.makedirs(feedback_dir, exist_ok=True)
 
     # Create feedback record
     feedback_record = {
@@ -176,13 +172,89 @@ async def save_feedback(
         "ml_classification": classification,
         "human_feedback": feedback,
         "scenario_id": scenario_id,
-        "is_correct": feedback.lower() == "correct"
+        "is_correct": feedback.lower() == "correct",
+        "model_version": "v2.0_feature_based",
+        "environment": "production"
     }
 
-    # Save to feedback log file
-    feedback_file = os.path.join(feedback_dir, "feedback_log.jsonl")
+    # Generate unique feedback ID
+    feedback_id = f"fb_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{hash(text) % 10000:04d}"
+    feedback_record["feedback_id"] = feedback_id
 
     try:
+        # Try Azure Blob Storage first
+        azure_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+
+        if azure_connection_string:
+            try:
+                from azure.storage.blob import BlobServiceClient
+
+                # Connect to Azure Blob Storage
+                blob_service_client = BlobServiceClient.from_connection_string(azure_connection_string)
+                container_name = "ml-feedback"
+
+                # Create container if it doesn't exist
+                container_client = blob_service_client.get_container_client(container_name)
+                try:
+                    container_client.create_container()
+                except:
+                    pass  # Container already exists
+
+                # Save feedback as individual blob for easy retrieval
+                blob_name = f"feedback/{datetime.now().strftime('%Y/%m/%d')}/{feedback_id}.json"
+                blob_client = blob_service_client.get_blob_client(
+                    container=container_name,
+                    blob=blob_name
+                )
+
+                blob_client.upload_blob(
+                    json.dumps(feedback_record, indent=2),
+                    overwrite=True
+                )
+
+                # Also append to daily log file
+                log_blob_name = f"feedback_logs/{datetime.now().strftime('%Y/%m/%d')}/feedback_log.jsonl"
+                log_blob_client = blob_service_client.get_blob_client(
+                    container=container_name,
+                    blob=log_blob_name
+                )
+
+                # Download existing log, append, and re-upload
+                existing_log = ""
+                try:
+                    existing_log = log_blob_client.download_blob().readall().decode('utf-8')
+                except:
+                    pass  # File doesn't exist yet
+
+                updated_log = existing_log + json.dumps(feedback_record) + "\n"
+                log_blob_client.upload_blob(updated_log, overwrite=True)
+
+                # Count total feedback (approximation based on lines)
+                total_feedback = len(updated_log.strip().split('\n')) if updated_log else 1
+
+                return {
+                    "success": True,
+                    "message": "Feedback saved to Azure Blob Storage",
+                    "storage": "azure_blob",
+                    "total_feedback_collected": total_feedback,
+                    "feedback_id": feedback_id,
+                    "blob_path": blob_name
+                }
+
+            except ImportError:
+                # Azure SDK not installed, fall back to local storage
+                pass
+            except Exception as azure_error:
+                print(f"Azure Blob Storage error: {azure_error}")
+                # Fall back to local storage
+
+        # Fallback to local storage (for development or if Azure fails)
+        feedback_dir = "/tmp/ml_feedback"
+        os.makedirs(feedback_dir, exist_ok=True)
+
+        # Save to local file
+        feedback_file = os.path.join(feedback_dir, "feedback_log.jsonl")
+
         with open(feedback_file, "a") as f:
             f.write(json.dumps(feedback_record) + "\n")
 
@@ -192,10 +264,13 @@ async def save_feedback(
 
         return {
             "success": True,
-            "message": "Feedback saved successfully",
+            "message": "Feedback saved locally (Azure not configured)",
+            "storage": "local_tmp",
             "total_feedback_collected": total_feedback,
-            "feedback_id": f"fb_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{hash(text) % 10000:04d}"
+            "feedback_id": feedback_id,
+            "warning": "Using temporary storage - data will be lost on container restart. Configure AZURE_STORAGE_CONNECTION_STRING for persistence."
         }
+
     except Exception as e:
         return {
             "success": False,
@@ -203,28 +278,112 @@ async def save_feedback(
             "error": str(e)
         }
 
+@app.post("/api/v1/feedback/save")
+async def save_feedback_v1(
+    text: str = Query(..., description="Text that was classified"),
+    predicted_class: str = Query(..., description="ML classification result"),
+    correct_class: str = Query(..., description="Human corrected classification"),
+    confidence: float = Query(..., description="Model confidence"),
+    error_type: str = Query(None, description="Error type (FP/FN)")
+):
+    """
+    Save feedback from Demo 2 - v1 API format
+    Warren's requirement: Support Demo 2 feedback format
+    """
+    # Convert to standard feedback format and call main handler
+    feedback_value = "correct" if predicted_class == correct_class else "incorrect"
+
+    return await save_feedback(
+        text=text,
+        classification=predicted_class,
+        feedback=feedback_value,
+        scenario_id=None
+    )
+
 @app.get("/api/feedback/stats")
 def get_feedback_stats():
     """
     Get feedback statistics for monitoring model performance
+    Warren's requirement: Read from Azure Blob Storage for persistent ground truth
     """
     import json
     import os
-
-    feedback_file = "/tmp/ml_feedback/feedback_log.jsonl"
-
-    if not os.path.exists(feedback_file):
-        return {
-            "total_feedback": 0,
-            "correct_predictions": 0,
-            "incorrect_predictions": 0,
-            "accuracy": 0.0
-        }
+    from datetime import datetime
 
     correct = 0
     incorrect = 0
+    total = 0
 
     try:
+        # Try Azure Blob Storage first
+        azure_connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+
+        if azure_connection_string:
+            try:
+                from azure.storage.blob import BlobServiceClient
+
+                blob_service_client = BlobServiceClient.from_connection_string(azure_connection_string)
+                container_name = "ml-feedback"
+                container_client = blob_service_client.get_container_client(container_name)
+
+                # Read today's feedback log
+                log_blob_name = f"feedback_logs/{datetime.now().strftime('%Y/%m/%d')}/feedback_log.jsonl"
+
+                try:
+                    blob_client = blob_service_client.get_blob_client(
+                        container=container_name,
+                        blob=log_blob_name
+                    )
+                    log_content = blob_client.download_blob().readall().decode('utf-8')
+
+                    for line in log_content.strip().split('\n'):
+                        if line:
+                            record = json.loads(line)
+                            if record.get("is_correct"):
+                                correct += 1
+                            else:
+                                incorrect += 1
+
+                    total = correct + incorrect
+                    accuracy = (correct / total * 100) if total > 0 else 0.0
+
+                    return {
+                        "total_feedback": total,
+                        "correct_predictions": correct,
+                        "incorrect_predictions": incorrect,
+                        "accuracy": round(accuracy, 1),
+                        "storage": "azure_blob",
+                        "date": datetime.now().strftime('%Y-%m-%d')
+                    }
+
+                except Exception as e:
+                    # No data for today yet
+                    return {
+                        "total_feedback": 0,
+                        "correct_predictions": 0,
+                        "incorrect_predictions": 0,
+                        "accuracy": 0.0,
+                        "storage": "azure_blob",
+                        "date": datetime.now().strftime('%Y-%m-%d'),
+                        "message": "No feedback data for today yet"
+                    }
+
+            except ImportError:
+                pass  # Fall back to local storage
+
+        # Fallback to local storage
+        feedback_file = "/tmp/ml_feedback/feedback_log.jsonl"
+
+        if not os.path.exists(feedback_file):
+            return {
+                "total_feedback": 0,
+                "correct_predictions": 0,
+                "incorrect_predictions": 0,
+                "accuracy": 0.0,
+                "storage": "local_tmp",
+                "warning": "Using temporary storage - configure Azure for persistence"
+            }
+
         with open(feedback_file, "r") as f:
             for line in f:
                 record = json.loads(line)
@@ -240,14 +399,18 @@ def get_feedback_stats():
             "total_feedback": total,
             "correct_predictions": correct,
             "incorrect_predictions": incorrect,
-            "accuracy": round(accuracy, 1)
+            "accuracy": round(accuracy, 1),
+            "storage": "local_tmp",
+            "warning": "Using temporary storage - data will be lost on restart"
         }
-    except:
+
+    except Exception as e:
         return {
             "total_feedback": 0,
             "correct_predictions": 0,
             "incorrect_predictions": 0,
-            "accuracy": 0.0
+            "accuracy": 0.0,
+            "error": str(e)
         }
 
 if __name__ == "__main__":
