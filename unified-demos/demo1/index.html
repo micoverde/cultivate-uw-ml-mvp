@@ -800,6 +800,30 @@
     </div>
 
     <script>
+        // Feature Flags Configuration
+        const featureFlags = {
+            modelSelection: false,  // Dark deployed - set to true to enable model selection UI
+            ensembleAPI: true,      // Use ensemble API endpoint when available
+            debugMode: false,       // Enable debug logging
+            showMetrics: true       // Show model metrics tab
+        };
+
+        // Model Configuration (Issue #196)
+        const modelConfig = {
+            availableModels: [
+                { id: 'ensemble', name: '🎯 7-Model Ensemble', description: 'Neural Network + XGBoost + RF + SVM + LR + LightGBM + GB' },
+                { id: 'neural', name: '🧠 Neural Network', description: 'PyTorch 4-layer NN with 56 features' },
+                { id: 'xgboost', name: '⚡ XGBoost', description: 'Gradient boosting with optimized hyperparameters' },
+                { id: 'random_forest', name: '🌲 Random Forest', description: '100 trees with feature importance' },
+                { id: 'svm', name: '📊 SVM', description: 'Support Vector Machine with RBF kernel' },
+                { id: 'logistic', name: '📈 Logistic Regression', description: 'L2 regularized logistic classifier' },
+                { id: 'lightgbm', name: '💡 LightGBM', description: 'Light Gradient Boosting Machine' },
+                { id: 'gradient_boost', name: '🚀 Gradient Boost', description: 'Classic gradient boosting' }
+            ],
+            selectedModel: 'ensemble',  // Default to ensemble
+            apiEndpoint: null  // Will be set dynamically
+        };
+
         // Child Scenarios Data
         const scenarios = [
             {
