@@ -42,30 +42,40 @@ class ModelSettings {
         style.textContent = `
             .model-settings-btn {
                 position: fixed;
-                bottom: 20px;
+                bottom: 60px; /* Above footer */
                 right: 20px;
                 width: 48px;
                 height: 48px;
                 border-radius: 50%;
-                background: white;
-                border: 1px solid #e0e0e0;
+                background: #6b7280;
+                border: none;
                 cursor: pointer;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
                 transition: all 0.3s ease;
-                z-index: 999;
+                z-index: 99;
             }
 
             .model-settings-btn:hover {
-                transform: scale(1.1);
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                background: #4b5563;
+                transform: scale(1.05);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            }
+
+            .model-settings-btn svg {
+                width: 24px;
+                height: 24px;
+                stroke: white;
             }
 
             body[data-theme="dark"] .model-settings-btn {
-                background: #2d2d2d;
-                border-color: #404040;
+                background: #4b5563;
+            }
+
+            body[data-theme="dark"] .model-settings-btn:hover {
+                background: #374151;
             }
 
             .model-settings-modal {
