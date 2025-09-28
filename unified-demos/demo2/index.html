@@ -517,6 +517,11 @@
 
     <!-- Demo Functionality -->
     <script>
+        // Feature Flags
+        const FEATURE_FLAGS = {
+            debugMLConsole: localStorage.getItem('debugMLConsole') !== 'false' // Default true
+        };
+
         // Tab switching
         function showTab(tabName) {
             const tabs = document.querySelectorAll('.tab-content');
@@ -532,7 +537,9 @@
         // Warren's Real Video Processing Data
         async function loadWarrenVideoData() {
             try {
-                console.log('Loading Warren\'s real video processing results...');
+                if (FEATURE_FLAGS.debugMLConsole) {
+                    console.log('Loading Warren\'s real video processing results...');
+                }
 
                 // Load Warren's processed data
                 const response = await fetch('./warren_teaching_demo_data.json');
@@ -541,8 +548,6 @@
                 }
                 const data = await response.json();
 
-                console.log(`Loaded Warren's gravity lesson: ${data.questions.length} questions, ${data.metadata.duration_formatted}`);
-
                 // Calculate real statistics from Warren's data
                 const oeqQuestions = data.questions.filter(q => q.ml_classification?.type === 'OEQ');
                 const ceqQuestions = data.questions.filter(q => q.ml_classification?.type === 'CEQ');
@@ -550,6 +555,27 @@
                     .filter(q => q.ml_classification?.confidence !== undefined)
                     .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
                     data.questions.filter(q => q.ml_classification?.confidence !== undefined).length;
+
+                if (FEATURE_FLAGS.debugMLConsole) {
+                    console.log(`Loaded Warren's gravity lesson: ${data.questions.length} questions, ${data.metadata.duration_formatted}`);
+
+                    // Log ML classification details for each question
+                    data.questions.forEach((q, index) => {
+                        if (q.ml_classification) {
+                            console.log(`Question ${index + 1}: "${q.text}"`);
+                            console.log(`  Classification: ${q.ml_classification.type}`);
+                            console.log(`  Confidence: ${(q.ml_classification.confidence * 100).toFixed(1)}%`);
+                            console.log(`  Timestamp: ${q.timestamp}s`);
+                        }
+                    });
+
+                    // Log summary statistics
+                    console.log('\n=== ML Classification Summary ===');
+                    console.log(`Total Questions: ${data.questions.length}`);
+                    console.log(`OEQ: ${oeqQuestions.length}`);
+                    console.log(`CEQ: ${ceqQuestions.length}`);
+                    console.log(`Average Confidence: ${(avgConfidence * 100).toFixed(1)}%`);
+                }
 
                 // Update statistics with real data
                 document.getElementById('totalQuestions').textContent = data.questions.length;
@@ -738,11 +764,31 @@
 
             try {
                 // Use the API endpoint from model settings
-                const endpoint = window.modelSettings ?
-                    window.modelSettings.getModelEndpoint() :
-                    'http://localhost:8001/api/feedback/save';
+                // Get the base URL from modelSettings (environment-aware)
+                const baseUrl = window.modelSettings ?
+                    window.modelSettings.apiBaseUrl :
+                    'http://localhost:8001';
 
-                const response = await fetch(endpoint.replace('/classify', '/feedback/save'), {
+                // Handle local environment - save to localStorage
+                if (baseUrl.includes('localhost')) {
+                    // Save feedback locally since API doesn't have endpoint
+                    const localFeedback = JSON.parse(localStorage.getItem('demo2Feedback') || '[]');
+                    localFeedback.push({
+                        ...feedbackData,
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem('demo2Feedback', JSON.stringify(localFeedback));
+
+                    console.log(`💾 Feedback saved locally (${localFeedback.length} entries)`);
+                    console.log('Local feedback data:', feedbackData);
+                    alert(`Thank you! Feedback saved locally.\n(${localFeedback.length} total entries)\n\nNote: Local environment saves to browser storage.`);
+                    return;
+                }
+
+                // Azure has feedback endpoint
+                const feedbackEndpoint = `${baseUrl}/api/feedback`;
+
+                const response = await fetch(feedbackEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

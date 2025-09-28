@@ -6,7 +6,9 @@
 class UnifiedFooter {
     constructor() {
         this.currentYear = new Date().getFullYear();
-        this.buildNumber = localStorage.getItem('buildNumber') || 'v1.0.0';
+        // Use last 6 digits of git hash for build number
+        // In production, this would be injected during CI/CD
+        this.buildNumber = localStorage.getItem('buildNumber') || '350888';
         this.init();
     }
 
