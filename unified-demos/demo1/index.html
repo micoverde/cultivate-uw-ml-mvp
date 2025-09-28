@@ -135,6 +135,57 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
+        /* SETTINGS BUTTON */
+        .settings-btn {
+            position: fixed;
+            top: 24px;
+            right: 80px;
+            z-index: 10000;
+            background: var(--surface-50);
+            border: 2px solid var(--surface-400);
+            border-radius: var(--border-radius-large);
+            padding: 10px 14px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all var(--transition-fast);
+            display: block !important;
+        }
+
+        .settings-btn:hover {
+            background: var(--surface-200);
+            transform: scale(1.1);
+        }
+
+        /* Settings Modal Styles for Dark Mode */
+        .settings-modal {
+            background: var(--surface-50) !important;
+            color: var(--text-primary) !important;
+            border: 2px solid var(--surface-400) !important;
+        }
+
+        .settings-modal h3 {
+            color: var(--text-primary) !important;
+        }
+
+        .settings-modal label {
+            color: var(--text-secondary) !important;
+        }
+
+        .settings-modal select {
+            background: var(--surface-200) !important;
+            color: var(--text-primary) !important;
+            border-color: var(--surface-400) !important;
+        }
+
+        .settings-modal button {
+            background: var(--primary-500) !important;
+            color: white !important;
+        }
+
+        .settings-modal button:hover {
+            background: var(--primary-600) !important;
+        }
+
         /* THEME TOGGLE COMPONENT */
         .theme-toggle {
             position: fixed;
@@ -568,6 +619,9 @@
     </style>
 </head>
 <body>
+    <!-- Settings Button -->
+    <button class="settings-btn" id="settingsBtn" title="Model Settings">⚙️</button>
+
     <!-- Theme Toggle -->
     <div class="theme-toggle" id="themeToggle">
         <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
@@ -1511,5 +1565,8 @@
     <script src="../shared/navigation.js"></script>
     <script src="../shared/api.js"></script>
     <script src="../shared/analytics.js"></script>
+
+    <!-- Model Settings Component -->
+    <script src="../shared/model-settings.js"></script>
 </body>
 </html>
