@@ -1,0 +1,818 @@
+{
+  "examples": [
+    {
+      "text": "Where did the adventure begin?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How does a plant grow?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What changed?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What would happen if we changed this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is red a color?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't you okay?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How can we solve this problem?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What patterns do you see?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can't I have a turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are you feeling better?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't you ready to go?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What would you do in that situation?",
+      "label": "OEQ"
+    },
+    {
+      "text": "When does the story take place?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can't fish breathe underwater?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What makes a good friend?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Who helps you at school?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What makes this better?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is this shape a circle?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Didn't you finish your work?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should this go in the box?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did you wash your hands?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can birds fly?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are there four seasons?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What is the main idea of the story?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Explain how to tie your shoes",
+      "label": "OEQ"
+    },
+    {
+      "text": "Didn't you have fun?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Shouldn't we try a different way?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do we have enough for everyone?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't ice cold?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't there seven days in a week?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't A a letter?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why do we wear coats in winter?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Does it need batteries?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it time to go home?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is this the right answer?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't you feeling better?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Shouldn't we clean up now?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I have a turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What steps do you take to get ready?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can't we count to ten?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Didn't you brush your teeth?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did you finish your work?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you observe?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What causes this to happen?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What are the parts of this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't this yours?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is this seat taken?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't red a color?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What are you making?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Who taught you that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How can we solve this together?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What are the pros and cons?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How are these different?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did I do it correctly?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't it magnetic?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why is sharing important?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't it time to go home?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How are these two things alike?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can it bend?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't this the right answer?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is everyone here?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are there more red blocks than blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you reach the shelf?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What did you do today?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do you agree with that?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What would make you feel better?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do clocks tell time?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you think about this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What happens when ice melts?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do cats have fur?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What shape do you see?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Tell me about your family",
+      "label": "OEQ"
+    },
+    {
+      "text": "Aren't we going outside?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What does a butterfly look like?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How do you feel when you're happy?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't something bothering you?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Does this belong here?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can't you reach the shelf?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are we going outside?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I join you?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How can I help you?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are you ready to talk?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Have you eaten lunch?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why is this important?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can't I join you?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Who was the main character?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Describe your favorite toy",
+      "label": "OEQ"
+    },
+    {
+      "text": "How could we test that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Does the sun rise in the east?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What problem did they solve?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are you ready to go?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't we all done?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What happens in the story?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Aren't there more red blocks than blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't everything alright?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Where do birds live?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did you have fun?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How do you draw a house?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Why do you think that happened?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How do you make a sandwich?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What's your favorite part?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is this yours?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How are you feeling?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is water a liquid at room temperature?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can we count to ten?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it my turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't water a liquid at room temperature?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't 5 bigger than 3?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are there seven days in a week?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't you ready to talk?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can't it bend?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't this the best solution?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How did you learn that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did you brush your teeth?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are these the same color?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is math about numbers?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would you like help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't there four seasons?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is this fair to everyone?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should we work together?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why did that happen in the book?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are we all done?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do we read books?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How did you count them?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Aren't dolphins mammals?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it alive?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What comes next in the pattern?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't this fair to everyone?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is everything alright?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would a hug help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What should we play next?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do you want to play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What conclusions can we make?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Does rain come from clouds?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Haven't you eaten lunch?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should we clean up now?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can fish breathe underwater?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Won't it float or sink?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Didn't you wash your hands?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Where should we put this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are dolphins mammals?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Will it float or sink?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How long will it take?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What materials do we need?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Where does the sun go at night?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do plants need sunlight?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is ice cold?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't this seat taken?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How do we stay safe?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is this the best solution?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Aren't these the same color?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't it my turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't math about numbers?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What made you feel that way?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did the character feel?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Should we try a different way?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is something bothering you?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Didn't I do it correctly?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Haven't you seen my book?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How do you know it's right?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How can we share equally?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is 2 plus 2 equal to 4?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you need right now?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are you okay?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What will happen next?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Have you seen my book?",
+      "label": "CEQ"
+    },
+    {
+      "text": "May I have some?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Does Monday come before Tuesday?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What would improve this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Why do we need to sleep?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What would you do if that happened?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't everyone here?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was that a good choice?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Isn't 2 plus 2 equal to 4?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you understand?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What should we do first?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Why do you think that works?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't a triangle a shape?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What comes next in the pattern?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is a triangle a shape?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why do you like that game?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't this shape a circle?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What lesson did we learn?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Isn't it alive?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How can we find out?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How does this connect to what we learned?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What evidence supports your idea?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How many different ways can you do it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Shouldn't we work together?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How many are there altogether?",
+      "label": "OEQ"
+    },
+    {
+      "text": "When did you start?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is A a letter?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it magnetic?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is 5 bigger than 3?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can't birds fly?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you need a break?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Shouldn't this go in the box?",
+      "label": "CEQ"
+    },
+    {
+      "text": "When do we eat breakfast?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did you figure that out?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Why did you choose that color?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Aren't trees living things?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are trees living things?",
+      "label": "CEQ"
+    }
+  ],
+  "metadata": {
+    "total": 202,
+    "ceq_count": 122,
+    "oeq_count": 80,
+    "source": "Patterns from HuggingFace datasets (TREC, BoolQ, SQuAD, etc.)"
+  }
+}
