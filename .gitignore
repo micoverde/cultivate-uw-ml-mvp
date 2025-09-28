@@ -19,6 +19,7 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+.pytest_cache/
 
 # Virtual environments
 venv/
@@ -67,6 +68,10 @@ Thumbs.db
 logs/
 *.log
 api_server*.log
+
+# Node.js dependencies
+node_modules/
+npm-debug.log*
 
 # Demo build
 demo/build/
