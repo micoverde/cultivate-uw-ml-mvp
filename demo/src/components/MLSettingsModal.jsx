@@ -1,10 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Settings, X, Cpu, Zap, TrendingUp, Clock } from 'lucide-react';
+import { Settings, X, Cpu, Zap, TrendingUp, Clock, BookOpen, Users, BarChart } from 'lucide-react';
 
 const MLSettingsModal = ({ isOpen, onClose }) => {
   const [selectedModel, setSelectedModel] = useState(() => {
     return localStorage.getItem('ml_model') || 'classic';
   });
+
+  // Scenario Settings
+  const [scenarioSource, setScenarioSource] = useState(() => {
+    return localStorage.getItem('scenario_source') || 'simulations';
+  });
+  const [showEducatorResponse, setShowEducatorResponse] = useState(() => {
+    return localStorage.getItem('show_educator_response') === 'true';
+  });
+  const [showConfidenceScores, setShowConfidenceScores] = useState(() => {
+    return localStorage.getItem('show_confidence_scores') !== 'false'; // Default true
+  });
+  const [comparisonMode, setComparisonMode] = useState(() => {
+    return localStorage.getItem('comparison_mode') === 'true';
+  });
+
   const [isLoading, setIsLoading] = useState(false);
   const [statusMessage, setStatusMessage] = useState('');
   const [performanceData, setPerformanceData] = useState({
@@ -36,13 +51,30 @@ const MLSettingsModal = ({ isOpen, onClose }) => {
   };
 
   const handleApply = async () => {
-    if (selectedModel === localStorage.getItem('ml_model')) {
-      onClose();
+    // Save scenario settings
+    localStorage.setItem('scenario_source', scenarioSource);
+    localStorage.setItem('show_educator_response', showEducatorResponse.toString());
+    localStorage.setItem('show_confidence_scores', showConfidenceScores.toString());
+    localStorage.setItem('comparison_mode', comparisonMode.toString());
+
+    // Check if model selection changed
+    const modelChanged = selectedModel !== localStorage.getItem('ml_model');
+
+    if (!modelChanged) {
+      setStatusMessage('✅ Settings saved successfully');
+      setTimeout(() => {
+        onClose();
+        setStatusMessage('');
+        // Trigger reload if scenario source changed
+        if (window.location.pathname.includes('demo')) {
+          window.location.reload();
+        }
+      }, 1000);
       return;
     }
 
     setIsLoading(true);
-    setStatusMessage('Switching models...');
+    setStatusMessage('Switching models and saving settings...');
 
     try {
       const response = await fetch('/api/v1/models/select', {
@@ -57,6 +89,10 @@ const MLSettingsModal = ({ isOpen, onClose }) => {
         setTimeout(() => {
           onClose();
           setStatusMessage('');
+          // Trigger reload to apply new settings
+          if (window.location.pathname.includes('demo')) {
+            window.location.reload();
+          }
         }, 2000);
       } else {
         setStatusMessage('❌ Failed to switch model. Please try again.');
@@ -145,6 +181,90 @@ const MLSettingsModal = ({ isOpen, onClose }) => {
                 </p>
               </div>
             </label>
+          </div>
+
+          {/* Scenarios Section */}
+          <div className="space-y-4 mb-6">
+            <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-200 flex items-center gap-2">
+              <BookOpen className="h-5 w-5 text-indigo-500" />
+              Scenarios
+            </h3>
+
+            {/* Data Source Selection */}
+            <div className="p-4 bg-gray-50 dark:bg-gray-900 rounded-lg space-y-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Data Source
+                </label>
+                <select
+                  value={scenarioSource}
+                  onChange={(e) => setScenarioSource(e.target.value)}
+                  className="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                >
+                  <option value="simulations">Simulations (Synthetic Scenarios)</option>
+                  <option value="real_transcriptions">Real Transcriptions (Gold Star Videos)</option>
+                </select>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                  {scenarioSource === 'simulations'
+                    ? 'AI-generated educational scenarios for training'
+                    : 'Actual classroom interactions from exemplar videos'}
+                </p>
+              </div>
+
+              {/* Display Options */}
+              <div className="space-y-3">
+                <label className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={showEducatorResponse}
+                    onChange={(e) => setShowEducatorResponse(e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <div className="flex-1">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Show Educator Responses
+                    </span>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Display what the educator actually said in gold star examples
+                    </p>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={showConfidenceScores}
+                    onChange={(e) => setShowConfidenceScores(e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <div className="flex-1">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Display OEQ/CEQ Confidence Scores
+                    </span>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Show AI confidence scores for educator responses
+                    </p>
+                  </div>
+                </label>
+
+                <label className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={comparisonMode}
+                    onChange={(e) => setComparisonMode(e.target.checked)}
+                    className="rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                  />
+                  <div className="flex-1">
+                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Enable Comparison Mode
+                    </span>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">
+                      Compare your responses with gold star educators
+                    </p>
+                  </div>
+                </label>
+              </div>
+            </div>
           </div>
 
           {/* Performance Comparison */}

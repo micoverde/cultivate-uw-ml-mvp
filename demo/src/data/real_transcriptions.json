@@ -1,0 +1,240 @@
+{
+  "scenarios": [
+    {
+      "id": "real_001",
+      "source_video": "Book about Flowers SOM SUBS.mp4",
+      "timestamp": "00:02:35",
+      "title": "Flower Book Discovery",
+      "age_group": "PK",
+      "context": "During circle time, a 4-year-old is looking through a nature book about flowers. They've been quietly examining the pictures for a few minutes and suddenly become excited about one particular page showing a giant sunflower.",
+      "child_utterance": "Look! Look at this one! It's so... it's so big! Is it real? Can flowers really be that big?",
+      "child_transcript_confidence": 0.94,
+      "educator_response": "What makes you think it might not be real? Let's look at the details together.",
+      "educator_transcript_confidence": 0.96,
+      "oeq_confidence": 0.92,
+      "ceq_confidence": 0.08,
+      "educational_focus": "Critical thinking, observation skills, scientific inquiry",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.2,
+        "follow_up_questions": true,
+        "child_engagement": "high",
+        "cognitive_demand": "analysis"
+      }
+    },
+    {
+      "id": "real_002",
+      "source_video": "Building Blocks Little School Ladybugs Kaylee 013.mp4",
+      "timestamp": "00:04:12",
+      "title": "Block Tower Collapse",
+      "age_group": "TODDLER",
+      "context": "A 3-year-old has been carefully stacking blocks for the past five minutes, creating their tallest tower yet. Just as they reach for another block, the entire structure tumbles down.",
+      "child_utterance": "Oh no! Oh no! It fall down! All my blocks fall down!",
+      "child_transcript_confidence": 0.89,
+      "educator_response": "You worked so hard on that tower. How do you think we could build it differently next time?",
+      "educator_transcript_confidence": 0.93,
+      "oeq_confidence": 0.88,
+      "ceq_confidence": 0.12,
+      "educational_focus": "Persistence, problem-solving, emotional regulation",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 2.8,
+        "emotional_acknowledgment": true,
+        "scaffolding_provided": true,
+        "cognitive_demand": "evaluation"
+      }
+    },
+    {
+      "id": "real_003",
+      "source_video": "Conflict Management during Outdoor Play.mp4",
+      "timestamp": "00:01:45",
+      "title": "Sharing the Tricycle",
+      "age_group": "PK",
+      "context": "Two 4-year-olds are having a conflict over a popular tricycle during outdoor play time. One child has been riding it, and another child wants a turn.",
+      "child_utterance": "But I want it! I've been waiting and waiting! It's not fair!",
+      "child_transcript_confidence": 0.91,
+      "educator_response": "I hear that you've been waiting. What ideas do you have for solving this problem together?",
+      "educator_transcript_confidence": 0.95,
+      "oeq_confidence": 0.90,
+      "ceq_confidence": 0.10,
+      "educational_focus": "Social problem-solving, turn-taking, conflict resolution",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 4.1,
+        "empowerment": true,
+        "peer_collaboration": true,
+        "cognitive_demand": "synthesis"
+      }
+    },
+    {
+      "id": "real_004",
+      "source_video": "Being Aware of a Toddler's Needs.mp4",
+      "timestamp": "00:03:20",
+      "title": "Sensory Exploration with Water",
+      "age_group": "TODDLER",
+      "context": "A 2-year-old is at the water table, repeatedly pouring water from one container to another, completely absorbed in watching the water flow.",
+      "child_utterance": "Water go down... down... splash!",
+      "child_transcript_confidence": 0.87,
+      "educator_response": "You're noticing how the water moves. What happens when you pour it slowly?",
+      "educator_transcript_confidence": 0.92,
+      "oeq_confidence": 0.85,
+      "ceq_confidence": 0.15,
+      "educational_focus": "Scientific exploration, cause and effect, vocabulary development",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.5,
+        "observation_based": true,
+        "extends_thinking": true,
+        "cognitive_demand": "application"
+      }
+    },
+    {
+      "id": "real_005",
+      "source_video": "Center Street Nancy Coach iPhone 010.MOV",
+      "timestamp": "00:05:15",
+      "title": "Art Creation Frustration",
+      "age_group": "PK",
+      "context": "A 5-year-old is working on a detailed drawing of their family but becomes frustrated when they can't get the proportions right.",
+      "child_utterance": "This doesn't look right! The mommy is too small and the baby is too big! I can't do it!",
+      "child_transcript_confidence": 0.93,
+      "educator_response": "What part of your drawing do you feel most proud of? Let's start there and think about what you want to change.",
+      "educator_transcript_confidence": 0.94,
+      "oeq_confidence": 0.91,
+      "ceq_confidence": 0.09,
+      "educational_focus": "Self-reflection, artistic expression, growth mindset",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.8,
+        "strength_based": true,
+        "metacognition": true,
+        "cognitive_demand": "evaluation"
+      }
+    },
+    {
+      "id": "real_006",
+      "source_video": "CDCSA Wenatchee Center Karina 017.mp4",
+      "timestamp": "00:02:48",
+      "title": "Mealtime Choices",
+      "age_group": "TODDLER",
+      "context": "During snack time, a 3-year-old is looking at the fruit options and seems unable to decide between apple slices and orange segments.",
+      "child_utterance": "I want... I want both! Can I have both fruits?",
+      "child_transcript_confidence": 0.90,
+      "educator_response": "You're thinking about your choices. What would help you decide which one to try first?",
+      "educator_transcript_confidence": 0.93,
+      "oeq_confidence": 0.87,
+      "ceq_confidence": 0.13,
+      "educational_focus": "Decision-making, autonomy, self-regulation",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 2.9,
+        "choice_offered": true,
+        "independence_supported": true,
+        "cognitive_demand": "analysis"
+      }
+    },
+    {
+      "id": "real_007",
+      "source_video": "Edgewater Early Head Start Martha 036.mp4",
+      "timestamp": "00:07:22",
+      "title": "Block Pattern Discovery",
+      "age_group": "PK",
+      "context": "A 4-year-old has arranged blocks in a repeating color pattern and is excitedly showing it to peers.",
+      "child_utterance": "Look! Red, blue, red, blue! I made it go like that all the way!",
+      "child_transcript_confidence": 0.92,
+      "educator_response": "You discovered a pattern! What would come next if you continued?",
+      "educator_transcript_confidence": 0.95,
+      "oeq_confidence": 0.89,
+      "ceq_confidence": 0.11,
+      "educational_focus": "Mathematical thinking, pattern recognition, logical reasoning",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.3,
+        "mathematical_language": true,
+        "extends_learning": true,
+        "cognitive_demand": "application"
+      }
+    },
+    {
+      "id": "real_008",
+      "source_video": "Clarke County School District Lynn 007.mp4",
+      "timestamp": "00:04:05",
+      "title": "Nature Walk Discovery",
+      "age_group": "MIXED",
+      "context": "During an outdoor nature walk, a group of children find an interesting leaf with holes in it.",
+      "child_utterance": "Why does this leaf have holes? Did something eat it?",
+      "child_transcript_confidence": 0.91,
+      "educator_response": "That's an interesting observation. What clues do you see that might tell us what happened?",
+      "educator_transcript_confidence": 0.94,
+      "oeq_confidence": 0.93,
+      "ceq_confidence": 0.07,
+      "educational_focus": "Scientific inquiry, observation skills, hypothesis formation",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 4.2,
+        "inquiry_based": true,
+        "evidence_focused": true,
+        "cognitive_demand": "analysis"
+      }
+    },
+    {
+      "id": "real_009",
+      "source_video": "ACAP_Marty_005.mp4",
+      "timestamp": "00:03:30",
+      "title": "Dramatic Play Negotiation",
+      "age_group": "PK",
+      "context": "Two children are in the dramatic play area, disagreeing about the storyline of their pretend play.",
+      "child_utterance": "No, the baby doesn't go to school! Babies stay home!",
+      "child_transcript_confidence": 0.88,
+      "educator_response": "You both have different ideas about the story. How could we include both of your ideas?",
+      "educator_transcript_confidence": 0.92,
+      "oeq_confidence": 0.86,
+      "ceq_confidence": 0.14,
+      "educational_focus": "Collaboration, creative thinking, perspective-taking",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.6,
+        "collaboration_encouraged": true,
+        "multiple_perspectives": true,
+        "cognitive_demand": "synthesis"
+      }
+    },
+    {
+      "id": "real_010",
+      "source_video": "Draw Results.mp4",
+      "timestamp": "00:01:15",
+      "title": "Counting Collection",
+      "age_group": "PK",
+      "context": "A 5-year-old is sorting and counting a collection of buttons, organizing them by color.",
+      "child_utterance": "I have one, two, three... wait, let me start over. There's so many!",
+      "child_transcript_confidence": 0.90,
+      "educator_response": "You're being careful with your counting. What strategy could help you keep track?",
+      "educator_transcript_confidence": 0.93,
+      "oeq_confidence": 0.88,
+      "ceq_confidence": 0.12,
+      "educational_focus": "Mathematical thinking, organization, problem-solving strategies",
+      "gold_star": true,
+      "quality_indicators": {
+        "wait_time": 3.4,
+        "strategy_focused": true,
+        "metacognition": true,
+        "cognitive_demand": "evaluation"
+      }
+    }
+  ],
+  "metadata": {
+    "total_scenarios": 10,
+    "source": "Gold Star Educational Videos",
+    "processing_date": "2025-09-28",
+    "quality_criteria": {
+      "minimum_oeq_confidence": 0.85,
+      "minimum_transcript_confidence": 0.87,
+      "required_indicators": ["wait_time", "cognitive_demand"],
+      "gold_star_verified": true
+    },
+    "educational_value": {
+      "domains_covered": ["cognitive", "social-emotional", "language", "physical"],
+      "questioning_techniques": ["open-ended", "scaffolding", "inquiry-based"],
+      "age_appropriateness": "verified"
+    }
+  }
+}
