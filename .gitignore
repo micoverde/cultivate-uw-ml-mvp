@@ -66,6 +66,7 @@ Thumbs.db
 # Logs
 logs/
 *.log
+api_server*.log
 
 # Demo build
 demo/build/
@@ -101,3 +102,16 @@ test_*.json
 alignment_*.json
 quality_*.json
 processing_*.txt
+ux_validation_report*.json
+
+# Test screenshots and debug images (root level)
+/debug_*.png
+/maya_*.png
+/ux_*.png
+test_screenshots/
+test_results/
+
+# Test HTML files in root
+/test_*.html
+/verify_*.html
+/demo2_*.html
