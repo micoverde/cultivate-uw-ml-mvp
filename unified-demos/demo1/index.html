@@ -139,7 +139,7 @@
         .settings-btn {
             position: fixed;
             top: 24px;
-            right: 80px;
+            right: 120px;
             z-index: 10000;
             background: var(--surface-50);
             border: 2px solid var(--surface-400);
@@ -148,7 +148,12 @@
             cursor: pointer;
             font-size: 20px;
             transition: all var(--transition-fast);
-            display: block !important;
+            display: flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            box-shadow: var(--elevation-shadow-large);
         }
 
         .settings-btn:hover {
