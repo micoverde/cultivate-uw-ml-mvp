@@ -509,6 +509,194 @@
             text-decoration: underline;
         }
 
+        /* SETTINGS BUTTON */
+        .settings-fab {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-500);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--elevation-shadow-large);
+            transition: all var(--transition-medium);
+            z-index: 999;
+        }
+
+        .settings-fab:hover {
+            background: var(--primary-600);
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .settings-fab svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+
+        /* SETTINGS MODAL */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .settings-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .settings-content {
+            background: var(--surface-50);
+            border-radius: var(--border-radius-large);
+            max-width: 600px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: var(--elevation-shadow-large);
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .settings-header {
+            padding: 24px;
+            border-bottom: 1px solid var(--surface-300);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .settings-header h2 {
+            margin: 0;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .settings-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 4px;
+            transition: color var(--transition-fast);
+        }
+
+        .settings-close:hover {
+            color: var(--text-primary);
+        }
+
+        .settings-body {
+            padding: 24px;
+        }
+
+        .settings-section {
+            margin-bottom: 32px;
+        }
+
+        .settings-section h3 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .settings-group {
+            background: var(--surface-100);
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+            border: 1px solid var(--surface-300);
+            margin-bottom: 16px;
+        }
+
+        .setting-item {
+            margin-bottom: 16px;
+        }
+
+        .setting-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .setting-item label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .setting-item select {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--surface-400);
+            border-radius: var(--border-radius-small);
+            background: var(--surface-50);
+            color: var(--text-primary);
+            font-size: 14px;
+            transition: all var(--transition-fast);
+        }
+
+        .setting-item select:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px var(--primary-50);
+        }
+
+        .setting-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .setting-checkbox input[type="checkbox"] {
+            margin-top: 4px;
+        }
+
+        .setting-checkbox-label {
+            flex: 1;
+        }
+
+        .setting-checkbox-label .label-title {
+            color: var(--text-primary);
+            font-weight: 500;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .setting-checkbox-label .label-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .settings-footer {
+            padding: 16px 24px;
+            border-top: 1px solid var(--surface-300);
+            display: flex;
+            justify-content: flex-end;
+            gap: 12px;
+        }
+
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
             .container {
@@ -562,6 +750,101 @@
         </svg>
     </div>
 
+    <!-- Settings Button (FAB) -->
+    <div class="settings-fab" id="settingsFab" onclick="openSettings()">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11.03C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+        </svg>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12,15.5A3.5,3.5 0 0,1 8.5,12A3.5,3.5 0 0,1 12,8.5A3.5,3.5 0 0,1 15.5,12A3.5,3.5 0 0,1 12,15.5M19.43,12.97C19.47,12.65 19.5,12.33 19.5,12C19.5,11.67 19.47,11.34 19.43,11.03L21.54,9.37C21.73,9.22 21.78,8.95 21.66,8.73L19.66,5.27C19.54,5.05 19.27,4.96 19.05,5.05L16.56,6.05C16.04,5.66 15.5,5.32 14.87,5.07L14.5,2.42C14.46,2.18 14.25,2 14,2H10C9.75,2 9.54,2.18 9.5,2.42L9.13,5.07C8.5,5.32 7.96,5.66 7.44,6.05L4.95,5.05C4.73,4.96 4.46,5.05 4.34,5.27L2.34,8.73C2.22,8.95 2.27,9.22 2.46,9.37L4.57,11.03C4.53,11.34 4.5,11.67 4.5,12C4.5,12.33 4.53,12.65 4.57,12.97L2.46,14.63C2.27,14.78 2.22,15.05 2.34,15.27L4.34,18.73C4.46,18.95 4.73,19.03 4.95,18.95L7.44,17.94C7.96,18.34 8.5,18.68 9.13,18.93L9.5,21.58C9.54,21.82 9.75,22 10,22H14C14.25,22 14.46,21.82 14.5,21.58L14.87,18.93C15.5,18.68 16.04,18.34 16.56,17.94L19.05,18.95C19.27,19.03 19.54,18.95 19.66,18.73L21.66,15.27C21.78,15.05 21.73,14.78 21.54,14.63L19.43,12.97Z"/>
+                    </svg>
+                    Settings
+                </h2>
+                <button class="settings-close" onclick="closeSettings()">&times;</button>
+            </div>
+
+            <div class="settings-body">
+                <!-- Scenarios Section -->
+                <div class="settings-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M19,2L14,6.5V17.5L19,13V2M6.5,5C4.55,5 2.45,5.4 1,6.5V21.16C1,21.41 1.25,21.66 1.5,21.66C1.6,21.66 1.65,21.59 1.75,21.59C3.1,20.94 5.05,20.5 6.5,20.5C8.45,20.5 10.55,20.9 12,22C13.35,21.15 15.8,20.5 17.5,20.5C19.15,20.5 20.85,20.81 22.25,21.56C22.35,21.61 22.4,21.59 22.5,21.59C22.75,21.59 23,21.34 23,21.09V6.5C22.4,6.05 21.75,5.75 21,5.5V19C19.9,18.65 18.7,18.5 17.5,18.5C15.8,18.5 13.35,19.15 12,20V13L12,8.82C10.55,7.85 8.45,7.5 6.5,7.5C5.05,7.5 3.1,7.94 1.75,8.59C1.65,8.59 1.6,8.66 1.5,8.66C1.25,8.66 1,8.41 1,8.16V6.5C2.45,5.4 4.55,5 6.5,5C8.45,5 10.55,5.4 12,6.5V8.82Z"/>
+                        </svg>
+                        Scenarios
+                    </h3>
+
+                    <div class="settings-group">
+                        <div class="setting-item">
+                            <label for="scenarioSource">Data Source</label>
+                            <select id="scenarioSource" onchange="updateScenarioSource(this.value)">
+                                <option value="simulations">Simulations (Synthetic Scenarios)</option>
+                                <option value="real_transcriptions">Real Transcriptions (Gold Star Videos)</option>
+                            </select>
+                            <p style="font-size: 12px; color: var(--text-tertiary); margin-top: 4px;" id="sourceDescription">
+                                AI-generated educational scenarios for training
+                            </p>
+                        </div>
+
+                        <div class="setting-checkbox">
+                            <input type="checkbox" id="showEducatorResponse" onchange="updateSettings()">
+                            <div class="setting-checkbox-label">
+                                <span class="label-title">Show Educator Responses</span>
+                                <span class="label-desc">Display what the educator actually said in gold star examples</span>
+                            </div>
+                        </div>
+
+                        <div class="setting-checkbox">
+                            <input type="checkbox" id="showConfidenceScores" checked onchange="updateSettings()">
+                            <div class="setting-checkbox-label">
+                                <span class="label-title">Display OEQ/CEQ Confidence Scores</span>
+                                <span class="label-desc">Show AI confidence scores for educator responses</span>
+                            </div>
+                        </div>
+
+                        <div class="setting-checkbox">
+                            <input type="checkbox" id="comparisonMode" onchange="updateSettings()">
+                            <div class="setting-checkbox-label">
+                                <span class="label-title">Enable Comparison Mode</span>
+                                <span class="label-desc">Compare your responses with gold star educators</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Display Section -->
+                <div class="settings-section">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z"/>
+                        </svg>
+                        Display
+                    </h3>
+
+                    <div class="settings-group">
+                        <div class="setting-checkbox">
+                            <input type="checkbox" id="debugMode" onchange="updateSettings()">
+                            <div class="setting-checkbox-label">
+                                <span class="label-title">Console Debug Output</span>
+                                <span class="label-desc">Show detailed ML analysis in browser console</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="settings-footer">
+                <button class="btn btn-secondary" onclick="closeSettings()">Cancel</button>
+                <button class="btn btn-primary" onclick="applySettings()">Apply</button>
+            </div>
+        </div>
+    </div>
 
     <div class="container">
         <header>
@@ -1114,9 +1397,118 @@
             }
         }
 
+        // Settings Management Functions
+        let settings = {
+            scenarioSource: 'simulations',
+            showEducatorResponse: false,
+            showConfidenceScores: true,
+            comparisonMode: false,
+            debugMode: false
+        };
+
+        function loadSettings() {
+            const saved = localStorage.getItem('demo1Settings');
+            if (saved) {
+                settings = { ...settings, ...JSON.parse(saved) };
+                // Apply settings to UI
+                document.getElementById('scenarioSource').value = settings.scenarioSource;
+                document.getElementById('showEducatorResponse').checked = settings.showEducatorResponse;
+                document.getElementById('showConfidenceScores').checked = settings.showConfidenceScores;
+                document.getElementById('comparisonMode').checked = settings.comparisonMode;
+                document.getElementById('debugMode').checked = settings.debugMode;
+            }
+        }
+
+        function saveSettings() {
+            localStorage.setItem('demo1Settings', JSON.stringify(settings));
+        }
+
+        function openSettings() {
+            loadSettings();
+            document.getElementById('settingsModal').classList.add('active');
+        }
+
+        function closeSettings() {
+            document.getElementById('settingsModal').classList.remove('active');
+        }
+
+        function updateScenarioSource(value) {
+            const desc = document.getElementById('sourceDescription');
+            if (value === 'real_transcriptions') {
+                desc.textContent = 'Actual classroom interactions from exemplar videos';
+            } else {
+                desc.textContent = 'AI-generated educational scenarios for training';
+            }
+        }
+
+        function updateSettings() {
+            // Update settings object from UI
+            settings.scenarioSource = document.getElementById('scenarioSource').value;
+            settings.showEducatorResponse = document.getElementById('showEducatorResponse').checked;
+            settings.showConfidenceScores = document.getElementById('showConfidenceScores').checked;
+            settings.comparisonMode = document.getElementById('comparisonMode').checked;
+            settings.debugMode = document.getElementById('debugMode').checked;
+        }
+
+        function applySettings() {
+            updateSettings();
+            saveSettings();
+
+            // Load appropriate scenarios based on settings
+            if (settings.scenarioSource === 'real_transcriptions') {
+                loadRealTranscriptions();
+            } else {
+                // Use existing scenarios
+            }
+
+            closeSettings();
+            // Optionally reload current scenario with new settings
+            loadScenario(currentScenarioIndex);
+        }
+
+        async function loadRealTranscriptions() {
+            try {
+                const response = await fetch('./real_transcriptions.json');
+                const realScenarios = await response.json();
+
+                // Transform real transcriptions to scenario format
+                scenarios = realScenarios.map(scenario => ({
+                    id: scenario.id,
+                    title: scenario.title,
+                    age: scenario.age,
+                    context: scenario.context,
+                    behavior: scenario.behavior,
+                    // Additional real data
+                    isReal: true,
+                    educatorResponse: scenario.educatorResponse,
+                    oeqScore: scenario.oeqScore,
+                    ceqScore: scenario.ceqScore,
+                    sourceVideo: scenario.sourceVideo,
+                    timestamp: scenario.timestamp,
+                    goldStar: scenario.goldStar
+                }));
+
+                console.log(`✨ Loaded ${scenarios.length} real transcriptions from gold star videos`);
+                currentScenarioIndex = 0;
+                loadScenario(0);
+            } catch (error) {
+                console.error('Failed to load real transcriptions:', error);
+                alert('Unable to load real transcriptions. Using simulations instead.');
+            }
+        }
+
+        // Close modal when clicking outside
+        document.addEventListener('click', (e) => {
+            const modal = document.getElementById('settingsModal');
+            if (e.target === modal) {
+                closeSettings();
+            }
+        });
+
         // Initialize theme manager and load first scenario on page load
         document.addEventListener('DOMContentLoaded', () => {
             new ThemeManager();
+            loadSettings(); // Load settings on startup
             loadScenario(0); // Load first scenario
 
             // Update build number with timestamp
