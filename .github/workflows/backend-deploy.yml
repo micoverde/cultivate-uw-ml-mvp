@@ -4,7 +4,7 @@ on:
   # Disabled until Azure secrets are configured
   # push:
   #   branches: [ main ]
-  #   paths: [ 'src/**', 'requirements-api.txt', 'Dockerfile.api', 'run_api.py', '.github/workflows/backend-deploy.yml' ]
+  #   paths: [ 'src/**', 'requirements.txt', 'docker/Dockerfile.api', 'api/run_api.py', '.github/workflows/backend-deploy.yml' ]
   workflow_dispatch:
     inputs:
       force_deploy:
@@ -34,8 +34,8 @@ jobs:
         run: |
           # Build with version tag
           VERSION=$(date +%Y%m%d.%H%M%S)
-          docker build -f Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:$VERSION .
-          docker build -f Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:latest .
+          docker build -f docker/Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:$VERSION .
+          docker build -f docker/Dockerfile.api -t cultivatemlapi.azurecr.io/cultivate-ml-api:latest .
 
           # Push both tags
           docker push cultivatemlapi.azurecr.io/cultivate-ml-api:$VERSION
