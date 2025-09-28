@@ -31,10 +31,10 @@ ENV/
 .ipynb_checkpoints
 
 # ML Models and Data
-*.pkl
+# *.pkl  # Now tracked with Git LFS
 *.h5
 *.pt
-*.pth
+# *.pth  # Now tracked with Git LFS
 models/*.bin
 models/*.safetensors
 
