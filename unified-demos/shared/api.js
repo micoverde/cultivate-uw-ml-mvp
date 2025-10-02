@@ -137,8 +137,8 @@ class UnifiedMLAPI {
         };
 
         try {
-            // Use demo1's feedback endpoint for now
-            const response = await fetch('http://localhost:8001/save_feedback', {
+            // Use main API's feedback endpoint
+            const response = await fetch('http://localhost:5001/save_feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackData)

@@ -168,60 +168,23 @@ async def classify_classic(request: ClassifyRequest):
     """Classification endpoint using classic single ML model"""
     if classic_classifier is not None:
         try:
-            # ClassicTrainer has model attribute (sklearn model)
-            if hasattr(classic_classifier, 'model'):
-                import numpy as np
+            # Use shared feature extractor
+            from src.ml.features.question_features import QuestionFeatureExtractor
+            import numpy as np
 
-                text_lower = request.text.lower()
-                word_count = len(request.text.split())
+            extractor = QuestionFeatureExtractor()
+            features = extractor.extract(request.text).reshape(1, -1)
 
-                # Strong OEQ indicators
-                has_how = 1 if ' how ' in f' {text_lower} ' or text_lower.startswith('how ') else 0
-                has_why = 1 if ' why ' in f' {text_lower} ' or text_lower.startswith('why ') else 0
-                has_what_think = 1 if 'what do you think' in text_lower or 'what did you think' in text_lower else 0
-                has_describe_explain = 1 if any(w in text_lower for w in [' describe ', ' explain ', ' tell me about ']) else 0
+            # Scale features
+            features_scaled = classic_classifier.scaler.transform(features)
 
-                # Question word features
-                has_what = 1 if ' what ' in f' {text_lower} ' or text_lower.startswith('what ') else 0
-                has_when = 1 if ' when ' in f' {text_lower} ' or text_lower.startswith('when ') else 0
-                has_where = 1 if ' where ' in f' {text_lower} ' or text_lower.startswith('where ') else 0
-                has_who = 1 if ' who ' in f' {text_lower} ' or text_lower.startswith('who ') else 0
+            # Classic trainer has models dict (random_forest, logistic)
+            # Use the first model (random forest)
+            if hasattr(classic_classifier, 'models') and classic_classifier.models:
+                model = list(classic_classifier.models.values())[0]
 
-                # CEQ indicators (yes/no questions)
-                has_did = 1 if ' did ' in text_lower or text_lower.startswith('did ') else 0
-                has_is_are = 1 if any(w in text_lower for w in [' is ', ' are ', ' was ', ' were ', 'is ', 'are ']) else 0
-                has_can_could = 1 if any(w in text_lower for w in [' can ', ' could ', ' would ', ' should ', 'can ', 'could ']) else 0
-                has_do_does = 1 if any(w in text_lower for w in [' do ', ' does ', 'do ', 'does ']) else 0
-
-                # Scores
-                oeq_score = has_how + has_why + has_what_think + has_describe_explain
-                ceq_score = has_did + has_is_are + has_can_could + has_do_does
-
-                # Extract features (19 features total)
-                features = [[
-                    word_count,               # 0
-                    1 if '?' in request.text else 0,  # 1
-                    len(request.text),        # 2
-                    has_how,                  # 3
-                    has_why,                  # 4
-                    has_what,                 # 5
-                    has_when,                 # 6
-                    has_where,                # 7
-                    has_who,                  # 8
-                    has_what_think,           # 9
-                    has_describe_explain,     # 10
-                    has_did,                  # 11
-                    has_is_are,               # 12
-                    has_can_could,            # 13
-                    has_do_does,              # 14
-                    oeq_score,                # 15
-                    ceq_score,                # 16
-                    request.text.count('?'),  # 17
-                    1 if word_count > 5 else 0,  # 18
-                ]]
-
-                prediction = classic_classifier.model.predict(np.array(features))[0]
-                proba = classic_classifier.model.predict_proba(np.array(features))[0]
+                prediction = model.predict(features_scaled)[0]
+                proba = model.predict_proba(features_scaled)[0]
 
                 classification = "OEQ" if prediction == 1 else "CEQ"
                 confidence = float(max(proba))
@@ -238,7 +201,7 @@ async def classify_classic(request: ClassifyRequest):
                     }
                 }
             else:
-                raise AttributeError("Model doesn't have expected methods")
+                raise AttributeError("Model doesn't have expected structure")
 
         except Exception as e:
             logger.error(f"Classic prediction error: {e}")
@@ -325,7 +288,38 @@ async def classify_response(request: ClassifyRequest):
                 classification = "OEQ" if prediction == 1 else "CEQ"
                 confidence = float(max(proba))
 
-                return {
+                # Get individual model predictions for voting details
+                individual_predictions = {}
+                vote_tally = {"OEQ": 0, "CEQ": 0}
+
+                # Get model names from the trainer's models dict
+                model_names = list(ensemble_classifier.models.keys()) if hasattr(ensemble_classifier, 'models') else []
+
+                if hasattr(ensemble_classifier.ensemble, 'estimators_'):
+                    for i, estimator in enumerate(ensemble_classifier.ensemble.estimators_):
+                        try:
+                            # Use the original model name if available, otherwise use class name
+                            model_name = model_names[i] if i < len(model_names) else type(estimator).__name__
+
+                            pred = estimator.predict(np.array(features))[0]
+                            pred_proba = estimator.predict_proba(np.array(features))[0]
+                            pred_label = "OEQ" if pred == 1 else "CEQ"
+
+                            # Track individual prediction
+                            individual_predictions[model_name] = {
+                                "prediction": pred_label,
+                                "oeq_prob": float(pred_proba[1]),
+                                "ceq_prob": float(pred_proba[0]),
+                                "confidence": float(max(pred_proba))
+                            }
+
+                            # Count votes
+                            vote_tally[pred_label] += 1
+
+                        except Exception as e:
+                            logger.warning(f"Could not get prediction from estimator {i}: {e}")
+
+                response_data = {
                     "classification": classification,
                     "confidence": confidence,
                     "text": request.text,
@@ -336,6 +330,19 @@ async def classify_response(request: ClassifyRequest):
                         "OEQ": float(proba[1])
                     }
                 }
+
+                # Add voting details if debug_mode or individual predictions available
+                if request.debug_mode or individual_predictions:
+                    total_votes = sum(vote_tally.values())
+                    response_data["voting_details"] = {
+                        "ensemble_method": "soft voting (weighted probabilities)",
+                        "num_models": len(ensemble_classifier.ensemble.estimators_) if hasattr(ensemble_classifier.ensemble, 'estimators_') else 7,
+                        "vote_tally": vote_tally,
+                        "vote_summary": f"{vote_tally['OEQ']}/{total_votes} models voted OEQ, {vote_tally['CEQ']}/{total_votes} voted CEQ",
+                        "individual_predictions": individual_predictions
+                    }
+
+                return response_data
             else:
                 raise AttributeError("Model doesn't have expected methods")
 
@@ -523,6 +530,27 @@ async def video_websocket_endpoint(websocket: WebSocket, video_id: str):
 
     except WebSocketDisconnect:
         manager.disconnect(websocket)
+
+@app.post("/save_feedback")
+async def save_feedback(feedback: dict):
+    """Save user feedback from the web portal"""
+    try:
+        import time
+        # Log feedback for now (could save to database later)
+        logger.info(f"📝 Feedback received: {feedback}")
+
+        return {
+            "status": "success",
+            "message": "Feedback saved successfully",
+            "feedback_id": f"fb_{int(time.time() * 1000)}",
+            "timestamp": feedback.get('timestamp', '')
+        }
+    except Exception as e:
+        logger.error(f"Error saving feedback: {e}")
+        return {
+            "status": "error",
+            "message": str(e)
+        }
 
 @app.get("/api/health")
 async def health_check():
