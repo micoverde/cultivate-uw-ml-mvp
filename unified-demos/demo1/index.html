@@ -743,7 +743,7 @@
 
             if (hostname === 'localhost' || hostname === '127.0.0.1') {
                 // Local development - use local ML API
-                return 'http://localhost:8001';
+                return 'http://localhost:5001';
             } else {
                 // Production - use Azure Container Apps API
                 return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
@@ -918,10 +918,13 @@
 
                 const mlResult = await apiResponse.json();
 
-                // Production API returns simplified format, normalize it
-                if (isProduction && !mlResult.oeq_probability) {
-                    // Calculate probabilities from confidence
-                    if (mlResult.classification === 'OEQ') {
+                // Normalize API response format if needed
+                if (!mlResult.oeq_probability) {
+                    // Use probabilities from API if available, otherwise calculate from confidence
+                    if (mlResult.probabilities) {
+                        mlResult.oeq_probability = mlResult.probabilities.OEQ;
+                        mlResult.ceq_probability = mlResult.probabilities.CEQ;
+                    } else if (mlResult.classification === 'OEQ') {
                         mlResult.oeq_probability = mlResult.confidence;
                         mlResult.ceq_probability = 1 - mlResult.confidence;
                     } else {
@@ -1013,7 +1016,7 @@
             } catch (error) {
                 console.error('❌ REAL ML API ERROR:', error);
                 console.log('\n🚫 NO FALLBACK: Real ML API required!');
-                console.log('🔧 To fix: Ensure PyTorch ML API is running on port 8001');
+                console.log('🔧 To fix: Ensure PyTorch ML API is running on port 5001');
                 console.log('💡 Start with: python3 ml_api_real.py');
 
                 // Show error instead of fallback

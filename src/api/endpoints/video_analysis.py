@@ -490,7 +490,7 @@ async def process_deep_learning_analysis(video_id: str, video_path: str, request
     video_processing_status[video_id]["message"] = "Processing audio with Whisper transcription and speaker diarization..."
 
     await asyncio.sleep(3)
-n    # Initialize Whisper audio processor for real audio analysis
+    # Initialize Whisper audio processor for real audio analysis
     audio_analysis = {}
     try:
         if WHISPER_AVAILABLE:

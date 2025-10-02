@@ -8,7 +8,7 @@ class UnifiedMLAPI {
     constructor() {
         // API endpoint configuration
         this.endpoints = {
-            demo1: 'http://localhost:8001/classify_response',
+            demo1: 'http://localhost:5001/api/v1/classify/response',
             demo2: {
                 classify: '/api/v1/classify/question',
                 feedback: '/api/v1/save_feedback'
