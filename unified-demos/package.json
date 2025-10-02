@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "python -m http.server 3000",
     "serve": "python -m http.server 3000",
-    "start": "python -m http.server 8080",
-    "preview": "python -m http.server 8080",
+    "start": "python -m http.server 6060",
+    "preview": "python -m http.server 6060",
     "build": "echo 'Static HTML build complete'",
     "test": "echo 'Running unified demo tests'",
     "lint": "echo 'Linting unified demos'",

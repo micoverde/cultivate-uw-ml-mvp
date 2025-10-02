@@ -11,7 +11,7 @@ class APIConfig {
 
         // Base URLs for each environment
         this.baseUrls = {
-            local: 'http://localhost:8001',
+            local: 'http://localhost:5001',
             azure: 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io'
         };
 
@@ -19,12 +19,12 @@ class APIConfig {
         this.endpoints = {
             local: {
                 classic: {
-                    classify: '/classify_response',  // Old endpoint for backward compatibility
-                    feedback: '/feedback'  // If it exists
+                    classify: '/api/v1/classify',  // Classic ML endpoint
+                    feedback: '/api/v2/feedback'
                 },
                 ensemble: {
-                    classify: '/api/v2/classify/ensemble',
-                    feedback: '/api/v2/feedback'  // If it exists
+                    classify: '/api/v2/classify/ensemble',  // Ensemble ML endpoint
+                    feedback: '/api/v2/feedback'
                 }
             },
             azure: {

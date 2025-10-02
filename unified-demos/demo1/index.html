@@ -728,6 +728,7 @@
     <!-- Load Unified Components -->
     <script src="../shared/unified-header.js"></script>
     <script src="../shared/footer.js"></script>
+    <script src="../shared/api-config.js"></script>
     <script src="../shared/model-settings.js"></script>
 
     <script>
@@ -880,14 +881,13 @@
                         method: 'POST'
                     });
                 } else {
-                    // Local development - check model settings for endpoint
+                    // Local development - use API config to get correct endpoint
+                    const endpoint = window.apiConfig ?
+                        window.apiConfig.getClassifyEndpoint() :
+                        `${apiBase}/api/v2/classify/ensemble`;  // Fallback to ensemble
+
                     const isEnsemble = window.modelSettings &&
                         window.modelSettings.getSelectedModel() === 'ensemble';
-
-                    // Use appropriate endpoint based on model selection
-                    const endpoint = isEnsemble ?
-                        window.modelSettings.getModelEndpoint() :  // Use ensemble endpoint from settings
-                        `${apiBase}/classify_response`;  // Classic uses old endpoint
 
                     console.log('\n🌐 API REQUEST (Local):');
                     console.log(`🎯 Endpoint: ${endpoint}`);
