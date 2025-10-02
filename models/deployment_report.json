@@ -1,5 +1,5 @@
 {
-  "timestamp": "2025-10-02T14:35:14.926918",
+  "timestamp": "2025-10-02T14:51:54.589779",
   "training_data": {
     "samples": 98,
     "features": 19,
@@ -11,12 +11,12 @@
   "ensemble_performance": {
     "accuracy": 1.0,
     "f1_score": 1.0,
-    "training_time": 5.95
+    "training_time": 5.92
   },
   "classic_performance": {
     "accuracy": 1.0,
     "f1_score": 1.0,
-    "training_time": 0.96
+    "training_time": 0.56
   },
   "recommendation": "DEPLOY ENSEMBLE - Similar performance, more robust",
   "azure_deployment": {

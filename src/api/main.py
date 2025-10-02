@@ -126,28 +126,139 @@ from pathlib import Path
 import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-# Load ensemble classifier
+# Load ensemble and classic classifiers
 ensemble_classifier = None
+classic_classifier = None
 try:
     import joblib
-    # Try to load the latest ensemble model
-    model_path = Path(__file__).parent.parent.parent / "models" / "ensemble_latest.pkl"
-    if not model_path.exists():
-        # Fallback to models directory
-        model_path = Path(__file__).parent.parent.parent / "models" / "ensemble_20251002_143514.pkl"
 
-    if model_path.exists():
-        ensemble_classifier = joblib.load(model_path)
-        logger.info(f"✅ Loaded ensemble model from {model_path}")
+    # Load ensemble model
+    ensemble_path = Path(__file__).parent.parent.parent / "models" / "ensemble_latest.pkl"
+    if not ensemble_path.exists():
+        ensemble_path = Path(__file__).parent.parent.parent / "models" / "ensemble_20251002_143514.pkl"
+
+    if ensemble_path.exists():
+        ensemble_classifier = joblib.load(ensemble_path)
+        logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
     else:
-        logger.warning(f"⚠️  Ensemble model not found at {model_path}")
+        logger.warning(f"⚠️  Ensemble model not found at {ensemble_path}")
+
+    # Load classic model
+    classic_path = Path(__file__).parent.parent.parent / "models" / "classic_latest.pkl"
+    if not classic_path.exists():
+        classic_path = Path(__file__).parent.parent.parent / "models" / "classic_20251002_143514.pkl"
+
+    if classic_path.exists():
+        classic_classifier = joblib.load(classic_path)
+        logger.info(f"✅ Loaded classic model from {classic_path}")
+    else:
+        logger.warning(f"⚠️  Classic model not found at {classic_path}")
+
 except Exception as e:
-    logger.error(f"❌ Failed to load ensemble classifier: {e}")
+    logger.error(f"❌ Failed to load classifiers: {e}")
 
 class ClassifyRequest(BaseModel):
     text: str
     scenario_id: int = 1
     debug_mode: bool = False
+
+@app.post("/api/classify")
+@app.post("/api/v1/classify")
+async def classify_classic(request: ClassifyRequest):
+    """Classification endpoint using classic single ML model"""
+    if classic_classifier is not None:
+        try:
+            # ClassicTrainer has model attribute (sklearn model)
+            if hasattr(classic_classifier, 'model'):
+                import numpy as np
+
+                text_lower = request.text.lower()
+                word_count = len(request.text.split())
+
+                # Strong OEQ indicators
+                has_how = 1 if ' how ' in f' {text_lower} ' or text_lower.startswith('how ') else 0
+                has_why = 1 if ' why ' in f' {text_lower} ' or text_lower.startswith('why ') else 0
+                has_what_think = 1 if 'what do you think' in text_lower or 'what did you think' in text_lower else 0
+                has_describe_explain = 1 if any(w in text_lower for w in [' describe ', ' explain ', ' tell me about ']) else 0
+
+                # Question word features
+                has_what = 1 if ' what ' in f' {text_lower} ' or text_lower.startswith('what ') else 0
+                has_when = 1 if ' when ' in f' {text_lower} ' or text_lower.startswith('when ') else 0
+                has_where = 1 if ' where ' in f' {text_lower} ' or text_lower.startswith('where ') else 0
+                has_who = 1 if ' who ' in f' {text_lower} ' or text_lower.startswith('who ') else 0
+
+                # CEQ indicators (yes/no questions)
+                has_did = 1 if ' did ' in text_lower or text_lower.startswith('did ') else 0
+                has_is_are = 1 if any(w in text_lower for w in [' is ', ' are ', ' was ', ' were ', 'is ', 'are ']) else 0
+                has_can_could = 1 if any(w in text_lower for w in [' can ', ' could ', ' would ', ' should ', 'can ', 'could ']) else 0
+                has_do_does = 1 if any(w in text_lower for w in [' do ', ' does ', 'do ', 'does ']) else 0
+
+                # Scores
+                oeq_score = has_how + has_why + has_what_think + has_describe_explain
+                ceq_score = has_did + has_is_are + has_can_could + has_do_does
+
+                # Extract features (19 features total)
+                features = [[
+                    word_count,               # 0
+                    1 if '?' in request.text else 0,  # 1
+                    len(request.text),        # 2
+                    has_how,                  # 3
+                    has_why,                  # 4
+                    has_what,                 # 5
+                    has_when,                 # 6
+                    has_where,                # 7
+                    has_who,                  # 8
+                    has_what_think,           # 9
+                    has_describe_explain,     # 10
+                    has_did,                  # 11
+                    has_is_are,               # 12
+                    has_can_could,            # 13
+                    has_do_does,              # 14
+                    oeq_score,                # 15
+                    ceq_score,                # 16
+                    request.text.count('?'),  # 17
+                    1 if word_count > 5 else 0,  # 18
+                ]]
+
+                prediction = classic_classifier.model.predict(np.array(features))[0]
+                proba = classic_classifier.model.predict_proba(np.array(features))[0]
+
+                classification = "OEQ" if prediction == 1 else "CEQ"
+                confidence = float(max(proba))
+
+                return {
+                    "classification": classification,
+                    "confidence": confidence,
+                    "text": request.text,
+                    "scenario_id": request.scenario_id,
+                    "model": "classic",
+                    "probabilities": {
+                        "CEQ": float(proba[0]),
+                        "OEQ": float(proba[1])
+                    }
+                }
+            else:
+                raise AttributeError("Model doesn't have expected methods")
+
+        except Exception as e:
+            logger.error(f"Classic prediction error: {e}")
+
+    # Fallback to heuristic
+    has_question_mark = "?" in request.text
+    classification = "OEQ" if has_question_mark else "CEQ"
+    confidence = 0.75 if has_question_mark else 0.65
+
+    return {
+        "classification": classification,
+        "confidence": confidence,
+        "text": request.text,
+        "scenario_id": request.scenario_id,
+        "model": "heuristic",
+        "probabilities": {
+            "CEQ": 0.25 if has_question_mark else 0.35,
+            "OEQ": 0.75 if has_question_mark else 0.65
+        }
+    }
 
 @app.post("/classify_response")
 @app.post("/api/v1/classify/response")
@@ -156,25 +267,60 @@ async def classify_response(request: ClassifyRequest):
     """Classification endpoint using ensemble ML model"""
     if ensemble_classifier is not None:
         try:
-            # EnhancedEnsembleTrainer has a classify method that takes features
-            # We need to extract features first or use the classifier's predict_from_text if available
-            if hasattr(ensemble_classifier, 'predict_from_text'):
-                result = ensemble_classifier.predict_from_text(request.text)
-                classification = result.get('classification', 'OEQ')
-                confidence = result.get('confidence', 0.85)
-            elif hasattr(ensemble_classifier, 'ensemble_model'):
-                # Access the underlying sklearn ensemble model
-                # For now, use a simple feature: presence of question mark
-                features = [[
-                    len(request.text.split()),  # word_count
-                    1 if '?' in request.text else 0,  # has_question
-                    len(request.text),  # char_count
-                ]]
-                # Pad features to match training (19 features)
-                features[0].extend([0] * (19 - len(features[0])))
+            # EnhancedEnsembleTrainer has ensemble attribute (sklearn VotingClassifier)
+            if hasattr(ensemble_classifier, 'ensemble'):
+                import numpy as np
 
-                prediction = ensemble_classifier.ensemble_model.predict(features)[0]
-                proba = ensemble_classifier.ensemble_model.predict_proba(features)[0]
+                text_lower = request.text.lower()
+                word_count = len(request.text.split())
+
+                # Strong OEQ indicators
+                has_how = 1 if ' how ' in f' {text_lower} ' or text_lower.startswith('how ') else 0
+                has_why = 1 if ' why ' in f' {text_lower} ' or text_lower.startswith('why ') else 0
+                has_what_think = 1 if 'what do you think' in text_lower or 'what did you think' in text_lower else 0
+                has_describe_explain = 1 if any(w in text_lower for w in [' describe ', ' explain ', ' tell me about ']) else 0
+
+                # Question word features
+                has_what = 1 if ' what ' in f' {text_lower} ' or text_lower.startswith('what ') else 0
+                has_when = 1 if ' when ' in f' {text_lower} ' or text_lower.startswith('when ') else 0
+                has_where = 1 if ' where ' in f' {text_lower} ' or text_lower.startswith('where ') else 0
+                has_who = 1 if ' who ' in f' {text_lower} ' or text_lower.startswith('who ') else 0
+
+                # CEQ indicators (yes/no questions)
+                has_did = 1 if ' did ' in text_lower or text_lower.startswith('did ') else 0
+                has_is_are = 1 if any(w in text_lower for w in [' is ', ' are ', ' was ', ' were ', 'is ', 'are ']) else 0
+                has_can_could = 1 if any(w in text_lower for w in [' can ', ' could ', ' would ', ' should ', 'can ', 'could ']) else 0
+                has_do_does = 1 if any(w in text_lower for w in [' do ', ' does ', 'do ', 'does ']) else 0
+
+                # Scores
+                oeq_score = has_how + has_why + has_what_think + has_describe_explain
+                ceq_score = has_did + has_is_are + has_can_could + has_do_does
+
+                # Extract features (19 features total)
+                features = [[
+                    word_count,               # 0
+                    1 if '?' in request.text else 0,  # 1
+                    len(request.text),        # 2
+                    has_how,                  # 3
+                    has_why,                  # 4
+                    has_what,                 # 5
+                    has_when,                 # 6
+                    has_where,                # 7
+                    has_who,                  # 8
+                    has_what_think,           # 9
+                    has_describe_explain,     # 10
+                    has_did,                  # 11
+                    has_is_are,               # 12
+                    has_can_could,            # 13
+                    has_do_does,              # 14
+                    oeq_score,                # 15
+                    ceq_score,                # 16
+                    request.text.count('?'),  # 17
+                    1 if word_count > 5 else 0,  # 18
+                ]]
+
+                prediction = ensemble_classifier.ensemble.predict(np.array(features))[0]
+                proba = ensemble_classifier.ensemble.predict_proba(np.array(features))[0]
 
                 classification = "OEQ" if prediction == 1 else "CEQ"
                 confidence = float(max(proba))
