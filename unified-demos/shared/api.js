@@ -11,7 +11,7 @@ function getApiBaseUrl() {
 
     if (hostname === 'localhost' || hostname === '127.0.0.1') {
         // Local development - use local ML API
-        return 'http://localhost:8001';
+        return 'http://localhost:5001';
     } else {
         // Production - use Azure Container Apps API
         return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
