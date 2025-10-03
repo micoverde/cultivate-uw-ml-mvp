@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:backend": "cd src && python -m uvicorn api.main:app --reload --port 8000",
+    "dev:backend": "cd src && python -m uvicorn api.main:app --reload --port 5001",
     "dev:frontend": "cd demo && npm run dev",
     "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "cd demo && npm run build",
@@ -26,7 +26,7 @@
     "setup:env": "python -m venv venv && source venv/bin/activate && pip install -r requirements.txt",
     "test:smoke": "./smoke-test.sh",
     "docker:build": "docker build -t cultivate-uw-ml .",
-    "docker:run": "docker run -p 3000:3000 -p 8000:8000 cultivate-uw-ml"
+    "docker:run": "docker run -p 3000:3000 -p 5001:5001 cultivate-uw-ml"
   },
   "keywords": [
     "machine-learning",
