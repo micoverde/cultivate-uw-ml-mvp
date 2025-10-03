@@ -30,7 +30,7 @@ import sys
 sys.path.append(str(Path(__file__).parent.parent.parent))
 
 from ml.training.ensemble_trainer_v2 import EnhancedEnsembleTrainer, PerformanceMetrics
-from ml.training.enhanced_feature_extractor import EnhancedFeatureExtractor
+from ml.training.enhanced_feature_extractor import EnhancedQuestionFeatureExtractor as EnhancedFeatureExtractor
 from ml.models.ensemble_question_classifier import EnsembleQuestionClassifier
 from ml.models.question_classifier import QuestionClassifier
 

@@ -11,7 +11,7 @@ class UnifiedAPI {
                           window.location.hostname === '127.0.0.1';
 
         // Base URLs
-        this.localBase = 'http://localhost:8001';
+        this.localBase = 'http://localhost:5001';
         this.azureBase = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
 
         // Get current base URL
@@ -193,8 +193,8 @@ class UnifiedAPI {
     }
 }
 
-// Initialize globally
-window.unifiedAPI = new UnifiedAPI();
+// Initialize globally with a unique name to avoid conflicts
+window.cultivateAPI = new UnifiedAPI();
 
 // Log initialization
-console.log('🚀 UnifiedAPI loaded:', window.unifiedAPI.getEnvironmentInfo());
+console.log('🚀 CultivateAPI loaded:', window.cultivateAPI.getEnvironmentInfo());

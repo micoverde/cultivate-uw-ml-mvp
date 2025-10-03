@@ -19,7 +19,7 @@ from pydantic import BaseModel, Field
 
 from ..core.logger import get_logger
 from ...ml.models.ensemble_question_classifier import EnsembleQuestionClassifier
-from ...ml.training.enhanced_feature_extractor import EnhancedFeatureExtractor
+from ...ml.training.enhanced_feature_extractor import EnhancedQuestionFeatureExtractor as EnhancedFeatureExtractor
 
 logger = get_logger(__name__)
 
@@ -136,7 +136,15 @@ async def classify_single_question(request: QuestionRequest) -> QuestionClassifi
         logger.error(f"❌ Classification failed: {e}")
         raise HTTPException(status_code=500, detail=f"Classification failed: {e}")
 
-@router.post("/questions/batch", response_model=BatchClassificationResponse)
+@router.post("/ensemble", response_model=QuestionClassificationResult)
+async def classify_ensemble(request: QuestionRequest) -> QuestionClassificationResult:
+    """
+    Ensemble endpoint alias for /question endpoint.
+    Maintained for backward compatibility with demo1.
+    """
+    return await classify_single_question(request)
+
+@router.post("/batch", response_model=BatchClassificationResponse)
 async def classify_questions_batch(request: BatchQuestionRequest) -> BatchClassificationResponse:
     """
     Classify multiple questions in batch for Warren's 95-question demo.

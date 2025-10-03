@@ -27,6 +27,7 @@ from .endpoints.educator_response_analysis import (
 )
 from .endpoints.admin import router as admin_router
 from .endpoints.video_analysis import router as video_router
+from .endpoints.question_classification import router as question_router
 # from .endpoints.model_management import router as model_router  # TODO: Fix import issues
 
 # Import security middleware
@@ -118,6 +119,7 @@ app.add_middleware(
 app.include_router(transcript_router, prefix="/api/v1")
 app.include_router(admin_router, prefix="/api/v1")
 app.include_router(video_router, prefix="/api/v1")
+app.include_router(question_router, prefix="/api/v2/classify")
 # app.include_router(model_router, prefix="/api/v1")  # TODO: Fix import issues
 
 # Simple classify endpoint for demo compatibility
