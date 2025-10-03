@@ -42,10 +42,21 @@ else
     echo -e "${GREEN}✅ ML models found${NC}"
 fi
 
-# Create logs directory
+# Create logs and build directories
 mkdir -p logs
+mkdir -p build
+
+# Copy unified-demos to build directory
+echo "📦 Copying demos to build directory..."
+rm -rf build/*
+cp -r unified-demos/* build/
 
 echo ""
 echo -e "${GREEN}✅ Build complete${NC}"
+echo ""
+echo "📁 Build output:"
+echo "   - build/demo1/"
+echo "   - build/demo2/"
+echo "   - build/index.html (demo hub)"
 echo ""
 echo "Next step: npm run serve"

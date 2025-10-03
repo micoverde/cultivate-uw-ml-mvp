@@ -114,7 +114,7 @@ fi
 # Start web server
 echo ""
 echo "🚀 Starting web server on port $WEB_PORT..."
-cd unified-demos
+cd build
 python3 -m http.server $WEB_PORT > ../logs/web.log 2>&1 &
 WEB_PID=$!
 cd ..

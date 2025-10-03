@@ -62,6 +62,7 @@ Press `Ctrl+C` in the terminal running `npm run serve`. The script will automati
 npm run setup       # First-time setup (venv + deps + logs)
 npm run build       # Validate environment before serving
 npm run serve       # Start API + web server with health validation
+npm run train       # Train ML models (ensemble + classic)
 npm test            # Run all tests (API + scenarios)
 ```
 
@@ -76,6 +77,13 @@ npm run dev         # Same as npm run serve
 npm test              # Run all tests
 npm run test:api      # Test API with ground truth (49 examples)
 npm run test:scenarios # Test demo2 system with scenarios
+```
+
+### Training
+```bash
+npm run train         # Train 7-model ensemble (2-5 minutes)
+npm run train:quick   # Quick training with simpler model
+npm run train:full    # Full ensemble training (same as npm run train)
 ```
 
 ### Code Quality
@@ -203,9 +211,20 @@ git push origin fix-00XXX-description
 
 ### Updating ML Models
 
-1. Train new models: `venv/bin/python train_7_model_ensemble.py`
-2. Models save to `models/ensemble_latest.pkl` and `models/classic_latest.pkl`
-3. Restart API (Ctrl+C, then `npm start`)
+```bash
+# Train new models
+npm run train
+
+# Test new models
+npm test
+
+# Restart API to use new models
+# (Ctrl+C to stop, then npm run serve to restart)
+```
+
+Models are saved to:
+- `models/ensemble_latest.pkl` - 7-model voting ensemble
+- `models/classic_latest.pkl` - Best single model
 
 ### Testing Demo2 System
 

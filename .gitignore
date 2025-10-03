@@ -104,3 +104,6 @@ processing_*.txt
 # Development logs
 logs/
 *.log
+
+# Build output
+build/
