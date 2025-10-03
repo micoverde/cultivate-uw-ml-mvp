@@ -4,29 +4,11 @@
  * Warren's requirement: REAL ML APIs only, no simulation
  */
 
-// Helper function to get the correct API base URL
-function getApiBaseUrl() {
-    // Check if we're running locally or in production
-    const hostname = window.location.hostname;
-
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
-        // Local development - use local ML API
-        return 'http://localhost:5001';
-    } else {
-        // Production - use Azure Container Apps API
-        return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
-    }
-}
-
 class UnifiedMLAPI {
     constructor() {
-        // Dynamic API endpoint configuration based on environment
-        const apiBase = getApiBaseUrl();
-        const isProduction = !apiBase.includes('localhost');
-
+        // API endpoint configuration
         this.endpoints = {
-            // Use correct endpoint based on environment
-            demo1: isProduction ? `${apiBase}/api/classify` : `${apiBase}/classify_response`,
+            demo1: 'http://localhost:5001/api/v1/classify/response',
             demo2: {
                 classify: '/api/v1/classify/question',
                 feedback: '/api/v1/save_feedback'
@@ -76,34 +58,19 @@ class UnifiedMLAPI {
      * Demo 1 classification - Child Scenarios pattern
      */
     async classifyDemo1(text, options) {
-        const apiBase = getApiBaseUrl();
-        const isProduction = !apiBase.includes('localhost');
-        let response;
+        const request = {
+            text: text,
+            scenario_id: options.scenario_id || 1,
+            debug_mode: true
+        };
 
-        if (isProduction) {
-            // Production API uses query parameter
-            console.log(`🎭 Demo 1 API Request (Production): text="${text}"`);
-            const endpoint = `${this.endpoints.demo1}?text=${encodeURIComponent(text)}`;
+        console.log(`🎭 Demo 1 API Request:`, request);
 
-            response = await fetch(endpoint, {
-                method: 'POST'
-            });
-        } else {
-            // Local API uses JSON body
-            const request = {
-                text: text,
-                scenario_id: options.scenario_id || 1,
-                debug_mode: true
-            };
-
-            console.log(`🎭 Demo 1 API Request (Local):`, request);
-
-            response = await fetch(this.endpoints.demo1, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(request)
-            });
-        }
+        const response = await fetch(this.endpoints.demo1, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(request)
+        });
 
         if (!response.ok) {
             throw new Error(`Demo 1 API Error: ${response.status} ${response.statusText}`);
@@ -170,9 +137,8 @@ class UnifiedMLAPI {
         };
 
         try {
-            // Use dynamic API URL based on environment
-            const apiBase = getApiBaseUrl();
-            const response = await fetch(`${apiBase}/save_feedback`, {
+            // Use main API's feedback endpoint
+            const response = await fetch('http://localhost:5001/save_feedback', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackData)

@@ -3,254 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Demo 2: Warren's Teaching Video Analysis - Microsoft Fluent Design</title>
+    <title>Demo 2 - Warren's Teaching Video Analysis | Cultivate Learning</title>
 
-    <!-- Professional Theme System -->
-    <link rel="stylesheet" href="../shared/theme.css">
+    <!-- Unified Design System -->
+    <link rel="stylesheet" href="../shared/unified-styles.css">
 
-    <!-- Microsoft Fluent Design System 2025 -->
+    <!-- Page Specific Styles -->
     <style>
-        :root {
-            /* Fluent Design Color Tokens */
-            --fluent-neutral-bg: #faf9f8;
-            --fluent-neutral-bg-secondary: #f3f2f1;
-            --fluent-neutral-bg-tertiary: #edebe9;
-            --fluent-neutral-surface: #ffffff;
-            --fluent-brand-primary: #0078d4;
-            --fluent-brand-secondary: #106ebe;
-            --fluent-text-primary: #323130;
-            --fluent-text-secondary: #605e5c;
-            --fluent-text-tertiary: #8a8886;
-            --fluent-border-primary: #edebe9;
-            --fluent-border-secondary: #d2d0ce;
-            --fluent-accent-success: #107c10;
-            --fluent-accent-warning: #ff8c00;
-            --fluent-accent-error: #d13438;
-
-            /* Dark Theme */
-            --fluent-dark-bg: #1e1e1e;
-            --fluent-dark-bg-secondary: #2d2d30;
-            --fluent-dark-bg-tertiary: #3e3e42;
-            --fluent-dark-surface: #252526;
-            --fluent-dark-text-primary: #cccccc;
-            --fluent-dark-text-secondary: #969696;
-            --fluent-dark-border: #464647;
-
-            /* Fluent Typography */
-            --fluent-font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            --fluent-font-size-xs: 10px;
-            --fluent-font-size-sm: 12px;
-            --fluent-font-size-base: 14px;
-            --fluent-font-size-lg: 16px;
-            --fluent-font-size-xl: 20px;
-            --fluent-font-size-xxl: 28px;
-
-            /* Fluent Spacing */
-            --fluent-space-xs: 4px;
-            --fluent-space-sm: 8px;
-            --fluent-space-md: 12px;
-            --fluent-space-lg: 16px;
-            --fluent-space-xl: 20px;
-            --fluent-space-xxl: 24px;
-
-            /* Fluent Radius */
-            --fluent-radius-sm: 2px;
-            --fluent-radius-md: 4px;
-            --fluent-radius-lg: 8px;
-
-            /* Fluent Shadows */
-            --fluent-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.12);
-            --fluent-shadow-md: 0 2px 4px rgba(0, 0, 0, 0.14);
-            --fluent-shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.18);
-
-            /* Animation */
-            --fluent-transition: all 0.2s cubic-bezier(0.1, 0.9, 0.2, 1);
-        }
-
-        /* Dark theme overrides */
-        [data-theme="dark"] {
-            --fluent-neutral-bg: var(--fluent-dark-bg);
-            --fluent-neutral-bg-secondary: var(--fluent-dark-bg-secondary);
-            --fluent-neutral-bg-tertiary: var(--fluent-dark-bg-tertiary);
-            --fluent-neutral-surface: var(--fluent-dark-surface);
-            --fluent-text-primary: var(--fluent-dark-text-primary);
-            --fluent-text-secondary: var(--fluent-dark-text-secondary);
-            --fluent-border-primary: var(--fluent-dark-border);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: var(--fluent-font-family);
-            font-size: var(--fluent-font-size-base);
-            background: var(--fluent-neutral-bg);
-            color: var(--fluent-text-primary);
-            line-height: 1.5;
-            transition: var(--fluent-transition);
-        }
-
-        /* Header */
-        .fluent-header {
-            background: var(--fluent-neutral-surface);
-            border-bottom: 1px solid var(--fluent-border-primary);
-            padding: var(--fluent-space-lg) var(--fluent-space-xl);
-            box-shadow: var(--fluent-shadow-sm);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .fluent-header-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .fluent-title {
-            font-size: var(--fluent-font-size-xxl);
-            font-weight: 600;
-            color: var(--fluent-brand-primary);
-            margin: 0;
-        }
-
-        .fluent-subtitle {
-            font-size: var(--fluent-font-size-base);
-            color: var(--fluent-text-secondary);
-            margin: 0;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            background: var(--fluent-neutral-bg-secondary);
-            border: 1px solid var(--fluent-border-secondary);
-            border-radius: var(--fluent-radius-md);
-            padding: var(--fluent-space-sm) var(--fluent-space-md);
-            cursor: pointer;
-            transition: var(--fluent-transition);
-            font-size: var(--fluent-font-size-sm);
-        }
-
-        .theme-toggle:hover {
-            background: var(--fluent-neutral-bg-tertiary);
-            border-color: var(--fluent-brand-primary);
-        }
-
-        /* Main Container */
-        .fluent-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: var(--fluent-space-xl);
-        }
-
-        /* Tab Navigation */
-        .fluent-tabs {
-            display: flex;
-            gap: var(--fluent-space-sm);
-            margin-bottom: var(--fluent-space-xl);
-            border-bottom: 1px solid var(--fluent-border-primary);
-        }
-
-        .fluent-tab {
-            background: transparent;
-            border: none;
-            padding: var(--fluent-space-md) var(--fluent-space-lg);
-            cursor: pointer;
-            transition: var(--fluent-transition);
-            font-size: var(--fluent-font-size-base);
-            color: var(--fluent-text-secondary);
-            border-bottom: 2px solid transparent;
-            position: relative;
-        }
-
-        .fluent-tab:hover {
-            color: var(--fluent-brand-primary);
-            background: var(--fluent-neutral-bg-secondary);
-        }
-
-        .fluent-tab.active {
-            color: var(--fluent-brand-primary);
-            border-bottom-color: var(--fluent-brand-primary);
-            font-weight: 600;
-        }
-
-        /* Tab Content */
-        .fluent-tab-content {
-            display: none;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        .fluent-tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Cards */
-        .fluent-card {
-            background: var(--fluent-neutral-surface);
-            border: 1px solid var(--fluent-border-primary);
-            border-radius: var(--fluent-radius-lg);
-            padding: var(--fluent-space-xl);
-            margin-bottom: var(--fluent-space-lg);
-            box-shadow: var(--fluent-shadow-sm);
-            transition: var(--fluent-transition);
-        }
-
-        .fluent-card:hover {
-            box-shadow: var(--fluent-shadow-md);
-            border-color: var(--fluent-brand-primary);
-        }
-
-        .fluent-card-title {
-            font-size: var(--fluent-font-size-xl);
-            font-weight: 600;
-            margin-bottom: var(--fluent-space-md);
-            color: var(--fluent-text-primary);
-        }
-
-        .fluent-card-subtitle {
-            font-size: var(--fluent-font-size-base);
-            color: var(--fluent-text-secondary);
-            margin-bottom: var(--fluent-space-lg);
-        }
-
-        /* Grid Layout */
-        .fluent-grid {
-            display: grid;
-            gap: var(--fluent-space-lg);
-        }
-
-        .fluent-grid-2 {
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .fluent-grid-3 {
-            grid-template-columns: 1fr 1fr 1fr;
-        }
-
-        @media (max-width: 768px) {
-            .fluent-grid-2,
-            .fluent-grid-3 {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Video Player Styles */
+        /* Demo 2 Specific Styles */
         .video-container {
             position: relative;
             background: #000;
-            border-radius: var(--fluent-radius-lg);
+            border-radius: var(--radius-lg);
             overflow: hidden;
-            margin-bottom: var(--fluent-space-lg);
+            margin-bottom: var(--space-lg);
         }
 
         .video-player {
@@ -265,139 +31,177 @@
             left: 0;
             right: 0;
             background: linear-gradient(transparent, rgba(0,0,0,0.7));
-            padding: var(--fluent-space-lg);
+            padding: var(--space-lg);
             color: white;
         }
 
-        /* Transcript Styles */
         .transcript-container {
             max-height: 400px;
             overflow-y: auto;
-            background: var(--fluent-neutral-bg-secondary);
-            border-radius: var(--fluent-radius-md);
-            padding: var(--fluent-space-lg);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
         }
 
         .transcript-segment {
-            margin-bottom: var(--fluent-space-md);
-            padding: var(--fluent-space-sm);
+            margin-bottom: var(--space-md);
+            padding: var(--space-sm);
             border-left: 3px solid transparent;
             cursor: pointer;
-            transition: var(--fluent-transition);
+            transition: all var(--transition-fast);
         }
 
         .transcript-segment:hover {
-            background: var(--fluent-neutral-surface);
-            border-left-color: var(--fluent-brand-primary);
+            background: var(--bg-primary);
+            border-left-color: var(--brand-primary);
         }
 
         .transcript-segment.question {
-            border-left-color: var(--fluent-accent-success);
-            background: var(--fluent-neutral-surface);
+            border-left-color: var(--success);
+            background: var(--bg-primary);
         }
 
         .transcript-timestamp {
-            font-size: var(--fluent-font-size-sm);
-            color: var(--fluent-text-tertiary);
-            margin-bottom: var(--fluent-space-xs);
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-xs);
         }
 
         .transcript-text {
-            color: var(--fluent-text-primary);
+            color: var(--text-primary);
         }
 
-        /* Question Analysis */
-        .question-analysis {
+        .question-item {
+            margin-bottom: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .question-item:hover {
+            border-color: var(--brand-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: var(--fluent-space-md);
-            background: var(--fluent-neutral-bg-secondary);
-            border-radius: var(--fluent-radius-md);
-            margin-top: var(--fluent-space-sm);
+            margin-bottom: var(--space-sm);
+        }
+
+        .question-timestamp {
+            color: var(--brand-primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .question-timestamp:hover {
+            text-decoration: underline;
+        }
+
+        .question-classification {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
         .ml-prediction {
-            background: var(--fluent-brand-primary);
-            color: white;
-            padding: var(--fluent-space-xs) var(--fluent-space-sm);
-            border-radius: var(--fluent-radius-sm);
-            font-size: var(--fluent-font-size-sm);
-            font-weight: 600;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .confidence-score {
-            font-size: var(--fluent-font-size-sm);
-            color: var(--fluent-text-secondary);
+        .ml-prediction.oeq {
+            background: var(--success);
+            color: var(--text-inverse);
         }
 
-        /* Statistics */
+        .ml-prediction.ceq {
+            background: var(--info);
+            color: var(--text-inverse);
+        }
+
+        .question-text {
+            margin-bottom: var(--space-sm);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .question-details {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--fluent-space-md);
-            margin-top: var(--fluent-space-lg);
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
         }
 
         .stat-card {
-            background: var(--fluent-neutral-surface);
-            border: 1px solid var(--fluent-border-primary);
-            border-radius: var(--fluent-radius-md);
-            padding: var(--fluent-space-lg);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
             text-align: center;
         }
 
         .stat-number {
-            font-size: var(--fluent-font-size-xxl);
+            font-size: var(--font-2xl);
             font-weight: 700;
-            color: var(--fluent-brand-primary);
-            margin-bottom: var(--fluent-space-xs);
+            color: var(--brand-primary);
+            margin-bottom: var(--space-xs);
         }
 
         .stat-label {
-            font-size: var(--fluent-font-size-sm);
-            color: var(--fluent-text-secondary);
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* Buttons */
-        .fluent-button {
-            background: var(--fluent-brand-primary);
-            color: white;
-            border: none;
-            border-radius: var(--fluent-radius-md);
-            padding: var(--fluent-space-md) var(--fluent-space-lg);
-            cursor: pointer;
-            transition: var(--fluent-transition);
-            font-size: var(--fluent-font-size-base);
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        @media (max-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .comparison-section {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .comparison-title {
+            font-size: var(--font-lg);
             font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
         }
 
-        .fluent-button:hover {
-            background: var(--fluent-brand-secondary);
-            transform: translateY(-1px);
-            box-shadow: var(--fluent-shadow-md);
-        }
-
-        .fluent-button-secondary {
-            background: var(--fluent-neutral-bg-secondary);
-            color: var(--fluent-text-primary);
-            border: 1px solid var(--fluent-border-secondary);
-        }
-
-        .fluent-button-secondary:hover {
-            background: var(--fluent-neutral-bg-tertiary);
-        }
-
-        /* Loading States */
         .loading-spinner {
             width: 24px;
             height: 24px;
-            border: 2px solid var(--fluent-border-primary);
-            border-top: 2px solid var(--fluent-brand-primary);
+            border: 2px solid var(--border-light);
+            border-top: 2px solid var(--brand-primary);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             display: inline-block;
-            margin-right: var(--fluent-space-sm);
+            margin-right: var(--space-sm);
         }
 
         @keyframes spin {
@@ -405,56 +209,192 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .fluent-container {
-                padding: var(--fluent-space-md);
-            }
+        .rate-button {
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--font-xs);
+            font-weight: 500;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
 
-            .fluent-header {
-                padding: var(--fluent-space-md);
-            }
+        .rate-button:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
 
-            .fluent-tabs {
-                flex-wrap: wrap;
-            }
+        .tab-content {
+            display: none;
+        }
 
-            .fluent-tab {
-                padding: var(--fluent-space-sm) var(--fluent-space-md);
-                font-size: var(--fluent-font-size-sm);
-            }
+        .tab-content.active {
+            display: block;
+            animation: fadeIn var(--transition-base);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Rating Modal Styles */
+        .rating-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .rating-modal.show {
+            display: flex;
+        }
+
+        .rating-modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .rating-modal h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            font-size: var(--font-lg);
+            font-weight: 600;
+        }
+
+        .rating-question {
+            background: var(--bg-tertiary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .rating-current {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            gap: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .rating-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .rating-option {
+            padding: var(--space-md);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition-fast);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .rating-option:hover {
+            border-color: var(--brand-primary);
+            background: var(--bg-secondary);
+        }
+
+        .rating-option.selected {
+            border-color: var(--brand-primary);
+            background: var(--bg-tertiary);
+            color: var(--brand-primary);
+        }
+
+        .rating-option .label {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .rating-option .desc {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+
+        .rating-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: flex-end;
+        }
+
+        .rating-btn {
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color var(--transition-fast);
+        }
+
+        .rating-btn.primary {
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        .rating-btn.primary:hover {
+            background: var(--brand-secondary);
+        }
+
+        .rating-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .rating-btn.secondary:hover {
+            background: var(--bg-secondary);
+        }
+
+        .rating-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
         }
     </style>
 </head>
 <body data-theme="light">
-    <!-- Header -->
-    <header class="fluent-header">
-        <div class="fluent-header-content">
-            <div>
-                <h1 class="fluent-title">Demo 2: Warren's Teaching Video Analysis</h1>
-                <p class="fluent-subtitle">AI-Powered Question Classification with Whisper + Ensemble ML</p>
+    <!-- Unified Header will be injected here -->
+
+    <div class="unified-container">
+        <div class="unified-card">
+            <div class="card-header">
+                <h2 class="card-title">Warren's Teaching Video Analysis</h2>
+                <p class="card-description">AI-powered question classification with Whisper transcription and Ensemble ML</p>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span id="theme-icon">🌙</span> Toggle Theme
-            </button>
-        </div>
-    </header>
 
-    <!-- Main Container -->
-    <div class="fluent-container">
-        <!-- Tab Navigation -->
-        <div class="fluent-tabs">
-            <button class="fluent-tab active" onclick="showTab('video-player')">📹 Video Player</button>
-            <button class="fluent-tab" onclick="showTab('transcript')">📝 Transcript & Analysis</button>
-            <button class="fluent-tab" onclick="showTab('questions')">❓ Question Classification</button>
-            <button class="fluent-tab" onclick="showTab('comparison')">⚖️ ML vs Manual</button>
-        </div>
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" onclick="showTab('video-player')">Video Player</button>
+                <button class="tab-btn" onclick="showTab('transcript')">Transcript & Analysis</button>
+                <button class="tab-btn" onclick="showTab('questions')">Question Classification</button>
+                <button class="tab-btn" onclick="showTab('comparison')">ML vs Manual</button>
+            </div>
 
-        <!-- Video Player Tab -->
-        <div id="video-player" class="fluent-tab-content active">
-            <div class="fluent-card">
-                <h2 class="fluent-card-title">Warren's Teaching Video - Real Classroom Analysis</h2>
-                <p class="fluent-card-subtitle">14m 45s • 1080p • Processed with OpenAI Whisper + Ensemble Classifier</p>
+            <!-- Video Player Tab -->
+            <div id="video-player" class="tab-content active">
+                <h3 class="card-title">Warren's Teaching Video - Real Classroom Analysis</h3>
+                <p class="card-description">14m 45s • 1080p • Processed with OpenAI Whisper + Ensemble Classifier</p>
 
                 <div class="video-container">
                     <video class="video-player" controls id="mainVideo">
@@ -482,53 +422,47 @@
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Transcript Tab -->
-        <div id="transcript" class="fluent-tab-content">
-            <div class="fluent-card">
-                <h2 class="fluent-card-title">Real-Time Transcript</h2>
-                <p class="fluent-card-subtitle">Powered by OpenAI Whisper with word-level timestamps</p>
+            <!-- Transcript Tab -->
+            <div id="transcript" class="tab-content">
+                <h3 class="card-title">Real-Time Transcript</h3>
+                <p class="card-description">Powered by OpenAI Whisper with word-level timestamps</p>
 
                 <div class="transcript-container" id="transcriptContainer">
                     <div class="loading-spinner"></div>
                     Loading Warren's video transcript...
                 </div>
             </div>
-        </div>
 
-        <!-- Questions Tab -->
-        <div id="questions" class="fluent-tab-content">
-            <div class="fluent-card">
-                <h2 class="fluent-card-title">Question Analysis Dashboard</h2>
-                <p class="fluent-card-subtitle">Ensemble ML Classification: Neural Network + Random Forest + Logistic Regression</p>
+            <!-- Questions Tab -->
+            <div id="questions" class="tab-content">
+                <h3 class="card-title">Question Analysis Dashboard</h3>
+                <p class="card-description">Ensemble ML Classification: Neural Network + Random Forest + Logistic Regression</p>
 
                 <div id="questionsContainer">
                     <div class="loading-spinner"></div>
                     Analyzing questions with ensemble classifier...
                 </div>
             </div>
-        </div>
 
-        <!-- Comparison Tab -->
-        <div id="comparison" class="fluent-tab-content">
-            <div class="fluent-card">
-                <h2 class="fluent-card-title">ML Predictions vs Manual Annotations</h2>
-                <p class="fluent-card-subtitle">Compare ensemble AI results with human expert analysis</p>
+            <!-- Comparison Tab -->
+            <div id="comparison" class="tab-content">
+                <h3 class="card-title">ML Predictions vs Manual Annotations</h3>
+                <p class="card-description">Compare ensemble AI results with human expert analysis</p>
 
-                <div class="fluent-grid fluent-grid-2">
-                    <div>
-                        <h3>🤖 Machine Learning Results</h3>
+                <div class="comparison-grid">
+                    <div class="comparison-section">
+                        <h4 class="comparison-title">Machine Learning Results</h4>
                         <div id="mlResults">
                             <div class="loading-spinner"></div>
                             Processing ML classifications...
                         </div>
                     </div>
-                    <div>
-                        <h3>👨‍🏫 Manual Annotations</h3>
+                    <div class="comparison-section">
+                        <h4 class="comparison-title">Manual Annotations</h4>
                         <div id="manualAnnotations">
                             <p>Manual annotations can be added here for comparison with ML predictions.</p>
-                            <button class="fluent-button-secondary">Add Annotation</button>
+                            <button class="btn btn-secondary">Add Annotation</button>
                         </div>
                     </div>
                 </div>
@@ -536,227 +470,7 @@
         </div>
     </div>
 
-    <script>
-        // Theme Management
-        function toggleTheme() {
-            const body = document.body;
-            const themeIcon = document.getElementById('theme-icon');
-            const currentTheme = body.getAttribute('data-theme');
-
-            if (currentTheme === 'light') {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.setAttribute('data-theme', 'light');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Load saved theme
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.setAttribute('data-theme', savedTheme);
-        document.getElementById('theme-icon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-        // Tab Management
-        function showTab(tabName) {
-            // Hide all tab contents
-            const tabContents = document.querySelectorAll('.fluent-tab-content');
-            tabContents.forEach(tab => tab.classList.remove('active'));
-
-            // Remove active class from all tabs
-            const tabs = document.querySelectorAll('.fluent-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-
-            // Show selected tab content
-            document.getElementById(tabName).classList.add('active');
-
-            // Add active class to clicked tab
-            event.target.classList.add('active');
-        }
-
-        // Warren's Real Video Processing Data
-        async function loadWarrenVideoData() {
-            try {
-                console.log('Loading Warren\'s real video processing results...');
-
-                // Load Warren's processed data from VM
-                const response = await fetch('./warren_teaching_demo_data.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load Warren\'s data');
-                }
-                const data = await response.json();
-
-                console.log(`Loaded Warren's gravity lesson: ${data.questions.length} questions, ${data.metadata.duration_formatted}`);
-
-                // Calculate real statistics from Warren's data
-                const oeqQuestions = data.questions.filter(q => q.ml_classification?.type === 'OEQ');
-                const ceqQuestions = data.questions.filter(q => q.ml_classification?.type === 'CEQ');
-                const avgConfidence = data.questions
-                    .filter(q => q.ml_classification?.confidence !== undefined)
-                    .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
-                    data.questions.filter(q => q.ml_classification?.confidence !== undefined).length;
-
-                // Update statistics with real data
-                document.getElementById('totalQuestions').textContent = data.questions.length;
-                document.getElementById('oeqCount').textContent = oeqQuestions.length;
-                document.getElementById('ceqCount').textContent = ceqQuestions.length;
-                document.getElementById('avgConfidence').textContent = (avgConfidence * 100).toFixed(1) + '%';
-
-                // Track each ML prediction in analytics
-                if (window.analytics) {
-                    data.questions.forEach((question, index) => {
-                        if (question.ml_classification) {
-                            const prediction = {
-                                classification: question.ml_classification.type,
-                                confidence: question.ml_classification.confidence || 0,
-                                processing_time_ms: question.ml_classification.processing_time_ms || 0,
-                                features_extracted: question.ml_classification.features_extracted || 56
-                            };
-                            analytics.trackMLPrediction('demo2', prediction, {
-                                userContext: {
-                                    question_length: question.text?.length || 0,
-                                    video_timestamp: question.timestamp || 0,
-                                    question_index: index
-                                },
-                                scenarioId: `warren_video_${index}`
-                            });
-                        }
-                    });
-                }
-
-                // Load real transcript
-                document.getElementById('transcriptContainer').innerHTML = `
-                    <div class="transcript-text">
-                        <h3>Warren's Gravity Lesson Transcript</h3>
-                        <p style="margin-bottom: 1rem; color: var(--fluent-text-secondary);">
-                            <strong>Subject:</strong> Physics - Gravity |
-                            <strong>Duration:</strong> ${data.metadata.duration_formatted} |
-                            <strong>Questions Detected:</strong> ${data.questions.length}
-                        </p>
-                        <div style="background: var(--fluent-neutral-bg-secondary); padding: 1rem; border-radius: 4px; max-height: 400px; overflow-y: auto;">
-                            ${data.metadata.transcript}
-                        </div>
-                    </div>
-                `;
-
-                // Load real questions with clickable timestamps
-                const questionsHtml = data.questions.map((q, index) => `
-                    <div class="question-item" style="margin-bottom: 1rem; padding: 1rem; background: var(--fluent-neutral-surface); border-radius: 8px; border: 1px solid var(--fluent-border-primary);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-                            <strong style="color: var(--fluent-brand-primary); cursor: pointer;" onclick="jumpToTimestamp(${q.timestamp})">
-                                ${formatTime(q.timestamp)} ⏯️
-                            </strong>
-                            <div style="display: flex; align-items: center; gap: 8px;">
-                                <span class="ml-prediction ${q.ml_classification?.type === 'OEQ' ? 'oeq' : 'ceq'}" style="padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 500; background: ${q.ml_classification?.type === 'OEQ' ? '#107c10' : '#0078d4'}; color: white;">
-                                    ${q.ml_classification?.type || 'Unknown'}
-                                </span>
-                                <button class="rate-button" onclick="showRatingModal(${index}, '${q.text?.replace(/'/g, "\\'")}', '${q.ml_classification?.type}', ${q.ml_classification?.confidence})" style="padding: 4px 10px; font-size: 11px; font-weight: 500; background: var(--surface-200); border: 1px solid var(--surface-400); border-radius: 6px; cursor: pointer; color: var(--text-secondary); transition: all 0.2s ease;">
-                                    RATE
-                                </button>
-                            </div>
-                        </div>
-                        <div style="margin-bottom: 0.5rem; font-style: italic;">
-                            "${q.text}"
-                        </div>
-                        <div style="font-size: 12px; color: var(--fluent-text-secondary);">
-                            <strong>ML Confidence:</strong> ${((q.ml_classification?.confidence || 0) * 100).toFixed(1)}% |
-                            <strong>Features:</strong> ${q.ml_classification?.features_extracted || 'N/A'} |
-                            <strong>Reasoning:</strong> ${q.ml_classification?.reasoning || 'N/A'}
-                        </div>
-                    </div>
-                `).join('');
-
-                document.getElementById('questionsContainer').innerHTML = questionsHtml;
-
-                // Update ML vs Manual comparison
-                document.getElementById('mlResults').innerHTML = `
-                    <div style="background: var(--fluent-neutral-bg-secondary); padding: 1rem; border-radius: 8px;">
-                        <h4>Ensemble Classifier Results</h4>
-                        <p><strong>Total Questions:</strong> ${data.questions.length}</p>
-                        <p><strong>Open-Ended (OEQ):</strong> ${oeqQuestions.length}</p>
-                        <p><strong>Closed-Ended (CEQ):</strong> ${ceqQuestions.length}</p>
-                        <p><strong>Average Confidence:</strong> ${(avgConfidence * 100).toFixed(1)}%</p>
-                        <p><strong>Model Architecture:</strong> Neural Network + Random Forest + Logistic Regression</p>
-                        <p><strong>Features per Question:</strong> 56</p>
-                    </div>
-                `;
-
-            } catch (error) {
-                console.error('Error loading Warren\'s video data:', error);
-                // Fallback display
-                document.getElementById('transcriptContainer').innerHTML = `
-                    <p style="color: var(--fluent-accent-error);">
-                        Error loading transcript. Please ensure warren_teaching_demo_data.json is available.
-                    </p>
-                `;
-            }
-        }
-
-        // Time formatting helper
-        function formatTime(seconds) {
-            const mins = Math.floor(seconds / 60);
-            const secs = Math.floor(seconds % 60);
-            return `${mins}:${secs.toString().padStart(2, '0')}`;
-        }
-
-        // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            loadWarrenVideoData();
-
-            // Setup video event listeners
-            const video = document.getElementById('mainVideo');
-            if (video) {
-                video.addEventListener('loadedmetadata', function() {
-                    console.log('Video loaded:', video.duration + 's');
-                });
-            }
-        });
-
-        // Video Timeline Navigation (will be populated with real data)
-        function jumpToTimestamp(seconds) {
-            const video = document.getElementById('mainVideo');
-            if (video) {
-                video.currentTime = seconds;
-                video.play();
-            }
-        }
-
-        console.log('Demo 2: Warren Video Analysis - Microsoft Fluent Design Template Ready!');
-        console.log('Waiting for VM processing results to populate real data...');
-
-        // Function to export ground truth data for model retraining
-        function exportGroundTruth() {
-            const groundTruth = JSON.parse(localStorage.getItem('warren_video_ground_truth') || '[]');
-
-            if (groundTruth.length === 0) {
-                alert('No ground truth data collected yet. Submit some ratings first!');
-                return;
-            }
-
-            // Create downloadable JSON file
-            const dataStr = JSON.stringify(groundTruth, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `warren_video_ground_truth_${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
-
-            console.log(`📊 Exported ${groundTruth.length} ground truth samples for retraining`);
-        }
-
-        // Add keyboard shortcut for exporting ground truth (Ctrl+Shift+E)
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
-                exportGroundTruth();
-            }
-        });
-    </script>
-
-    <!-- Professional Rating Modal -->
+    <!-- Rating Modal -->
     <div id="ratingModal" class="rating-modal">
         <div class="rating-modal-content">
             <h3>Rate ML Classification</h3>
@@ -796,14 +510,318 @@
         </div>
     </div>
 
-    <!-- Unified Navigation and API -->
-    <script src="../shared/theme.js"></script>
-    <script src="../shared/navigation.js"></script>
-    <script src="../shared/api.js"></script>
-    <script src="../shared/analytics.js"></script>
+    <!-- Load Unified Components -->
+    <script src="../shared/unified-header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="../shared/model-settings.js"></script>
+    <script src="../shared/api-config.js"></script>
 
+    <!-- Demo Functionality -->
     <script>
-        // Professional Rating System
+        // Feature Flags
+        const FEATURE_FLAGS = {
+            debugMLConsole: localStorage.getItem('debugMLConsole') !== 'false' // Default true
+        };
+
+        // Tab switching
+        function showTab(tabName) {
+            const tabs = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            tabs.forEach(tab => tab.classList.remove('active'));
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        // Store questions globally for re-classification
+        let globalQuestions = [];
+        let globalData = null;
+        let isReclassifying = false;
+        let cancelReclassification = false;
+
+        // Re-classify all questions with current model
+        async function reclassifyAllQuestions() {
+            if (!globalData || globalQuestions.length === 0) {
+                console.log('No questions loaded yet, skipping re-classification');
+                return;
+            }
+
+            // Cancel any in-progress re-classification
+            if (isReclassifying) {
+                console.log('⚠️  Cancelling previous re-classification...');
+                cancelReclassification = true;
+                // Wait for previous to cancel
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            isReclassifying = true;
+            cancelReclassification = false;
+
+            const currentModel = window.apiConfig.getModel();
+            console.log(`🔄 Re-classifying ${globalQuestions.length} questions with ${currentModel} model...`);
+            console.log(`⚡ Using batch endpoint for 10-20x speedup...`);
+
+            const baseUrl = window.apiConfig.getBaseUrl();
+            const startTime = performance.now();
+
+            let successCount = 0;
+            let errorCount = 0;
+
+            try {
+                // Use batch endpoint - single request for all questions
+                const batchUrl = currentModel === 'classic'
+                    ? `${baseUrl}/api/v1/classify/batch`
+                    : `${baseUrl}/api/v2/classify/batch`;
+
+                const response = await fetch(batchUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        questions: globalQuestions.map(q => q.text),
+                        model: currentModel
+                    })
+                });
+
+                if (response.ok) {
+                    const batchResult = await response.json();
+                    const endTime = performance.now();
+                    const duration = ((endTime - startTime) / 1000).toFixed(2);
+
+                    console.log(`⚡ Batch classified ${batchResult.count} questions in ${duration}s`);
+
+                    // Update all questions with their classifications
+                    batchResult.results.forEach((result, index) => {
+                        globalQuestions[index].ml_classification = {
+                            type: result.classification,
+                            confidence: result.confidence,
+                            reasoning: `${result.classification} indicators`,
+                            features_extracted: 56,
+                            model: currentModel
+                        };
+                    });
+
+                    successCount = batchResult.count;
+                } else {
+                    console.error(`Batch classification failed: ${response.status}`);
+                    errorCount = globalQuestions.length;
+                }
+            } catch (error) {
+                console.error(`Batch classification error:`, error);
+                errorCount = globalQuestions.length;
+            }
+
+            console.log(`✅ Re-classification complete: ${successCount} success, ${errorCount} errors`);
+
+            // Update the UI with new classifications
+            updateUIWithClassifications();
+
+            // Mark as complete
+            isReclassifying = false;
+        }
+
+        // Update UI after re-classification
+        function updateUIWithClassifications() {
+            const oeqQuestions = globalQuestions.filter(q => q.ml_classification?.type === 'OEQ');
+            const ceqQuestions = globalQuestions.filter(q => q.ml_classification?.type === 'CEQ');
+            const avgConfidence = globalQuestions
+                .filter(q => q.ml_classification?.confidence !== undefined)
+                .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
+                globalQuestions.filter(q => q.ml_classification?.confidence !== undefined).length;
+
+            // Update statistics
+            document.getElementById('oeqCount').textContent = oeqQuestions.length;
+            document.getElementById('ceqCount').textContent = ceqQuestions.length;
+            document.getElementById('avgConfidence').textContent = (avgConfidence * 100).toFixed(1) + '%';
+
+            // Update questions container
+            const questionsHtml = globalQuestions.map((q, index) => `
+                <div class="question-item">
+                    <div class="question-header">
+                        <a href="#" class="question-timestamp" onclick="jumpToTimestamp(${q.timestamp}); return false;">
+                            ${formatTime(q.timestamp)}
+                        </a>
+                        <div class="question-classification">
+                            <span class="ml-prediction ${q.ml_classification?.type === 'OEQ' ? 'oeq' : 'ceq'}">
+                                ${q.ml_classification?.type || 'Unknown'}
+                            </span>
+                            <button class="rate-button" onclick="showRatingModal(${index}, '${q.text?.replace(/'/g, "\\'")}', '${q.ml_classification?.type}', ${q.ml_classification?.confidence})">
+                                Rate
+                            </button>
+                        </div>
+                    </div>
+                    <div class="question-text">
+                        "${q.text}"
+                    </div>
+                    <div class="question-details">
+                        <strong>ML Confidence:</strong> ${((q.ml_classification?.confidence || 0) * 100).toFixed(1)}% |
+                        <strong>Model:</strong> ${q.ml_classification?.model || 'Unknown'} |
+                        <strong>Reasoning:</strong> ${q.ml_classification?.reasoning || 'N/A'}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('questionsContainer').innerHTML = questionsHtml;
+
+            // Update ML results comparison
+            const currentModel = window.apiConfig.getModel();
+            document.getElementById('mlResults').innerHTML = `
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px;">
+                    <h4>${currentModel === 'ensemble' ? 'Ensemble' : 'Classic'} Classifier Results</h4>
+                    <p><strong>Current Model:</strong> ${currentModel.toUpperCase()}</p>
+                    <p><strong>Total Questions:</strong> ${globalQuestions.length}</p>
+                    <p><strong>Open-Ended (OEQ):</strong> ${oeqQuestions.length}</p>
+                    <p><strong>Closed-Ended (CEQ):</strong> ${ceqQuestions.length}</p>
+                    <p><strong>Average Confidence:</strong> ${(avgConfidence * 100).toFixed(1)}%</p>
+                    <p><strong>Model Architecture:</strong> ${currentModel === 'ensemble' ? 'Neural Network + Random Forest + SVM + Logistic + Gradient Boosting' : 'Random Forest'}</p>
+                    <p><strong>Features per Question:</strong> 56</p>
+                </div>
+            `;
+
+            console.log(`📊 UI updated: ${oeqQuestions.length} OEQ, ${ceqQuestions.length} CEQ, ${(avgConfidence * 100).toFixed(1)}% avg confidence`);
+        }
+
+        // Warren's Real Video Processing Data
+        async function loadWarrenVideoData() {
+            try {
+                if (FEATURE_FLAGS.debugMLConsole) {
+                    console.log('Loading Warren\'s real video processing results...');
+                }
+
+                // Load Warren's processed data
+                const response = await fetch('./warren_teaching_demo_data.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load Warren\'s data');
+                }
+                const data = await response.json();
+                globalData = data;
+                globalQuestions = data.questions;
+
+                // Calculate real statistics from Warren's data
+                const oeqQuestions = data.questions.filter(q => q.ml_classification?.type === 'OEQ');
+                const ceqQuestions = data.questions.filter(q => q.ml_classification?.type === 'CEQ');
+                const avgConfidence = data.questions
+                    .filter(q => q.ml_classification?.confidence !== undefined)
+                    .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
+                    data.questions.filter(q => q.ml_classification?.confidence !== undefined).length;
+
+                if (FEATURE_FLAGS.debugMLConsole) {
+                    console.log(`Loaded Warren's gravity lesson: ${data.questions.length} questions, ${data.metadata.duration_formatted}`);
+
+                    // Log ML classification details for each question
+                    data.questions.forEach((q, index) => {
+                        if (q.ml_classification) {
+                            console.log(`Question ${index + 1}: "${q.text}"`);
+                            console.log(`  Classification: ${q.ml_classification.type}`);
+                            console.log(`  Confidence: ${(q.ml_classification.confidence * 100).toFixed(1)}%`);
+                            console.log(`  Timestamp: ${q.timestamp}s`);
+                        }
+                    });
+
+                    // Log summary statistics
+                    console.log('\n=== ML Classification Summary ===');
+                    console.log(`Total Questions: ${data.questions.length}`);
+                    console.log(`OEQ: ${oeqQuestions.length}`);
+                    console.log(`CEQ: ${ceqQuestions.length}`);
+                    console.log(`Average Confidence: ${(avgConfidence * 100).toFixed(1)}%`);
+                }
+
+                // Update statistics with real data
+                document.getElementById('totalQuestions').textContent = data.questions.length;
+                document.getElementById('oeqCount').textContent = oeqQuestions.length;
+                document.getElementById('ceqCount').textContent = ceqQuestions.length;
+                document.getElementById('avgConfidence').textContent = (avgConfidence * 100).toFixed(1) + '%';
+
+                // Load real transcript
+                document.getElementById('transcriptContainer').innerHTML = `
+                    <div class="transcript-text">
+                        <h4>Warren's Gravity Lesson Transcript</h4>
+                        <p style="margin-bottom: 1rem; color: var(--text-secondary);">
+                            <strong>Subject:</strong> Physics - Gravity |
+                            <strong>Duration:</strong> ${data.metadata.duration_formatted} |
+                            <strong>Questions Detected:</strong> ${data.questions.length}
+                        </p>
+                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 4px; max-height: 400px; overflow-y: auto;">
+                            ${data.metadata.transcript}
+                        </div>
+                    </div>
+                `;
+
+                // Load real questions with clickable timestamps
+                const questionsHtml = data.questions.map((q, index) => `
+                    <div class="question-item">
+                        <div class="question-header">
+                            <a href="#" class="question-timestamp" onclick="jumpToTimestamp(${q.timestamp}); return false;">
+                                ${formatTime(q.timestamp)}
+                            </a>
+                            <div class="question-classification">
+                                <span class="ml-prediction ${q.ml_classification?.type === 'OEQ' ? 'oeq' : 'ceq'}">
+                                    ${q.ml_classification?.type || 'Unknown'}
+                                </span>
+                                <button class="rate-button" onclick="showRatingModal(${index}, '${q.text?.replace(/'/g, "\\'")}', '${q.ml_classification?.type}', ${q.ml_classification?.confidence})">
+                                    Rate
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question-text">
+                            "${q.text}"
+                        </div>
+                        <div class="question-details">
+                            <strong>ML Confidence:</strong> ${((q.ml_classification?.confidence || 0) * 100).toFixed(1)}% |
+                            <strong>Features:</strong> ${q.ml_classification?.features_extracted || 'N/A'} |
+                            <strong>Reasoning:</strong> ${q.ml_classification?.reasoning || 'N/A'}
+                        </div>
+                    </div>
+                `).join('');
+
+                document.getElementById('questionsContainer').innerHTML = questionsHtml;
+
+                // Update ML vs Manual comparison
+                document.getElementById('mlResults').innerHTML = `
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px;">
+                        <h4>Ensemble Classifier Results</h4>
+                        <p><strong>Total Questions:</strong> ${data.questions.length}</p>
+                        <p><strong>Open-Ended (OEQ):</strong> ${oeqQuestions.length}</p>
+                        <p><strong>Closed-Ended (CEQ):</strong> ${ceqQuestions.length}</p>
+                        <p><strong>Average Confidence:</strong> ${(avgConfidence * 100).toFixed(1)}%</p>
+                        <p><strong>Model Architecture:</strong> Neural Network + Random Forest + Logistic Regression</p>
+                        <p><strong>Features per Question:</strong> 56</p>
+                    </div>
+                `;
+
+                // Re-classify all questions with current model on initial load
+                console.log('🚀 Initial load complete, re-classifying with current model...');
+                setTimeout(() => reclassifyAllQuestions(), 1000);
+
+            } catch (error) {
+                console.error('Error loading Warren\'s video data:', error);
+                // Fallback display
+                document.getElementById('transcriptContainer').innerHTML = `
+                    <p style="color: var(--error);">
+                        Error loading transcript. Please ensure warren_teaching_demo_data.json is available.
+                    </p>
+                `;
+            }
+        }
+
+        // Time formatting helper
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Video Timeline Navigation
+        function jumpToTimestamp(seconds) {
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.currentTime = seconds;
+                video.play();
+            }
+        }
+
+        // Rating System
         let currentRatingData = null;
 
         function showRatingModal(questionIndex, questionText, currentClassification, confidence) {
@@ -832,29 +850,50 @@
         }
 
         // Handle rating selection
-        document.querySelectorAll('.rating-option[data-type]').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.rating-option[data-type]').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
+        document.addEventListener('DOMContentLoaded', function() {
+            // Rating option selection
+            document.querySelectorAll('.rating-option[data-type]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.rating-option[data-type]').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
 
-                const isIncorrect = this.dataset.type === 'incorrect';
-                document.getElementById('correctionOptions').style.display = isIncorrect ? 'block' : 'none';
+                    const isIncorrect = this.dataset.type === 'incorrect';
+                    document.getElementById('correctionOptions').style.display = isIncorrect ? 'block' : 'none';
 
-                if (!isIncorrect) {
-                    document.getElementById('submitRating').disabled = false;
-                } else {
-                    document.getElementById('submitRating').disabled = true;
-                    document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
-                }
+                    if (!isIncorrect) {
+                        document.getElementById('submitRating').disabled = false;
+                    } else {
+                        document.getElementById('submitRating').disabled = true;
+                        document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
+                    }
+                });
             });
-        });
 
-        // Handle correction selection
-        document.querySelectorAll('.rating-option[data-correct-type]').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                document.getElementById('submitRating').disabled = false;
+            // Handle correction selection
+            document.querySelectorAll('.rating-option[data-correct-type]').forEach(option => {
+                option.addEventListener('click', function() {
+                    document.querySelectorAll('.rating-option[data-correct-type]').forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    document.getElementById('submitRating').disabled = false;
+                });
+            });
+
+            // Load video data
+            loadWarrenVideoData();
+
+            // Setup video event listeners
+            const video = document.getElementById('mainVideo');
+            if (video) {
+                video.addEventListener('loadedmetadata', function() {
+                    console.log('Video loaded:', video.duration + 's');
+                });
+            }
+
+            // Listen for model changes and re-classify when model switches
+            window.addEventListener('modelChanged', (e) => {
+                console.log('🔄 Model changed to:', e.detail.model);
+                console.log('📊 Re-classifying all questions with new model...');
+                reclassifyAllQuestions();
             });
         });
 
@@ -882,12 +921,35 @@
                 video_file: 'warren_teaching_web.mp4'
             });
             localStorage.setItem('warren_video_ground_truth', JSON.stringify(groundTruth));
-            console.log('💾 Saved to ground truth dataset:', feedbackData);
+            console.log('Saved to ground truth dataset:', feedbackData);
 
             try {
-                // Use Azure Container Apps API endpoint
-                const apiEndpoint = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/feedback/save';
-                const response = await fetch(apiEndpoint, {
+                // Use the API endpoint from model settings
+                // Get the base URL from modelSettings (environment-aware)
+                const baseUrl = window.modelSettings ?
+                    window.modelSettings.apiBaseUrl :
+                    'http://localhost:8001';
+
+                // Handle local environment - save to localStorage
+                if (baseUrl.includes('localhost')) {
+                    // Save feedback locally since API doesn't have endpoint
+                    const localFeedback = JSON.parse(localStorage.getItem('demo2Feedback') || '[]');
+                    localFeedback.push({
+                        ...feedbackData,
+                        timestamp: new Date().toISOString()
+                    });
+                    localStorage.setItem('demo2Feedback', JSON.stringify(localFeedback));
+
+                    console.log(`💾 Feedback saved locally (${localFeedback.length} entries)`);
+                    console.log('Local feedback data:', feedbackData);
+                    alert(`Thank you! Feedback saved locally.\n(${localFeedback.length} total entries)\n\nNote: Local environment saves to browser storage.`);
+                    return;
+                }
+
+                // Azure has feedback endpoint
+                const feedbackEndpoint = `${baseUrl}/api/feedback`;
+
+                const response = await fetch(feedbackEndpoint, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -896,20 +958,7 @@
                 });
 
                 if (response.ok) {
-                    console.log('✅ Rating submitted successfully:', feedbackData);
-
-                    // Track in analytics
-                    if (window.analytics) {
-                        analytics.trackUserInteraction('rating_submitted', 'demo2', {
-                            question_index: currentRatingData.index,
-                            is_correct: isCorrect,
-                            original_classification: currentRatingData.classification,
-                            corrected_classification: correctedType || currentRatingData.classification,
-                            confidence: currentRatingData.confidence
-                        });
-                    }
-
-                    // Show success feedback
+                    console.log('Rating submitted successfully:', feedbackData);
                     alert('Thank you! Your rating has been submitted and will help improve the ML model.');
                 } else {
                     console.error('Failed to submit rating:', response.statusText);
@@ -930,190 +979,33 @@
             }
         });
 
-        // Add modal styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .rating-modal {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.5);
-                display: none;
-                justify-content: center;
-                align-items: center;
-                z-index: 10000;
+        // Function to export ground truth data for model retraining
+        function exportGroundTruth() {
+            const groundTruth = JSON.parse(localStorage.getItem('warren_video_ground_truth') || '[]');
+
+            if (groundTruth.length === 0) {
+                alert('No ground truth data collected yet. Submit some ratings first!');
+                return;
             }
 
-            .rating-modal.show {
-                display: flex;
-            }
+            // Create downloadable JSON file
+            const dataStr = JSON.stringify(groundTruth, null, 2);
+            const dataBlob = new Blob([dataStr], { type: 'application/json' });
+            const url = URL.createObjectURL(dataBlob);
 
-            .rating-modal-content {
-                background: var(--surface-50);
-                border-radius: var(--border-radius-large);
-                padding: 24px;
-                max-width: 500px;
-                width: 90%;
-                box-shadow: var(--elevation-shadow-large);
-                position: relative;
-            }
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `warren_video_ground_truth_${new Date().toISOString().split('T')[0]}.json`;
+            link.click();
 
-            .rating-modal h3 {
-                color: var(--text-primary);
-                margin-bottom: 16px;
-                font-size: 1.2rem;
-                font-weight: 600;
-            }
-
-            .rating-question {
-                background: var(--surface-200);
-                padding: 12px;
-                border-radius: 8px;
-                margin-bottom: 16px;
-                font-style: italic;
-                color: var(--text-secondary);
-            }
-
-            .rating-current {
-                display: flex;
-                align-items: center;
-                margin-bottom: 16px;
-                gap: 8px;
-                color: var(--text-primary);
-            }
-
-            .rating-options {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                margin-bottom: 16px;
-            }
-
-            .rating-option {
-                padding: 12px;
-                border: 2px solid var(--surface-300);
-                border-radius: 8px;
-                cursor: pointer;
-                text-align: center;
-                transition: all 0.2s ease;
-                background: var(--surface-50);
-                color: var(--text-primary);
-            }
-
-            .rating-option:hover {
-                border-color: var(--primary-500);
-                background: var(--surface-100);
-            }
-
-            .rating-option.selected {
-                border-color: var(--primary-500);
-                background: var(--primary-50);
-                color: var(--primary-600);
-            }
-
-            .rating-option .label {
-                font-weight: 600;
-                margin-bottom: 4px;
-            }
-
-            .rating-option .desc {
-                font-size: 0.85rem;
-                color: var(--text-secondary);
-            }
-
-            .rating-actions {
-                display: flex;
-                gap: 12px;
-                justify-content: flex-end;
-            }
-
-            .rating-btn {
-                padding: 10px 20px;
-                border: none;
-                border-radius: 6px;
-                cursor: pointer;
-                font-weight: 500;
-                transition: background-color 0.2s ease;
-            }
-
-            .rating-btn.primary {
-                background: var(--primary-500);
-                color: white;
-            }
-
-            .rating-btn.primary:hover {
-                background: var(--primary-600);
-            }
-
-            .rating-btn.secondary {
-                background: var(--surface-300);
-                color: var(--text-primary);
-            }
-
-            .rating-btn.secondary:hover {
-                background: var(--surface-400);
-            }
-
-            .rating-btn:disabled {
-                opacity: 0.5;
-                cursor: not-allowed;
-            }
-
-            .rate-button:hover {
-                background: var(--surface-300) !important;
-                border-color: var(--primary-500) !important;
-                color: var(--primary-500) !important;
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
-
-    <!-- Footer with version info -->
-    <div style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--fluent-neutral-bg-secondary); border-top: 1px solid var(--fluent-border-primary); padding: 8px 20px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--fluent-text-tertiary);">
-        <div>© 2025 Cultivate Learning, University of Washington</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <span id="apiHealthStatus" style="display: flex; align-items: center; gap: 5px;">
-                <span id="apiHealthIndicator" style="width: 8px; height: 8px; border-radius: 50%; background: #ffa500;"></span>
-                <span id="apiHealthText">API: Checking...</span>
-            </span>
-            <span>BUILD v1.2.0-demo2</span>
-            <span style="color: var(--fluent-brand-primary); font-weight: 500;">Demo v2.0.1</span>
-        </div>
-    </div>
-
-    <script>
-        // API Health Check Function
-        async function checkApiHealth() {
-            const indicator = document.getElementById('apiHealthIndicator');
-            const text = document.getElementById('apiHealthText');
-            const apiBase = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
-
-            try {
-                const response = await fetch(`${apiBase}/health`, {
-                    method: 'GET',
-                    mode: 'cors'
-                });
-
-                if (response.ok) {
-                    const data = await response.json();
-                    indicator.style.background = '#28a745';  // Green
-                    text.textContent = `API: Healthy (${data.real_ml ? 'Real ML' : 'Mock'})`;
-                } else {
-                    indicator.style.background = '#ffc107';  // Yellow
-                    text.textContent = 'API: Limited';
-                }
-            } catch (error) {
-                indicator.style.background = '#dc3545';  // Red
-                text.textContent = 'API: Offline';
-            }
+            console.log(`Exported ${groundTruth.length} ground truth samples for retraining`);
         }
 
-        // Check API health on load and periodically
-        document.addEventListener('DOMContentLoaded', () => {
-            checkApiHealth();
-            setInterval(checkApiHealth, 30000);  // Check every 30 seconds
+        // Add keyboard shortcut for exporting ground truth (Ctrl+Shift+E)
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                exportGroundTruth();
+            }
         });
     </script>
 </body>

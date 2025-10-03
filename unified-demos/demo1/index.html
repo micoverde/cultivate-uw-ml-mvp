@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DEMO 1: Child Scenario OEQ/CEQ Classifier</title>
+    <title>Demo 1 - ECE Question Classification | Cultivate Learning</title>
 
-    <!-- Professional Theme System -->
-    <link rel="stylesheet" href="../shared/theme.css">
+    <!-- Unified Design System -->
+    <link rel="stylesheet" href="../shared/unified-styles.css">
 
     <style>
         /* ECE Question Classification System - Professional Dual Theme Interface */
@@ -135,72 +135,10 @@
             -moz-osx-font-smoothing: grayscale;
         }
 
-        /* THEME TOGGLE COMPONENT */
-        .theme-toggle {
-            position: fixed;
-            top: 24px;
-            right: 24px;
-            z-index: 9999;
-            background: var(--surface-50);
-            border: 2px solid var(--surface-400);
-            border-radius: var(--border-radius-large);
-            padding: 10px 14px;
-            display: flex !important;
-            align-items: center;
-            gap: 8px;
-            box-shadow: var(--elevation-shadow-large);
-            transition: all var(--transition-medium);
-            cursor: pointer;
-        }
-
-        .theme-toggle:hover {
-            background: var(--surface-200);
-            border-color: var(--primary-500);
-            transform: translateY(-1px);
-        }
-
-        .theme-icon {
-            width: 20px;
-            height: 20px;
-            color: var(--text-secondary);
-            transition: color var(--transition-fast);
-        }
-
-        .theme-toggle-switch {
-            width: 40px;
-            height: 20px;
-            background: var(--surface-300);
-            border-radius: 10px;
-            position: relative;
-            transition: background-color var(--transition-fast);
-        }
-
-        .theme-toggle-switch.active {
-            background: var(--primary-500);
-        }
-
-        .theme-toggle-knob {
-            width: 16px;
-            height: 16px;
-            background: var(--surface-50);
-            border-radius: 50%;
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            transition: transform var(--transition-fast);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .theme-toggle-switch.active .theme-toggle-knob {
-            transform: translateX(20px);
-        }
-
-        .theme-toggle:hover .theme-icon {
-            opacity: 1;
-        }
+        /* Theme toggle removed - using unified system */
 
         /* LAYOUT COMPONENTS */
-        .container {
+        .unified-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 24px;
@@ -567,27 +505,12 @@
         }
     </style>
 </head>
-<body>
-    <!-- Theme Toggle -->
-    <div class="theme-toggle" id="themeToggle">
-        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 18.5C15.59 18.5 18.5 15.59 18.5 12C18.5 8.41 15.59 5.5 12 5.5C8.41 5.5 5.5 8.41 5.5 12C5.5 15.59 8.41 18.5 12 18.5ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5C11.16 5 10.35 5.15 9.61 5.42L12 2ZM3.34 7L6.76 4.61C6.15 5.85 5.85 7.15 5.85 8.5C5.85 9.85 6.15 11.15 6.76 12.39L3.34 17ZM3.34 17L6.76 19.39C6.15 18.15 5.85 16.85 5.85 15.5C5.85 14.15 6.15 12.85 6.76 11.61L3.34 7ZM12 22L9.61 18.58C10.35 18.85 11.16 19 12 19C12.84 19 13.65 18.85 14.39 18.58L12 22ZM20.66 17L17.24 19.39C17.85 18.15 18.15 16.85 18.15 15.5C18.15 14.15 17.85 12.85 17.24 11.61L20.66 7ZM20.66 7L17.24 4.61C17.85 5.85 18.15 7.15 18.15 8.5C18.15 9.85 17.85 11.15 17.24 12.39L20.66 17Z"/>
-        </svg>
-        <div class="theme-toggle-switch" id="themeSwitch">
-            <div class="theme-toggle-knob"></div>
-        </div>
-        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95M17.33,17.97C14.5,17.81 11.7,16.64 9.53,14.5C7.36,12.31 6.2,9.5 6.04,6.68C3.23,9.82 3.34,14.4 6.35,17.41C9.37,20.43 14,20.54 17.33,17.97Z"/>
-        </svg>
-    </div>
+<body data-theme="light">
+    <!-- Unified Header will be injected here -->
 
-    <div class="container">
-        <header>
-            <h1>ECE Question Classification System</h1>
-            <p>AI-powered assessment tool for early childhood education questioning techniques</p>
-
-            <!-- Tab Navigation -->
-            <div class="tab-navigation">
+    <div class="unified-container">
+        <!-- Tab Navigation -->
+        <div class="tab-navigation" style="margin-top: 80px;">
                 <button class="tab-btn active" onclick="showTab('demo')">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -613,7 +536,6 @@
                     Model Training
                 </button>
             </div>
-        </header>
 
         <!-- Live Demo Tab -->
         <div id="demo-tab" class="tab-content active">
@@ -803,7 +725,18 @@
         </div>
     </div>
 
+    <!-- Load Unified Components -->
+    <script src="../shared/unified-header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="../shared/api-config.js"></script>
+    <script src="../shared/model-settings.js"></script>
+
     <script>
+        // Feature Flags
+        const FEATURE_FLAGS = {
+            debugMLConsole: localStorage.getItem('debugMLConsole') !== 'false' // Default true
+        };
+
         // Helper function to get the correct API base URL
         function getApiBaseUrl() {
             // Check if we're running locally or in production
@@ -917,7 +850,7 @@
             }
 
             console.log('🧠 REAL ML ANALYSIS STARTING');
-            console.log('=' * 60);
+            if (FEATURE_FLAGS.debugMLConsole) console.log('='.repeat(60));
             console.log(`📝 Input Text: "${response}"`);
             console.log(`📏 Text Length: ${response.length} characters`);
             console.log(`🔤 Word Count: ${response.split(' ').length} words`);
@@ -948,11 +881,18 @@
                         method: 'POST'
                     });
                 } else {
-                    // Local development uses /classify_response with JSON body
+                    // Local development - use API config to get correct endpoint
+                    const endpoint = window.apiConfig ?
+                        window.apiConfig.getClassifyEndpoint() :
+                        `${apiBase}/api/v2/classify/ensemble`;  // Fallback to ensemble
+
+                    const isEnsemble = window.modelSettings &&
+                        window.modelSettings.getSelectedModel() === 'ensemble';
+
                     console.log('\n🌐 API REQUEST (Local):');
-                    console.log(`🎯 Endpoint: ${apiBase}/classify_response`);
+                    console.log(`🎯 Endpoint: ${endpoint}`);
                     console.log(`📋 Scenario ID: ${currentScenario.id}`);
-                    console.log(`🧠 Model: PyTorch Neural Network (4-layer, 56 features)`);
+                    console.log(`🧠 Model: ${isEnsemble ? 'Ensemble (7 Models)' : 'PyTorch Neural Network (4-layer, 56 features)'}`);
 
                     const apiRequest = {
                         text: response,
@@ -963,7 +903,7 @@
                     console.log('\n📤 REQUEST PAYLOAD:');
                     console.log(JSON.stringify(apiRequest, null, 2));
 
-                    apiResponse = await fetch(`${apiBase}/classify_response`, {
+                    apiResponse = await fetch(endpoint, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -978,10 +918,13 @@
 
                 const mlResult = await apiResponse.json();
 
-                // Production API returns simplified format, normalize it
-                if (isProduction && !mlResult.oeq_probability) {
-                    // Calculate probabilities from confidence
-                    if (mlResult.classification === 'OEQ') {
+                // Normalize API response format if needed
+                if (!mlResult.oeq_probability) {
+                    // Use probabilities from API if available, otherwise calculate from confidence
+                    if (mlResult.probabilities) {
+                        mlResult.oeq_probability = mlResult.probabilities.OEQ;
+                        mlResult.ceq_probability = mlResult.probabilities.CEQ;
+                    } else if (mlResult.classification === 'OEQ') {
                         mlResult.oeq_probability = mlResult.confidence;
                         mlResult.ceq_probability = 1 - mlResult.confidence;
                     } else {
@@ -1018,7 +961,7 @@
                 console.log(`🎭 Child Behavior: ${currentScenario.behavior.substring(0, 100)}...`);
 
                 console.log('\n✅ REAL NEURAL NETWORK Analysis Complete!');
-                console.log('=' * 60);
+                if (FEATURE_FLAGS.debugMLConsole) console.log('='.repeat(60));
 
                 // Track ML prediction in analytics
                 if (window.analytics) {
@@ -1414,9 +1357,8 @@
             }
         }
 
-        // Initialize theme manager and load first scenario on page load
+        // Load first scenario on page load (theme handled by unified-header.js)
         document.addEventListener('DOMContentLoaded', () => {
-            new ThemeManager();
             loadScenario(0); // Load first scenario
 
             // Update build number with timestamp
@@ -1436,13 +1378,13 @@
             console.log('⚙️ ML Features: Pattern matching, linguistic indicators, question analysis');
             console.log('🎯 Classification: Open-Ended Questions (OEQ) vs Closed-Ended Questions (CEQ)');
             console.log(`🔧 Build: v1.2.0-demo1.${buildDate}.${buildTime}`);
-            console.log('=' * 60);
+            if (FEATURE_FLAGS.debugMLConsole) console.log('='.repeat(60));
         });
     </script>
 
     <!-- Unified Navigation and API -->
-    <script src="../shared/theme.js"></script>
-    <script src="../shared/navigation.js"></script>
+    <!-- Removed theme.js - theme toggle is now in unified-header.js -->
+    <!-- Removed old navigation.js - using unified header system -->
     <script src="../shared/api.js"></script>
     <script src="../shared/analytics.js"></script>
 </body>
