@@ -173,6 +173,7 @@ class BatchClassifyRequest(BaseModel):
 
 @app.post("/api/classify")
 @app.post("/api/v1/classify")
+@app.post("/classify_response")
 async def classify_classic(request: ClassifyRequest):
     """Classification endpoint using classic single ML model"""
     if classic_classifier is not None:
@@ -232,7 +233,6 @@ async def classify_classic(request: ClassifyRequest):
         }
     }
 
-@app.post("/classify_response")
 @app.post("/api/v1/classify/response")
 @app.post("/api/v2/classify/ensemble")
 async def classify_response(request: ClassifyRequest):
