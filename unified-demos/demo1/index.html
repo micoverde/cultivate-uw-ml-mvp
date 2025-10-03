@@ -1357,9 +1357,8 @@
             }
         }
 
-        // Initialize theme manager and load first scenario on page load
+        // Load first scenario on page load (theme handled by unified-header.js)
         document.addEventListener('DOMContentLoaded', () => {
-            new ThemeManager();
             loadScenario(0); // Load first scenario
 
             // Update build number with timestamp
