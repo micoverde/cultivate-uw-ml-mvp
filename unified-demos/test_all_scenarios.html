@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test All 4 Scenarios - 2 Envs × 2 Models</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f5f5f5;
+        }
+        h1 { color: #0078d4; }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .test-card {
+            background: white;
+            border: 2px solid #e1e5ea;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-card h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        .status {
+            padding: 5px 10px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .status.pending { background: #fff3cd; color: #856404; }
+        .status.testing { background: #d1ecf1; color: #0c5460; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        button {
+            background: #0078d4;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 5px;
+        }
+        button:hover { background: #106ebe; }
+        .results {
+            margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .environment-info {
+            background: #e7f3ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .test-input {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧪 Comprehensive Test Suite: 2 Environments × 2 Models</h1>
+
+    <div class="environment-info">
+        <h3>Current Environment</h3>
+        <div id="env-info">Loading...</div>
+    </div>
+
+    <div>
+        <input type="text" id="test-text" class="test-input" placeholder="Enter test text..." value="Can you help me build a tower?">
+        <button onclick="testAllScenarios()">Test All 4 Scenarios</button>
+        <button onclick="clearResults()">Clear Results</button>
+    </div>
+
+    <div class="test-grid">
+        <!-- Local + Classic -->
+        <div class="test-card">
+            <h3>🏠 Local + Classic ML</h3>
+            <div class="status pending" id="status-local-classic">Pending</div>
+            <div class="results" id="results-local-classic">
+                Endpoint: http://localhost:8001/classify_response
+            </div>
+        </div>
+
+        <!-- Local + Ensemble -->
+        <div class="test-card">
+            <h3>🏠 Local + Ensemble (7 Models)</h3>
+            <div class="status pending" id="status-local-ensemble">Pending</div>
+            <div class="results" id="results-local-ensemble">
+                Endpoint: http://localhost:8001/api/v2/classify/ensemble
+            </div>
+        </div>
+
+        <!-- Azure + Classic -->
+        <div class="test-card">
+            <h3>☁️ Azure + Classic ML</h3>
+            <div class="status pending" id="status-azure-classic">Pending</div>
+            <div class="results" id="results-azure-classic">
+                Endpoint: https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/classify
+            </div>
+        </div>
+
+        <!-- Azure + Ensemble -->
+        <div class="test-card">
+            <h3>☁️ Azure + Ensemble (7 Models)</h3>
+            <div class="status pending" id="status-azure-ensemble">Pending</div>
+            <div class="results" id="results-azure-ensemble">
+                Endpoint: https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v2/classify/ensemble
+            </div>
+        </div>
+    </div>
+
+    <script src="shared/model-settings.js"></script>
+    <script src="shared/unified-api.js"></script>
+
+    <script>
+        // Display environment info
+        function updateEnvironmentInfo() {
+            const info = window.unifiedAPI.getEnvironmentInfo();
+            document.getElementById('env-info').innerHTML = `
+                <strong>Environment:</strong> ${info.environment}<br>
+                <strong>Base URL:</strong> ${info.baseUrl}<br>
+                <strong>Selected Model:</strong> ${info.selectedModel}<br>
+                <strong>Current Time:</strong> ${new Date().toLocaleTimeString()}
+            `;
+        }
+
+        async function testScenario(environment, model) {
+            const statusId = `status-${environment}-${model}`;
+            const resultsId = `results-${environment}-${model}`;
+            const statusEl = document.getElementById(statusId);
+            const resultsEl = document.getElementById(resultsId);
+
+            statusEl.className = 'status testing';
+            statusEl.textContent = 'Testing...';
+
+            const text = document.getElementById('test-text').value;
+
+            // Temporarily override settings for testing
+            const originalEnv = window.unifiedAPI.isLocalhost;
+            const originalModel = window.modelSettings.getSelectedModel();
+
+            try {
+                // Set environment
+                window.unifiedAPI.isLocalhost = (environment === 'local');
+                window.unifiedAPI.baseUrl = window.unifiedAPI.isLocalhost ?
+                    window.unifiedAPI.localBase :
+                    window.unifiedAPI.azureBase;
+
+                // Set model
+                window.modelSettings.selectedModel = model;
+
+                // Get endpoint
+                const endpoint = window.unifiedAPI.getClassificationEndpoint();
+
+                // Make request
+                const startTime = Date.now();
+                const result = await window.unifiedAPI.classifyText(text, 1, true);
+                const duration = Date.now() - startTime;
+
+                // Display results
+                statusEl.className = 'status success';
+                statusEl.textContent = 'Success';
+
+                resultsEl.innerHTML = `
+<strong>Endpoint:</strong> ${endpoint}
+<strong>Response Time:</strong> ${duration}ms
+<strong>Classification:</strong> ${result.classification}
+<strong>Confidence:</strong> ${(result.confidence * 100).toFixed(1)}%
+<strong>Method:</strong> ${result.method || 'unknown'}
+${result.debug_info?.ensemble_votes ?
+    `<strong>Votes:</strong> OEQ: ${result.debug_info.ensemble_votes.OEQ}, CEQ: ${result.debug_info.ensemble_votes.CEQ}` : ''}
+                `;
+
+            } catch (error) {
+                statusEl.className = 'status error';
+                statusEl.textContent = 'Error';
+                resultsEl.innerHTML = `
+<strong>Error:</strong> ${error.message}
+<strong>Endpoint:</strong> ${window.unifiedAPI.getClassificationEndpoint()}
+                `;
+            } finally {
+                // Restore original settings
+                window.unifiedAPI.isLocalhost = originalEnv;
+                window.unifiedAPI.baseUrl = originalEnv ?
+                    window.unifiedAPI.localBase :
+                    window.unifiedAPI.azureBase;
+                window.modelSettings.selectedModel = originalModel;
+            }
+        }
+
+        async function testAllScenarios() {
+            console.log('🚀 Starting all scenario tests...');
+
+            // Test all 4 combinations
+            await testScenario('local', 'classic');
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testScenario('local', 'ensemble');
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testScenario('azure', 'classic');
+            await new Promise(resolve => setTimeout(resolve, 500));
+
+            await testScenario('azure', 'ensemble');
+        }
+
+        function clearResults() {
+            ['local-classic', 'local-ensemble', 'azure-classic', 'azure-ensemble'].forEach(id => {
+                document.getElementById(`status-${id}`).className = 'status pending';
+                document.getElementById(`status-${id}`).textContent = 'Pending';
+                document.getElementById(`results-${id}`).innerHTML = 'Ready for testing...';
+            });
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateEnvironmentInfo();
+            setInterval(updateEnvironmentInfo, 5000);
+        });
+    </script>
+</body>
+</html>

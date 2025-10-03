@@ -39,9 +39,9 @@ security_logger.setLevel(logging.INFO)
 class SecurityConfig:
     """Security configuration constants"""
     # Rate limiting
-    RATE_LIMIT_REQUESTS = 100  # requests per window
+    RATE_LIMIT_REQUESTS = 200  # requests per window (relaxed for development)
     RATE_LIMIT_WINDOW = 900    # 15 minutes
-    RATE_LIMIT_BURST = 10      # burst allowance
+    RATE_LIMIT_BURST = 20      # burst allowance (relaxed for development)
 
     # Input validation
     MAX_REQUEST_SIZE = 10 * 1024 * 1024  # 10MB
@@ -78,6 +78,10 @@ class RateLimiter:
 
     def is_allowed(self, client_ip: str) -> tuple[bool, Optional[str]]:
         """Check if request is allowed under rate limit"""
+        # Exempt localhost from rate limiting for development
+        if client_ip in ['127.0.0.1', 'localhost', '::1']:
+            return True, None
+
         now = time.time()
         window_start = now - SecurityConfig.RATE_LIMIT_WINDOW
 

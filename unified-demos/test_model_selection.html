@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Model Selection Unit Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; background: #1a1a1a; color: #0f0; }
+        .test { margin: 10px 0; padding: 10px; border: 1px solid #333; }
+        .pass { border-color: #0f0; }
+        .fail { border-color: #f00; color: #f00; }
+        .info { color: #ff0; }
+        button { padding: 10px; margin: 10px; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Model Selection Unit Tests</h1>
+    <button onclick="runAllTests()">Run All Tests</button>
+    <button onclick="testLocalStorage()">Test LocalStorage</button>
+    <button onclick="testEndpointGeneration()">Test Endpoints</button>
+    <div id="results"></div>
+
+    <!-- Load model settings -->
+    <script src="shared/model-settings.js"></script>
+
+    <script>
+        const results = document.getElementById('results');
+
+        function log(message, isPass = null) {
+            const div = document.createElement('div');
+            div.className = 'test';
+            if (isPass !== null) {
+                div.className += isPass ? ' pass' : ' fail';
+            }
+            div.innerHTML = `${new Date().toLocaleTimeString()} - ${message}`;
+            results.appendChild(div);
+        }
+
+        function testLocalStorage() {
+            log('=== Testing LocalStorage Model Selection ===', null);
+
+            // Test 1: Default should be classic
+            localStorage.removeItem('selectedModel');
+            const ms1 = new ModelSettings();
+            const test1 = ms1.getSelectedModel() === 'classic';
+            log(`Test 1 - Default is classic: ${test1 ? 'PASS' : 'FAIL'}`, test1);
+
+            // Test 2: Set to ensemble
+            localStorage.setItem('selectedModel', 'ensemble');
+            const ms2 = new ModelSettings();
+            const test2 = ms2.getSelectedModel() === 'ensemble';
+            log(`Test 2 - Can select ensemble: ${test2 ? 'PASS' : 'FAIL'}`, test2);
+
+            // Test 3: Persist across instances
+            ms2.selectModel('classic');
+            const ms3 = new ModelSettings();
+            const test3 = ms3.getSelectedModel() === 'classic';
+            log(`Test 3 - Persists selection: ${test3 ? 'PASS' : 'FAIL'}`, test3);
+
+            return test1 && test2 && test3;
+        }
+
+        function testEndpointGeneration() {
+            log('=== Testing Endpoint Generation ===', null);
+
+            // Test localhost endpoints
+            window.location.hostname = 'localhost';
+            const ms = new ModelSettings();
+
+            // Test 1: Classic endpoint on localhost
+            ms.selectedModel = 'classic';
+            const classicEndpoint = ms.getModelEndpoint();
+            const test1 = classicEndpoint === 'http://localhost:8001/api/classify';
+            log(`Test 1 - Classic localhost: ${classicEndpoint}`, test1);
+            log(`  Expected: http://localhost:8001/api/classify`, null);
+
+            // Test 2: Ensemble endpoint on localhost
+            ms.selectedModel = 'ensemble';
+            const ensembleEndpoint = ms.getModelEndpoint();
+            const test2 = ensembleEndpoint === 'http://localhost:8001/api/v2/classify/ensemble';
+            log(`Test 2 - Ensemble localhost: ${ensembleEndpoint}`, test2);
+            log(`  Expected: http://localhost:8001/api/v2/classify/ensemble`, null);
+
+            // Simulate production
+            ms.isLocalhost = false;
+            ms.apiBaseUrl = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+
+            // Test 3: Classic endpoint on production
+            ms.selectedModel = 'classic';
+            const prodClassic = ms.getModelEndpoint();
+            const test3 = prodClassic === 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/classify';
+            log(`Test 3 - Classic production: ${prodClassic}`, test3);
+
+            // Test 4: Ensemble endpoint on production
+            ms.selectedModel = 'ensemble';
+            const prodEnsemble = ms.getModelEndpoint();
+            const test4 = prodEnsemble === 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v2/classify/ensemble';
+            log(`Test 4 - Ensemble production: ${prodEnsemble}`, test4);
+
+            return test1 && test2 && test3 && test4;
+        }
+
+        function testEventDispatch() {
+            log('=== Testing Model Change Events ===', null);
+
+            let eventFired = false;
+            let modelReceived = null;
+
+            window.addEventListener('modelChanged', (e) => {
+                eventFired = true;
+                modelReceived = e.detail.model;
+            });
+
+            const ms = new ModelSettings();
+            ms.selectModel('ensemble');
+
+            // Give time for event
+            setTimeout(() => {
+                const test1 = eventFired === true;
+                const test2 = modelReceived === 'ensemble';
+                log(`Test 1 - Event fired: ${test1 ? 'PASS' : 'FAIL'}`, test1);
+                log(`Test 2 - Correct model in event: ${test2 ? 'PASS' : 'FAIL'}`, test2);
+            }, 100);
+        }
+
+        function runAllTests() {
+            results.innerHTML = '';
+            log('🚀 Starting All Tests...', null);
+
+            const localStoragePass = testLocalStorage();
+            const endpointPass = testEndpointGeneration();
+            testEventDispatch();
+
+            setTimeout(() => {
+                log('=== TEST SUMMARY ===', null);
+                log(`LocalStorage Tests: ${localStoragePass ? 'PASS ✅' : 'FAIL ❌'}`, localStoragePass);
+                log(`Endpoint Tests: ${endpointPass ? 'PASS ✅' : 'FAIL ❌'}`, endpointPass);
+            }, 200);
+        }
+
+        // Auto-run on load
+        document.addEventListener('DOMContentLoaded', () => {
+            log('Unit test page loaded. Click "Run All Tests" to begin.', null);
+        });
+    </script>
+</body>
+</html>

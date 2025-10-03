@@ -1,0 +1,1746 @@
+{
+  "examples": [
+    {
+      "text": "Did the toy fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the toy helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the toy moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Does it work?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Where did you learn that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can I help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me about your drawing",
+      "label": "OEQ"
+    },
+    {
+      "text": "Would you like to try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How many ways can you think of?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the ball stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me more about it",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the book blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What might happen next?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the toy stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is there one more?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How did you know?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the ball blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me how you feel",
+      "label": "OEQ"
+    },
+    {
+      "text": "Have you a turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What should we do?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can you fix it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what is different\u2026?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the clay hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What can you see?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How do you feel about it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did you do that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the toy hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What should we do next?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Have you the crayon?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the toy changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What comes next?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can you share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Whose hat is it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you have finished?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you do it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Have you finished?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How\u2026?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What kind of feet are we gonna use?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is this right?",
+      "label": "CEQ"
+    },
+    {
+      "text": "then what happens?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do you need help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I see it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How can we solve this?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the book new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What happened to the tower?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Could you see it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How tall is it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the game new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Which one do you like better and why?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the game blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why is that important?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the paint fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Will it fall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you see?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was that fun?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What can we try?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What did you do first?",
+      "label": "OEQ"
+    },
+    {
+      "text": "what else is yellow",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the ball small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you have a turn?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what goes on the top?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the game big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What could we do differently?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the book heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should we try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are you sure?",
+      "label": "CEQ"
+    },
+    {
+      "text": "why\u2026",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the puzzle blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What did you make?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the tower soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the toy broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What did you learn?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What steps did you take?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the ball heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the clay moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What's different about these?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the paint old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "how come\u2026",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the blocks heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Were they happy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would you like to share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Who showed you how?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Tell me about your idea",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the ball changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what do you need?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the clay fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what can we do about it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Do you have your snack?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How many can you make?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the tower tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could it fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it ready?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the clay stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why do you think that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the puzzle tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what happens when\u2026",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did that happen?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How does it work?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the clay helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why should we try again?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the book small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you wait?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How did you build it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the game worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you understand?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why did it fall?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the puzzle blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I do it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you see it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what did we learn?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the toy blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Show me what you did",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the ball small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you want red or blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are these the same?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the clay broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was it hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did you try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you wait?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did you see that?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Will you help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "When have you seen this before?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the game changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How does it feel?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What is the same?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the book red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Has it started?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I wait?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the clay changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What's happening here?",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did you figure it out?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the blocks small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why do we need to?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Are we done?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is that okay?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How can we fix it?",
+      "label": "OEQ"
+    },
+    {
+      "text": "What would happen if we tried again?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the blocks changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why did that happen?",
+      "label": "OEQ"
+    },
+    {
+      "text": "what else?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the game tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would you like to help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Have you the blocks?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What would you change?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the book heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the clay worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Describe what you made",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the puzzle soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you notice?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Why is it like that?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can I fix it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you think will happen?",
+      "label": "OEQ"
+    },
+    {
+      "text": "how do they look different?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the game big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can you try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What would happen if?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the toy old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should I help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Has everyone finished?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the toy worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you have two crayons?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should we play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What materials do we need?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Have we done this before?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How many blocks are there?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What is different?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Have you your snack?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why should we be careful?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Was the ball soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me what you did",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the book tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "how about\u2026",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the book broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why do you think it fell?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is it hot or cold?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What makes you happy?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did your drawing broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Can I try?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "why\u2026?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Can I share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "how can...",
+      "label": "OEQ"
+    },
+    {
+      "text": "How did that make you feel?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Should we help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are there three blocks?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Does it fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is it big or small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could we share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the paint big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What do you think\u2026?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Should we stop?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay big?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Should we share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is that yours?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How could we make it better?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the paint old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the game blue?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what do I do?",
+      "label": "OEQ"
+    },
+    {
+      "text": "what is she going to see?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the paint heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me what happened",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the tower moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the ball red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Explain how it works",
+      "label": "OEQ"
+    },
+    {
+      "text": "What do you think?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the toy fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the puzzle tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Were you scared?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the paint stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book changed?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the toy new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the ball hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the clay old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you help?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What happened?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did it break?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you have the crayon?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the blocks heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you do it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the toy tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "What else could we make?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Is the ball soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "what do you need help with?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the clay fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Tell me about your tower",
+      "label": "OEQ"
+    },
+    {
+      "text": "How are they the same?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Should we go fast or slow?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book old?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the book worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Why is it important?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did the book stopped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would you like to play?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the puzzle helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the tower fall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks worked?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How far did it go?",
+      "label": "OEQ"
+    },
+    {
+      "text": "Did your drawing moved?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the clay soft?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the blocks tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the puzzle hard?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the paint small?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the game red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks fit?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Have you seen this?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would that work?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the game fell?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the ball broke?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Are you finished?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did the blocks helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Did your drawing helped?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the tower heavy?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Do you have the blocks?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you share?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the book new?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Is the tower red?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Could you fix it?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Would you try again?",
+      "label": "CEQ"
+    },
+    {
+      "text": "how is the toast today?",
+      "label": "CEQ"
+    },
+    {
+      "text": "Was the book tall?",
+      "label": "CEQ"
+    },
+    {
+      "text": "How\u2026what...?",
+      "label": "OEQ"
+    }
+  ],
+  "metadata": {
+    "total": 434,
+    "ceq_count": 345,
+    "oeq_count": 89,
+    "source": "Ground truth CSV + Synthetic generation"
+  }
+}
