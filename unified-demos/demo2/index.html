@@ -514,6 +514,7 @@
     <script src="../shared/unified-header.js"></script>
     <script src="../shared/footer.js"></script>
     <script src="../shared/model-settings.js"></script>
+    <script src="../shared/api-config.js"></script>
 
     <!-- Demo Functionality -->
     <script>
@@ -534,6 +535,153 @@
             event.target.classList.add('active');
         }
 
+        // Store questions globally for re-classification
+        let globalQuestions = [];
+        let globalData = null;
+        let isReclassifying = false;
+        let cancelReclassification = false;
+
+        // Re-classify all questions with current model
+        async function reclassifyAllQuestions() {
+            if (!globalData || globalQuestions.length === 0) {
+                console.log('No questions loaded yet, skipping re-classification');
+                return;
+            }
+
+            // Cancel any in-progress re-classification
+            if (isReclassifying) {
+                console.log('⚠️  Cancelling previous re-classification...');
+                cancelReclassification = true;
+                // Wait for previous to cancel
+                await new Promise(resolve => setTimeout(resolve, 500));
+            }
+
+            isReclassifying = true;
+            cancelReclassification = false;
+
+            const currentModel = window.apiConfig.getModel();
+            console.log(`🔄 Re-classifying ${globalQuestions.length} questions with ${currentModel} model...`);
+            console.log(`⚡ Using batch endpoint for 10-20x speedup...`);
+
+            const baseUrl = window.apiConfig.getBaseUrl();
+            const startTime = performance.now();
+
+            let successCount = 0;
+            let errorCount = 0;
+
+            try {
+                // Use batch endpoint - single request for all questions
+                const batchUrl = currentModel === 'classic'
+                    ? `${baseUrl}/api/v1/classify/batch`
+                    : `${baseUrl}/api/v2/classify/batch`;
+
+                const response = await fetch(batchUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        questions: globalQuestions.map(q => q.text),
+                        model: currentModel
+                    })
+                });
+
+                if (response.ok) {
+                    const batchResult = await response.json();
+                    const endTime = performance.now();
+                    const duration = ((endTime - startTime) / 1000).toFixed(2);
+
+                    console.log(`⚡ Batch classified ${batchResult.count} questions in ${duration}s`);
+
+                    // Update all questions with their classifications
+                    batchResult.results.forEach((result, index) => {
+                        globalQuestions[index].ml_classification = {
+                            type: result.classification,
+                            confidence: result.confidence,
+                            reasoning: `${result.classification} indicators`,
+                            features_extracted: 56,
+                            model: currentModel
+                        };
+                    });
+
+                    successCount = batchResult.count;
+                } else {
+                    console.error(`Batch classification failed: ${response.status}`);
+                    errorCount = globalQuestions.length;
+                }
+            } catch (error) {
+                console.error(`Batch classification error:`, error);
+                errorCount = globalQuestions.length;
+            }
+
+            console.log(`✅ Re-classification complete: ${successCount} success, ${errorCount} errors`);
+
+            // Update the UI with new classifications
+            updateUIWithClassifications();
+
+            // Mark as complete
+            isReclassifying = false;
+        }
+
+        // Update UI after re-classification
+        function updateUIWithClassifications() {
+            const oeqQuestions = globalQuestions.filter(q => q.ml_classification?.type === 'OEQ');
+            const ceqQuestions = globalQuestions.filter(q => q.ml_classification?.type === 'CEQ');
+            const avgConfidence = globalQuestions
+                .filter(q => q.ml_classification?.confidence !== undefined)
+                .reduce((sum, q) => sum + q.ml_classification.confidence, 0) /
+                globalQuestions.filter(q => q.ml_classification?.confidence !== undefined).length;
+
+            // Update statistics
+            document.getElementById('oeqCount').textContent = oeqQuestions.length;
+            document.getElementById('ceqCount').textContent = ceqQuestions.length;
+            document.getElementById('avgConfidence').textContent = (avgConfidence * 100).toFixed(1) + '%';
+
+            // Update questions container
+            const questionsHtml = globalQuestions.map((q, index) => `
+                <div class="question-item">
+                    <div class="question-header">
+                        <a href="#" class="question-timestamp" onclick="jumpToTimestamp(${q.timestamp}); return false;">
+                            ${formatTime(q.timestamp)}
+                        </a>
+                        <div class="question-classification">
+                            <span class="ml-prediction ${q.ml_classification?.type === 'OEQ' ? 'oeq' : 'ceq'}">
+                                ${q.ml_classification?.type || 'Unknown'}
+                            </span>
+                            <button class="rate-button" onclick="showRatingModal(${index}, '${q.text?.replace(/'/g, "\\'")}', '${q.ml_classification?.type}', ${q.ml_classification?.confidence})">
+                                Rate
+                            </button>
+                        </div>
+                    </div>
+                    <div class="question-text">
+                        "${q.text}"
+                    </div>
+                    <div class="question-details">
+                        <strong>ML Confidence:</strong> ${((q.ml_classification?.confidence || 0) * 100).toFixed(1)}% |
+                        <strong>Model:</strong> ${q.ml_classification?.model || 'Unknown'} |
+                        <strong>Reasoning:</strong> ${q.ml_classification?.reasoning || 'N/A'}
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('questionsContainer').innerHTML = questionsHtml;
+
+            // Update ML results comparison
+            const currentModel = window.apiConfig.getModel();
+            document.getElementById('mlResults').innerHTML = `
+                <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px;">
+                    <h4>${currentModel === 'ensemble' ? 'Ensemble' : 'Classic'} Classifier Results</h4>
+                    <p><strong>Current Model:</strong> ${currentModel.toUpperCase()}</p>
+                    <p><strong>Total Questions:</strong> ${globalQuestions.length}</p>
+                    <p><strong>Open-Ended (OEQ):</strong> ${oeqQuestions.length}</p>
+                    <p><strong>Closed-Ended (CEQ):</strong> ${ceqQuestions.length}</p>
+                    <p><strong>Average Confidence:</strong> ${(avgConfidence * 100).toFixed(1)}%</p>
+                    <p><strong>Model Architecture:</strong> ${currentModel === 'ensemble' ? 'Neural Network + Random Forest + SVM + Logistic + Gradient Boosting' : 'Random Forest'}</p>
+                    <p><strong>Features per Question:</strong> 56</p>
+                </div>
+            `;
+
+            console.log(`📊 UI updated: ${oeqQuestions.length} OEQ, ${ceqQuestions.length} CEQ, ${(avgConfidence * 100).toFixed(1)}% avg confidence`);
+        }
+
         // Warren's Real Video Processing Data
         async function loadWarrenVideoData() {
             try {
@@ -547,6 +695,8 @@
                     throw new Error('Failed to load Warren\'s data');
                 }
                 const data = await response.json();
+                globalData = data;
+                globalQuestions = data.questions;
 
                 // Calculate real statistics from Warren's data
                 const oeqQuestions = data.questions.filter(q => q.ml_classification?.type === 'OEQ');
@@ -639,6 +789,10 @@
                         <p><strong>Features per Question:</strong> 56</p>
                     </div>
                 `;
+
+                // Re-classify all questions with current model on initial load
+                console.log('🚀 Initial load complete, re-classifying with current model...');
+                setTimeout(() => reclassifyAllQuestions(), 1000);
 
             } catch (error) {
                 console.error('Error loading Warren\'s video data:', error);
@@ -734,6 +888,13 @@
                     console.log('Video loaded:', video.duration + 's');
                 });
             }
+
+            // Listen for model changes and re-classify when model switches
+            window.addEventListener('modelChanged', (e) => {
+                console.log('🔄 Model changed to:', e.detail.model);
+                console.log('📊 Re-classifying all questions with new model...');
+                reclassifyAllQuestions();
+            });
         });
 
         async function submitRating() {
