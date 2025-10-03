@@ -8,14 +8,17 @@
 git clone https://github.com/micoverde/cultivate-uw-ml-mvp.git
 cd cultivate-uw-ml-mvp
 
-# 2. Run setup (creates venv, installs dependencies, creates logs dir)
+# 2. Setup environment (creates venv, installs dependencies)
 npm run setup
 
-# 3. Start development environment
-npm start
+# 3. Build (validates environment)
+npm run build
+
+# 4. Serve (starts API + web server)
+npm run serve
 ```
 
-That's it! The unified startup script will:
+The build script validates your environment. The serve script will:
 - ✅ Check for Python virtual environment
 - ✅ Check for ML models
 - ✅ Verify ports are available
@@ -37,9 +40,17 @@ After running `npm start`, you'll have:
   - Demo 1: http://localhost:6061/demo1/
   - Demo 2: http://localhost:6061/demo2/
 
+### Daily Development Workflow
+
+```bash
+npm run build    # Validate environment (run once per session)
+npm run serve    # Start API + web server
+# Press Ctrl+C to stop
+```
+
 ### Stopping Servers
 
-Press `Ctrl+C` in the terminal running `npm start`. The script will automatically:
+Press `Ctrl+C` in the terminal running `npm run serve`. The script will automatically:
 - Kill both API and web servers
 - Clean up any processes on ports 5001 and 6061
 - Display cleanup confirmation
@@ -48,16 +59,16 @@ Press `Ctrl+C` in the terminal running `npm start`. The script will automaticall
 
 ### Core Commands
 ```bash
-npm start           # Start API + web server with health validation
-npm run dev         # Alias for npm start
-npm test            # Run all tests (API + scenarios)
 npm run setup       # First-time setup (venv + deps + logs)
+npm run build       # Validate environment before serving
+npm run serve       # Start API + web server with health validation
+npm test            # Run all tests (API + scenarios)
 ```
 
-### Individual Services (Advanced)
+### Aliases
 ```bash
-npm run dev:backend   # Run API only
-npm run dev:frontend  # Run web server only
+npm start           # Same as npm run serve
+npm run dev         # Same as npm run serve
 ```
 
 ### Testing
