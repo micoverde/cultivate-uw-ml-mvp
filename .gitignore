@@ -101,3 +101,6 @@ test_*.json
 alignment_*.json
 quality_*.json
 processing_*.txt
+# Development logs
+logs/
+*.log
