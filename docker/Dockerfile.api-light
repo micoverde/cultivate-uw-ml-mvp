@@ -5,23 +5,19 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install curl for health checks and Azure CLI for model downloads
+# Install curl for health checks (minimal system dependencies)
 RUN apt-get update && apt-get install -y \
     curl \
-    azure-cli \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy and install minimal requirements
+# Copy and install minimal requirements (includes azure-storage-blob)
 COPY requirements/requirements-api-light.txt .
 RUN pip install --no-cache-dir -r requirements-api-light.txt
 
 # Copy application code
 COPY src/ ./src/
 COPY run_api.py .
-COPY download_models.sh .
-
-# Make download script executable
-RUN chmod +x download_models.sh
+COPY download_models.py .
 
 # Create models directory (will be populated at startup)
 RUN mkdir -p /app/models
@@ -37,4 +33,4 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/health || exit 1
 
 # Run startup script that downloads models from Azure Blob, then starts API
-CMD ["/bin/bash", "download_models.sh"]
+CMD ["python", "download_models.py"]
