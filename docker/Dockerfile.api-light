@@ -1,12 +1,15 @@
 # Ultra-lightweight ML API for Azure Container Apps
-# Minimal dependencies for fast deployment
+# Models downloaded from Azure Blob Storage at runtime (not from Git LFS)
 
 FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install curl for health checks
-RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+# Install curl for health checks and Azure CLI for model downloads
+RUN apt-get update && apt-get install -y \
+    curl \
+    azure-cli \
+    && rm -rf /var/lib/apt/lists/*
 
 # Copy and install minimal requirements
 COPY requirements/requirements-api-light.txt .
@@ -15,6 +18,10 @@ RUN pip install --no-cache-dir -r requirements-api-light.txt
 # Copy application code
 COPY src/ ./src/
 COPY run_api.py .
+COPY download_models.sh .
+
+# Create models directory (will be populated at startup)
+RUN mkdir -p /app/models
 
 # Create non-root user
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
@@ -26,5 +33,5 @@ EXPOSE 8000
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/api/health || exit 1
 
-# Run the application
-CMD ["python", "run_api.py"]
+# Run startup script that downloads models from Azure Blob, then starts API
+CMD ["/bin/bash", "download_models.sh"]
