@@ -1,4 +1,4 @@
-name: Claude Code Review - Detailed
+name: Detailed Code Review Request
 
 on:
   issue_comment:
@@ -11,8 +11,6 @@ jobs:
     permissions:
       pull-requests: write
       issues: write
-      contents: read
-      id-token: write
 
     steps:
       - name: Checkout repository
@@ -20,51 +18,69 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Run Claude Code Detailed Review
-        uses: anthropics/claude-code-action@v1
+      - name: Post Detailed Review Request
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: |
-            A detailed code review has been requested for this PR.
+          script: |
+            const prNumber = context.payload.issue.number;
+            const detailedReview = `## 🔍 Detailed Code Review Requested
 
-            Please provide a comprehensive review covering:
+            Comprehensive review covering:
 
             ### Architecture & Design
-            - Does this follow established patterns in the codebase?
-            - Is the solution appropriate for the problem?
-            - Are there any scalability concerns?
-            - Is the code maintainable?
+            - [ ] Follows established patterns in codebase
+            - [ ] Solution is appropriate for the problem
+            - [ ] No scalability concerns
+            - [ ] Code is maintainable
 
             ### Code Quality
-            - Are there any obvious bugs or edge cases?
-            - Is error handling appropriate?
-            - Is the code clear and readable?
-            - Is there unnecessary complexity?
+            - [ ] No obvious bugs or edge cases
+            - [ ] Error handling is appropriate
+            - [ ] Code is clear and readable
+            - [ ] No unnecessary complexity
 
             ### Security
-            - Are there any security vulnerabilities?
-            - Are credentials/sensitive data handled correctly?
-            - Is authentication/authorization proper?
-            - Is input validation present?
+            - [ ] No security vulnerabilities
+            - [ ] Credentials/sensitive data handled correctly
+            - [ ] Authentication/authorization proper
+            - [ ] Input validation present
 
             ### Testing
-            - Is test coverage adequate?
-            - Are edge cases covered?
-            - Are tests meaningful?
-            - Are there any test regressions?
+            - [ ] Test coverage is adequate
+            - [ ] Edge cases are covered
+            - [ ] Tests are meaningful
+            - [ ] No test regressions
 
             ### Performance
-            - Are there any performance regressions?
-            - Are database queries optimized (if applicable)?
-            - Is frontend bundle size impact acceptable?
-            - Are caching strategies considered?
+            - [ ] No performance regressions
+            - [ ] Database queries optimized (if applicable)
+            - [ ] Frontend bundle size impact acceptable
+            - [ ] Caching strategies considered
 
             ### Documentation
-            - Are changes properly documented?
-            - Are commit messages clear?
-            - Is API documentation updated (if applicable)?
-            - Are comments explaining complex logic?
+            - [ ] Changes are properly documented
+            - [ ] Commit messages are clear
+            - [ ] API documentation updated (if applicable)
+            - [ ] Comments explain complex logic
 
-            Reference CLAUDE.md in the repository for coding standards.
-            Be constructive and provide actionable feedback.
+            **Reference:** CLAUDE.md for coding standards.`;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: detailedReview
+            });
+
+            // Add label for detailed review
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['detailed-review-requested']
+              });
+            } catch (error) {
+              console.log('Could not add label:', error.message);
+            }
