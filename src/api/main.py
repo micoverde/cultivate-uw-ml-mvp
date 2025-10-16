@@ -266,6 +266,7 @@ async def classify_classic(request: ClassifyRequest):
         }
     }
 
+@app.post("/api/v1/classify/response")
 @app.post("/api/v2/classify/ensemble")
 async def classify_response(request: ClassifyRequest):
     """Classification endpoint using ensemble ML model"""
