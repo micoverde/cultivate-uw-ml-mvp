@@ -137,30 +137,63 @@ classic_classifier = None
 try:
     import joblib
 
+    # Resolve models directory
+    models_dir = Path(__file__).parent.parent.parent / "models"
+    logger.info(f"🔍 Looking for models in: {models_dir}")
+    logger.info(f"📁 Models directory exists: {models_dir.exists()}")
+
+    if models_dir.exists():
+        available_files = sorted(models_dir.glob("*.pkl"))
+        logger.info(f"📦 Available model files: {[f.name for f in available_files[-5:]]}")  # Show last 5
+
     # Load ensemble model
-    ensemble_path = Path(__file__).parent.parent.parent / "models" / "ensemble_latest.pkl"
+    ensemble_path = models_dir / "ensemble_latest.pkl"
     if not ensemble_path.exists():
-        ensemble_path = Path(__file__).parent.parent.parent / "models" / "ensemble_20251002_143514.pkl"
+        ensemble_path = models_dir / "ensemble_20251002_143514.pkl"
+        logger.info(f"⚙️  ensemble_latest.pkl not found, trying: {ensemble_path.name}")
 
     if ensemble_path.exists():
         ensemble_classifier = joblib.load(ensemble_path)
         logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
     else:
-        logger.warning(f"⚠️  Ensemble model not found at {ensemble_path}")
+        # Try to find any ensemble model (sort by modification time for most recent)
+        ensemble_candidates = sorted(
+            models_dir.glob("ensemble_*.pkl"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True
+        )
+        if ensemble_candidates:
+            ensemble_path = ensemble_candidates[0]  # Most recently modified
+            ensemble_classifier = joblib.load(ensemble_path)
+            logger.warning(f"⚠️  Using fallback ensemble model: {ensemble_path}")
+        else:
+            logger.error(f"❌ No ensemble models found at {models_dir}")
 
     # Load classic model
-    classic_path = Path(__file__).parent.parent.parent / "models" / "classic_latest.pkl"
+    classic_path = models_dir / "classic_latest.pkl"
     if not classic_path.exists():
-        classic_path = Path(__file__).parent.parent.parent / "models" / "classic_20251002_143514.pkl"
+        classic_path = models_dir / "classic_20251002_143514.pkl"
+        logger.info(f"⚙️  classic_latest.pkl not found, trying: {classic_path.name}")
 
     if classic_path.exists():
         classic_classifier = joblib.load(classic_path)
         logger.info(f"✅ Loaded classic model from {classic_path}")
     else:
-        logger.warning(f"⚠️  Classic model not found at {classic_path}")
+        # Try to find any classic model (sort by modification time for most recent)
+        classic_candidates = sorted(
+            models_dir.glob("classic_*.pkl"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True
+        )
+        if classic_candidates:
+            classic_path = classic_candidates[0]  # Most recently modified
+            classic_classifier = joblib.load(classic_path)
+            logger.warning(f"⚠️  Using fallback classic model: {classic_path}")
+        else:
+            logger.error(f"❌ No classic models found at {models_dir}")
 
 except Exception as e:
-    logger.error(f"❌ Failed to load classifiers: {e}")
+    logger.error(f"❌ Failed to load classifiers: {e}", exc_info=True)
 
 class ClassifyRequest(BaseModel):
     text: str
@@ -237,7 +270,7 @@ async def classify_classic(request: ClassifyRequest):
 @app.post("/api/v2/classify/ensemble")
 async def classify_response(request: ClassifyRequest):
     """Classification endpoint using ensemble ML model"""
-    logger.info(f"🔍 classify_response called - ensemble_classifier is {ensemble_classifier}")
+    logger.info(f"🔍 classify_response (ENSEMBLE) called - ensemble_classifier is {ensemble_classifier}")
 
     if ensemble_classifier is not None:
         try:
