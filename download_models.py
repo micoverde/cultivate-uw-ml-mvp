@@ -21,12 +21,14 @@ def download_models_from_blob():
     existing_models = list(models_dir.glob("*.pkl"))
     if existing_models:
         print("✅ Models directory already populated, skipping download")
+        print(f"   Found {len(existing_models)} model files")
         return True
 
     print("📥 Downloading ML models from Azure Blob Storage...")
 
     # Get connection string from environment
     connection_string = os.getenv("AZURE_STORAGE_CONNECTION_STRING")
+    print(f"   Connection string set: {bool(connection_string)}")
     if not connection_string:
         print("⚠️  AZURE_STORAGE_CONNECTION_STRING not set")
         print("   Models will not be available in this environment")
@@ -74,11 +76,15 @@ def download_models_from_blob():
             print("❌ Failed to download any models from blob storage")
             return False
 
-    except ImportError:
-        print("❌ azure-storage-blob package not installed")
+    except ImportError as e:
+        print(f"❌ azure-storage-blob package not installed: {e}")
+        import traceback
+        traceback.print_exc()
         return False
     except Exception as e:
         print(f"❌ Error downloading models: {e}")
+        import traceback
+        traceback.print_exc()
         return False
 
 
