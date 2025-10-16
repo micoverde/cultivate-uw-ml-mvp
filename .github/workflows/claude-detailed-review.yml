@@ -1,81 +1,70 @@
-name: Request Claude Review
+name: Claude Code Review - Detailed
 
 on:
   issue_comment:
     types: [created, edited]
 
 jobs:
-  request-claude-review:
+  claude-detailed-review:
     if: contains(github.event.comment.body, '@claude') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       issues: write
+      contents: read
+      id-token: write
 
     steps:
-      - name: Add Claude Review Request Comment
-        uses: actions/github-script@v7
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Detailed Review
+        uses: anthropics/claude-code-action@v1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = context.issue.number;
-            const reviewRequest = `## 🤖 Claude Code Review Requested
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            A detailed code review has been requested for this PR.
 
-            A detailed code review has been requested. Here's what to check:
+            Please provide a comprehensive review covering:
 
             ### Architecture & Design
-            - [ ] Follows established patterns
-            - [ ] Solution is appropriate
-            - [ ] No scalability concerns
-            - [ ] Code is maintainable
+            - Does this follow established patterns in the codebase?
+            - Is the solution appropriate for the problem?
+            - Are there any scalability concerns?
+            - Is the code maintainable?
 
             ### Code Quality
-            - [ ] No obvious bugs
-            - [ ] Error handling appropriate
-            - [ ] Code is clear and readable
-            - [ ] No unnecessary complexity
+            - Are there any obvious bugs or edge cases?
+            - Is error handling appropriate?
+            - Is the code clear and readable?
+            - Is there unnecessary complexity?
 
             ### Security
-            - [ ] No vulnerabilities detected
-            - [ ] Credentials handled correctly
-            - [ ] Auth/authz proper
-            - [ ] Input validation present
+            - Are there any security vulnerabilities?
+            - Are credentials/sensitive data handled correctly?
+            - Is authentication/authorization proper?
+            - Is input validation present?
 
             ### Testing
-            - [ ] Adequate coverage
-            - [ ] Edge cases covered
-            - [ ] Meaningful tests
-            - [ ] No regressions
+            - Is test coverage adequate?
+            - Are edge cases covered?
+            - Are tests meaningful?
+            - Are there any test regressions?
 
             ### Performance
-            - [ ] No regressions
-            - [ ] Queries optimized
-            - [ ] Bundle size acceptable
-            - [ ] Caching considered
+            - Are there any performance regressions?
+            - Are database queries optimized (if applicable)?
+            - Is frontend bundle size impact acceptable?
+            - Are caching strategies considered?
 
             ### Documentation
-            - [ ] Changes documented
-            - [ ] Commit messages clear
-            - [ ] API docs updated
-            - [ ] Logic comments present
+            - Are changes properly documented?
+            - Are commit messages clear?
+            - Is API documentation updated (if applicable)?
+            - Are comments explaining complex logic?
 
-            Please refer to CLAUDE.md for coding standards.`;
-
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: reviewRequest
-            });
-
-            // Add labels
-            try {
-              github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                labels: ['awaiting-review', 'claude-requested']
-              });
-            } catch (err) {
-              console.log('Could not add labels');
-            }
+            Reference CLAUDE.md in the repository for coding standards.
+            Be constructive and provide actionable feedback.
