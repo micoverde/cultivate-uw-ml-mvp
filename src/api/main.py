@@ -640,24 +640,86 @@ async def video_websocket_endpoint(websocket: WebSocket, video_id: str):
         manager.disconnect(websocket)
 
 @app.post("/save_feedback")
+@app.post("/api/feedback")
 async def save_feedback(feedback: dict):
-    """Save user feedback from the web portal"""
+    """
+    Save user feedback to Azure Blob Storage for model retraining.
+
+    This endpoint persists labeled training data from the UI to blob storage
+    where it can be collected for continuous model improvement.
+
+    Issue #225: Fix CSP violation and use Blob Storage instead of localhost
+    """
     try:
         import time
-        # Log feedback for now (could save to database later)
-        logger.info(f"📝 Feedback received: {feedback}")
+        from src.services.azure_blob_service import AzureBlobTrainingDataService, FeedbackData
 
-        return {
-            "status": "success",
-            "message": "Feedback saved successfully",
-            "feedback_id": f"fb_{int(time.time() * 1000)}",
-            "timestamp": feedback.get('timestamp', '')
-        }
+        logger.info(f"📝 Feedback received for storage: {feedback}")
+
+        # Initialize Blob Storage service
+        blob_service = AzureBlobTrainingDataService()
+
+        # Extract feedback components
+        question = feedback.get('text', '')
+        classification = feedback.get('classification', 'UNKNOWN')
+        confidence = feedback.get('confidence', 0.0)
+        demo = feedback.get('demo', 'demo1')
+        timestamp = feedback.get('timestamp', datetime.now().isoformat())
+
+        # Create structured feedback data for storage
+        structured_feedback = FeedbackData(
+            question=question,
+            ml_prediction=classification,
+            human_label=feedback.get('human_label', classification),  # Use ML prediction as default if no human label
+            confidence=float(confidence),
+            features={
+                'demo': demo,
+                'processing_time': feedback.get('processingTime', 0),
+                'model': feedback.get('model', 'unknown')
+            },
+            context={
+                'source': 'web-ui',
+                'environment': 'azure' if not (window.location.hostname == 'localhost') else 'local'
+            },
+            user_id=feedback.get('user_id', 'anonymous'),
+            session_id=feedback.get('session_id', 'unknown'),
+            timestamp=timestamp,
+            model_version=feedback.get('model_version', '1.0.0')
+        )
+
+        # Store feedback to Azure Blob Storage
+        success, blob_name = await blob_service.store_feedback(structured_feedback)
+
+        if success:
+            feedback_id = blob_name.split('/')[-1].replace('.json', '')
+            logger.info(f"✅ Feedback stored successfully: {blob_name}")
+
+            return {
+                "status": "success",
+                "message": "Feedback saved to training data storage",
+                "feedback_id": feedback_id,
+                "blob_name": blob_name,
+                "timestamp": timestamp,
+                "storage": "azure-blob"
+            }
+        else:
+            logger.error(f"Failed to store feedback to blob storage")
+            return {
+                "status": "warning",
+                "message": "Feedback received but storage failed. Check logs.",
+                "feedback_id": f"fb_{int(time.time() * 1000)}",
+                "timestamp": timestamp,
+                "storage": "local-log-only"
+            }
+
     except Exception as e:
-        logger.error(f"Error saving feedback: {e}")
+        logger.error(f"❌ Error saving feedback: {e}")
+        import traceback
+        traceback.print_exc()
         return {
             "status": "error",
-            "message": str(e)
+            "message": str(e),
+            "error_details": "See server logs for details"
         }
 
 @app.get("/api/health")

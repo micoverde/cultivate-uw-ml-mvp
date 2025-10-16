@@ -49,17 +49,12 @@ class UnifiedAPI {
 
     /**
      * Get the correct feedback endpoint based on environment
-     * Note: Local environment doesn't have feedback endpoints!
+     * Fixed: Now uses Azure blob storage endpoint instead of localhost
      */
     getFeedbackEndpoint() {
-        if (this.isLocalhost) {
-            // Local doesn't have feedback - we'll handle this gracefully
-            console.warn('⚠️ Feedback endpoint not available in local environment');
-            return null;
-        } else {
-            // Azure has a unified feedback endpoint
-            return `${this.azureBase}/api/feedback`;
-        }
+        // Always use the Azure API feedback endpoint for Blob Storage
+        // Issue #225: Fixed CSP violation - removed localhost:5001 reference
+        return `${this.azureBase}/api/feedback`;
     }
 
     /**
@@ -127,33 +122,19 @@ class UnifiedAPI {
     }
 
     /**
-     * Submit feedback (only works in Azure environment)
+     * Submit feedback to Blob Storage via Azure API
+     * Issue #225: Fixed CSP violation - now uses Azure API endpoint with Blob Storage
      */
     async submitFeedback(feedbackData) {
         const endpoint = this.getFeedbackEndpoint();
 
-        if (!endpoint) {
-            // Local environment - save to localStorage instead
-            console.log('💾 Saving feedback locally (no API endpoint in local env)');
-            const localFeedback = JSON.parse(localStorage.getItem('feedbackData') || '[]');
-            localFeedback.push({
-                ...feedbackData,
-                timestamp: new Date().toISOString(),
-                environment: 'local'
-            });
-            localStorage.setItem('feedbackData', JSON.stringify(localFeedback));
-
-            console.log(`📊 Local feedback saved (${localFeedback.length} total entries)`);
-            return {
-                status: 'success',
-                message: 'Feedback saved locally',
-                total_entries: localFeedback.length,
-                environment: 'local'
-            };
+        // Ensure timestamp is included
+        if (!feedbackData.timestamp) {
+            feedbackData.timestamp = new Date().toISOString();
         }
 
-        // Azure environment - send to API
         console.log(`📤 Submitting feedback to: ${endpoint}`);
+        console.log(`📝 Feedback data:`, feedbackData);
 
         try {
             const response = await fetch(endpoint, {
@@ -163,16 +144,49 @@ class UnifiedAPI {
             });
 
             if (!response.ok) {
-                throw new Error(`Feedback API error: ${response.status}`);
+                throw new Error(`Feedback API error: ${response.status} ${response.statusText}`);
             }
 
             const result = await response.json();
-            console.log('✅ Feedback submitted successfully:', result);
-            return result;
+            console.log('✅ Feedback submitted successfully to Blob Storage:', result);
+
+            return {
+                ...result,
+                storage: 'azure-blob',
+                environment: this.isLocalhost ? 'local-to-azure' : 'azure'
+            };
 
         } catch (error) {
             console.error('❌ Feedback submission failed:', error);
-            throw error;
+
+            // Graceful fallback: save to localStorage for offline support
+            try {
+                console.log('💾 Falling back to localStorage (Blob Storage unavailable)');
+                const localFeedback = JSON.parse(localStorage.getItem('feedbackData') || '[]');
+                localFeedback.push({
+                    ...feedbackData,
+                    timestamp: feedbackData.timestamp,
+                    environment: 'local-fallback',
+                    upload_status: 'pending'
+                });
+                localStorage.setItem('feedbackData', JSON.stringify(localFeedback));
+
+                console.log(`📊 Feedback saved to localStorage (${localFeedback.length} total entries)`);
+                return {
+                    status: 'partial',
+                    message: 'Feedback saved locally (Blob Storage unavailable)',
+                    total_entries: localFeedback.length,
+                    storage: 'local-fallback',
+                    environment: 'local'
+                };
+            } catch (fallbackError) {
+                console.error('❌ Even localStorage fallback failed:', fallbackError);
+                return {
+                    status: 'error',
+                    message: 'Failed to save feedback: ' + error.message,
+                    original_error: error.message
+                };
+            }
         }
     }
 
