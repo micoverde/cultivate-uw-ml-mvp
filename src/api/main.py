@@ -237,10 +237,14 @@ async def classify_classic(request: ClassifyRequest):
 @app.post("/api/v2/classify/ensemble")
 async def classify_response(request: ClassifyRequest):
     """Classification endpoint using ensemble ML model"""
+    logger.info(f"🔍 classify_response called - ensemble_classifier is {ensemble_classifier}")
+
     if ensemble_classifier is not None:
         try:
+            logger.info(f"✅ Ensemble classifier loaded, checking structure...")
             # EnhancedEnsembleTrainer has ensemble attribute (sklearn VotingClassifier)
             if hasattr(ensemble_classifier, 'ensemble'):
+                logger.info(f"✅ Ensemble attribute found")
                 import numpy as np
 
                 text_lower = request.text.lower()
@@ -363,9 +367,12 @@ async def classify_response(request: ClassifyRequest):
                 raise AttributeError("Model doesn't have expected methods")
 
         except Exception as e:
-            logger.error(f"Ensemble prediction error: {e}")
+            logger.error(f"❌ Ensemble prediction error: {e}", exc_info=True)
+    else:
+        logger.warning(f"⚠️  Ensemble classifier is None! Using heuristic fallback")
 
     # Fallback response
+    logger.warning(f"🔴 Using heuristic fallback for ensemble request")
     # Simple heuristic: questions with ? are likely OEQ
     has_question_mark = "?" in request.text
     classification = "OEQ" if has_question_mark else "CEQ"
