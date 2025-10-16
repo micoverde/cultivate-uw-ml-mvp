@@ -138,22 +138,7 @@ try:
     import joblib
 
     # Resolve models directory
-    # In Docker: models are at /app/models (when WORKDIR /app)
-    # In local dev: models are at project_root/models
     models_dir = Path(__file__).parent.parent.parent / "models"
-
-    # If not found at the computed path, try alternate locations
-    if not models_dir.exists():
-        # Try /app/models (Docker container)
-        docker_models = Path("/app/models")
-        if docker_models.exists():
-            models_dir = docker_models
-        # Try ../../../models (relative to src/api/main.py)
-        else:
-            alt_models = Path(__file__).parent / ".." / ".." / ".." / "models"
-            if alt_models.exists():
-                models_dir = alt_models.resolve()
-
     logger.info(f"🔍 Looking for models in: {models_dir}")
     logger.info(f"📁 Models directory exists: {models_dir.exists()}")
 
@@ -163,93 +148,49 @@ try:
 
     # Load ensemble model
     ensemble_path = models_dir / "ensemble_latest.pkl"
-    ensemble_loaded = False
-
-    # Try ensemble_latest.pkl symlink first
-    if ensemble_path.exists():
-        try:
-            ensemble_classifier = joblib.load(ensemble_path)
-            logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
-            ensemble_loaded = True
-        except Exception as e:
-            logger.warning(f"⚠️  Failed to load ensemble_latest.pkl: {e}")
-
-    # Try hardcoded fallback file if symlink failed
-    if not ensemble_loaded:
+    if not ensemble_path.exists():
         ensemble_path = models_dir / "ensemble_20251002_143514.pkl"
-        if ensemble_path.exists():
-            try:
-                ensemble_classifier = joblib.load(ensemble_path)
-                logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
-                ensemble_loaded = True
-            except Exception as e:
-                logger.warning(f"⚠️  Failed to load hardcoded ensemble path: {e}")
+        logger.info(f"⚙️  ensemble_latest.pkl not found, trying: {ensemble_path.name}")
 
-    # Try to find any ensemble model (sort by modification time for most recent)
-    if not ensemble_loaded:
+    if ensemble_path.exists():
+        ensemble_classifier = joblib.load(ensemble_path)
+        logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
+    else:
+        # Try to find any ensemble model (sort by modification time for most recent)
         ensemble_candidates = sorted(
-            [p for p in models_dir.glob("ensemble_*.pkl") if p.is_file()],
+            models_dir.glob("ensemble_*.pkl"),
             key=lambda p: p.stat().st_mtime,
             reverse=True
         )
         if ensemble_candidates:
-            for candidate in ensemble_candidates:
-                try:
-                    ensemble_classifier = joblib.load(candidate)
-                    logger.info(f"✅ Loaded ensemble model from fallback: {candidate.name}")
-                    ensemble_loaded = True
-                    break
-                except Exception as e:
-                    logger.warning(f"⚠️  Failed to load {candidate.name}: {e}")
-                    continue
-
-        if not ensemble_loaded:
-            logger.error(f"❌ No ensemble models found or all failed to load at {models_dir}")
+            ensemble_path = ensemble_candidates[0]  # Most recently modified
+            ensemble_classifier = joblib.load(ensemble_path)
+            logger.warning(f"⚠️  Using fallback ensemble model: {ensemble_path}")
+        else:
+            logger.error(f"❌ No ensemble models found at {models_dir}")
 
     # Load classic model
     classic_path = models_dir / "classic_latest.pkl"
-    classic_loaded = False
-
-    # Try classic_latest.pkl symlink first
-    if classic_path.exists():
-        try:
-            classic_classifier = joblib.load(classic_path)
-            logger.info(f"✅ Loaded classic model from {classic_path}")
-            classic_loaded = True
-        except Exception as e:
-            logger.warning(f"⚠️  Failed to load classic_latest.pkl: {e}")
-
-    # Try hardcoded fallback file if symlink failed
-    if not classic_loaded:
+    if not classic_path.exists():
         classic_path = models_dir / "classic_20251002_143514.pkl"
-        if classic_path.exists():
-            try:
-                classic_classifier = joblib.load(classic_path)
-                logger.info(f"✅ Loaded classic model from {classic_path}")
-                classic_loaded = True
-            except Exception as e:
-                logger.warning(f"⚠️  Failed to load hardcoded classic path: {e}")
+        logger.info(f"⚙️  classic_latest.pkl not found, trying: {classic_path.name}")
 
-    # Try to find any classic model (sort by modification time for most recent)
-    if not classic_loaded:
+    if classic_path.exists():
+        classic_classifier = joblib.load(classic_path)
+        logger.info(f"✅ Loaded classic model from {classic_path}")
+    else:
+        # Try to find any classic model (sort by modification time for most recent)
         classic_candidates = sorted(
-            [p for p in models_dir.glob("classic_*.pkl") if p.is_file()],
+            models_dir.glob("classic_*.pkl"),
             key=lambda p: p.stat().st_mtime,
             reverse=True
         )
         if classic_candidates:
-            for candidate in classic_candidates:
-                try:
-                    classic_classifier = joblib.load(candidate)
-                    logger.info(f"✅ Loaded classic model from fallback: {candidate.name}")
-                    classic_loaded = True
-                    break
-                except Exception as e:
-                    logger.warning(f"⚠️  Failed to load {candidate.name}: {e}")
-                    continue
-
-        if not classic_loaded:
-            logger.error(f"❌ No classic models found or all failed to load at {models_dir}")
+            classic_path = classic_candidates[0]  # Most recently modified
+            classic_classifier = joblib.load(classic_path)
+            logger.warning(f"⚠️  Using fallback classic model: {classic_path}")
+        else:
+            logger.error(f"❌ No classic models found at {models_dir}")
 
 except Exception as e:
     logger.error(f"❌ Failed to load classifiers: {e}", exc_info=True)
