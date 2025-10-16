@@ -136,7 +136,6 @@ ensemble_classifier = None
 classic_classifier = None
 try:
     import joblib
-    import glob
 
     # Resolve models directory
     models_dir = Path(__file__).parent.parent.parent / "models"
@@ -157,10 +156,14 @@ try:
         ensemble_classifier = joblib.load(ensemble_path)
         logger.info(f"✅ Loaded ensemble model from {ensemble_path}")
     else:
-        # Try to find any ensemble model
-        ensemble_candidates = sorted(models_dir.glob("ensemble_*.pkl"))
+        # Try to find any ensemble model (sort by modification time for most recent)
+        ensemble_candidates = sorted(
+            models_dir.glob("ensemble_*.pkl"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True
+        )
         if ensemble_candidates:
-            ensemble_path = ensemble_candidates[-1]  # Use most recent
+            ensemble_path = ensemble_candidates[0]  # Most recently modified
             ensemble_classifier = joblib.load(ensemble_path)
             logger.warning(f"⚠️  Using fallback ensemble model: {ensemble_path}")
         else:
@@ -176,10 +179,14 @@ try:
         classic_classifier = joblib.load(classic_path)
         logger.info(f"✅ Loaded classic model from {classic_path}")
     else:
-        # Try to find any classic model
-        classic_candidates = sorted(models_dir.glob("classic_*.pkl"))
+        # Try to find any classic model (sort by modification time for most recent)
+        classic_candidates = sorted(
+            models_dir.glob("classic_*.pkl"),
+            key=lambda p: p.stat().st_mtime,
+            reverse=True
+        )
         if classic_candidates:
-            classic_path = classic_candidates[-1]  # Use most recent
+            classic_path = classic_candidates[0]  # Most recently modified
             classic_classifier = joblib.load(classic_path)
             logger.warning(f"⚠️  Using fallback classic model: {classic_path}")
         else:
