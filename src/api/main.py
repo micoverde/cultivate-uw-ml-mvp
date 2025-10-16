@@ -138,7 +138,22 @@ try:
     import joblib
 
     # Resolve models directory
+    # In Docker: models are at /app/models (when WORKDIR /app)
+    # In local dev: models are at project_root/models
     models_dir = Path(__file__).parent.parent.parent / "models"
+
+    # If not found at the computed path, try alternate locations
+    if not models_dir.exists():
+        # Try /app/models (Docker container)
+        docker_models = Path("/app/models")
+        if docker_models.exists():
+            models_dir = docker_models
+        # Try ../../../models (relative to src/api/main.py)
+        else:
+            alt_models = Path(__file__).parent / ".." / ".." / ".." / "models"
+            if alt_models.exists():
+                models_dir = alt_models.resolve()
+
     logger.info(f"🔍 Looking for models in: {models_dir}")
     logger.info(f"📁 Models directory exists: {models_dir.exists()}")
 
