@@ -122,9 +122,16 @@ class UnifiedMLAPI {
 
     /**
      * Submit human feedback - unified interface
+     * Fixed: Uses Azure endpoint instead of hardcoded localhost (Issue #225)
      */
     async submitFeedback(isCorrect, predictedClass, confidence, options = {}) {
         console.log(`📝 Unified Feedback: ${isCorrect ? 'Correct' : 'Incorrect'} for ${predictedClass}`);
+
+        // Detect environment and use appropriate endpoint
+        const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const feedbackEndpoint = isLocalhost
+            ? 'http://localhost:5001/api/feedback'
+            : 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/feedback';
 
         const feedbackData = {
             text: options.text || '',
@@ -137,8 +144,9 @@ class UnifiedMLAPI {
         };
 
         try {
-            // Use main API's feedback endpoint
-            const response = await fetch('http://localhost:5001/save_feedback', {
+            // Use environment-aware feedback endpoint
+            console.log(`📤 Submitting feedback to: ${feedbackEndpoint}`);
+            const response = await fetch(feedbackEndpoint, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(feedbackData)
@@ -154,7 +162,26 @@ class UnifiedMLAPI {
 
         } catch (error) {
             console.error(`❌ Feedback Error:`, error);
-            return { error: error.message };
+            // Graceful fallback to localStorage for offline support
+            try {
+                console.log('💾 Falling back to localStorage (Feedback endpoint unavailable)');
+                const localFeedback = JSON.parse(localStorage.getItem('feedbackData') || '[]');
+                localFeedback.push({
+                    ...feedbackData,
+                    environment: 'local-fallback',
+                    upload_status: 'pending'
+                });
+                localStorage.setItem('feedbackData', JSON.stringify(localFeedback));
+                return {
+                    status: 'partial',
+                    message: 'Feedback saved locally (endpoint unavailable)',
+                    total_entries: localFeedback.length,
+                    storage: 'local-fallback'
+                };
+            } catch (fallbackError) {
+                console.error(`❌ Even localStorage fallback failed:`, fallbackError);
+                return { error: error.message };
+            }
         }
     }
 
