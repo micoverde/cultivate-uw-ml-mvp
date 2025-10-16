@@ -1,0 +1,150 @@
+name: Claude Code Review
+
+# Trigger on PR creation and when @claude is mentioned
+on:
+  pull_request:
+    types: [opened, ready_for_review, synchronize]
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  claude-review:
+    name: Claude Code Review
+    runs-on: ubuntu-latest
+
+    # Only run on PR comments that mention @claude
+    if: |
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body, '@claude') &&
+       github.event.issue.pull_request)
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.head_ref }}
+
+      - name: Get PR Info
+        id: pr_info
+        run: |
+          echo "pr_number=${{ github.event.pull_request.number || github.event.issue.number }}" >> $GITHUB_OUTPUT
+          echo "pr_title=${{ github.event.pull_request.title || github.event.issue.title }}" >> $GITHUB_OUTPUT
+
+      - name: Get Changed Files
+        id: changed_files
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git diff --name-only origin/main...HEAD > /tmp/changed_files.txt
+          else
+            # For comments, get the current PR diff
+            git diff --name-only origin/main...HEAD > /tmp/changed_files.txt
+          fi
+
+          echo "files=$(cat /tmp/changed_files.txt | tr '\n' ' ')" >> $GITHUB_OUTPUT
+          cat /tmp/changed_files.txt
+
+      - name: Generate Diff
+        id: diff
+        run: |
+          if [ "${{ github.event_name }}" == "pull_request" ]; then
+            git diff origin/main...HEAD > /tmp/pr.diff
+          else
+            git diff origin/main...HEAD > /tmp/pr.diff
+          fi
+
+          # Truncate if too large
+          if [ $(wc -c < /tmp/pr.diff) -gt 50000 ]; then
+            head -c 50000 /tmp/pr.diff > /tmp/pr_truncated.diff
+            echo "⚠️ Diff truncated to 50KB" >> /tmp/pr.diff
+            mv /tmp/pr_truncated.diff /tmp/pr.diff
+          fi
+
+          echo "diff_size=$(wc -c < /tmp/pr.diff)" >> $GITHUB_OUTPUT
+
+      - name: Create Claude Review Comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const pr = ${{ github.event.pull_request.number || github.event.issue.number }};
+            const title = '${{ steps.pr_info.outputs.pr_title }}';
+            const files = '${{ steps.changed_files.outputs.files }}';
+
+            let reviewPrompt = `## 🤖 Claude Code Review Request
+
+**PR Title:** ${title}
+**PR Number:** #${pr}
+**Changed Files:** ${files || 'N/A'}
+
+### Review Checklist
+Please provide a code review covering:
+
+1. **Architecture & Design**
+   - Are the changes following established patterns in the codebase?
+   - Is the solution appropriate for the problem?
+   - Any potential scalability or maintainability concerns?
+
+2. **Code Quality**
+   - Are there any obvious bugs or edge cases?
+   - Is error handling appropriate?
+   - Could any logic be simplified or clarified?
+
+3. **Security**
+   - Any potential security vulnerabilities?
+   - Are credentials or sensitive data handled properly?
+   - CSP, CORS, or authentication concerns?
+
+4. **Testing**
+   - Is test coverage adequate for the changes?
+   - Are there any missing test cases?
+   - Edge cases not covered?
+
+5. **Performance**
+   - Any performance regressions?
+   - Database queries optimized?
+   - Frontend bundle size impact?
+
+6. **Documentation**
+   - Are changes documented?
+   - Do commit messages clearly describe changes?
+   - Any API documentation updates needed?
+
+### Context
+This PR aims to fix/add: ${title}
+
+Please review the code and provide detailed feedback on the implementation.`;
+
+            // Post comment
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: pr,
+              body: reviewPrompt
+            });
+
+            console.log('✅ Claude Code Review request posted to PR #' + pr);
+
+      - name: Post Review Status
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const pr = ${{ github.event.pull_request.number || github.event.issue.number }};
+
+            // Add reaction to show Claude Code is reviewing
+            github.rest.reactions.createOnIssueComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              comment_id: context.payload.comment?.id || 0,
+              content: 'eyes'
+            }).catch(() => {
+              // Comment reaction fails for non-existent comment, that's ok
+            });
+
+            console.log('✅ Claude Code Review workflow completed');
