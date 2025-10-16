@@ -23,7 +23,7 @@ jobs:
       - name: Run Claude Code Detailed Review
         uses: anthropics/claude-code-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           prompt: |
             A detailed code review has been requested for this PR.
