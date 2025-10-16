@@ -17,28 +17,31 @@ def download_models_from_blob():
     models_dir = Path("/app/models")
     models_dir.mkdir(exist_ok=True)
 
-    # Check if model files already exist (for local dev or cached builds)
-    # BUT: Filter out Git LFS pointer files (they're ~131 bytes, not actual models!)
+    # Check if REAL model files exist (filter out Git LFS pointer files)
+    # LFS pointers are ~131 bytes, real models are >1MB
+    # This is necessary because when cloning without Git LFS (local dev, Docker builds),
+    # the models/ directory contains 131-byte pointer files. Without size filtering,
+    # we'd skip downloading and the API would try to load pointers instead of real models.
     existing_models = [
         f for f in models_dir.glob("*.pkl")
-        if f.stat().st_size > 1000  # Actual models are >1MB, LFS pointers are ~131 bytes
+        if f.stat().st_size > 1000
     ]
+
     if existing_models:
         print("✅ Models directory already populated, skipping download")
         print(f"   Found {len(existing_models)} model files")
         return True
 
-    # Check if we have LFS pointers (which aren't real models)
+    # Clean up any LFS pointers that might exist
     lfs_pointers = [
         f for f in models_dir.glob("*.pkl")
         if f.stat().st_size <= 1000
     ]
     if lfs_pointers:
-        print(f"⚠️  Found {len(lfs_pointers)} Git LFS pointer files (not real models)")
-        print("   Removing LFS pointers and downloading real models from Azure...")
-        for pointer_file in lfs_pointers:
-            pointer_file.unlink()
-            print(f"   Deleted: {pointer_file.name}")
+        print(f"⚠️  Found {len(lfs_pointers)} Git LFS pointer files (removing)")
+        for pointer in lfs_pointers:
+            pointer.unlink()
+            print(f"   Deleted: {pointer.name}")
 
     print("📥 Downloading ML models from Azure Blob Storage...")
 
