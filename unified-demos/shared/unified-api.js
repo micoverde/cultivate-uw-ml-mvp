@@ -49,12 +49,15 @@ class UnifiedAPI {
 
     /**
      * Get the correct feedback endpoint based on environment
-     * Fixed: Now uses Azure blob storage endpoint instead of localhost
+     * Fixed: Now uses /save_feedback endpoint instead of /api/feedback (which doesn't exist)
      */
     getFeedbackEndpoint() {
-        // Always use the Azure API feedback endpoint for Blob Storage
-        // Issue #225: Fixed CSP violation - removed localhost:5001 reference
-        return `${this.azureBase}/api/feedback`;
+        // Use environment-aware endpoint
+        // Local: http://localhost:5001/save_feedback
+        // Azure: https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/save_feedback
+        return this.isLocalhost
+            ? `${this.localBase}/save_feedback`
+            : `${this.azureBase}/save_feedback`;
     }
 
     /**
