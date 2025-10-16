@@ -1,0 +1,60 @@
+# Python virtual environments
+venv/
+demo_env/
+.venv/
+env/
+ENV/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# Git
+.git/
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build outputs
+build/
+dist/
+*.egg-info/
+
+# Node modules
+node_modules/
+
+# Temporary files
+*.log
+*.tmp
+.DS_Store
+
+# Azure deployment files (not needed in container)
+.azure/
+
+# Test data
+*.csv
+*.xlsx
+*.xls
+
+# Git artifacts
+git-lfs-3.4.0/
+git-lfs.tar.gz
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Training scripts (not needed in production)
+train_*.py
+generate_*.py
+extract_*.py
+deploy-*.sh
+test_*.py
+verify_*.py
