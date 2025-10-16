@@ -1,150 +1,77 @@
-name: Claude Code Review
+name: Claude Code Review Request
 
-# Trigger on PR creation and when @claude is mentioned
+# Trigger Claude Code review workflow on PR creation and @claude mentions
 on:
   pull_request:
-    types: [opened, ready_for_review, synchronize]
+    types: [opened, synchronize, ready_for_review]
   issue_comment:
     types: [created, edited]
 
 jobs:
-  claude-review:
-    name: Claude Code Review
+  request-claude-review:
+    name: Request Claude Code Review
     runs-on: ubuntu-latest
-
-    # Only run on PR comments that mention @claude
     if: |
       github.event_name == 'pull_request' ||
-      (github.event_name == 'issue_comment' &&
-       contains(github.event.comment.body, '@claude') &&
-       github.event.issue.pull_request)
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
+
+    permissions:
+      pull-requests: write
+      issues: write
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
 
-      - name: Get PR Info
-        id: pr_info
-        run: |
-          echo "pr_number=${{ github.event.pull_request.number || github.event.issue.number }}" >> $GITHUB_OUTPUT
-          echo "pr_title=${{ github.event.pull_request.title || github.event.issue.title }}" >> $GITHUB_OUTPUT
-
-      - name: Get Changed Files
-        id: changed_files
+      - name: Get PR Number
+        id: pr
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "${{ github.event_name }}" == "pull_request" ]; then
-            git diff --name-only origin/main...HEAD > /tmp/changed_files.txt
+            echo "number=${{ github.event.pull_request.number }}" >> $GITHUB_OUTPUT
           else
-            # For comments, get the current PR diff
-            git diff --name-only origin/main...HEAD > /tmp/changed_files.txt
+            echo "number=${{ github.event.issue.number }}" >> $GITHUB_OUTPUT
           fi
 
-          echo "files=$(cat /tmp/changed_files.txt | tr '\n' ' ')" >> $GITHUB_OUTPUT
-          cat /tmp/changed_files.txt
-
-      - name: Generate Diff
-        id: diff
-        run: |
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            git diff origin/main...HEAD > /tmp/pr.diff
-          else
-            git diff origin/main...HEAD > /tmp/pr.diff
-          fi
-
-          # Truncate if too large
-          if [ $(wc -c < /tmp/pr.diff) -gt 50000 ]; then
-            head -c 50000 /tmp/pr.diff > /tmp/pr_truncated.diff
-            echo "⚠️ Diff truncated to 50KB" >> /tmp/pr.diff
-            mv /tmp/pr_truncated.diff /tmp/pr.diff
-          fi
-
-          echo "diff_size=$(wc -c < /tmp/pr.diff)" >> $GITHUB_OUTPUT
-
-      - name: Create Claude Review Comment
+      - name: Post Claude Review Request
         uses: actions/github-script@v7
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
-            const path = require('path');
+            const prNumber = process.env.PR_NUMBER;
 
-            const pr = ${{ github.event.pull_request.number || github.event.issue.number }};
-            const title = '${{ steps.pr_info.outputs.pr_title }}';
-            const files = '${{ steps.changed_files.outputs.files }}';
+            const reviewRequest = 'Please review this PR with focus on: Architecture & Design, Code Quality, Security, Testing, Performance, and Documentation.';
 
-            let reviewPrompt = `## 🤖 Claude Code Review Request
-
-**PR Title:** ${title}
-**PR Number:** #${pr}
-**Changed Files:** ${files || 'N/A'}
-
-### Review Checklist
-Please provide a code review covering:
-
-1. **Architecture & Design**
-   - Are the changes following established patterns in the codebase?
-   - Is the solution appropriate for the problem?
-   - Any potential scalability or maintainability concerns?
-
-2. **Code Quality**
-   - Are there any obvious bugs or edge cases?
-   - Is error handling appropriate?
-   - Could any logic be simplified or clarified?
-
-3. **Security**
-   - Any potential security vulnerabilities?
-   - Are credentials or sensitive data handled properly?
-   - CSP, CORS, or authentication concerns?
-
-4. **Testing**
-   - Is test coverage adequate for the changes?
-   - Are there any missing test cases?
-   - Edge cases not covered?
-
-5. **Performance**
-   - Any performance regressions?
-   - Database queries optimized?
-   - Frontend bundle size impact?
-
-6. **Documentation**
-   - Are changes documented?
-   - Do commit messages clearly describe changes?
-   - Any API documentation updates needed?
-
-### Context
-This PR aims to fix/add: ${title}
-
-Please review the code and provide detailed feedback on the implementation.`;
-
-            // Post comment
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: pr,
-              body: reviewPrompt
+              issue_number: parseInt(prNumber),
+              body: reviewRequest
             });
 
-            console.log('✅ Claude Code Review request posted to PR #' + pr);
+            console.log('Claude Code Review request posted to PR #' + prNumber);
 
-      - name: Post Review Status
+      - name: Add Review Label
         uses: actions/github-script@v7
-        if: always()
+        if: github.event_name == 'pull_request'
+        env:
+          PR_NUMBER: ${{ steps.pr.outputs.number }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const pr = ${{ github.event.pull_request.number || github.event.issue.number }};
+            const prNumber = parseInt(process.env.PR_NUMBER);
 
-            // Add reaction to show Claude Code is reviewing
-            github.rest.reactions.createOnIssueComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              comment_id: context.payload.comment?.id || 0,
-              content: 'eyes'
-            }).catch(() => {
-              // Comment reaction fails for non-existent comment, that's ok
-            });
-
-            console.log('✅ Claude Code Review workflow completed');
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['waiting-for-review']
+              });
+              console.log('Added review label');
+            } catch (err) {
+              console.log('Could not add label (may not exist)');
+            }

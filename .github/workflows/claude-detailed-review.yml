@@ -1,269 +1,85 @@
 name: Claude Detailed Code Review
 
-# Automated detailed code review for PRs using Claude AI
 on:
   pull_request:
-    types: [opened, synchronize, ready_for_review]
-  issue_comment:
-    types: [created, edited]
+    types: [opened, synchronize]
 
 jobs:
-  claude-code-review:
-    name: Run Claude Code Review
+  claude-review:
+    name: Code Review Checklist
     runs-on: ubuntu-latest
-    if: |
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude'))
 
     permissions:
       pull-requests: write
-      contents: read
       issues: write
+      contents: read
 
     steps:
-      - name: Checkout PR code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          ref: ${{ github.head_ref }}
-
-      - name: Get PR Details
-        id: pr_details
-        run: |
-          PR_NUMBER="${{ github.event.pull_request.number || github.event.issue.number }}"
-          echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
-
-          # Get PR title and description
-          if [ "${{ github.event_name }}" == "pull_request" ]; then
-            echo "pr_title=${{ github.event.pull_request.title }}" >> $GITHUB_OUTPUT
-            echo "pr_body=${{ github.event.pull_request.body }}" >> $GITHUB_OUTPUT
-            echo "pr_author=${{ github.event.pull_request.user.login }}" >> $GITHUB_OUTPUT
-          else
-            echo "pr_title=${{ github.event.issue.title }}" >> $GITHUB_OUTPUT
-            echo "pr_author=${{ github.event.issue.user.login }}" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Get Changed Files and Diff
-        id: changes
-        run: |
-          # Get list of changed files
-          git diff --name-only origin/main...HEAD > /tmp/files.txt
-          FILES=$(cat /tmp/files.txt | head -20 | tr '\n' ', ' | sed 's/,$//')
-          echo "changed_files=$FILES" >> $GITHUB_OUTPUT
-
-          # Generate diff (limit to 100KB)
-          git diff origin/main...HEAD > /tmp/full.diff
-          if [ $(wc -c < /tmp/full.diff) -gt 100000 ]; then
-            head -c 100000 /tmp/full.diff > /tmp/changes.diff
-          else
-            cp /tmp/full.diff /tmp/changes.diff
-          fi
-
-          # Count changes
-          ADDITIONS=$(git diff --numstat origin/main...HEAD | awk '{sum+=$1} END {print sum}')
-          DELETIONS=$(git diff --numstat origin/main...HEAD | awk '{sum+=$2} END {print sum}')
-          echo "additions=$ADDITIONS" >> $GITHUB_OUTPUT
-          echo "deletions=$DELETIONS" >> $GITHUB_OUTPUT
-
-      - name: Analyze Code Changes
-        id: analysis
-        run: |
-          # Analyze file types changed
-          python3 << 'EOF'
-          import os
-          import re
-
-          file_types = {}
-          changed_files = []
-
-          with open('/tmp/files.txt') as f:
-            for line in f:
-              line = line.strip()
-              if line:
-                changed_files.append(line)
-                ext = os.path.splitext(line)[1] or 'unknown'
-                file_types[ext] = file_types.get(ext, 0) + 1
-
-          # Output analysis
-          print("::group::File Analysis")
-          for ext, count in sorted(file_types.items(), key=lambda x: x[1], reverse=True):
-            print(f"  {ext}: {count} files")
-          print("::endgroup::")
-
-          # Output for next step
-          with open('/tmp/analysis.txt', 'w') as f:
-            f.write(f"Files changed: {len(changed_files)}\n")
-            for ext, count in file_types.items():
-              f.write(f"  {ext}: {count}\n")
-
-          EOF
-
-      - name: Create Comprehensive Review Request
+      - name: Post Review Checklist Comment
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const fs = require('fs');
+            const prNum = context.payload.pull_request.number;
 
-            const prNumber = ${{ steps.pr_details.outputs.pr_number }};
-            const prTitle = '${{ steps.pr_details.outputs.pr_title }}';
-            const prAuthor = '${{ steps.pr_details.outputs.pr_author }}';
-            const changedFiles = '${{ steps.changes.outputs.changed_files }}';
-            const additions = '${{ steps.changes.outputs.additions }}';
-            const deletions = '${{ steps.changes.outputs.deletions }}';
+            const checklist = 'Code Review Checklist\n\n' +
+              '### Architecture and Design\n' +
+              '- [ ] Follows established patterns in codebase\n' +
+              '- [ ] Solution is appropriate for the problem\n' +
+              '- [ ] No scalability concerns\n' +
+              '- [ ] Maintainability is good\n\n' +
+              '### Code Quality\n' +
+              '- [ ] No obvious bugs or edge cases\n' +
+              '- [ ] Error handling is appropriate\n' +
+              '- [ ] Code is clear and readable\n' +
+              '- [ ] No unnecessary complexity\n\n' +
+              '### Security\n' +
+              '- [ ] No security vulnerabilities detected\n' +
+              '- [ ] Credentials/sensitive data handled correctly\n' +
+              '- [ ] Authentication/authorization proper\n' +
+              '- [ ] Input validation present\n\n' +
+              '### Testing\n' +
+              '- [ ] Test coverage is adequate\n' +
+              '- [ ] Edge cases are covered\n' +
+              '- [ ] Tests are meaningful\n' +
+              '- [ ] No test regressions\n\n' +
+              '### Performance\n' +
+              '- [ ] No performance regressions\n' +
+              '- [ ] Database queries optimized (if applicable)\n' +
+              '- [ ] Frontend bundle size impact acceptable\n' +
+              '- [ ] Caching strategies considered\n\n' +
+              '### Documentation\n' +
+              '- [ ] Changes are documented\n' +
+              '- [ ] Commit messages are clear\n' +
+              '- [ ] API documentation updated (if applicable)\n' +
+              '- [ ] Comments explain complex logic\n\n' +
+              '---\n\n' +
+              'To request a detailed Claude Code review, comment: @claude';
 
-            const reviewBody = `## 🔍 Claude Code Review
-
-**Status:** Waiting for Claude review
-**PR:** #${prNumber} - ${prTitle}
-**Author:** @${prAuthor}
-
-### Summary
-- **Files Changed:** ${changedFiles}
-- **Lines Added:** ${additions || '?'}
-- **Lines Deleted:** ${deletions || '?'}
-
-### Code Review Dimensions
-
-#### 1. 🏗️ Architecture & Design
-- [ ] Follows established patterns in codebase
-- [ ] Solution is appropriate for the problem
-- [ ] No scalability concerns identified
-- [ ] Maintainability is good
-
-#### 2. 💻 Code Quality
-- [ ] No obvious bugs or logic errors
-- [ ] Error handling is comprehensive
-- [ ] Code is clear and maintainable
-- [ ] No unnecessary complexity
-
-#### 3. 🔐 Security
-- [ ] No security vulnerabilities detected
-- [ ] Credentials/sensitive data handled correctly
-- [ ] Authentication/authorization is appropriate
-- [ ] Input validation is present
-
-#### 4. 🧪 Testing
-- [ ] Test coverage is adequate
-- [ ] Edge cases are covered
-- [ ] Tests are meaningful and maintainable
-- [ ] No test regressions
-
-#### 5. ⚡ Performance
-- [ ] No performance regressions
-- [ ] Database queries optimized (if applicable)
-- [ ] Frontend bundle size impact acceptable
-- [ ] Caching strategies considered
-
-#### 6. 📚 Documentation
-- [ ] Changes are documented
-- [ ] Commit messages are clear
-- [ ] API documentation updated (if applicable)
-- [ ] Comments explain complex logic
-
-### Next Steps
-1. Review the code changes above
-2. Provide feedback on each dimension
-3. Request changes or approve as appropriate
-4. Tag with \`approved-by-claude\` when ready
-
----
-**Note:** This is an automated review request. Claude Code will provide detailed feedback when available.`;
-
-            // Post the review request
             github.rest.issues.createComment({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              issue_number: prNumber,
-              body: reviewBody
+              issue_number: prNum,
+              body: checklist
             });
 
-            console.log('✅ Claude Code Review request posted for PR #' + prNumber);
+            console.log('Code review checklist posted for PR #' + prNum);
 
       - name: Add Labels
         uses: actions/github-script@v7
-        if: github.event_name == 'pull_request'
+        if: always()
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            github.rest.issues.addLabels({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: ${{ steps.pr_details.outputs.pr_number }},
-              labels: ['waiting-for-claude-review', 'needs-review']
-            }).catch(() => {
-              console.log('Could not add labels (may not exist)');
-            });
+            const prNum = context.payload.pull_request.number;
 
-      - name: Post Review Checklist
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = ${{ steps.pr_details.outputs.pr_number }};
-
-            const checklistBody = \`### 📋 Claude Code Review Checklist
-
-\\\`\\\`\\\`
-## Architecture & Design
-- [ ] Appropriate design pattern used
-- [ ] Consistent with codebase conventions
-- [ ] No over-engineering or under-engineering
-- [ ] Future maintainability considered
-
-## Code Quality
-- [ ] Variables and functions named clearly
-- [ ] DRY principle followed
-- [ ] SOLID principles considered
-- [ ] No magic numbers or unclear logic
-
-## Security
-- [ ] Input validation present
-- [ ] Authentication/Authorization correct
-- [ ] No hardcoded secrets or credentials
-- [ ] Error messages don't leak information
-
-## Testing
-- [ ] Unit tests for new logic
-- [ ] Integration tests for workflows
-- [ ] Edge cases tested
-- [ ] Negative test cases included
-
-## Performance
-- [ ] Algorithmic efficiency considered
-- [ ] No N+1 queries (database)
-- [ ] Proper caching strategies
-- [ ] Bundle size impact acceptable
-
-## Documentation
-- [ ] Code comments for complex logic
-- [ ] README or CONTRIBUTING updates
-- [ ] API docs updated if applicable
-- [ ] Commit messages are descriptive
-\\\`\\\`\\\`
-
-**Instructions for Reviewer:**
-1. Review the changes against this checklist
-2. Approve or request changes
-3. Leave detailed feedback
-
-**Questions for the Reviewer:**
-- Does the solution match the problem statement?
-- Are there any edge cases not handled?
-- Could this be simplified or optimized?
-- Will this cause issues with existing features?\`;
-
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: checklistBody
-            }).catch(err => {
-              console.log('Could not post checklist:', err);
-            });
-
-      - name: Summary
-        run: |
-          echo "✅ Claude Code Review workflow completed"
-          echo "📝 Review request posted to PR"
-          echo "⏳ Awaiting Claude Code feedback..."
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNum,
+                labels: ['needs-review']
+              });
+            } catch (err) {
+              console.log('Could not add labels');
+            }
