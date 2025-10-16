@@ -18,11 +18,27 @@ def download_models_from_blob():
     models_dir.mkdir(exist_ok=True)
 
     # Check if model files already exist (for local dev or cached builds)
-    existing_models = list(models_dir.glob("*.pkl"))
+    # BUT: Filter out Git LFS pointer files (they're ~131 bytes, not actual models!)
+    existing_models = [
+        f for f in models_dir.glob("*.pkl")
+        if f.stat().st_size > 1000  # Actual models are >1MB, LFS pointers are ~131 bytes
+    ]
     if existing_models:
         print("✅ Models directory already populated, skipping download")
         print(f"   Found {len(existing_models)} model files")
         return True
+
+    # Check if we have LFS pointers (which aren't real models)
+    lfs_pointers = [
+        f for f in models_dir.glob("*.pkl")
+        if f.stat().st_size <= 1000
+    ]
+    if lfs_pointers:
+        print(f"⚠️  Found {len(lfs_pointers)} Git LFS pointer files (not real models)")
+        print("   Removing LFS pointers and downloading real models from Azure...")
+        for pointer_file in lfs_pointers:
+            pointer_file.unlink()
+            print(f"   Deleted: {pointer_file.name}")
 
     print("📥 Downloading ML models from Azure Blob Storage...")
 
