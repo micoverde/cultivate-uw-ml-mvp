@@ -1,86 +1,81 @@
-name: Claude Code Review - Detailed Analysis
-
-# This workflow provides comprehensive code review analysis
-# It runs on all PRs and can be triggered with @claude mentions in comments
+name: Request Claude Review
 
 on:
-  pull_request:
-    types: [opened, synchronize, reopened]
   issue_comment:
     types: [created, edited]
 
 jobs:
-  claude-detailed-review:
-    # Only run on PR events or @claude mentions in comments
-    if: |
-      github.event_name == 'pull_request' ||
-      (github.event_name == 'issue_comment' &&
-       contains(github.event.comment.body, '@claude') &&
-       github.event.issue.pull_request)
-
+  request-claude-review:
+    if: contains(github.event.comment.body, '@claude') && github.event.issue.pull_request
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read
-      issues: read
-      contents: read
-      id-token: write
+      pull-requests: write
+      issues: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Run Claude Code Detailed Review
-        uses: anthropics/claude-code-action@v1
+      - name: Add Claude Review Request Comment
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: |
-            REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+          script: |
+            const prNumber = context.issue.number;
+            const reviewRequest = `## 🤖 Claude Code Review Requested
 
-            Please provide a comprehensive code review covering:
+            A detailed code review has been requested. Here's what to check:
 
-            ### Architecture and Design
-            - Does this follow established patterns in the codebase?
-            - Is the solution appropriate for the problem?
-            - Are there any scalability concerns?
-            - Is the code maintainable?
+            ### Architecture & Design
+            - [ ] Follows established patterns
+            - [ ] Solution is appropriate
+            - [ ] No scalability concerns
+            - [ ] Code is maintainable
 
             ### Code Quality
-            - Are there any obvious bugs or edge cases?
-            - Is error handling appropriate?
-            - Is the code clear and readable?
-            - Is there unnecessary complexity?
+            - [ ] No obvious bugs
+            - [ ] Error handling appropriate
+            - [ ] Code is clear and readable
+            - [ ] No unnecessary complexity
 
             ### Security
-            - Are there any security vulnerabilities?
-            - Are credentials/sensitive data handled correctly?
-            - Is authentication/authorization proper?
-            - Is input validation present?
+            - [ ] No vulnerabilities detected
+            - [ ] Credentials handled correctly
+            - [ ] Auth/authz proper
+            - [ ] Input validation present
 
             ### Testing
-            - Is test coverage adequate?
-            - Are edge cases covered?
-            - Are tests meaningful?
-            - Are there any test regressions?
+            - [ ] Adequate coverage
+            - [ ] Edge cases covered
+            - [ ] Meaningful tests
+            - [ ] No regressions
 
             ### Performance
-            - Are there any performance regressions?
-            - Are database queries optimized (if applicable)?
-            - Is frontend bundle size impact acceptable?
-            - Are caching strategies considered?
+            - [ ] No regressions
+            - [ ] Queries optimized
+            - [ ] Bundle size acceptable
+            - [ ] Caching considered
 
             ### Documentation
-            - Are changes properly documented?
-            - Are commit messages clear?
-            - Is API documentation updated (if applicable)?
-            - Are comments explaining complex logic?
+            - [ ] Changes documented
+            - [ ] Commit messages clear
+            - [ ] API docs updated
+            - [ ] Logic comments present
 
-            Refer to CLAUDE.md in the repository for coding standards and conventions.
-            Be constructive and provide actionable feedback.
+            Please refer to CLAUDE.md for coding standards.`;
 
-            Use `gh pr comment` to post your detailed review.
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: reviewRequest
+            });
 
-          claude_args: '--allowed-tools "Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh search:*)"'
+            // Add labels
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['awaiting-review', 'claude-requested']
+              });
+            } catch (err) {
+              console.log('Could not add labels');
+            }

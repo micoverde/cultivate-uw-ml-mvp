@@ -1,56 +1,84 @@
-name: Claude Code Review
+name: Code Review Checklist
 
 on:
   pull_request:
     types: [opened, synchronize]
-    # Optional: Only run on specific file changes
-    # paths:
-    #   - "src/**"
-    #   - "*.md"
 
 jobs:
-  claude-review:
-    # Optional: Filter by PR author or contributor status
-    # if: |
-    #   github.event.pull_request.user.login == 'external-contributor' ||
-    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
-
+  code-review-checklist:
     runs-on: ubuntu-latest
     permissions:
-      pull-requests: read
-      issues: read
-      contents: read
-      id-token: write
+      pull-requests: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Run Claude Code Review
-        id: claude-review
-        uses: anthropics/claude-code-action@v1
+      - name: Post Code Review Checklist
+        uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          prompt: |
-            REPO: ${{ github.repository }}
-            PR NUMBER: ${{ github.event.pull_request.number }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const checklist = `## 📋 Code Review Checklist
 
-            Please review this pull request and provide feedback on:
-            - Code quality and best practices
-            - Potential bugs or issues
-            - Performance considerations
-            - Security concerns
-            - Test coverage
-            - Documentation completeness
+            ### Architecture & Design
+            - [ ] Follows established patterns in codebase
+            - [ ] Solution is appropriate for the problem
+            - [ ] No scalability concerns
+            - [ ] Maintainable code
 
-            Use the repository's CLAUDE.md for guidance on style and conventions.
-            Be constructive and helpful in your feedback.
+            ### Code Quality
+            - [ ] No obvious bugs or edge cases
+            - [ ] Error handling is appropriate
+            - [ ] Code is clear and readable
+            - [ ] No unnecessary complexity
 
-            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+            ### Security
+            - [ ] No security vulnerabilities
+            - [ ] Credentials/sensitive data handled correctly
+            - [ ] Authentication/authorization proper
+            - [ ] Input validation present
 
-          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          # or https://docs.claude.com/en/docs/claude-code/cli-reference for available options
-          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'
+            ### Testing
+            - [ ] Test coverage is adequate
+            - [ ] Edge cases are covered
+            - [ ] Tests are meaningful
+            - [ ] No test regressions
+
+            ### Performance
+            - [ ] No performance regressions
+            - [ ] Database queries optimized (if applicable)
+            - [ ] Frontend bundle size acceptable
+            - [ ] Caching strategies considered
+
+            ### Documentation
+            - [ ] Changes are documented
+            - [ ] Commit messages are clear
+            - [ ] API documentation updated (if applicable)
+            - [ ] Comments explain complex logic
+
+            ---
+            **To request a detailed Claude Code review, comment:** \`@claude\``;
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: checklist
+            });
+
+      - name: Add Review Labels
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNumber,
+                labels: ['needs-review']
+              });
+            } catch (err) {
+              console.log('Could not add label');
+            }
