@@ -1,84 +1,37 @@
-name: Code Review Checklist
+name: Claude Code Review
 
 on:
   pull_request:
     types: [opened, synchronize]
 
 jobs:
-  code-review-checklist:
+  claude-review:
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
+      issues: write
+      contents: read
+      id-token: write
 
     steps:
-      - name: Post Code Review Checklist
-        uses: actions/github-script@v7
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            const checklist = `## 📋 Code Review Checklist
+          fetch-depth: 1
 
-            ### Architecture & Design
-            - [ ] Follows established patterns in codebase
-            - [ ] Solution is appropriate for the problem
-            - [ ] No scalability concerns
-            - [ ] Maintainable code
-
-            ### Code Quality
-            - [ ] No obvious bugs or edge cases
-            - [ ] Error handling is appropriate
-            - [ ] Code is clear and readable
-            - [ ] No unnecessary complexity
-
-            ### Security
-            - [ ] No security vulnerabilities
-            - [ ] Credentials/sensitive data handled correctly
-            - [ ] Authentication/authorization proper
-            - [ ] Input validation present
-
-            ### Testing
-            - [ ] Test coverage is adequate
-            - [ ] Edge cases are covered
-            - [ ] Tests are meaningful
-            - [ ] No test regressions
-
-            ### Performance
-            - [ ] No performance regressions
-            - [ ] Database queries optimized (if applicable)
-            - [ ] Frontend bundle size acceptable
-            - [ ] Caching strategies considered
-
-            ### Documentation
-            - [ ] Changes are documented
-            - [ ] Commit messages are clear
-            - [ ] API documentation updated (if applicable)
-            - [ ] Comments explain complex logic
-
-            ---
-            **To request a detailed Claude Code review, comment:** \`@claude\``;
-
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNumber,
-              body: checklist
-            });
-
-      - name: Add Review Labels
-        uses: actions/github-script@v7
-        if: always()
+      - name: Run Claude Code Review
+        uses: anthropics/claude-code-action@v1
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNumber = context.payload.pull_request.number;
-            try {
-              github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber,
-                labels: ['needs-review']
-              });
-            } catch (error) {
-              console.log('Could not add label:', error.message);
-            }
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            Please review this pull request and provide feedback on:
+            - Architecture & Design patterns
+            - Code Quality and best practices
+            - Security concerns and vulnerabilities
+            - Testing coverage and edge cases
+            - Performance implications
+            - Documentation completeness
+
+            Reference CLAUDE.md for coding standards and conventions.
+            Be constructive and actionable in your feedback.
