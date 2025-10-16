@@ -76,6 +76,8 @@ Supporting early educators through evidence-based ML feedback to ensure all chil
 ## 🌿 Development Workflow
 This project follows a structured git workflow: `feature/fix → dev → main → production`. See [Git Workflow Guide](docs/GIT_WORKFLOW.md) for complete details.
 
+> **OAuth Test**: Testing Claude Code OAuth integration - this is a harmless test commit to verify real Claude Code reviews are working.
+
 ## Getting Started
 
 ### For ML Developers
