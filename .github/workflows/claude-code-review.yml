@@ -1,29 +1,56 @@
-# DEPRECATED: This workflow does NOT integrate with Claude Code
-# The official Claude Code GitHub App handles reviews automatically
-# This workflow is kept for documentation purposes only
-#
-# For actual Claude Code reviews:
-# 1. Ensure Claude Code GitHub App is installed on the repository
-# 2. Grant it necessary permissions (pull-requests: write, issues: write)
-# 3. It will automatically review PRs on creation
-# 4. Mention @claude in a PR comment to trigger reviews
-#
-# See: https://docs.claude.com/claude-code for integration details
-
-name: "[DEPRECATED] Claude Code Review Request"
+name: Claude Code Review
 
 on:
-  schedule:
-    # This workflow is disabled - run on a schedule that never triggers
-    - cron: '0 0 31 2 *'  # Feb 31 - never happens
+  pull_request:
+    types: [opened, synchronize]
+    # Optional: Only run on specific file changes
+    # paths:
+    #   - "src/**"
+    #   - "*.md"
 
 jobs:
-  deprecated-notice:
-    name: This workflow is deprecated
+  claude-review:
+    # Optional: Filter by PR author or contributor status
+    # if: |
+    #   github.event.pull_request.user.login == 'external-contributor' ||
+    #   github.event.pull_request.author_association == 'FIRST_TIME_CONTRIBUTOR'
+
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      issues: read
+      contents: read
+      id-token: write
+
     steps:
-      - name: Notice
-        run: |
-          echo "This workflow is deprecated and not functional"
-          echo "The official Claude Code GitHub App handles reviews automatically"
-          echo "See documentation for proper integration"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Review
+        id: claude-review
+        uses: anthropics/claude-code-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number }}
+
+            Please review this pull request and provide feedback on:
+            - Code quality and best practices
+            - Potential bugs or issues
+            - Performance considerations
+            - Security concerns
+            - Test coverage
+            - Documentation completeness
+
+            Use the repository's CLAUDE.md for guidance on style and conventions.
+            Be constructive and helpful in your feedback.
+
+            Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
+
+          # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
+          # or https://docs.claude.com/en/docs/claude-code/cli-reference for available options
+          claude_args: '--allowed-tools "Bash(gh issue view:*),Bash(gh search:*),Bash(gh issue list:*),Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr list:*)"'

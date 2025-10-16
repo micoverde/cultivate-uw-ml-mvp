@@ -1,37 +1,86 @@
-# DEPRECATED: This workflow does NOT provide actual code reviews
-# The official Claude Code GitHub App handles comprehensive reviews automatically
-# This workflow only posted static templates and is no longer functional
-#
-# For actual Claude Code reviews:
-# 1. Install the official Claude Code GitHub App on your repository
-# 2. Configure it in repository settings with required permissions
-# 3. The app will automatically review PRs on creation and @claude mentions
-# 4. It provides actual code analysis, not just templates
-#
-# The Claude Code app performs real analysis of:
-# - Architecture and Design patterns
-# - Code Quality and best practices
-# - Security vulnerabilities
-# - Testing coverage and edge cases
-# - Performance implications
-# - Documentation completeness
-#
-# See: https://docs.claude.com/claude-code for proper integration
+name: Claude Code Review - Detailed Analysis
 
-name: "[DEPRECATED] Claude Detailed Code Review"
+# This workflow provides comprehensive code review analysis
+# It runs on all PRs and can be triggered with @claude mentions in comments
 
 on:
-  schedule:
-    # This workflow is disabled - run on a schedule that never triggers
-    - cron: '0 0 31 2 *'  # Feb 31 - never happens
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created, edited]
 
 jobs:
-  deprecated-notice:
-    name: This workflow is deprecated
+  claude-detailed-review:
+    # Only run on PR events or @claude mentions in comments
+    if: |
+      github.event_name == 'pull_request' ||
+      (github.event_name == 'issue_comment' &&
+       contains(github.event.comment.body, '@claude') &&
+       github.event.issue.pull_request)
+
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      issues: read
+      contents: read
+      id-token: write
+
     steps:
-      - name: Notice
-        run: |
-          echo "This workflow is deprecated and does not provide real reviews"
-          echo "The official Claude Code GitHub App should be used instead"
-          echo "See documentation for proper integration setup"
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude Code Detailed Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          prompt: |
+            REPO: ${{ github.repository }}
+            PR NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+
+            Please provide a comprehensive code review covering:
+
+            ### Architecture and Design
+            - Does this follow established patterns in the codebase?
+            - Is the solution appropriate for the problem?
+            - Are there any scalability concerns?
+            - Is the code maintainable?
+
+            ### Code Quality
+            - Are there any obvious bugs or edge cases?
+            - Is error handling appropriate?
+            - Is the code clear and readable?
+            - Is there unnecessary complexity?
+
+            ### Security
+            - Are there any security vulnerabilities?
+            - Are credentials/sensitive data handled correctly?
+            - Is authentication/authorization proper?
+            - Is input validation present?
+
+            ### Testing
+            - Is test coverage adequate?
+            - Are edge cases covered?
+            - Are tests meaningful?
+            - Are there any test regressions?
+
+            ### Performance
+            - Are there any performance regressions?
+            - Are database queries optimized (if applicable)?
+            - Is frontend bundle size impact acceptable?
+            - Are caching strategies considered?
+
+            ### Documentation
+            - Are changes properly documented?
+            - Are commit messages clear?
+            - Is API documentation updated (if applicable)?
+            - Are comments explaining complex logic?
+
+            Refer to CLAUDE.md in the repository for coding standards and conventions.
+            Be constructive and provide actionable feedback.
+
+            Use `gh pr comment` to post your detailed review.
+
+          claude_args: '--allowed-tools "Bash(gh pr view:*),Bash(gh pr diff:*),Bash(gh pr comment:*),Bash(gh search:*)"'
