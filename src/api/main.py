@@ -679,7 +679,7 @@ async def save_feedback(feedback: dict):
             },
             context={
                 'source': 'web-ui',
-                'environment': 'azure' if not (window.location.hostname == 'localhost') else 'local'
+                'environment': os.getenv('ENVIRONMENT', 'production')
             },
             user_id=feedback.get('user_id', 'anonymous'),
             session_id=feedback.get('session_id', 'unknown'),
