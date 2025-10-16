@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy lightweight requirements
-COPY requirements-api.txt .
+COPY requirements/requirements-api.txt .
 
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements-api.txt
