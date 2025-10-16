@@ -1,0 +1,85 @@
+name: Claude Detailed Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  claude-review:
+    name: Code Review Checklist
+    runs-on: ubuntu-latest
+
+    permissions:
+      pull-requests: write
+      issues: write
+      contents: read
+
+    steps:
+      - name: Post Review Checklist Comment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNum = context.payload.pull_request.number;
+
+            const checklist = 'Code Review Checklist\n\n' +
+              '### Architecture and Design\n' +
+              '- [ ] Follows established patterns in codebase\n' +
+              '- [ ] Solution is appropriate for the problem\n' +
+              '- [ ] No scalability concerns\n' +
+              '- [ ] Maintainability is good\n\n' +
+              '### Code Quality\n' +
+              '- [ ] No obvious bugs or edge cases\n' +
+              '- [ ] Error handling is appropriate\n' +
+              '- [ ] Code is clear and readable\n' +
+              '- [ ] No unnecessary complexity\n\n' +
+              '### Security\n' +
+              '- [ ] No security vulnerabilities detected\n' +
+              '- [ ] Credentials/sensitive data handled correctly\n' +
+              '- [ ] Authentication/authorization proper\n' +
+              '- [ ] Input validation present\n\n' +
+              '### Testing\n' +
+              '- [ ] Test coverage is adequate\n' +
+              '- [ ] Edge cases are covered\n' +
+              '- [ ] Tests are meaningful\n' +
+              '- [ ] No test regressions\n\n' +
+              '### Performance\n' +
+              '- [ ] No performance regressions\n' +
+              '- [ ] Database queries optimized (if applicable)\n' +
+              '- [ ] Frontend bundle size impact acceptable\n' +
+              '- [ ] Caching strategies considered\n\n' +
+              '### Documentation\n' +
+              '- [ ] Changes are documented\n' +
+              '- [ ] Commit messages are clear\n' +
+              '- [ ] API documentation updated (if applicable)\n' +
+              '- [ ] Comments explain complex logic\n\n' +
+              '---\n\n' +
+              'To request a detailed Claude Code review, comment: @claude';
+
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNum,
+              body: checklist
+            });
+
+            console.log('Code review checklist posted for PR #' + prNum);
+
+      - name: Add Labels
+        uses: actions/github-script@v7
+        if: always()
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNum = context.payload.pull_request.number;
+
+            try {
+              github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: prNum,
+                labels: ['needs-review']
+              });
+            } catch (err) {
+              console.log('Could not add labels');
+            }
