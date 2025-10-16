@@ -1,85 +1,37 @@
-name: Claude Detailed Code Review
+# DEPRECATED: This workflow does NOT provide actual code reviews
+# The official Claude Code GitHub App handles comprehensive reviews automatically
+# This workflow only posted static templates and is no longer functional
+#
+# For actual Claude Code reviews:
+# 1. Install the official Claude Code GitHub App on your repository
+# 2. Configure it in repository settings with required permissions
+# 3. The app will automatically review PRs on creation and @claude mentions
+# 4. It provides actual code analysis, not just templates
+#
+# The Claude Code app performs real analysis of:
+# - Architecture and Design patterns
+# - Code Quality and best practices
+# - Security vulnerabilities
+# - Testing coverage and edge cases
+# - Performance implications
+# - Documentation completeness
+#
+# See: https://docs.claude.com/claude-code for proper integration
+
+name: "[DEPRECATED] Claude Detailed Code Review"
 
 on:
-  pull_request:
-    types: [opened, synchronize]
+  schedule:
+    # This workflow is disabled - run on a schedule that never triggers
+    - cron: '0 0 31 2 *'  # Feb 31 - never happens
 
 jobs:
-  claude-review:
-    name: Code Review Checklist
+  deprecated-notice:
+    name: This workflow is deprecated
     runs-on: ubuntu-latest
-
-    permissions:
-      pull-requests: write
-      issues: write
-      contents: read
-
     steps:
-      - name: Post Review Checklist Comment
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNum = context.payload.pull_request.number;
-
-            const checklist = 'Code Review Checklist\n\n' +
-              '### Architecture and Design\n' +
-              '- [ ] Follows established patterns in codebase\n' +
-              '- [ ] Solution is appropriate for the problem\n' +
-              '- [ ] No scalability concerns\n' +
-              '- [ ] Maintainability is good\n\n' +
-              '### Code Quality\n' +
-              '- [ ] No obvious bugs or edge cases\n' +
-              '- [ ] Error handling is appropriate\n' +
-              '- [ ] Code is clear and readable\n' +
-              '- [ ] No unnecessary complexity\n\n' +
-              '### Security\n' +
-              '- [ ] No security vulnerabilities detected\n' +
-              '- [ ] Credentials/sensitive data handled correctly\n' +
-              '- [ ] Authentication/authorization proper\n' +
-              '- [ ] Input validation present\n\n' +
-              '### Testing\n' +
-              '- [ ] Test coverage is adequate\n' +
-              '- [ ] Edge cases are covered\n' +
-              '- [ ] Tests are meaningful\n' +
-              '- [ ] No test regressions\n\n' +
-              '### Performance\n' +
-              '- [ ] No performance regressions\n' +
-              '- [ ] Database queries optimized (if applicable)\n' +
-              '- [ ] Frontend bundle size impact acceptable\n' +
-              '- [ ] Caching strategies considered\n\n' +
-              '### Documentation\n' +
-              '- [ ] Changes are documented\n' +
-              '- [ ] Commit messages are clear\n' +
-              '- [ ] API documentation updated (if applicable)\n' +
-              '- [ ] Comments explain complex logic\n\n' +
-              '---\n\n' +
-              'To request a detailed Claude Code review, comment: @claude';
-
-            github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: prNum,
-              body: checklist
-            });
-
-            console.log('Code review checklist posted for PR #' + prNum);
-
-      - name: Add Labels
-        uses: actions/github-script@v7
-        if: always()
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const prNum = context.payload.pull_request.number;
-
-            try {
-              github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNum,
-                labels: ['needs-review']
-              });
-            } catch (err) {
-              console.log('Could not add labels');
-            }
+      - name: Notice
+        run: |
+          echo "This workflow is deprecated and does not provide real reviews"
+          echo "The official Claude Code GitHub App should be used instead"
+          echo "See documentation for proper integration setup"
