@@ -1,4 +1,7 @@
-*.pkl filter=lfs diff=lfs merge=lfs -text
+# CRITICAL: Model files must NOT use LFS since Docker builds don't fetch LFS content
+# Models MUST be stored directly in git so they're available in Docker image builds
+# See: Issue #300 - ensemble models all failed to load (got LFS pointers instead)
+# *.pkl filter=lfs diff=lfs merge=lfs -text  # DISABLED - models must be in git directly
 *.pt filter=lfs diff=lfs merge=lfs -text
 *.bin filter=lfs diff=lfs merge=lfs -text
 *.h5 filter=lfs diff=lfs merge=lfs -text
