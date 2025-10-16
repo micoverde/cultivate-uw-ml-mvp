@@ -1,0 +1,189 @@
+text,label,source
+When did it happen?,CEQ
+When did you arrive?,CEQ
+When did you see it?,CEQ
+When did they leave?,CEQ
+When does it start?,CEQ
+When does it end?,CEQ
+When will you be ready?,CEQ
+When should we go?,CEQ
+When can you come?,CEQ
+When was it made?,CEQ
+When were you born?,CEQ
+When did you finish?,CEQ
+When do you want to eat?,CEQ
+When is your birthday?,CEQ
+When is the meeting?,CEQ
+When did you last see it?,CEQ
+Where did you put it?,CEQ
+Where is the book?,CEQ
+Where are you going?,CEQ
+Where does it go?,CEQ
+Where should we meet?,CEQ
+Where can I find it?,CEQ
+Where is your house?,CEQ
+Where did you hide it?,CEQ
+Who did this?,CEQ
+"What other solutions are there?",OEQ
+"What other options do we have?",OEQ
+"What other ways could we try?",OEQ
+"What other ideas do you have?",OEQ
+"What are some alternatives?",OEQ
+"What are some other possibilities?",OEQ
+"What are different ways to solve this?",OEQ
+"What are some other approaches?",OEQ
+"What else could work?",OEQ
+"What are other methods we could use?",OEQ
+"What if we did something different?",OEQ
+"What are some variations?",OEQ
+"How else might we approach this?",OEQ
+"How many different ways can you think of?",OEQ
+"Can you think of other examples?",OEQ
+"What other strategies are there?",OEQ
+"What other choices do we have?",OEQ
+"What are the alternatives?",OEQ
+"What are the options?",CEQ
+"How many options are there?",CEQ
+"Which option is best?",CEQ
+"Which solution is correct?",CEQ
+"Is there another way?",CEQ
+"Are there other choices?",CEQ
+"Do you have other ideas?",CEQ
+"What is the capital of France?",CEQ
+"What is the answer?",CEQ
+"What is your name?",CEQ
+"What is the time?",CEQ
+"What color is the sky?",CEQ
+"What number comes next?",CEQ
+"What is 2 plus 2?",CEQ
+"What letter is this?",CEQ
+"What shape is it?",CEQ
+"What size is it?",CEQ
+"What are your thoughts?",OEQ
+"What are your ideas?",OEQ
+"What are your feelings?",OEQ
+"What are your opinions?",OEQ
+"What are your reflections?",OEQ
+"What are your observations?",OEQ
+"What are you thinking?",OEQ
+"What are you noticing?",OEQ
+"What would you say?",OEQ
+"What do you believe?",OEQ
+"What is the capital of Spain?",CEQ
+"What is the largest planet?",CEQ
+"What is the first letter?",CEQ
+"What is your age?",CEQ
+"What is the password?",CEQ
+what is this called?,CEQ,Book about Flowers SOM SUBS .mp4 - Q4
+which one is the bottom?,CEQ,Launch Cascade Vista Breanna 013.MP4 - Q2
+how many…?,CEQ,Launch Cascade Vista Breanna 013.MP4 - Q3
+whose hat is it?,CEQ,Conflict Management during Outdoor Play - Q1
+how,OEQ,CDCSA Wenatchee Center Yasmin 035 - Q2
+how is the toast today?,CEQ,CDCSA Wenatchee Center Karina 021 - Q6
+what can we do about it?,OEQ,Being Aware of a Toddler's Needs - Q4
+what song could we sing?,CEQ,CDCSA Wenatchee Center Karina 017 - Q1
+what?,CEQ,CDCSA Wenatchee Center Karina 017 - Q2
+what song do you want to sing?,CEQ,CDCSA Wenatchee Center Karina 017 - Q3
+then what happens?,OEQ,CDCSA Wenatchee Center Karina 017 - Q6
+how can...,OEQ,CDCSA Sunset Ridge Khani 011 - Q1
+how many…,CEQ,CDCSA Sunset Ridge Khani 011 - Q2
+why…,OEQ,CDCSA Sunset Ridge Khani 011 - Q4
+how come…,OEQ,CDCSA Sunset Ridge Khani 011 - Q5
+what do I do?,OEQ,Center Street Nancy Coach iPhone 010 - Q2
+how about…,OEQ,Center Street Nancy Coach iPhone 010 - Q4
+what goes on the top?,OEQ,Center Street Nancy Coach iPhone 010 - Q5
+what else is yellow,OEQ,Edgewater Early Head Start Martha 036 - Q2
+what kind of feet are we gonna use?,CEQ,Fiddleheads Sarah 038 - Q3
+what happens when…,OEQ,Little Teddys - Jeanette First Walkthrough 015 - Q2
+what else?,OEQ,What Can We Measure_ESP SUBS - Q2
+what does it say?,CEQ,Snoqualmie_Ridge_ELC-Linda-001 - Q4
+what about yours?,CEQ,Snoqualmie_Ridge_ELC-Linda-001 - Q7
+what do you need help with?,OEQ,Clarke County School District Lynn 007 - Q1
+what do you need?,OEQ,Clarke County School District Lynn 007 - Q3
+How…what...?,OEQ,Clarke County School District Lynn 007 - Q5
+How…?,OEQ,Clarke County School District Lynn 007 - Q6
+What do you think…?,OEQ,ACAP_Marty_005 - Q2
+what is she going to see?,OEQ,ACAP_Marty_005 - Q5
+what did we learn?,OEQ,childrens_place_zaid_006 - Q1
+some tihngs what?,CEQ,childrens_place_zaid_006 - Q2
+why…?,OEQ,childrens_place_zaid_006 - Q3
+how…?,OEQ,childrens_place_zaid_006 - Q4
+what is different…?,OEQ,Draw Results - Q1
+how do they look different?,OEQ,Draw Results - Q2
+How did that happen?,OEQ,synthetic
+How does this work?,OEQ,synthetic
+How do you think it works?,OEQ,synthetic
+How can we solve this?,OEQ,synthetic
+How would you describe it?,OEQ,synthetic
+How did you figure that out?,OEQ,synthetic
+How do you know?,OEQ,synthetic
+How could we make it better?,OEQ,synthetic
+How is this similar to that?,OEQ,synthetic
+How are they different?,OEQ,synthetic
+Why did it fall?,OEQ,synthetic
+Why do you think that happened?,OEQ,synthetic
+Why is it important?,OEQ,synthetic
+Why did you choose that?,OEQ,synthetic
+Why do we need this?,OEQ,synthetic
+Why does it work that way?,OEQ,synthetic
+Why is it called that?,OEQ,synthetic
+Why do you think so?,OEQ,synthetic
+What do you think happened?,OEQ,synthetic
+What do you think will happen next?,OEQ,synthetic
+What do you think about this?,OEQ,synthetic
+What do you think it means?,OEQ,synthetic
+What do you think we should do?,OEQ,synthetic
+What did you think when you saw that?,OEQ,synthetic
+Can you describe what you saw?,OEQ,synthetic
+Can you explain how you did that?,OEQ,synthetic
+Tell me about what you made?,OEQ,synthetic
+Describe what happened?,OEQ,synthetic
+Explain what you're thinking?,OEQ,synthetic
+Tell me more about that?,OEQ,synthetic
+Can you show me how it works?,OEQ,synthetic
+What else could we try?,OEQ,synthetic
+What else do you notice?,OEQ,synthetic
+What if we did it differently?,OEQ,synthetic
+What would happen if we changed it?,OEQ,synthetic
+What else can you tell me?,OEQ,synthetic
+What happened next?,OEQ,synthetic
+What did we learn?,OEQ,synthetic
+What do you need help with?,OEQ,synthetic
+Where do you think it goes?,OEQ,synthetic
+When do you think we should do it?,OEQ,synthetic
+Did you like it?,CEQ,synthetic
+Did you finish?,CEQ,synthetic
+Did you see that?,CEQ,synthetic
+Did it work?,CEQ,synthetic
+Did you try it?,CEQ,synthetic
+Did you have fun?,CEQ,synthetic
+Is this correct?,CEQ,synthetic
+Is it big?,CEQ,synthetic
+Is it red?,CEQ,synthetic
+Are you ready?,CEQ,synthetic
+Are they the same?,CEQ,synthetic
+Is that yours?,CEQ,synthetic
+Can you do it?,CEQ,synthetic
+Can you see it?,CEQ,synthetic
+Could you help me?,CEQ,synthetic
+Can we start?,CEQ,synthetic
+Could you pass that?,CEQ,synthetic
+Do you want more?,CEQ,synthetic
+Do you like this?,CEQ,synthetic
+Does it fit?,CEQ,synthetic
+Do you need help?,CEQ,synthetic
+Does it work?,CEQ,synthetic
+What color is it?,CEQ,synthetic
+What number is this?,CEQ,synthetic
+Which one do you want?,CEQ,synthetic
+What's your name?,CEQ,synthetic
+Which is bigger?,CEQ,synthetic
+How many are there?,CEQ,synthetic
+How many do you have?,CEQ,synthetic
+How many do you see?,CEQ,synthetic
+Is it this one?,CEQ,synthetic
+Was it you?,CEQ,synthetic
+Were you there?,CEQ,synthetic
+Will you try?,CEQ,synthetic
+Would you like that?,CEQ,synthetic
+Should we go?,CEQ,synthetic

@@ -1,0 +1,1 @@
+{"model_type": "ensemble", "timestamp": "2025-10-02T15:07:09.121049", "training_time": "4.911550760269165", "num_models": "4", "ensemble_accuracy": "0.8260869565217391", "ensemble_f1": "0.8174603174603174"}
