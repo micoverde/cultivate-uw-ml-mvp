@@ -19,6 +19,9 @@ def download_models_from_blob():
 
     # Check if REAL model files exist (filter out Git LFS pointer files)
     # LFS pointers are ~131 bytes, real models are >1MB
+    # This is necessary because when cloning without Git LFS (local dev, Docker builds),
+    # the models/ directory contains 131-byte pointer files. Without size filtering,
+    # we'd skip downloading and the API would try to load pointers instead of real models.
     existing_models = [
         f for f in models_dir.glob("*.pkl")
         if f.stat().st_size > 1000
