@@ -21,6 +21,9 @@ RUN pip install --no-cache-dir -r requirements-api.txt
 COPY src/ ./src/
 COPY run_api.py .
 
+# Copy ML models (required for ensemble and classic classifiers)
+COPY models/ ./models/
+
 # Create non-root user for security
 RUN useradd -m -u 1000 apiuser && chown -R apiuser:apiuser /app
 USER apiuser
