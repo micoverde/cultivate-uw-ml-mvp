@@ -20,6 +20,9 @@ COPY src/ ./src/
 COPY run_api.py .
 COPY download_models.sh .
 
+# Make download script executable
+RUN chmod +x download_models.sh
+
 # Create models directory (will be populated at startup)
 RUN mkdir -p /app/models
 
