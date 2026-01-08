@@ -56,6 +56,13 @@ class CompareRequest(BaseModel):
     text: str = Field(..., min_length=1, max_length=1000, description="Question text to analyze")
 
 
+class FeatureDetails(BaseModel):
+    """Detailed feature breakdown for display."""
+    name: str
+    value: float
+    description: str
+
+
 class ExtractorResult(BaseModel):
     """Result from a single extractor."""
     classification: str = Field(..., description="OEQ or CEQ classification")
@@ -64,6 +71,7 @@ class ExtractorResult(BaseModel):
     latency_ms: float = Field(..., description="Extraction time in milliseconds")
     available: bool = Field(default=True, description="Whether this extractor is available")
     error: Optional[str] = Field(None, description="Error message if not available")
+    features: Optional[list[FeatureDetails]] = Field(None, description="Key features extracted")
 
 
 class CompareResponse(BaseModel):
@@ -191,17 +199,49 @@ async def compare_extractors(request: CompareRequest) -> CompareResponse:
     """
     logger.info(f"Demo 4 comparison request: '{request.text[:50]}...'")
 
+    # Feature names for rule-based extractor
+    rule_feature_names = [
+        ("word_count", "Number of words"),
+        ("has_question_mark", "Contains question mark"),
+        ("char_count", "Character count"),
+        ("has_how", "Contains 'how'"),
+        ("has_why", "Contains 'why'"),
+        ("has_what", "Contains 'what'"),
+        ("has_when", "Contains 'when'"),
+        ("has_where", "Contains 'where'"),
+        ("has_who", "Contains 'who'"),
+        ("has_what_think", "Contains 'what do you think'"),
+        ("has_describe_explain", "Contains describe/explain"),
+        ("has_did", "Contains 'did'"),
+        ("has_is_are", "Contains is/are/was/were"),
+        ("has_can_could", "Contains can/could/would"),
+        ("has_do_does", "Contains do/does"),
+        ("oeq_score", "OEQ indicator score"),
+        ("ceq_score", "CEQ indicator score"),
+        ("question_mark_count", "Question mark count"),
+        ("is_long_question", "Question > 5 words")
+    ]
+
     # Rule-based extraction
     start = time.perf_counter()
     try:
         rule_class, rule_conf, rule_features = classify_with_rules(request.text)
         rule_latency = (time.perf_counter() - start) * 1000
+
+        # Build feature details for display (only non-zero features)
+        rule_feature_details = [
+            FeatureDetails(name=name, value=float(rule_features[i]), description=desc)
+            for i, (name, desc) in enumerate(rule_feature_names)
+            if float(rule_features[i]) > 0
+        ]
+
         rule_result = ExtractorResult(
             classification=rule_class,
             confidence=rule_conf,
             feature_count=19,
             latency_ms=round(rule_latency, 2),
-            available=True
+            available=True,
+            features=rule_feature_details
         )
     except Exception as e:
         rule_result = ExtractorResult(
@@ -218,12 +258,22 @@ async def compare_extractors(request: CompareRequest) -> CompareResponse:
     try:
         sem_class, sem_conf, sem_features = classify_with_semantic(request.text)
         sem_latency = (time.perf_counter() - start) * 1000
+
+        # For semantic, show top embedding dimensions (most significant)
+        import numpy as np
+        top_indices = np.argsort(np.abs(sem_features))[-5:][::-1]
+        sem_feature_details = [
+            FeatureDetails(name=f"embedding_dim_{idx}", value=float(sem_features[idx]), description=f"Semantic dimension {idx}")
+            for idx in top_indices
+        ]
+
         semantic_result = ExtractorResult(
             classification=sem_class,
             confidence=sem_conf,
             feature_count=384,
             latency_ms=round(sem_latency, 2),
-            available=True
+            available=True,
+            features=sem_feature_details
         )
     except Exception as e:
         logger.warning(f"Semantic extraction failed: {e}")
@@ -239,14 +289,23 @@ async def compare_extractors(request: CompareRequest) -> CompareResponse:
     # Hybrid extraction
     start = time.perf_counter()
     try:
-        hyb_class, hyb_conf, _ = classify_with_hybrid(request.text)
+        hyb_class, hyb_conf, hyb_features = classify_with_hybrid(request.text)
         hyb_latency = (time.perf_counter() - start) * 1000
+
+        # Hybrid shows combined: key rule features + top semantic dimensions
+        # Combine rule features (first 19) + semantic summary
+        hyb_feature_details = rule_feature_details[:5] if rule_result.available else []  # Top 5 rule features
+        hyb_feature_details.append(
+            FeatureDetails(name="semantic_combined", value=float(sem_conf if semantic_result.available else 0.5), description="Semantic confidence boost")
+        )
+
         hybrid_result = ExtractorResult(
             classification=hyb_class,
             confidence=hyb_conf,
             feature_count=403,
             latency_ms=round(hyb_latency, 2),
-            available=True
+            available=True,
+            features=hyb_feature_details
         )
     except Exception as e:
         logger.warning(f"Hybrid extraction failed: {e}")
