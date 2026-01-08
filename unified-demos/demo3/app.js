@@ -119,7 +119,7 @@ const Config = {
     },
 
     // Azure Blob Storage for video fallback
-    azureBlobBase: 'https://cultivatemlstorage.blob.core.windows.net/videos',
+    azureBlobBase: 'https://cultivatemlvideos.blob.core.windows.net/videos',
 
     // LocalStorage keys
     storageKeys: {
