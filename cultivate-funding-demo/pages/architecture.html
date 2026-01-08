@@ -562,6 +562,229 @@
             color: var(--text-secondary);
             font-size: var(--font-sm);
         }
+
+        /* System Diagram Styles */
+        .system-diagram {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .diagram-track {
+            margin-bottom: var(--space-lg);
+        }
+
+        .track-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+            font-size: var(--font-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .training-track .track-label {
+            color: #81c784;
+        }
+
+        .processing-track .track-label {
+            color: var(--brand-primary);
+        }
+
+        .diagram-flow {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .diagram-node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            min-width: 80px;
+            text-align: center;
+            transition: transform var(--transition-fast);
+        }
+
+        .diagram-node:hover {
+            transform: scale(1.05);
+        }
+
+        .diagram-node i {
+            font-size: 24px;
+        }
+
+        .diagram-node span {
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .diagram-node.training {
+            background: rgba(129, 199, 132, 0.1);
+            border: 1px solid rgba(129, 199, 132, 0.3);
+            color: #81c784;
+        }
+
+        .diagram-node.training.highlight {
+            background: rgba(129, 199, 132, 0.2);
+            border: 2px solid #81c784;
+            box-shadow: 0 0 20px rgba(129, 199, 132, 0.2);
+        }
+
+        .diagram-node.processing {
+            background: rgba(79, 195, 247, 0.1);
+            border: 1px solid rgba(79, 195, 247, 0.3);
+            color: var(--brand-primary);
+        }
+
+        .diagram-node.processing.highlight {
+            background: rgba(79, 195, 247, 0.2);
+            border: 2px solid var(--brand-primary);
+            box-shadow: 0 0 20px rgba(79, 195, 247, 0.2);
+        }
+
+        .diagram-node.output {
+            background: rgba(255, 167, 38, 0.15);
+            border: 2px solid var(--warning);
+            color: var(--warning);
+            box-shadow: 0 0 20px rgba(255, 167, 38, 0.2);
+        }
+
+        .diagram-arrow {
+            color: var(--text-tertiary);
+            font-size: 14px;
+        }
+
+        .diagram-connector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: var(--space-lg) 0;
+            position: relative;
+        }
+
+        .connector-line {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(180deg, #81c784, var(--brand-primary));
+        }
+
+        .connector-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            background: var(--bg-tertiary);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin: var(--space-sm) 0;
+        }
+
+        .connector-label i {
+            color: var(--success);
+        }
+
+        .connector-arrow {
+            color: var(--brand-primary);
+            font-size: 18px;
+        }
+
+        .diagram-output {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin-top: var(--space-xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .output-stat {
+            text-align: center;
+        }
+
+        .output-value {
+            display: block;
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--warning);
+        }
+
+        .output-label {
+            display: block;
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: var(--space-xs);
+        }
+
+        .architecture-legend {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: var(--radius-sm);
+        }
+
+        .legend-color.training {
+            background: rgba(129, 199, 132, 0.3);
+            border: 2px solid #81c784;
+        }
+
+        .legend-color.processing {
+            background: rgba(79, 195, 247, 0.3);
+            border: 2px solid var(--brand-primary);
+        }
+
+        .legend-color.output {
+            background: rgba(255, 167, 38, 0.3);
+            border: 2px solid var(--warning);
+        }
+
+        @media (max-width: 768px) {
+            .diagram-flow {
+                flex-direction: column;
+            }
+
+            .diagram-arrow {
+                transform: rotate(90deg);
+            }
+
+            .diagram-output {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-md);
+            }
+
+            .architecture-legend {
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-sm);
+            }
+        }
     </style>
 </head>
 <body>
@@ -790,6 +1013,131 @@
                         <span class="tech-tag">Precision</span>
                         <span class="tech-tag">Recall</span>
                     </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- System Design Visual -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Complete System Architecture</h2>
+                <p class="section-subtitle">How the Processing Pipeline and Ensemble Training work together</p>
+            </div>
+
+            <div class="system-diagram">
+                <!-- Training Path (Top) -->
+                <div class="diagram-track training-track">
+                    <div class="track-label">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                        <span>OFFLINE: Model Training</span>
+                    </div>
+                    <div class="diagram-flow">
+                        <div class="diagram-node training">
+                            <i class="fa-solid fa-database"></i>
+                            <span>26 Videos</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node training">
+                            <i class="fa-solid fa-tags"></i>
+                            <span>119 Labels</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node training">
+                            <i class="fa-solid fa-flask"></i>
+                            <span>19 Features</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node training highlight">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span>3-Model Ensemble</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connection Arrow -->
+                <div class="diagram-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-label">
+                        <i class="fa-solid fa-download"></i>
+                        Trained Models (.joblib)
+                    </div>
+                    <div class="connector-arrow"><i class="fa-solid fa-arrow-down"></i></div>
+                </div>
+
+                <!-- Processing Path (Bottom) -->
+                <div class="diagram-track processing-track">
+                    <div class="track-label">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span>REAL-TIME: Classification Pipeline</span>
+                    </div>
+                    <div class="diagram-flow">
+                        <div class="diagram-node processing">
+                            <i class="fa-solid fa-video"></i>
+                            <span>Video</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node processing">
+                            <i class="fa-solid fa-waveform-lines"></i>
+                            <span>Audio</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node processing">
+                            <i class="fa-solid fa-comment-dots"></i>
+                            <span>Whisper</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node processing">
+                            <i class="fa-solid fa-circle-question"></i>
+                            <span>Questions</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node processing">
+                            <i class="fa-solid fa-chart-column"></i>
+                            <span>Features</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node processing highlight">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>Ensemble</span>
+                        </div>
+                        <div class="diagram-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                        <div class="diagram-node output">
+                            <i class="fa-solid fa-lightbulb"></i>
+                            <span>OEQ/CEQ</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Stats -->
+                <div class="diagram-output">
+                    <div class="output-stat">
+                        <span class="output-value">89%</span>
+                        <span class="output-label">Accuracy</span>
+                    </div>
+                    <div class="output-stat">
+                        <span class="output-value">&lt;50ms</span>
+                        <span class="output-label">Latency</span>
+                    </div>
+                    <div class="output-stat">
+                        <span class="output-value">Real-time</span>
+                        <span class="output-label">Feedback</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Architecture Legend -->
+            <div class="architecture-legend">
+                <div class="legend-item">
+                    <div class="legend-color training"></div>
+                    <span>Training Pipeline (Offline)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color processing"></div>
+                    <span>Processing Pipeline (Real-time)</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color output"></div>
+                    <span>Classification Output</span>
                 </div>
             </div>
         </section>
