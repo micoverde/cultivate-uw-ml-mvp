@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 4: Feature Extraction Comparison | Cultivate Learning</title>
+    <link rel="stylesheet" href="../shared/unified-styles.css">
+    <style>
+        .demo-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-xl);
+        }
+
+        .demo-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+            padding: var(--space-xl) 0;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            border-radius: var(--radius-lg);
+        }
+
+        .demo-header h1 {
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .demo-header p {
+            color: var(--text-secondary);
+            font-size: var(--font-lg);
+        }
+
+        .input-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .input-section label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .input-section textarea {
+            width: 100%;
+            padding: var(--space-md);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
+            font-family: inherit;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .input-section textarea:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+        }
+
+        .quick-examples {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+            margin: var(--space-md) 0;
+        }
+
+        .example-chip {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-sm);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .example-chip:hover {
+            background: var(--brand-primary);
+            color: var(--text-inverse);
+            border-color: var(--brand-primary);
+        }
+
+        .analyze-btn {
+            background: var(--brand-primary);
+            color: var(--text-inverse);
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            margin-top: var(--space-md);
+        }
+
+        .analyze-btn:hover {
+            background: var(--brand-secondary);
+            transform: translateY(-1px);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        @media (max-width: 968px) {
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .extractor-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+            transition: all var(--transition-base);
+        }
+
+        .extractor-card.winner {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.1);
+        }
+
+        .extractor-card h3 {
+            font-size: var(--font-lg);
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .extractor-card .feature-count {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .classification-badge {
+            display: inline-block;
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-md);
+            font-size: var(--font-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+        }
+
+        .classification-badge.oeq {
+            background: rgba(16, 124, 16, 0.1);
+            color: #107c10;
+        }
+
+        .classification-badge.ceq {
+            background: rgba(0, 120, 212, 0.1);
+            color: #0078d4;
+        }
+
+        .confidence-bar {
+            height: 8px;
+            background: var(--bg-tertiary);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: var(--space-sm);
+        }
+
+        .confidence-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+            border-radius: 4px;
+            transition: width 0.5s ease;
+        }
+
+        .confidence-text {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .latency {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
+        .status-banner {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeeba 100%);
+            border: 1px solid #ffc107;
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+
+        .status-banner h2 {
+            color: #856404;
+            margin-bottom: var(--space-sm);
+        }
+
+        .status-banner p {
+            color: #856404;
+        }
+
+        .status-banner a {
+            color: #0078d4;
+        }
+
+        .metrics-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+        }
+
+        .metrics-section h3 {
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+        }
+
+        .metrics-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .metrics-table th,
+        .metrics-table td {
+            padding: var(--space-sm) var(--space-md);
+            text-align: left;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .metrics-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .metrics-table td {
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="demo-container">
+        <div class="demo-header">
+            <h1>Demo 4: Feature Extraction Comparison</h1>
+            <p>Compare rule-based, semantic, and hybrid feature extraction methods</p>
+        </div>
+
+        <div class="status-banner">
+            <h2>Coming Soon</h2>
+            <p>This demo is under active development as part of <a href="https://github.com/micoverde/cultivate-uw-ml-mvp/issues/298" target="_blank">FEATURE #298</a></p>
+            <p style="margin-top: var(--space-md);">Track progress: <a href="https://github.com/micoverde/cultivate-uw-ml-mvp/issues/299" target="_blank">USER STORY 3.1</a> | <a href="https://github.com/micoverde/cultivate-uw-ml-mvp/issues/301" target="_blank">USER STORY 3.3 (UI)</a></p>
+        </div>
+
+        <div class="input-section">
+            <label for="question-input">Enter a question to classify:</label>
+            <textarea id="question-input" placeholder="What happened to your tower?"></textarea>
+            <div class="quick-examples">
+                <span class="example-chip" onclick="setExample('Did you like it?')">Did you like it?</span>
+                <span class="example-chip" onclick="setExample('What do you think happened?')">What do you think happened?</span>
+                <span class="example-chip" onclick="setExample('How could you make it stronger?')">How could you make it stronger?</span>
+                <span class="example-chip" onclick="setExample('Is this correct?')">Is this correct?</span>
+            </div>
+            <button class="analyze-btn" onclick="analyze()">Analyze Question</button>
+        </div>
+
+        <div class="comparison-grid">
+            <div class="extractor-card" id="rule-card">
+                <h3>Rule-Based</h3>
+                <div class="feature-count">19 features</div>
+                <div class="classification-badge oeq" id="rule-class">OEQ</div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="rule-conf-bar" style="width: 68%"></div>
+                </div>
+                <div class="confidence-text" id="rule-conf">68.2%</div>
+                <div class="latency" id="rule-latency">2ms</div>
+            </div>
+
+            <div class="extractor-card" id="semantic-card">
+                <h3>Semantic</h3>
+                <div class="feature-count">384 features</div>
+                <div class="classification-badge oeq" id="semantic-class">OEQ</div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="semantic-conf-bar" style="width: 87%"></div>
+                </div>
+                <div class="confidence-text" id="semantic-conf">87.4%</div>
+                <div class="latency" id="semantic-latency">43ms</div>
+            </div>
+
+            <div class="extractor-card winner" id="hybrid-card">
+                <h3>Hybrid</h3>
+                <div class="feature-count">403 features</div>
+                <div class="classification-badge oeq" id="hybrid-class">OEQ</div>
+                <div class="confidence-bar">
+                    <div class="confidence-fill" id="hybrid-conf-bar" style="width: 91%"></div>
+                </div>
+                <div class="confidence-text" id="hybrid-conf">91.2%</div>
+                <div class="latency" id="hybrid-latency">46ms</div>
+            </div>
+        </div>
+
+        <div class="metrics-section">
+            <h3>Performance Comparison (Target Metrics)</h3>
+            <table class="metrics-table">
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Rule-Based</th>
+                        <th>Semantic</th>
+                        <th>Hybrid</th>
+                        <th>Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>F1 Score (macro)</td>
+                        <td>0.48</td>
+                        <td>0.72</td>
+                        <td>0.78</td>
+                        <td>0.75+</td>
+                    </tr>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td>52%</td>
+                        <td>75%</td>
+                        <td>81%</td>
+                        <td>80%+</td>
+                    </tr>
+                    <tr>
+                        <td>CEQ Recall</td>
+                        <td>25%</td>
+                        <td>68%</td>
+                        <td>79%</td>
+                        <td>80%+</td>
+                    </tr>
+                    <tr>
+                        <td>Latency (p50)</td>
+                        <td>2ms</td>
+                        <td>43ms</td>
+                        <td>46ms</td>
+                        <td>&lt;100ms</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="../shared/unified-header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script>
+        function setExample(text) {
+            document.getElementById('question-input').value = text;
+        }
+
+        function analyze() {
+            const question = document.getElementById('question-input').value;
+            if (!question.trim()) {
+                alert('Please enter a question');
+                return;
+            }
+
+            // Placeholder - will integrate with API when ready
+            alert('API integration coming soon!\\n\\nQuestion: ' + question + '\\n\\nThis will call /api/v3/classify/compare');
+        }
+    </script>
+</body>
+</html>
