@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 env:
-  RESOURCE_GROUP: cultivate-ml-rg
+  RESOURCE_GROUP: cultivate-ml-prod
   CONTAINER_APP_NAME: cultivate-ml-api
-  ACR_NAME: cultivatemlregistry
+  ACR_NAME: cultivatemlacr
   SWA_NAME: cultivate-ml-demos
   SWA_RG: cultivate-ml-prod
 
