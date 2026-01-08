@@ -825,7 +825,7 @@ async function initializeComponents() {
         // Constructor signature: (containerId: string, options?: object)
         // Note: VideoSelector renders its own UI inside the container, so we use the video grid container
         if (VideoSelector) {
-            window.videoSelector = new VideoSelector('videoGrid', {
+            window.videoSelector = new VideoSelector('videoSelectorContainer', {
                 catalogPath: Config.catalogPath,
                 onVideoSelect: (video) => {
                     window.dispatchEvent(new CustomEvent('videoSelected', { detail: { video } }));
