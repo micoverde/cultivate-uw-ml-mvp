@@ -248,11 +248,17 @@ async function checkApiStatus() {
     const statusDot = elements.apiStatus.querySelector('.status-dot');
     const statusText = elements.apiStatus.querySelector('.status-text');
 
-    for (const endpoint of API_CONFIG.endpoints) {
+    // Skip localhost endpoints when running on production (Azure)
+    const isProduction = window.location.hostname.includes('azurestaticapps.net');
+    const endpointsToCheck = isProduction
+        ? API_CONFIG.endpoints.filter(e => !e.includes('localhost'))
+        : API_CONFIG.endpoints;
+
+    for (const endpoint of endpointsToCheck) {
         try {
             const response = await fetch(`${endpoint}/health`, {
                 method: 'GET',
-                timeout: 3000
+                signal: AbortSignal.timeout(3000)
             });
 
             if (response.ok) {
