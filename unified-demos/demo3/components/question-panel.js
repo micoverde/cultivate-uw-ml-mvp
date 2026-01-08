@@ -11,7 +11,7 @@
  * - Request cancellation support
  */
 
-class QuestionPanel {
+export class QuestionPanel {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
         this.initialized = false;

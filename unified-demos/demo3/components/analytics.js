@@ -12,7 +12,7 @@
  * Warren's Vision: Professional, data-driven, fully functional analytics
  */
 
-class AnalyticsDashboard {
+export class AnalyticsDashboard {
     constructor(containerId, options = {}) {
         this.containerId = containerId;
         this.container = null;
