@@ -704,14 +704,12 @@
     </style>
 </head>
 <body data-theme="dark">
-    <!-- Demo 3 defaults to dark mode -->
+    <!-- Demo 3 ALWAYS uses dark mode -->
     <script>
-        // Set dark mode as default for Demo 3 if no preference saved
-        if (!localStorage.getItem('theme')) {
-            localStorage.setItem('theme', 'dark');
-        }
-        // Apply saved theme immediately to prevent flash
-        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+        // Demo 3 forces dark mode for better viewing of educational content
+        // This overrides any saved preference specifically for Demo 3
+        localStorage.setItem('theme', 'dark');
+        document.body.setAttribute('data-theme', 'dark');
     </script>
 
     <!-- Password Protection Overlay -->
