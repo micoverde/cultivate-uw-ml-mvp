@@ -3,682 +3,1661 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Architecture | Cultivate Learning ML Pipeline</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/architecture.css">
+    <title>Cultivate Learning | AI-Powered Early Educator Support</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Dark Mode Design System */
+        :root {
+            --brand-primary: #4fc3f7;
+            --brand-secondary: #29b6f6;
+            --brand-dark: #0288d1;
+            --success: #66bb6a;
+            --warning: #ffa726;
+            --error: #ef5350;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --text-tertiary: #78909c;
+            --text-inverse: #121212;
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --border-light: #424242;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --font-sm: 14px;
+            --font-base: 16px;
+            --font-lg: 18px;
+            --font-xl: 24px;
+            --font-2xl: 32px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-size: var(--font-base);
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
+        }
+
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-light);
+            padding: var(--space-md) var(--space-lg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .brand-icon {
+            font-size: 28px;
+            color: var(--brand-primary);
+        }
+
+        .brand-text {
+            font-size: var(--font-xl);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .header-nav {
+            display: flex;
+            gap: var(--space-md);
+        }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-base);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-link:hover {
+            color: var(--brand-primary);
+            background: var(--bg-tertiary);
+        }
+
+        .nav-link.active {
+            color: var(--brand-primary);
+            background: rgba(0, 120, 212, 0.1);
+        }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: var(--space-3xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .hero p {
+            font-size: var(--font-lg);
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-lg);
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .section-title {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .section-subtitle {
+            font-size: var(--font-lg);
+            color: var(--text-secondary);
+        }
+
+        /* Pipeline Grid */
+        .pipeline-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-3xl);
+        }
+
+        @media (max-width: 1200px) {
+            .pipeline-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .pipeline-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Pipeline Stage Card */
+        .stage-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stage-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+        }
+
+        .stage-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--brand-primary);
+        }
+
+        .stage-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .stage-card.active {
+            border-color: var(--brand-primary);
+            box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.15);
+        }
+
+        .stage-card.active::before {
+            transform: scaleX(1);
+        }
+
+        .stage-number {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: var(--text-inverse);
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: var(--font-lg);
+            margin-bottom: var(--space-md);
+        }
+
+        .stage-icon {
+            font-size: 32px;
+            color: var(--brand-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .stage-card h3 {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .stage-card p {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-md);
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .tech-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Detail Panel */
+        .detail-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: var(--space-lg);
+        }
+
+        .detail-overlay.active {
+            display: flex;
+        }
+
+        .detail-panel {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .detail-header {
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: var(--text-inverse);
+            padding: var(--space-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .detail-header h2 {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .detail-header p {
+            opacity: 0.9;
+            font-size: var(--font-sm);
+        }
+
+        .close-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background var(--transition-fast);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .detail-content {
+            padding: var(--space-xl);
+        }
+
+        .detail-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .detail-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .detail-section h3 {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .detail-section h3 i {
+            color: var(--brand-primary);
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin-bottom: var(--space-md);
+            white-space: pre;
+            line-height: 1.6;
+        }
+
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #569cd6; }
+        .code-block .string { color: #ce9178; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .number { color: #b5cea8; }
+
+        /* Feature List */
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-sm);
+        }
+
+        @media (max-width: 600px) {
+            .feature-list { grid-template-columns: 1fr; }
+        }
+
+        .feature-item {
+            background: var(--bg-tertiary);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .feature-item i {
+            color: var(--success);
+        }
+
+        /* Model Cards in Detail */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+
+        @media (max-width: 600px) {
+            .model-grid { grid-template-columns: 1fr; }
+        }
+
+        .model-item {
+            background: var(--bg-tertiary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .model-item h4 {
+            font-size: var(--font-base);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .model-item p {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .model-weight {
+            background: var(--brand-primary);
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* API Endpoint */
+        .endpoint-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .endpoint-method {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            font-weight: 700;
+            margin-right: var(--space-sm);
+        }
+
+        .endpoint-method.post { background: var(--success); color: white; }
+        .endpoint-method.get { background: var(--brand-primary); color: white; }
+
+        .endpoint-path {
+            font-family: monospace;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Metrics */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-lg);
+            margin-bottom: var(--space-3xl);
+        }
+
+        @media (max-width: 1024px) {
+            .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        .metric-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--brand-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .metric-label {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Stats Grid for Training Details */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .stat-box {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+        }
+
+        .stat-box.oeq {
+            border-color: var(--success);
+            background: rgba(102, 187, 106, 0.1);
+        }
+
+        .stat-box.ceq {
+            border-color: var(--warning);
+            background: rgba(255, 167, 38, 0.1);
+        }
+
+        .stat-box.success {
+            border-color: var(--success);
+            background: rgba(102, 187, 106, 0.15);
+        }
+
+        .stat-box .stat-value {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--brand-primary);
+            display: block;
+        }
+
+        .stat-box .stat-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: var(--space-xs);
+            display: block;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-light);
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-brand">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-brand">
                 <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
                 <span class="brand-text">Cultivate Learning</span>
             </div>
-            <div class="nav-links">
+            <nav class="header-nav">
                 <a href="../index.html" class="nav-link">Home</a>
                 <a href="architecture.html" class="nav-link active">Docs</a>
-                <a href="demo.html" class="nav-link">Demo 2</a>
-                <a href="https://victorious-meadow-0b2278a10.1.azurestaticapps.net/" class="nav-link" target="_blank">Demo 3</a>
-                <a href="https://victorious-meadow-0b2278a10.1.azurestaticapps.net/" class="nav-link" target="_blank">Demo 4</a>
+                <a href="learning.html" class="nav-link">Learning</a>
+                <a href="demo.html" class="nav-link">Demo</a>
                 <a href="research.html" class="nav-link">Research</a>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>ML Pipeline Architecture</h1>
-            <p>End-to-end video analysis system for educator question classification</p>
-        </div>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>ML Pipeline Architecture</h1>
+        <p>Click any stage below to explore the real implementation details from our codebase</p>
     </section>
 
-    <!-- Pipeline Overview -->
-    <section class="section">
-        <div class="container">
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Pipeline Stages -->
+        <section>
             <div class="section-header">
-                <h2 class="section-title">Complete Pipeline Flow</h2>
-                <p class="section-subtitle">From classroom video to actionable educator feedback</p>
+                <h2 class="section-title">Processing Pipeline</h2>
+                <p class="section-subtitle">End-to-end video analysis for educator question classification</p>
             </div>
 
-            <!-- Visual Pipeline Diagram -->
-            <div class="pipeline-diagram">
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">1</div>
-                        <h3>Video Input</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-video"></i></div>
-                        <div class="stage-details">
-                            <p>Classroom recording (MP4/MOV)</p>
-                            <ul>
-                                <li>Resolution: Up to 4K</li>
-                                <li>Duration: 1-60 minutes</li>
-                                <li>Audio: Multi-channel</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
-                        <span class="tech-tag">Azure Blob Storage</span>
-                        <span class="tech-tag">Secure Upload</span>
-                    </div>
-                </div>
-
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">2</div>
-                        <h3>Audio Extraction</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-waveform-lines"></i></div>
-                        <div class="stage-details">
-                            <p>FFmpeg audio processing</p>
-                            <ul>
-                                <li>Sample Rate: 16kHz</li>
-                                <li>Format: Mono WAV</li>
-                                <li>Encoding: PCM 16-bit</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+            <div class="pipeline-grid">
+                <div class="stage-card" data-stage="video">
+                    <div class="stage-number">1</div>
+                    <div class="stage-icon"><i class="fa-solid fa-video"></i></div>
+                    <h3>Video Input</h3>
+                    <p>Classroom recording upload and initial processing</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Azure Blob</span>
                         <span class="tech-tag">FFmpeg</span>
-                        <span class="tech-tag">Python</span>
                     </div>
                 </div>
 
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                <div class="stage-card" data-stage="audio">
+                    <div class="stage-number">2</div>
+                    <div class="stage-icon"><i class="fa-solid fa-waveform-lines"></i></div>
+                    <h3>Audio Extraction</h3>
+                    <p>Extract and process audio stream for transcription</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">FFmpeg</span>
+                        <span class="tech-tag">16kHz WAV</span>
+                    </div>
                 </div>
 
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">3</div>
-                        <h3>Speech Recognition</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-comment-dots"></i></div>
-                        <div class="stage-details">
-                            <p>OpenAI Whisper transcription</p>
-                            <ul>
-                                <li>Model: base/medium</li>
-                                <li>Word timestamps</li>
-                                <li>Auto language detect</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+                <div class="stage-card" data-stage="speech">
+                    <div class="stage-number">3</div>
+                    <div class="stage-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                    <h3>Speech Recognition</h3>
+                    <p>OpenAI Whisper transcription with timestamps</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">Whisper</span>
                         <span class="tech-tag">HuggingFace</span>
                     </div>
                 </div>
 
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">4</div>
-                        <h3>Speaker Diarization</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-users"></i></div>
-                        <div class="stage-details">
-                            <p>Who said what, when</p>
-                            <ul>
-                                <li>Teacher identification</li>
-                                <li>Child speech segments</li>
-                                <li>Turn-taking analysis</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+                <div class="stage-card" data-stage="diarization">
+                    <div class="stage-number">4</div>
+                    <div class="stage-icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>Speaker Diarization</h3>
+                    <p>Identify teacher vs child speech segments</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">pyannote</span>
                         <span class="tech-tag">librosa</span>
                     </div>
                 </div>
-            </div>
 
-            <!-- Second Row -->
-            <div class="pipeline-diagram pipeline-row-2">
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">5</div>
-                        <h3>Question Detection</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-circle-question"></i></div>
-                        <div class="stage-details">
-                            <p>Identify educator questions</p>
-                            <ul>
-                                <li>Punctuation analysis</li>
-                                <li>Interrogative patterns</li>
-                                <li>Context extraction</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+                <div class="stage-card" data-stage="detection">
+                    <div class="stage-number">5</div>
+                    <div class="stage-icon"><i class="fa-solid fa-circle-question"></i></div>
+                    <h3>Question Detection</h3>
+                    <p>Identify educator questions from transcript</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">Regex</span>
                         <span class="tech-tag">NLP</span>
                     </div>
                 </div>
 
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <div class="pipeline-stage highlight">
-                    <div class="stage-header">
-                        <div class="stage-number">6</div>
-                        <h3>Feature Extraction</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-chart-column"></i></div>
-                        <div class="stage-details">
-                            <p>56 linguistic features</p>
-                            <ul>
-                                <li>16 OEQ indicators</li>
-                                <li>13 CEQ indicators</li>
-                                <li>Structural features</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+                <div class="stage-card" data-stage="features-rule">
+                    <div class="stage-number">6a</div>
+                    <div class="stage-icon"><i class="fa-solid fa-chart-column"></i></div>
+                    <h3>Rule-Based Features</h3>
+                    <p>19 linguistic features for ML classification</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">Current</span>
+                    </div>
+                </div>
+
+                <div class="stage-card" data-stage="features-deep">
+                    <div class="stage-number">6b</div>
+                    <div class="stage-icon"><i class="fa-solid fa-microchip"></i></div>
+                    <h3>Deep Learning Features</h3>
+                    <p>384-dim semantic embeddings (Future)</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Transformers</span>
+                        <span class="tech-tag">Future</span>
+                    </div>
+                </div>
+
+                <div class="stage-card" data-stage="ensemble">
+                    <div class="stage-number">7</div>
+                    <div class="stage-icon"><i class="fa-solid fa-brain"></i></div>
+                    <h3>Ensemble ML</h3>
+                    <p>3-model voting system for robust classification</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">joblib</span>
                     </div>
                 </div>
 
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <div class="pipeline-stage highlight">
-                    <div class="stage-header">
-                        <div class="stage-number">7</div>
-                        <h3>Ensemble ML</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-brain"></i></div>
-                        <div class="stage-details">
-                            <p>7-model voting system</p>
-                            <ul>
-                                <li>Neural Network</li>
-                                <li>Random Forest</li>
-                                <li>XGBoost + more</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
-                        <span class="tech-tag">PyTorch</span>
-                        <span class="tech-tag">scikit-learn</span>
-                    </div>
-                </div>
-
-                <div class="pipeline-connector">
-                    <div class="connector-line"></div>
-                    <div class="connector-arrow"><i class="fa-solid fa-arrow-right"></i></div>
-                </div>
-
-                <div class="pipeline-stage">
-                    <div class="stage-header">
-                        <div class="stage-number">8</div>
-                        <h3>Feedback Generation</h3>
-                    </div>
-                    <div class="stage-content">
-                        <div class="stage-icon"><i class="fa-solid fa-lightbulb"></i></div>
-                        <div class="stage-details">
-                            <p>Actionable insights</p>
-                            <ul>
-                                <li>OEQ/CEQ distribution</li>
-                                <li>Wait time analysis</li>
-                                <li>Improvement tips</li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="stage-tech">
+                <div class="stage-card" data-stage="api">
+                    <div class="stage-number">8</div>
+                    <div class="stage-icon"><i class="fa-solid fa-lightbulb"></i></div>
+                    <h3>API & Feedback</h3>
+                    <p>RESTful endpoints for real-time classification</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Azure</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Ensemble Training Section -->
+        <section>
+            <div class="section-header">
+                <h2 class="section-title">Ensemble Training</h2>
+                <p class="section-subtitle">How we built the 3-model ensemble from ground truth data</p>
+            </div>
+
+            <div class="pipeline-grid">
+                <div class="stage-card training-card" data-stage="data-collection">
+                    <div class="stage-number">1</div>
+                    <div class="stage-icon"><i class="fa-solid fa-database"></i></div>
+                    <h3>Data Collection</h3>
+                    <p>26 classroom videos with 119 expert-annotated questions</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Cultivate Learning</span>
+                        <span class="tech-tag">UW</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="annotation">
+                    <div class="stage-number">2</div>
+                    <div class="stage-icon"><i class="fa-solid fa-tags"></i></div>
+                    <h3>Expert Annotation</h3>
+                    <p>OEQ/CEQ labels from early childhood education researchers</p>
+                    <div class="tech-tags">
                         <span class="tech-tag">CLASS Framework</span>
+                        <span class="tech-tag">Labels</span>
                     </div>
                 </div>
+
+                <div class="stage-card training-card" data-stage="splitting">
+                    <div class="stage-number">3</div>
+                    <div class="stage-icon"><i class="fa-solid fa-divide"></i></div>
+                    <h3>Train/Test Split</h3>
+                    <p>5-fold stratified cross-validation for robust evaluation</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">80/20 Split</span>
+                        <span class="tech-tag">Stratified</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="feature-eng">
+                    <div class="stage-number">4</div>
+                    <div class="stage-icon"><i class="fa-solid fa-flask"></i></div>
+                    <h3>Feature Engineering</h3>
+                    <p>Designing 19 linguistic features based on CLASS research</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">pandas</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="model-training">
+                    <div class="stage-number">5</div>
+                    <div class="stage-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <h3>Model Training</h3>
+                    <p>Training MLPClassifier, RandomForest, LogisticRegression</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">scikit-learn</span>
+                        <span class="tech-tag">NumPy</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="hyperparameter">
+                    <div class="stage-number">6</div>
+                    <div class="stage-icon"><i class="fa-solid fa-sliders"></i></div>
+                    <h3>Hyperparameter Tuning</h3>
+                    <p>Grid search optimization for each model architecture</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">GridSearchCV</span>
+                        <span class="tech-tag">Optuna</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="ensemble-combine">
+                    <div class="stage-number">7</div>
+                    <div class="stage-icon"><i class="fa-solid fa-layer-group"></i></div>
+                    <h3>Ensemble Combination</h3>
+                    <p>Optimizing model weights for soft voting strategy</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Weight Search</span>
+                        <span class="tech-tag">Voting</span>
+                    </div>
+                </div>
+
+                <div class="stage-card training-card" data-stage="validation">
+                    <div class="stage-number">8</div>
+                    <div class="stage-icon"><i class="fa-solid fa-check-double"></i></div>
+                    <h3>Final Validation</h3>
+                    <p>Hold-out test set evaluation achieving 89% accuracy</p>
+                    <div class="tech-tags">
+                        <span class="tech-tag">Precision</span>
+                        <span class="tech-tag">Recall</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Detail Overlay -->
+    <div class="detail-overlay" id="detailOverlay">
+        <div class="detail-panel">
+            <div class="detail-header">
+                <div>
+                    <h2 id="detailTitle">Stage Details</h2>
+                    <p id="detailSubtitle">Implementation details from our codebase</p>
+                </div>
+                <button class="close-btn" onclick="closeDetail()"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="detail-content" id="detailContent">
+                <!-- Dynamic content loaded here -->
             </div>
         </div>
-    </section>
-
-    <!-- Feature Extraction Detail -->
-    <section class="section section-alt">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Feature Extraction Engine</h2>
-                <p class="section-subtitle">56 carefully engineered linguistic features power our classification</p>
-            </div>
-
-            <div class="feature-matrix">
-                <div class="feature-category">
-                    <h3 class="category-title oeq-title">OEQ Indicators (16 features)</h3>
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <span class="feature-name">what</span>
-                            <span class="feature-desc">Open exploration</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">how</span>
-                            <span class="feature-desc">Process inquiry</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">why</span>
-                            <span class="feature-desc">Reasoning prompt</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">describe</span>
-                            <span class="feature-desc">Elaboration request</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">explain</span>
-                            <span class="feature-desc">Understanding probe</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">tell me</span>
-                            <span class="feature-desc">Narrative prompt</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">think</span>
-                            <span class="feature-desc">Opinion seeking</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">feel</span>
-                            <span class="feature-desc">Emotional inquiry</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">imagine</span>
-                            <span class="feature-desc">Creative prompt</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">wonder</span>
-                            <span class="feature-desc">Curiosity catalyst</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">predict</span>
-                            <span class="feature-desc">Future thinking</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">compare</span>
-                            <span class="feature-desc">Analytical prompt</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feature-category">
-                    <h3 class="category-title ceq-title">CEQ Indicators (13 features)</h3>
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <span class="feature-name">is/are</span>
-                            <span class="feature-desc">Yes/no pattern</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">do/does</span>
-                            <span class="feature-desc">Yes/no pattern</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">did</span>
-                            <span class="feature-desc">Past confirmation</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">can/could</span>
-                            <span class="feature-desc">Ability check</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">will/would</span>
-                            <span class="feature-desc">Future confirm</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">should</span>
-                            <span class="feature-desc">Norm check</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">has/have</span>
-                            <span class="feature-desc">Possession check</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">was/were</span>
-                            <span class="feature-desc">Past state check</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="feature-category">
-                    <h3 class="category-title structural-title">Structural Features (27 features)</h3>
-                    <div class="feature-list">
-                        <div class="feature-item">
-                            <span class="feature-name">word_count</span>
-                            <span class="feature-desc">Question length</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">char_count</span>
-                            <span class="feature-desc">Character count</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">avg_word_len</span>
-                            <span class="feature-desc">Complexity proxy</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">question_marks</span>
-                            <span class="feature-desc">Punctuation count</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">comma_count</span>
-                            <span class="feature-desc">Clause indicator</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">starts_wh</span>
-                            <span class="feature-desc">WH-question start</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">contains_you</span>
-                            <span class="feature-desc">Direct address</span>
-                        </div>
-                        <div class="feature-item">
-                            <span class="feature-name">ends_question</span>
-                            <span class="feature-desc">? at end</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ensemble Model Detail -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">7-Model Ensemble Architecture</h2>
-                <p class="section-subtitle">Soft voting with weighted probability averaging</p>
-            </div>
-
-            <div class="ensemble-diagram">
-                <div class="ensemble-input">
-                    <div class="input-box">
-                        <h4>Feature Vector</h4>
-                        <p>56-dimensional input</p>
-                        <div class="vector-preview">[0.23, 0.87, 0.12, ..., 0.45]</div>
-                    </div>
-                </div>
-
-                <div class="ensemble-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <div class="ensemble-models">
-                    <div class="model-card nn">
-                        <div class="model-icon"><i class="fa-solid fa-brain"></i></div>
-                        <h4>Neural Network</h4>
-                        <p class="model-arch">[56→128→64→2]</p>
-                        <div class="model-weight">Weight: 0.18</div>
-                    </div>
-                    <div class="model-card rf">
-                        <div class="model-icon"><i class="fa-solid fa-tree"></i></div>
-                        <h4>Random Forest</h4>
-                        <p class="model-arch">100 trees, depth=10</p>
-                        <div class="model-weight">Weight: 0.16</div>
-                    </div>
-                    <div class="model-card xgb">
-                        <div class="model-icon"><i class="fa-solid fa-bolt"></i></div>
-                        <h4>XGBoost</h4>
-                        <p class="model-arch">Gradient boosting</p>
-                        <div class="model-weight">Weight: 0.16</div>
-                    </div>
-                    <div class="model-card svm">
-                        <div class="model-icon"><i class="fa-solid fa-vector-square"></i></div>
-                        <h4>SVM</h4>
-                        <p class="model-arch">RBF kernel</p>
-                        <div class="model-weight">Weight: 0.14</div>
-                    </div>
-                    <div class="model-card lr">
-                        <div class="model-icon"><i class="fa-solid fa-chart-line"></i></div>
-                        <h4>Logistic Reg</h4>
-                        <p class="model-arch">L2 regularized</p>
-                        <div class="model-weight">Weight: 0.12</div>
-                    </div>
-                    <div class="model-card lgb">
-                        <div class="model-icon"><i class="fa-solid fa-leaf"></i></div>
-                        <h4>LightGBM</h4>
-                        <p class="model-arch">Leaf-wise growth</p>
-                        <div class="model-weight">Weight: 0.12</div>
-                    </div>
-                    <div class="model-card gb">
-                        <div class="model-icon"><i class="fa-solid fa-bullseye"></i></div>
-                        <h4>Gradient Boost</h4>
-                        <p class="model-arch">sklearn GBC</p>
-                        <div class="model-weight">Weight: 0.12</div>
-                    </div>
-                </div>
-
-                <div class="ensemble-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <div class="ensemble-voting">
-                    <div class="voting-box">
-                        <h4>Soft Voting</h4>
-                        <p>Weighted probability averaging</p>
-                        <div class="voting-formula">
-                            P(class) = Σ(weight<sub>i</sub> × P<sub>i</sub>(class))
-                        </div>
-                    </div>
-                </div>
-
-                <div class="ensemble-arrow"><i class="fa-solid fa-arrow-down"></i></div>
-
-                <div class="ensemble-output">
-                    <div class="output-box oeq">
-                        <span class="output-label">OEQ</span>
-                        <span class="output-prob">0.73</span>
-                    </div>
-                    <div class="output-box ceq">
-                        <span class="output-label">CEQ</span>
-                        <span class="output-prob">0.27</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Performance Metrics -->
-    <section class="section section-alt">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Model Performance</h2>
-                <p class="section-subtitle">Validated against expert-annotated ground truth data</p>
-            </div>
-
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>Accuracy</h4>
-                        <div class="metric-value">89%</div>
-                    </div>
-                    <div class="metric-bar">
-                        <div class="bar-fill" style="width: 89%"></div>
-                    </div>
-                    <p class="metric-desc">Overall classification accuracy on held-out test set</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>OEQ Precision</h4>
-                        <div class="metric-value">87%</div>
-                    </div>
-                    <div class="metric-bar oeq-bar">
-                        <div class="bar-fill" style="width: 87%"></div>
-                    </div>
-                    <p class="metric-desc">When we predict OEQ, we're right 87% of the time</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>OEQ Recall</h4>
-                        <div class="metric-value">84%</div>
-                    </div>
-                    <div class="metric-bar oeq-bar">
-                        <div class="bar-fill" style="width: 84%"></div>
-                    </div>
-                    <p class="metric-desc">We find 84% of all true OEQ questions</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>CEQ Precision</h4>
-                        <div class="metric-value">91%</div>
-                    </div>
-                    <div class="metric-bar ceq-bar">
-                        <div class="bar-fill" style="width: 91%"></div>
-                    </div>
-                    <p class="metric-desc">When we predict CEQ, we're right 91% of the time</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>F1 Score</h4>
-                        <div class="metric-value">0.88</div>
-                    </div>
-                    <div class="metric-bar">
-                        <div class="bar-fill" style="width: 88%"></div>
-                    </div>
-                    <p class="metric-desc">Harmonic mean of precision and recall</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-header">
-                        <h4>Latency</h4>
-                        <div class="metric-value">&lt;50ms</div>
-                    </div>
-                    <div class="metric-bar latency-bar">
-                        <div class="bar-fill" style="width: 95%"></div>
-                    </div>
-                    <p class="metric-desc">End-to-end inference time per question</p>
-                </div>
-            </div>
-
-            <div class="confusion-matrix">
-                <h3>Confusion Matrix</h3>
-                <div class="matrix-container">
-                    <div class="matrix-labels-y">
-                        <span>Actual OEQ</span>
-                        <span>Actual CEQ</span>
-                    </div>
-                    <div class="matrix-grid">
-                        <div class="matrix-cell tp">
-                            <span class="cell-value">42</span>
-                            <span class="cell-label">True Positive</span>
-                        </div>
-                        <div class="matrix-cell fn">
-                            <span class="cell-value">8</span>
-                            <span class="cell-label">False Negative</span>
-                        </div>
-                        <div class="matrix-cell fp">
-                            <span class="cell-value">6</span>
-                            <span class="cell-label">False Positive</span>
-                        </div>
-                        <div class="matrix-cell tn">
-                            <span class="cell-value">63</span>
-                            <span class="cell-label">True Negative</span>
-                        </div>
-                    </div>
-                    <div class="matrix-labels-x">
-                        <span>Predicted OEQ</span>
-                        <span>Predicted CEQ</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- API Endpoints -->
-    <section class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">API Reference</h2>
-                <p class="section-subtitle">RESTful endpoints for classification services</p>
-            </div>
-
-            <div class="api-cards">
-                <div class="api-card">
-                    <div class="api-method post">POST</div>
-                    <div class="api-endpoint">/api/v2/classify/ensemble</div>
-                    <div class="api-desc">Classify question using 7-model ensemble voting</div>
-                    <div class="api-example">
-                        <pre><code>{
-  "text": "What do you think will happen?",
-  "scenario_id": 1,
-  "debug_mode": true
-}</code></pre>
-                    </div>
-                </div>
-
-                <div class="api-card">
-                    <div class="api-method post">POST</div>
-                    <div class="api-endpoint">/api/v1/classify</div>
-                    <div class="api-desc">Classify using classic single-model approach</div>
-                </div>
-
-                <div class="api-card">
-                    <div class="api-method post">POST</div>
-                    <div class="api-endpoint">/api/v2/classify/batch</div>
-                    <div class="api-desc">Batch classify multiple questions (10-20x faster)</div>
-                </div>
-
-                <div class="api-card">
-                    <div class="api-method post">POST</div>
-                    <div class="api-endpoint">/api/v1/video/upload</div>
-                    <div class="api-desc">Upload video for full pipeline analysis</div>
-                </div>
-
-                <div class="api-card">
-                    <div class="api-method ws">WS</div>
-                    <div class="api-endpoint">/ws/video/{video_id}</div>
-                    <div class="api-desc">WebSocket for real-time processing updates</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Try It Yourself</h2>
-                <p>Experience the classification pipeline in action with our interactive demo.</p>
-                <div class="cta-buttons">
-                    <a href="demo.html" class="btn btn-primary btn-large">Launch Demo</a>
-                    <a href="research.html" class="btn btn-outline btn-large">View Research</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
-                    <span class="brand-text">Cultivate Learning</span>
-                </div>
-                <div class="footer-info">
-                    <p>A partnership between Bona Opera Ventures and University of Washington</p>
-                </div>
-            </div>
-        </div>
+        <p>Cultivate Learning ML Pipeline | A partnership between Bona Opera Ventures and University of Washington</p>
     </footer>
 
-    <script src="../js/main.js"></script>
+    <script>
+        // Stage detail data - pulled from actual codebase
+        const stageDetails = {
+            video: {
+                title: "Video Input Processing",
+                subtitle: "src/data_processing/video_to_audio_extraction.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Classroom recordings are uploaded to Azure Blob Storage for secure processing. The system supports MP4, MOV, and AVI formats up to 4K resolution with multi-channel audio.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Technical Specifications</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Resolution: Up to 4K (3840x2160)</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Duration: 1-60 minutes</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Formats: MP4, MOV, AVI</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Audio: Multi-channel support</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation (Azure SDK for Python)</h3>
+                        <div class="code-block"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 1: Import Azure Blob Storage SDK
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">from</span> azure.storage.blob <span class="keyword">import</span> BlobServiceClient
+
+<span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 2: Define upload function with type hints
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">def</span> <span class="function">upload_video</span>(file_path: str, container: str) -> str:
+    <span class="string">"""Upload classroom video to Azure Blob Storage."""</span>
+
+    <span class="comment"># STEP 3: Get blob client for the target container</span>
+    blob_client = container_client.get_blob_client(blob_name)
+
+    <span class="comment"># STEP 4: Open file in binary mode and upload</span>
+    <span class="keyword">with</span> <span class="function">open</span>(file_path, <span class="string">"rb"</span>) <span class="keyword">as</span> data:
+        blob_client.upload_blob(data, overwrite=<span class="keyword">True</span>)
+
+    <span class="comment"># STEP 5: Return the public URL for downstream processing</span>
+    <span class="keyword">return</span> blob_client.url</div>
+                    </div>
+                `
+            },
+            audio: {
+                title: "Audio Extraction",
+                subtitle: "src/ml/audio/whisper_processor.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>FFmpeg extracts and processes the audio stream, converting to optimal format for speech recognition. The pipeline normalizes audio to 16kHz mono WAV for Whisper compatibility.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Audio Processing Pipeline</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Sample Rate: 16kHz</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Channels: Mono</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Format: PCM 16-bit WAV</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Noise Reduction: Applied</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> FFmpeg Command</h3>
+                        <div class="code-block">
+<span class="comment"># Extract audio and convert to Whisper-compatible format</span>
+ffmpeg -i input.mp4 \\
+    -vn \\                    <span class="comment"># No video</span>
+    -acodec pcm_s16le \\      <span class="comment"># 16-bit PCM</span>
+    -ar <span class="number">16000</span> \\             <span class="comment"># 16kHz sample rate</span>
+    -ac <span class="number">1</span> \\                 <span class="comment"># Mono channel</span>
+    output.wav</div>
+                    </div>
+                `
+            },
+            speech: {
+                title: "Speech Recognition",
+                subtitle: "src/ml/audio/whisper_processor.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>OpenAI Whisper provides state-of-the-art speech recognition with word-level timestamps. The system uses the base or medium model for optimal accuracy/speed tradeoff.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Whisper Configuration</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Model: whisper-base/medium</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Word timestamps: Enabled</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Language: Auto-detect</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Task: Transcribe</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation (OpenAI Whisper / PyTorch)</h3>
+                        <div class="code-block"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 1: Import OpenAI Whisper (built on PyTorch)
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">import</span> whisper  <span class="comment"># PyTorch-based speech recognition</span>
+
+<span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 2: Load pre-trained Whisper model
+# Options: tiny, base, small, medium, large
+# ═══════════════════════════════════════════════════════════════</span>
+model = whisper.<span class="function">load_model</span>(<span class="string">"base"</span>)  <span class="comment"># ~140MB, good accuracy/speed</span>
+
+<span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 3: Transcribe audio with word-level timestamps
+# ═══════════════════════════════════════════════════════════════</span>
+result = model.<span class="function">transcribe</span>(
+    audio_path,
+    word_timestamps=<span class="keyword">True</span>,   <span class="comment"># Enable precise timing</span>
+    language=<span class="string">"en"</span>            <span class="comment"># English language</span>
+)
+
+<span class="comment"># ═══════════════════════════════════════════════════════════════
+# STEP 4: Extract transcript segments with timing info
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">for</span> segment <span class="keyword">in</span> result[<span class="string">"segments"</span>]:
+    text = segment[<span class="string">"text"</span>]    <span class="comment"># Transcribed text</span>
+    start = segment[<span class="string">"start"</span>]  <span class="comment"># Start time in seconds</span>
+    end = segment[<span class="string">"end"</span>]      <span class="comment"># End time in seconds</span></div>
+                    </div>
+                `
+            },
+            diarization: {
+                title: "Speaker Diarization",
+                subtitle: "src/ml/audio/whisper_processor.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Speaker diarization identifies who is speaking at each moment. This enables separating educator questions from child responses for accurate analysis.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Diarization Features</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Teacher identification</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Child speech segments</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Turn-taking analysis</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Speaker embedding clustering</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation</h3>
+                        <div class="code-block">
+<span class="keyword">from</span> pyannote.audio <span class="keyword">import</span> Pipeline
+
+<span class="comment"># Load pretrained diarization pipeline</span>
+pipeline = Pipeline.<span class="function">from_pretrained</span>(
+    <span class="string">"pyannote/speaker-diarization"</span>
+)
+
+<span class="comment"># Process audio file</span>
+diarization = <span class="function">pipeline</span>(audio_path)
+
+<span class="comment"># Extract speaker segments</span>
+<span class="keyword">for</span> turn, _, speaker <span class="keyword">in</span> diarization.itertracks(yield_label=<span class="keyword">True</span>):
+    <span class="function">print</span>(f<span class="string">"{speaker}: {turn.start:.1f}s - {turn.end:.1f}s"</span>)</div>
+                    </div>
+                `
+            },
+            detection: {
+                title: "Question Detection",
+                subtitle: "src/ml/features/question_features.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Questions are identified from educator speech using punctuation analysis, interrogative word patterns, and intonation cues from the transcript.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Detection Patterns</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Question mark detection</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> WH-word patterns (what, how, why)</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Yes/No starters (is, are, do, can)</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Context window extraction</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation</h3>
+                        <div class="code-block">
+<span class="comment"># Question detection from transcript segments</span>
+<span class="keyword">def</span> <span class="function">detect_questions</span>(transcript: List[Segment]) -> List[Question]:
+    questions = []
+    <span class="keyword">for</span> segment <span class="keyword">in</span> transcript:
+        text = segment.text.strip()
+
+        <span class="comment"># Check for question indicators</span>
+        is_question = (
+            text.endswith(<span class="string">"?"</span>) <span class="keyword">or</span>
+            text.lower().startswith((
+                <span class="string">"what"</span>, <span class="string">"how"</span>, <span class="string">"why"</span>, <span class="string">"when"</span>,
+                <span class="string">"where"</span>, <span class="string">"who"</span>, <span class="string">"is"</span>, <span class="string">"are"</span>,
+                <span class="string">"do"</span>, <span class="string">"does"</span>, <span class="string">"can"</span>, <span class="string">"could"</span>
+            ))
+        )
+
+        <span class="keyword">if</span> is_question:
+            questions.append(Question(text, segment.start))
+    <span class="keyword">return</span> questions</div>
+                    </div>
+                `
+            },
+            'features-rule': {
+                title: "6a: Rule-Based Features (Current)",
+                subtitle: "src/ml/features/question_features.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>The QuestionFeatureExtractor analyzes each question and produces a 19-dimensional feature vector capturing linguistic patterns that distinguish OEQ from CEQ. This is our current production approach.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> 19 Extracted Features</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> word_count</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_question_mark</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> char_count</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_how</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_why</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_what</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_what_think</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_describe_explain</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_did (CEQ)</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_is_are (CEQ)</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> oeq_score</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> ceq_score</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation (NumPy / scikit-learn)</h3>
+                        <div class="code-block"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# Feature Extraction Class - Returns 19-dimensional vector
+# Framework: NumPy for vectorization, scikit-learn for pipeline
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">class</span> <span class="function">QuestionFeatureExtractor</span>:
+    <span class="string">"""Extracts 19 linguistic features for OEQ/CEQ classification"""</span>
+
+    <span class="keyword">def</span> <span class="function">extract</span>(self, text: str) -> np.ndarray:
+        text_lower = text.lower()
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 1: Extract OEQ indicators (open-ended patterns)
+        # These words encourage exploration and elaboration
+        # ─────────────────────────────────────────────────────────</span>
+        has_how = <span class="number">1</span> <span class="keyword">if</span> <span class="string">' how '</span> <span class="keyword">in</span> text_lower <span class="keyword">else</span> <span class="number">0</span>
+        has_why = <span class="number">1</span> <span class="keyword">if</span> <span class="string">' why '</span> <span class="keyword">in</span> text_lower <span class="keyword">else</span> <span class="number">0</span>
+        has_what_think = <span class="number">1</span> <span class="keyword">if</span> <span class="string">'what do you think'</span> <span class="keyword">in</span> text_lower <span class="keyword">else</span> <span class="number">0</span>
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 2: Extract CEQ indicators (closed-ended patterns)
+        # These patterns typically expect yes/no answers
+        # ─────────────────────────────────────────────────────────</span>
+        has_did = <span class="number">1</span> <span class="keyword">if</span> text_lower.startswith(<span class="string">'did '</span>) <span class="keyword">else</span> <span class="number">0</span>
+        has_is_are = <span class="number">1</span> <span class="keyword">if</span> text_lower.startswith((<span class="string">'is '</span>, <span class="string">'are '</span>)) <span class="keyword">else</span> <span class="number">0</span>
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 3: Compute aggregate scores
+        # Higher oeq_score = more likely open-ended
+        # ─────────────────────────────────────────────────────────</span>
+        oeq_score = has_how + has_why + has_what_think
+        ceq_score = has_did + has_is_are + has_can_could
+
+        <span class="comment"># STEP 4: Return as NumPy array for ML model input</span>
+        <span class="keyword">return</span> np.array([...], dtype=np.float32)</div>
+                    </div>
+                `
+            },
+            'features-deep': {
+                title: "6b: Deep Learning Features (Future)",
+                subtitle: "src/ml/features/hybrid_feature_extractor.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-rocket"></i> Future Enhancement</h3>
+                        <p>The HybridFeatureExtractor will use pre-trained transformer models to automatically learn semantic features, eliminating manual feature engineering and capturing deeper linguistic patterns.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-microchip"></i> 384-Dimensional Semantic Embeddings</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-brain"></i> Sentence-level semantic meaning</div>
+                            <div class="feature-item"><i class="fa-solid fa-language"></i> Contextual word relationships</div>
+                            <div class="feature-item"><i class="fa-solid fa-arrows-spin"></i> Transfer learning from large corpora</div>
+                            <div class="feature-item"><i class="fa-solid fa-gauge-high"></i> No manual feature engineering</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> Planned Architecture</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-value">384</span>
+                                <span class="stat-label">Dimensions</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">MiniLM</span>
+                                <span class="stat-label">Model</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">~22M</span>
+                                <span class="stat-label">Parameters</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Future Implementation (sentence-transformers)</h3>
+                        <div class="code-block"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# FUTURE: Deep Learning Feature Extraction
+# Framework: HuggingFace sentence-transformers
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">from</span> sentence_transformers <span class="keyword">import</span> SentenceTransformer
+
+<span class="keyword">class</span> <span class="function">HybridFeatureExtractor</span>:
+    <span class="string">"""Combines rule-based + deep learning features"""</span>
+
+    <span class="keyword">def</span> <span class="function">__init__</span>(self):
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 1: Load pre-trained sentence transformer
+        # all-MiniLM-L6-v2: Fast, 384-dim embeddings
+        # ─────────────────────────────────────────────────────────</span>
+        self.model = <span class="function">SentenceTransformer</span>(<span class="string">'all-MiniLM-L6-v2'</span>)
+
+    <span class="keyword">def</span> <span class="function">extract</span>(self, text: str) -> np.ndarray:
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 2: Generate 384-dim semantic embedding
+        # Captures meaning, not just keywords
+        # ─────────────────────────────────────────────────────────</span>
+        embedding = self.model.<span class="function">encode</span>(text)
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 3: Combine with rule-based features (optional)
+        # Hybrid approach: interpretable + powerful
+        # ─────────────────────────────────────────────────────────</span>
+        rule_features = self.rule_extractor.<span class="function">extract</span>(text)
+
+        <span class="keyword">return</span> np.<span class="function">concatenate</span>([embedding, rule_features])</div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-lightbulb"></i> Why This Matters</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Handles ambiguity:</strong> "Can you tell me more?" recognized as OEQ despite "can"</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Context awareness:</strong> Understands rhetorical vs genuine questions</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Scalable:</strong> No need to manually add new patterns</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>AR-ready:</strong> Lightweight for real-time AR glasses deployment</div>
+                        </div>
+                    </div>
+                `
+            },
+            ensemble: {
+                title: "Ensemble ML Classification",
+                subtitle: "src/ml/models/ensemble_question_classifier.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>The EnsembleQuestionClassifier combines three complementary models using soft voting with weighted probability averaging for robust OEQ/CEQ classification.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> 3-Model Ensemble Architecture (scikit-learn)</h3>
+                        <div class="model-grid">
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-brain"></i> MLPClassifier</h4>
+                                <p>sklearn MLP (128, 64), ReLU, adam solver, early stopping</p>
+                                <span class="model-weight">Weight: 0.40</span>
+                            </div>
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-tree"></i> RandomForest</h4>
+                                <p>n_estimators=100, max_depth=10, class_weight='balanced'</p>
+                                <span class="model-weight">Weight: 0.35</span>
+                            </div>
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-chart-line"></i> LogisticRegression</h4>
+                                <p>C=1.0, solver='liblinear', max_iter=1000</p>
+                                <span class="model-weight">Weight: 0.25</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Soft Voting (scikit-learn / NumPy)</h3>
+                        <div class="code-block"><span class="comment"># ═══════════════════════════════════════════════════════════════
+# Ensemble Voting Strategy - Combines 3 ML Models
+# Framework: scikit-learn MLPClassifier, RandomForest, LogisticRegression
+# ═══════════════════════════════════════════════════════════════</span>
+<span class="keyword">class</span> <span class="function">SoftVotingStrategy</span>:
+    <span class="string">"""Weighted probability averaging for ensemble classification"""</span>
+
+    <span class="comment"># ─────────────────────────────────────────────────────────
+    # STEP 1: Initialize with model weights
+    # Neural Network gets highest weight (best non-linear fit)
+    # ─────────────────────────────────────────────────────────</span>
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, model_weights=[<span class="number">0.4</span>, <span class="number">0.35</span>, <span class="number">0.25</span>]):
+        self.model_weights = model_weights  <span class="comment"># [NN, RF, LR]</span>
+
+    <span class="keyword">def</span> <span class="function">vote</span>(self, predictions, probabilities):
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 2: Initialize weighted probability array
+        # Shape: [2] for binary classification (OEQ, CEQ)
+        # ─────────────────────────────────────────────────────────</span>
+        weighted_probs = np.zeros_like(probabilities[<span class="number">0</span>])
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 3: Accumulate weighted probabilities from each model
+        # Each model contributes its probability × weight
+        # ─────────────────────────────────────────────────────────</span>
+        <span class="keyword">for</span> probs, weight <span class="keyword">in</span> <span class="function">zip</span>(probabilities, self.model_weights):
+            weighted_probs += probs * weight
+
+        <span class="comment"># ─────────────────────────────────────────────────────────
+        # STEP 4: Get final prediction and confidence
+        # argmax returns 0 (OEQ) or 1 (CEQ)
+        # ─────────────────────────────────────────────────────────</span>
+        final_prediction = np.<span class="function">argmax</span>(weighted_probs)
+        confidence = <span class="function">float</span>(np.<span class="function">max</span>(weighted_probs))
+
+        <span class="keyword">return</span> final_prediction, confidence</div>
+                    </div>
+                `
+            },
+            api: {
+                title: "API & Feedback System",
+                subtitle: "src/api/endpoints/question_classification.py",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>FastAPI provides RESTful endpoints for real-time question classification. The API returns detailed ensemble results including individual model predictions and confidence scores.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-cog"></i> API Endpoints</h3>
+                        <div class="endpoint-box">
+                            <span class="endpoint-method post">POST</span>
+                            <span class="endpoint-path">/api/classify/question</span>
+                            <p style="margin-top: 8px; color: var(--text-secondary); font-size: 14px;">Single question classification with ensemble voting</p>
+                        </div>
+                        <div class="endpoint-box">
+                            <span class="endpoint-method post">POST</span>
+                            <span class="endpoint-path">/api/classify/batch</span>
+                            <p style="margin-top: 8px; color: var(--text-secondary); font-size: 14px;">Batch processing up to 100 questions (10-20x faster)</p>
+                        </div>
+                        <div class="endpoint-box">
+                            <span class="endpoint-method get">GET</span>
+                            <span class="endpoint-path">/api/classify/health</span>
+                            <p style="margin-top: 8px; color: var(--text-secondary); font-size: 14px;">Health check with model status</p>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Response Schema</h3>
+                        <div class="code-block">
+{
+    <span class="string">"question_text"</span>: <span class="string">"What do you think will happen?"</span>,
+    <span class="string">"classification"</span>: <span class="string">"OEQ"</span>,
+    <span class="string">"confidence"</span>: <span class="number">0.92</span>,
+    <span class="string">"features_extracted"</span>: <span class="number">19</span>,
+    <span class="string">"ensemble_details"</span>: {
+        <span class="string">"neural_network"</span>: {<span class="string">"prediction"</span>: <span class="string">"OEQ"</span>, <span class="string">"confidence"</span>: <span class="number">0.94</span>},
+        <span class="string">"random_forest"</span>: {<span class="string">"prediction"</span>: <span class="string">"OEQ"</span>, <span class="string">"confidence"</span>: <span class="number">0.89</span>},
+        <span class="string">"logistic_regression"</span>: {<span class="string">"prediction"</span>: <span class="string">"OEQ"</span>, <span class="string">"confidence"</span>: <span class="number">0.87</span>},
+        <span class="string">"voting_strategy"</span>: <span class="string">"soft"</span>,
+        <span class="string">"model_weights"</span>: [<span class="number">0.4</span>, <span class="number">0.35</span>, <span class="number">0.25</span>]
+    },
+    <span class="string">"processing_time_ms"</span>: <span class="number">23.5</span>
+}</div>
+                    </div>
+                `
+            },
+            // Ensemble Training Stages
+            'data-collection': {
+                title: "Data Collection",
+                subtitle: "Ground Truth Dataset from Cultivate Learning",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Real classroom recordings from diverse early childhood settings across Washington State. Videos capture authentic educator-child interactions during various learning activities.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-chart-bar"></i> Dataset Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-value">26</span>
+                                <span class="stat-label">Training Videos</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">119</span>
+                                <span class="stat-label">Annotated Questions</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">4</span>
+                                <span class="stat-label">Age Groups</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-video"></i> Sample Training Videos</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-cubes"></i> <strong>Structure Activity:</strong> Melon exploration with predictions (Pre-K, 7 min)</div>
+                            <div class="feature-item"><i class="fa-solid fa-book"></i> <strong>Book about Flowers:</strong> Book reading with questions about flower parts (Pre-K)</div>
+                            <div class="feature-item"><i class="fa-solid fa-utensils"></i> <strong>Ladybugs Lunch:</strong> Mealtime conversation about food (Toddler)</div>
+                            <div class="feature-item"><i class="fa-solid fa-tree"></i> <strong>Outdoor Play:</strong> Sand play with sharing and problem-solving (Pre-K)</div>
+                            <div class="feature-item"><i class="fa-solid fa-list-ol"></i> <strong>Circle Time Numbers:</strong> Number writing, opposites, inclusive play (Pre-K, 20 min)</div>
+                            <div class="feature-item"><i class="fa-solid fa-people-group"></i> <strong>Conflict Management:</strong> Outdoor conflict resolution strategies (Pre-K)</div>
+                        </div>
+                    </div>
+                `
+            },
+            'annotation': {
+                title: "Expert Annotation",
+                subtitle: "CLASS Framework-Based Labeling",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Cultivate Learning researchers with expertise in CLASS framework annotated each educator question, noting classification, wait time behavior, and child response patterns.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-circle-check"></i> Real OEQ Examples (from training data)</h3>
+                        <div class="code-block"><span class="comment"># From Structure Activity Video (Pre-K) @ 1:13</span>
+<span class="string">"What do you think is inside?"</span>
+<span class="comment">→ OEQ: Teacher pauses and listens to child response</span>
+
+<span class="comment"># From CDCSA Wenatchee Center (Pre-K) @ 0:12</span>
+<span class="string">"How can we ask them to share?"</span>
+<span class="comment">→ OEQ: Good "how" question, teacher listens for response</span>
+
+<span class="comment"># From Being Aware of a Toddler's Needs @ 0:19</span>
+<span class="string">"What can we do about it?"</span>
+<span class="comment">→ OEQ: Promotes problem-solving, pauses for response</span>
+
+<span class="comment"># From Draw Results Activity @ 0:03</span>
+<span class="string">"How do they look different?"</span>
+<span class="comment">→ OEQ: Good open question, listens for response</span></div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-circle-xmark"></i> Real CEQ Examples (from training data)</h3>
+                        <div class="code-block"><span class="comment"># From Ladybugs Lunch (Toddler) @ 0:03</span>
+<span class="string">"Is that your lunch?"</span>
+<span class="comment">→ CEQ: Yes/no with brief pause for child to confirm</span>
+
+<span class="comment"># From Book about Flowers (Pre-K) @ 0:59</span>
+<span class="string">"What is this called?"</span>
+<span class="comment">→ CEQ: Looking for specific factual answer</span>
+
+<span class="comment"># From Launch Cascade Vista (Pre-K) @ 0:39</span>
+<span class="string">"How many do you have?"</span>
+<span class="comment">→ CEQ: Counting question, waits for specific response</span>
+
+<span class="comment"># From Conflict Management (Pre-K) @ 0:01</span>
+<span class="string">"Whose hat is it?"</span>
+<span class="comment">→ CEQ: Requires single correct answer</span></div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-clipboard-check"></i> Annotation Details Recorded</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Wait time:</strong> Did teacher pause for response?</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Rhetorical:</strong> Was question genuine or rhetorical?</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Child response:</strong> Did child answer? How?</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> <strong>Follow-up:</strong> Did teacher extend the conversation?</div>
+                        </div>
+                    </div>
+                `
+            },
+            'splitting': {
+                title: "Train/Test Split",
+                subtitle: "Stratified Cross-Validation Setup",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Data is split using stratified sampling to maintain class balance. 5-fold cross-validation ensures robust evaluation and helps detect overfitting.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-divide"></i> Split Strategy</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-value">80%</span>
+                                <span class="stat-label">Training Set</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">20%</span>
+                                <span class="stat-label">Test Set</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Implementation</h3>
+                        <div class="code-block">
+<span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> StratifiedKFold, train_test_split
+
+<span class="comment"># Initial train/test split</span>
+X_train, X_test, y_train, y_test = <span class="function">train_test_split</span>(
+    features, labels,
+    test_size=<span class="number">0.2</span>,
+    stratify=labels,
+    random_state=<span class="number">42</span>
+)
+
+<span class="comment"># 5-fold cross-validation for hyperparameter tuning</span>
+cv = <span class="function">StratifiedKFold</span>(n_splits=<span class="number">5</span>, shuffle=<span class="keyword">True</span>)</div>
+                    </div>
+                `
+            },
+            'feature-eng': {
+                title: "Feature Engineering",
+                subtitle: "CLASS Research-Based Feature Design",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>19 linguistic features designed based on CLASS Framework research on effective questioning. Features capture both OEQ indicators (exploration words) and CEQ indicators (yes/no patterns).</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-lightbulb"></i> OEQ Indicator Features</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_how - "How" questions invite process explanation</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_why - "Why" questions prompt reasoning</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_what_think - "What do you think" invites opinion</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_describe_explain - Elaboration requests</div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-circle-xmark"></i> CEQ Indicator Features</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_did - "Did you..." expects yes/no</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_is_are - "Is it..." binary response</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> has_can_could - "Can you..." ability check</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> starts_with_do - "Do you..." yes/no pattern</div>
+                        </div>
+                    </div>
+                `
+            },
+            'model-training': {
+                title: "Model Training",
+                subtitle: "Training Three Complementary Classifiers",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Three models with different learning biases are trained independently. This diversity enables the ensemble to capture patterns that individual models might miss.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-brain"></i> Model Architectures (All scikit-learn)</h3>
+                        <div class="model-grid">
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-brain"></i> MLPClassifier</h4>
+                                <p>hidden_layer_sizes=(128, 64), activation='relu', solver='adam', alpha=0.001</p>
+                            </div>
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-tree"></i> RandomForestClassifier</h4>
+                                <p>n_estimators=100, max_depth=10, class_weight='balanced'</p>
+                            </div>
+                            <div class="model-item">
+                                <h4><i class="fa-solid fa-chart-line"></i> LogisticRegression</h4>
+                                <p>C=1.0, solver='liblinear', max_iter=1000, class_weight='balanced'</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Training Code (from ensemble_question_classifier.py)</h3>
+                        <div class="code-block"><span class="comment"># From src/ml/models/ensemble_question_classifier.py</span>
+<span class="keyword">from</span> sklearn.neural_network <span class="keyword">import</span> MLPClassifier
+<span class="keyword">from</span> sklearn.ensemble <span class="keyword">import</span> RandomForestClassifier
+<span class="keyword">from</span> sklearn.linear_model <span class="keyword">import</span> LogisticRegression
+
+<span class="comment"># Initialize models with optimal hyperparameters</span>
+nn_model = <span class="function">MLPClassifier</span>(
+    hidden_layer_sizes=(<span class="number">128</span>, <span class="number">64</span>),
+    activation=<span class="string">'relu'</span>,
+    solver=<span class="string">'adam'</span>,
+    alpha=<span class="number">0.001</span>,
+    max_iter=<span class="number">500</span>,
+    early_stopping=<span class="keyword">True</span>
+)
+rf_model = <span class="function">RandomForestClassifier</span>(
+    n_estimators=<span class="number">100</span>,
+    max_depth=<span class="number">10</span>,
+    class_weight=<span class="string">'balanced'</span>
+)
+lr_model = <span class="function">LogisticRegression</span>(
+    C=<span class="number">1.0</span>,
+    solver=<span class="string">'liblinear'</span>,
+    max_iter=<span class="number">1000</span>,
+    class_weight=<span class="string">'balanced'</span>
+)</div>
+                    </div>
+                `
+            },
+            'hyperparameter': {
+                title: "Hyperparameter Tuning",
+                subtitle: "Grid Search Optimization",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Exhaustive grid search with cross-validation finds optimal hyperparameters for each model. This prevents overfitting while maximizing validation accuracy.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-sliders"></i> Search Spaces</h3>
+                        <div class="code-block">
+<span class="comment"># Neural Network hyperparameters</span>
+nn_params = {
+    <span class="string">'hidden_layer_sizes'</span>: [(<span class="number">64</span>,), (<span class="number">128</span>, <span class="number">64</span>), (<span class="number">256</span>, <span class="number">128</span>)],
+    <span class="string">'alpha'</span>: [<span class="number">0.0001</span>, <span class="number">0.001</span>, <span class="number">0.01</span>],
+    <span class="string">'learning_rate_init'</span>: [<span class="number">0.001</span>, <span class="number">0.01</span>]
+}
+
+<span class="comment"># Random Forest hyperparameters</span>
+rf_params = {
+    <span class="string">'n_estimators'</span>: [<span class="number">50</span>, <span class="number">100</span>, <span class="number">200</span>],
+    <span class="string">'max_depth'</span>: [<span class="number">5</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="keyword">None</span>],
+    <span class="string">'min_samples_split'</span>: [<span class="number">2</span>, <span class="number">5</span>, <span class="number">10</span>]
+}</div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-trophy"></i> Best Parameters Found</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> NN: hidden_layers=(128, 64), alpha=0.001</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> RF: n_estimators=100, max_depth=10</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> LR: C=1.0, solver=liblinear</div>
+                        </div>
+                    </div>
+                `
+            },
+            'ensemble-combine': {
+                title: "Ensemble Combination",
+                subtitle: "Optimizing Model Weights",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>Model weights are optimized to maximize ensemble accuracy. The Neural Network receives highest weight due to its ability to capture non-linear patterns in the feature space.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-scale-balanced"></i> Optimized Weights</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box">
+                                <span class="stat-value">0.40</span>
+                                <span class="stat-label">Neural Network</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">0.35</span>
+                                <span class="stat-label">Random Forest</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">0.25</span>
+                                <span class="stat-label">Log. Regression</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-code"></i> Soft Voting Implementation</h3>
+                        <div class="code-block">
+<span class="comment"># Weighted probability averaging</span>
+weights = [<span class="number">0.40</span>, <span class="number">0.35</span>, <span class="number">0.25</span>]  <span class="comment"># NN, RF, LR</span>
+
+<span class="keyword">def</span> <span class="function">ensemble_predict</span>(X):
+    probs = []
+    <span class="keyword">for</span> model <span class="keyword">in</span> models:
+        probs.append(model.<span class="function">predict_proba</span>(X))
+
+    <span class="comment"># Weighted average of probabilities</span>
+    weighted_probs = np.<span class="function">zeros_like</span>(probs[<span class="number">0</span>])
+    <span class="keyword">for</span> p, w <span class="keyword">in</span> <span class="function">zip</span>(probs, weights):
+        weighted_probs += p * w
+
+    <span class="keyword">return</span> np.<span class="function">argmax</span>(weighted_probs, axis=<span class="number">1</span>)</div>
+                    </div>
+                `
+            },
+            'validation': {
+                title: "Final Validation",
+                subtitle: "Hold-Out Test Set Evaluation",
+                content: `
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-info-circle"></i> Overview</h3>
+                        <p>The ensemble is evaluated on the held-out 20% test set that was never seen during training or hyperparameter tuning. This provides an unbiased estimate of real-world performance.</p>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-chart-line"></i> Final Metrics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-box success">
+                                <span class="stat-value">89%</span>
+                                <span class="stat-label">Accuracy</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">0.88</span>
+                                <span class="stat-label">Precision</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">0.87</span>
+                                <span class="stat-label">Recall</span>
+                            </div>
+                            <div class="stat-box">
+                                <span class="stat-value">0.87</span>
+                                <span class="stat-label">F1 Score</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-section">
+                        <h3><i class="fa-solid fa-table"></i> Confusion Matrix Insights</h3>
+                        <div class="feature-list">
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> True OEQ identification: 86% recall</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> True CEQ identification: 91% recall</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Most errors on ambiguous "tricky" questions</div>
+                            <div class="feature-item"><i class="fa-solid fa-check"></i> Ensemble outperforms individual models by 3-5%</div>
+                        </div>
+                    </div>
+                `
+            }
+        };
+
+        // Event listeners
+        document.querySelectorAll('.stage-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const stage = card.dataset.stage;
+                openDetail(stage);
+
+                // Update active state
+                document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+            });
+        });
+
+        function openDetail(stage) {
+            const data = stageDetails[stage];
+            if (!data) return;
+
+            document.getElementById('detailTitle').textContent = data.title;
+            document.getElementById('detailSubtitle').textContent = data.subtitle;
+            document.getElementById('detailContent').innerHTML = data.content;
+            document.getElementById('detailOverlay').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDetail() {
+            document.getElementById('detailOverlay').classList.remove('active');
+            document.body.style.overflow = '';
+            document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+        }
+
+        // Close on overlay click
+        document.getElementById('detailOverlay').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('detailOverlay')) {
+                closeDetail();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeDetail();
+            }
+        });
+    </script>
 </body>
 </html>

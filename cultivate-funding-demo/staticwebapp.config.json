@@ -9,6 +9,10 @@
       "rewrite": "/pages/architecture.html"
     },
     {
+      "route": "/learning",
+      "rewrite": "/pages/learning.html"
+    },
+    {
       "route": "/demo",
       "rewrite": "/pages/demo.html"
     },
@@ -31,7 +35,7 @@
     "X-Content-Type-Options": "nosniff",
     "X-XSS-Protection": "1; mode=block",
     "Referrer-Policy": "strict-origin-when-cross-origin",
-    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' http://localhost:* https://*.azurecontainerapps.io https://*.azurewebsites.net"
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; connect-src 'self' http://localhost:* https://*.azurecontainerapps.io https://*.azurewebsites.net"
   },
   "mimeTypes": {
     ".json": "application/json",
