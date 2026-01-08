@@ -131,7 +131,7 @@ class UnifiedMLAPI {
         const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
         const feedbackEndpoint = isLocalhost
             ? 'http://localhost:5001/save_feedback'
-            : 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/save_feedback';
+            : 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io/save_feedback';
 
         const feedbackData = {
             text: options.text || '',

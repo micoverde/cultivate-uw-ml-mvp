@@ -12,7 +12,7 @@ class APIConfig {
         // Base URLs for each environment
         this.baseUrls = {
             local: 'http://localhost:5001',
-            azure: 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io'
+            azure: 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io'
         };
 
         // Endpoint mappings for each environment and model

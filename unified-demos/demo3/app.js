@@ -115,7 +115,7 @@ const Config = {
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return 'http://localhost:5001';
         }
-        return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+        return 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io';
     },
 
     // Azure Blob Storage for video fallback (PRIVATE container)

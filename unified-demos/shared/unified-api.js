@@ -12,7 +12,7 @@ class UnifiedAPI {
 
         // Base URLs
         this.localBase = 'http://localhost:5001';
-        this.azureBase = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+        this.azureBase = 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io';
 
         // Get current base URL
         this.baseUrl = this.isLocalhost ? this.localBase : this.azureBase;
@@ -54,7 +54,7 @@ class UnifiedAPI {
     getFeedbackEndpoint() {
         // Use environment-aware endpoint
         // Local: http://localhost:5001/save_feedback
-        // Azure: https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/save_feedback
+        // Azure: https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io/save_feedback
         return this.isLocalhost
             ? `${this.localBase}/save_feedback`
             : `${this.azureBase}/save_feedback`;

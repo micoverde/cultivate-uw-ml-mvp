@@ -748,7 +748,7 @@
                 return 'http://localhost:5001';
             } else {
                 // Production - use Azure Container Apps API
-                return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+                return 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io';
             }
         }
 
@@ -1269,7 +1269,7 @@
                 progressBar.style.width = '50%';
 
                 // Call actual retraining API with password header
-                const apiEndpoint = 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io/api/v1/model/retrain';
+                const apiEndpoint = 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io/api/v1/model/retrain';
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {

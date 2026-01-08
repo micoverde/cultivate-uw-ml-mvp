@@ -19,7 +19,7 @@ def test_classification(text, model_type, environment="local"):
         else:  # ensemble
             endpoint = f"{base_url}/api/v2/classify/ensemble"
     else:  # azure
-        base_url = "https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io"
+        base_url = "https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io"
         if model_type == "classic":
             endpoint = f"{base_url}/api/classify"
         else:  # ensemble

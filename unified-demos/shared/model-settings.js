@@ -12,7 +12,7 @@ class ModelSettings {
         // Set base API URL based on environment
         this.apiBaseUrl = this.isLocalhost
             ? 'http://localhost:5001'
-            : 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+            : 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io';
 
         this.models = [
             {
