@@ -4,493 +4,1290 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Learning Modules | Cultivate Learning</title>
-    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        .learning-section {
-            padding: 4rem 0;
-            border-bottom: 1px solid #e0e0e0;
-        }
-        .learning-section:last-of-type {
-            border-bottom: none;
-        }
-        .section-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 40px;
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-        .learning-content {
-            margin: 2rem 0;
-            line-height: 1.8;
-        }
-        .learning-content p {
-            margin-bottom: 1rem;
-        }
-        .key-points {
-            background: #f5f5f5;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin: 1.5rem 0;
-        }
-        .key-points h4 {
-            color: #2E7D32;
-            margin-bottom: 1rem;
-        }
-        .key-points ul {
-            margin-left: 1.5rem;
-        }
-        .key-points li {
-            margin-bottom: 0.5rem;
+        /* Dark Mode Design System - Consistent with Architecture */
+        :root {
+            --brand-primary: #4fc3f7;
+            --brand-secondary: #29b6f6;
+            --brand-dark: #0288d1;
+            --success: #66bb6a;
+            --warning: #ffa726;
+            --error: #ef5350;
+            --purple: #ab47bc;
+            --text-primary: #ffffff;
+            --text-secondary: #b0bec5;
+            --text-tertiary: #78909c;
+            --text-inverse: #121212;
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --border-light: #424242;
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            --space-3xl: 64px;
+            --font-sm: 14px;
+            --font-base: 16px;
+            --font-lg: 18px;
+            --font-xl: 24px;
+            --font-2xl: 32px;
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 4px 8px 0 rgba(0, 0, 0, 0.12);
+            --transition-fast: 150ms ease;
+            --transition-base: 250ms ease;
         }
 
-        /* Quiz Styles */
-        .quiz-container {
-            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
-            border: 2px solid #4CAF50;
-            border-radius: 12px;
-            padding: 2rem;
-            margin: 2rem 0;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            font-size: var(--font-base);
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
         }
+
+        /* Header */
+        .header {
+            background: var(--bg-primary);
+            border-bottom: 1px solid var(--border-light);
+            padding: var(--space-md) var(--space-lg);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .brand-icon { font-size: 28px; color: var(--brand-primary); }
+        .brand-text { font-size: var(--font-xl); font-weight: 600; color: var(--text-primary); }
+
+        .header-nav { display: flex; gap: var(--space-md); }
+
+        .nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: var(--font-base);
+            font-weight: 500;
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .nav-link:hover { color: var(--brand-primary); background: var(--bg-tertiary); }
+        .nav-link.active { color: var(--brand-primary); background: rgba(79, 195, 247, 0.1); }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+            padding: var(--space-3xl) var(--space-lg);
+            text-align: center;
+        }
+
+        .hero h1 { font-size: 2.5rem; font-weight: 700; color: var(--text-primary); margin-bottom: var(--space-md); }
+        .hero p { font-size: var(--font-lg); color: var(--text-secondary); max-width: 800px; margin: 0 auto; }
+
+        /* Container */
+        .container { max-width: 1200px; margin: 0 auto; padding: var(--space-2xl) var(--space-lg); }
+
+        /* Framework Section */
+        .framework-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .framework-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .framework-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--text-inverse);
+        }
+
+        .framework-title { font-size: var(--font-xl); font-weight: 700; color: var(--text-primary); }
+        .framework-subtitle { font-size: var(--font-sm); color: var(--text-secondary); }
+
+        /* Learning Spiral */
+        .spiral-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: var(--space-md);
+            margin: var(--space-xl) 0;
+        }
+
+        @media (max-width: 900px) { .spiral-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (max-width: 600px) { .spiral-grid { grid-template-columns: 1fr 1fr; } }
+
+        .spiral-step {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            border: 1px solid var(--border-light);
+            transition: all var(--transition-base);
+        }
+
+        .spiral-step:hover {
+            transform: translateY(-4px);
+            border-color: var(--brand-primary);
+        }
+
+        .spiral-step i { font-size: 32px; margin-bottom: var(--space-sm); }
+        .spiral-step.imagine i { color: #ab47bc; }
+        .spiral-step.create i { color: #42a5f5; }
+        .spiral-step.play i { color: #66bb6a; }
+        .spiral-step.share i { color: #ffa726; }
+        .spiral-step.reflect i { color: #ef5350; }
+
+        .spiral-step h4 { font-size: var(--font-base); font-weight: 600; margin-bottom: var(--space-xs); }
+        .spiral-step p { font-size: var(--font-sm); color: var(--text-secondary); }
+
+        /* Track Section */
+        .track-section { margin-bottom: var(--space-3xl); }
+
+        .track-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 2px solid var(--brand-primary);
+        }
+
+        .track-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .track-icon.pipeline { background: linear-gradient(135deg, #42a5f5, #1976d2); color: white; }
+        .track-icon.training { background: linear-gradient(135deg, #66bb6a, #388e3c); color: white; }
+
+        .track-title { font-size: var(--font-xl); font-weight: 700; }
+        .track-subtitle { font-size: var(--font-sm); color: var(--text-secondary); }
+
+        /* Module Cards */
+        .module-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        @media (max-width: 900px) { .module-grid { grid-template-columns: 1fr; } }
+
+        .module-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .module-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--brand-primary);
+        }
+
+        .module-card.expanded { grid-column: 1 / -1; }
+
+        .module-header {
+            background: var(--bg-tertiary);
+            padding: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .module-number {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
+            color: var(--text-inverse);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: var(--font-lg);
+        }
+
+        .module-info { flex: 1; }
+        .module-title { font-size: var(--font-lg); font-weight: 600; margin-bottom: var(--space-xs); }
+        .module-time { font-size: var(--font-sm); color: var(--text-secondary); }
+        .module-time i { margin-right: var(--space-xs); }
+
+        .module-expand { color: var(--text-secondary); font-size: 20px; transition: transform var(--transition-fast); }
+        .module-card.expanded .module-expand { transform: rotate(180deg); }
+
+        .module-preview {
+            padding: var(--space-lg);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .module-description { color: var(--text-secondary); margin-bottom: var(--space-md); }
+
+        .module-objectives {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-sm);
+        }
+
+        .objective-tag {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+
+        .objective-tag i { color: var(--success); }
+
+        /* Module Content (Expanded) */
+        .module-content {
+            display: none;
+            padding: var(--space-xl);
+            border-top: 1px solid var(--border-light);
+            background: var(--bg-secondary);
+        }
+
+        .module-card.expanded .module-content { display: block; }
+
+        /* Learning Sections within Module */
+        .learning-phase {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+            overflow: hidden;
+        }
+
+        .phase-header {
+            background: var(--bg-tertiary);
+            padding: var(--space-md) var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .phase-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .phase-icon.explore { background: rgba(171, 71, 188, 0.2); color: #ab47bc; }
+        .phase-icon.create { background: rgba(66, 165, 245, 0.2); color: #42a5f5; }
+        .phase-icon.reflect { background: rgba(239, 83, 80, 0.2); color: #ef5350; }
+        .phase-icon.connect { background: rgba(255, 167, 38, 0.2); color: #ffa726; }
+
+        .phase-title { font-weight: 600; }
+        .phase-time { font-size: var(--font-sm); color: var(--text-secondary); margin-left: auto; }
+
+        .phase-content { padding: var(--space-lg); }
+
+        /* Code Examples */
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            font-family: 'Cascadia Code', 'Fira Code', Consolas, monospace;
+            font-size: 13px;
+            overflow-x: auto;
+            margin: var(--space-md) 0;
+            white-space: pre;
+            line-height: 1.6;
+        }
+
+        .code-block .comment { color: #6a9955; }
+        .code-block .keyword { color: #569cd6; }
+        .code-block .string { color: #ce9178; }
+        .code-block .function { color: #dcdcaa; }
+        .code-block .number { color: #b5cea8; }
+
+        /* Activity Steps */
+        .activity-steps { margin: var(--space-md) 0; }
+
+        .activity-step {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .activity-step:last-child { border-bottom: none; }
+
+        .step-number {
+            width: 28px;
+            height: 28px;
+            background: var(--brand-primary);
+            color: var(--text-inverse);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 { font-size: var(--font-base); margin-bottom: var(--space-xs); }
+        .step-content p { color: var(--text-secondary); font-size: var(--font-sm); }
+
+        /* Quiz Section */
+        .quiz-container {
+            background: linear-gradient(135deg, rgba(102, 187, 106, 0.1), rgba(56, 142, 60, 0.1));
+            border: 1px solid var(--success);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin: var(--space-lg) 0;
+        }
+
         .quiz-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
         }
-        .quiz-icon {
-            font-size: 1.5rem;
-            color: #2E7D32;
-        }
-        .quiz-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #1B5E20;
-        }
-        .quiz-question {
-            font-size: 1.1rem;
-            font-weight: 500;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
+
+        .quiz-icon { font-size: 24px; color: var(--success); }
+        .quiz-title { font-weight: 600; color: var(--success); }
+
+        .quiz-question { font-size: var(--font-lg); margin-bottom: var(--space-md); }
+
+        .quiz-options { display: flex; flex-direction: column; gap: var(--space-sm); }
+
         .quiz-option {
             display: flex;
             align-items: center;
-            padding: 1rem;
-            background: white;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: var(--space-md);
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all var(--transition-fast);
         }
-        .quiz-option:hover {
-            border-color: #4CAF50;
-            background: #f9fff9;
-        }
-        .quiz-option.selected {
-            border-color: #2196F3;
-            background: #e3f2fd;
-        }
-        .quiz-option.correct {
-            border-color: #4CAF50;
-            background: #e8f5e9;
-        }
-        .quiz-option.incorrect {
-            border-color: #f44336;
-            background: #ffebee;
-        }
-        .quiz-option input {
-            margin-right: 1rem;
-        }
-        .quiz-feedback {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            display: none;
-        }
-        .quiz-feedback.show {
-            display: block;
-        }
-        .quiz-feedback.correct {
-            background: #e8f5e9;
-            border: 1px solid #4CAF50;
-            color: #2E7D32;
-        }
-        .quiz-feedback.incorrect {
-            background: #ffebee;
-            border: 1px solid #f44336;
-            color: #c62828;
-        }
+
+        .quiz-option:hover { border-color: var(--brand-primary); background: var(--bg-tertiary); }
+        .quiz-option input { margin-right: var(--space-md); }
+        .quiz-option.correct { border-color: var(--success); background: rgba(102, 187, 106, 0.1); }
+        .quiz-option.incorrect { border-color: var(--error); background: rgba(239, 83, 80, 0.1); }
+
         .quiz-submit {
-            margin-top: 1rem;
-            padding: 0.75rem 2rem;
-            background: #4CAF50;
+            margin-top: var(--space-md);
+            padding: var(--space-sm) var(--space-xl);
+            background: var(--success);
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.2s;
-        }
-        .quiz-submit:hover {
-            background: #388E3C;
-        }
-        .quiz-submit:disabled {
-            background: #bdbdbd;
-            cursor: not-allowed;
+            transition: background var(--transition-fast);
         }
 
-        /* Score Summary */
-        .score-summary {
-            background: linear-gradient(135deg, #1B5E20, #2E7D32);
-            color: white;
-            padding: 2rem;
-            border-radius: 12px;
-            text-align: center;
-            margin: 3rem 0;
+        .quiz-submit:hover { background: #388e3c; }
+        .quiz-submit:disabled { background: var(--text-tertiary); cursor: not-allowed; }
+
+        .quiz-feedback {
+            margin-top: var(--space-md);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
             display: none;
         }
-        .score-summary.show {
-            display: block;
-        }
-        .score-value {
-            font-size: 3rem;
-            font-weight: bold;
-            margin: 1rem 0;
-        }
-        .score-message {
-            font-size: 1.2rem;
-            opacity: 0.9;
+
+        .quiz-feedback.show { display: block; }
+        .quiz-feedback.correct { background: rgba(102, 187, 106, 0.2); border: 1px solid var(--success); color: var(--success); }
+        .quiz-feedback.incorrect { background: rgba(239, 83, 80, 0.2); border: 1px solid var(--error); color: var(--error); }
+
+        /* Progress Tracker */
+        .progress-section {
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-top: var(--space-2xl);
         }
 
-        /* Example boxes */
-        .example-box {
-            background: #fff3e0;
-            border-left: 4px solid #ff9800;
-            padding: 1rem 1.5rem;
-            margin: 1rem 0;
-            border-radius: 0 8px 8px 0;
+        .progress-header { margin-bottom: var(--space-lg); }
+        .progress-title { font-size: var(--font-xl); font-weight: 700; margin-bottom: var(--space-xs); }
+        .progress-subtitle { color: var(--text-secondary); }
+
+        .progress-tracks { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-xl); }
+        @media (max-width: 768px) { .progress-tracks { grid-template-columns: 1fr; } }
+
+        .progress-track h4 {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
         }
-        .example-box.oeq {
-            background: #e8f5e9;
-            border-left-color: #4CAF50;
+
+        .progress-track h4 i { color: var(--brand-primary); }
+
+        .progress-bar-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            height: 12px;
+            margin-bottom: var(--space-sm);
+            overflow: hidden;
         }
-        .example-box.ceq {
-            background: #e3f2fd;
-            border-left-color: #2196F3;
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
+            border-radius: var(--radius-sm);
+            transition: width var(--transition-base);
         }
-        .example-label {
-            font-weight: 600;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
+
+        .progress-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
         }
-        .example-box.oeq .example-label { color: #2E7D32; }
-        .example-box.ceq .example-label { color: #1565C0; }
+
+        /* Footer */
+        .footer {
+            background: var(--bg-primary);
+            border-top: 1px solid var(--border-light);
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+        }
+
+        .footer a { color: var(--brand-primary); text-decoration: none; }
+        .footer a:hover { text-decoration: underline; }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="nav">
-        <div class="nav-container">
-            <div class="nav-brand">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="header-brand">
                 <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
                 <span class="brand-text">Cultivate Learning</span>
             </div>
-            <div class="nav-links">
+            <nav class="header-nav">
                 <a href="architecture.html" class="nav-link">Home</a>
                 <a href="learning.html" class="nav-link active">Learning</a>
-            </div>
+            </nav>
         </div>
-    </nav>
+    </header>
 
-    <!-- Page Header -->
-    <section class="page-header">
-        <div class="container">
-            <h1>Learning Modules</h1>
-            <p>Master the art of asking effective questions in early childhood education</p>
-        </div>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>ML Learning Curriculum</h1>
+        <p>Master machine learning concepts through hands-on exploration, creative projects, and reflective practice - based on MIT's Creative Computing approach by Karen Brennan and Mitchel Resnick</p>
     </section>
 
-    <!-- Module 1: Introduction to Question Types -->
-    <section class="learning-section">
-        <div class="container">
-            <h2><span class="section-number">1</span>Understanding OEQ vs CEQ</h2>
-
-            <div class="learning-content">
-                <p>In early childhood education, the questions we ask children have a profound impact on their cognitive development and learning outcomes. Questions are categorized into two main types:</p>
-
-                <div class="key-points">
-                    <h4><i class="fa-solid fa-lightbulb"></i> Key Concepts</h4>
-                    <ul>
-                        <li><strong>Open-Ended Questions (OEQ)</strong> - Encourage children to think, explain, and elaborate. These questions don't have a single correct answer and promote critical thinking.</li>
-                        <li><strong>Closed-Ended Questions (CEQ)</strong> - Have specific, short answers (often yes/no). While useful for assessment, they don't encourage extended thinking.</li>
-                    </ul>
-                </div>
-
-                <div class="example-box oeq">
-                    <div class="example-label"><i class="fa-solid fa-check-circle"></i> Open-Ended Question Example</div>
-                    <p>"What do you think will happen if we add more blocks to your tower?"</p>
-                </div>
-
-                <div class="example-box ceq">
-                    <div class="example-label"><i class="fa-solid fa-circle"></i> Closed-Ended Question Example</div>
-                    <p>"Did your tower fall down?"</p>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Framework Section -->
+        <section class="framework-section">
+            <div class="framework-header">
+                <div class="framework-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <div>
+                    <h2 class="framework-title">Creative Learning Framework</h2>
+                    <p class="framework-subtitle">Based on Brennan & Resnick's Computational Thinking research at MIT</p>
                 </div>
             </div>
 
-            <!-- Quiz 1 -->
-            <div class="quiz-container" id="quiz1">
-                <div class="quiz-header">
-                    <i class="fa-solid fa-brain quiz-icon"></i>
-                    <span class="quiz-title">Knowledge Check</span>
+            <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                This curriculum follows the <strong>Creative Learning Spiral</strong> - a proven approach to deep, meaningful learning
+                that emphasizes exploration, creation, and reflection. Each module guides you through five interconnected phases,
+                building both technical skills and conceptual understanding.
+            </p>
+
+            <div class="spiral-grid">
+                <div class="spiral-step imagine">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <h4>Imagine</h4>
+                    <p>Explore possibilities and form hypotheses</p>
                 </div>
-                <div class="quiz-question">Which of the following is an Open-Ended Question (OEQ)?</div>
-                <div class="quiz-options">
-                    <label class="quiz-option">
-                        <input type="radio" name="q1" value="a">
-                        "Is the sky blue?"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q1" value="b">
-                        "How do you think the caterpillar feels?"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q1" value="c">
-                        "Did you wash your hands?"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q1" value="d">
-                        "Can you count to five?"
-                    </label>
+                <div class="spiral-step create">
+                    <i class="fa-solid fa-hammer"></i>
+                    <h4>Create</h4>
+                    <p>Build and experiment with real code</p>
                 </div>
-                <button class="quiz-submit" onclick="checkQuiz('quiz1', 'b', 'Correct! \"How do you think...\" prompts the child to express thoughts and feelings, encouraging deeper thinking.', 'Not quite. The correct answer is B. \"How do you think the caterpillar feels?\" is open-ended because it invites the child to share their perspective and reasoning.')">Submit Answer</button>
-                <div class="quiz-feedback" id="quiz1-feedback"></div>
+                <div class="spiral-step play">
+                    <i class="fa-solid fa-play"></i>
+                    <h4>Play</h4>
+                    <p>Test, iterate, and discover patterns</p>
+                </div>
+                <div class="spiral-step share">
+                    <i class="fa-solid fa-share-nodes"></i>
+                    <h4>Share</h4>
+                    <p>Connect learning to real applications</p>
+                </div>
+                <div class="spiral-step reflect">
+                    <i class="fa-solid fa-brain"></i>
+                    <h4>Reflect</h4>
+                    <p>Assess understanding and plan next steps</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Module 2: Why OEQs Matter -->
-    <section class="learning-section" style="background: #fafafa;">
-        <div class="container">
-            <h2><span class="section-number">2</span>The Power of Open-Ended Questions</h2>
-
-            <div class="learning-content">
-                <p>Research shows that the ratio of OEQ to CEQ in classroom interactions significantly impacts child development. The CLASS (Classroom Assessment Scoring System) framework emphasizes the importance of high-quality teacher-child interactions.</p>
-
-                <div class="key-points">
-                    <h4><i class="fa-solid fa-chart-line"></i> Research Findings</h4>
-                    <ul>
-                        <li>Children exposed to more OEQs show <strong>23% higher vocabulary growth</strong></li>
-                        <li>OEQs promote <strong>executive function development</strong> and self-regulation</li>
-                        <li>The ideal OEQ:CEQ ratio is approximately <strong>3:1</strong> for optimal engagement</li>
-                        <li>Wait time after asking OEQs should be <strong>3-5 seconds</strong> for deeper responses</li>
-                    </ul>
-                </div>
-
-                <p>Open-ended questions trigger what researchers call "sustained shared thinking" - extended conversations where adults and children work together to solve problems or explore ideas.</p>
-            </div>
-
-            <!-- Quiz 2 -->
-            <div class="quiz-container" id="quiz2">
-                <div class="quiz-header">
-                    <i class="fa-solid fa-brain quiz-icon"></i>
-                    <span class="quiz-title">Knowledge Check</span>
-                </div>
-                <div class="quiz-question">What is the recommended wait time after asking an open-ended question?</div>
-                <div class="quiz-options">
-                    <label class="quiz-option">
-                        <input type="radio" name="q2" value="a">
-                        Less than 1 second
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q2" value="b">
-                        3-5 seconds
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q2" value="c">
-                        10-15 seconds
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q2" value="d">
-                        Wait time doesn't matter
-                    </label>
-                </div>
-                <button class="quiz-submit" onclick="checkQuiz('quiz2', 'b', 'Correct! 3-5 seconds gives children time to process the question and formulate a thoughtful response.', 'Not quite. The correct answer is B. Research shows 3-5 seconds of wait time allows children to process and form deeper responses.')">Submit Answer</button>
-                <div class="quiz-feedback" id="quiz2-feedback"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Module 3: Transforming Questions -->
-    <section class="learning-section">
-        <div class="container">
-            <h2><span class="section-number">3</span>Transforming CEQs into OEQs</h2>
-
-            <div class="learning-content">
-                <p>One of the most valuable skills for educators is learning to transform closed-ended questions into open-ended ones. This simple shift can dramatically change the quality of classroom discourse.</p>
-
-                <div class="key-points">
-                    <h4><i class="fa-solid fa-arrows-rotate"></i> Transformation Strategies</h4>
-                    <ul>
-                        <li><strong>Add "how" or "why"</strong> - Instead of "Did you build a tower?" ask "How did you build your tower?"</li>
-                        <li><strong>Use "tell me about"</strong> - Instead of "Is that a dog?" say "Tell me about your drawing"</li>
-                        <li><strong>Ask for predictions</strong> - Instead of "Will it fall?" ask "What do you think will happen?"</li>
-                        <li><strong>Invite comparisons</strong> - Instead of "Is this bigger?" ask "How are these different?"</li>
-                    </ul>
-                </div>
-
-                <div class="example-box">
-                    <div class="example-label"><i class="fa-solid fa-arrow-right"></i> Transformation Example</div>
-                    <p><strong>Before (CEQ):</strong> "Did you like the story?"</p>
-                    <p><strong>After (OEQ):</strong> "What was your favorite part of the story and why?"</p>
+        <!-- Processing Pipeline Track -->
+        <section class="track-section">
+            <div class="track-header">
+                <div class="track-icon pipeline"><i class="fa-solid fa-diagram-project"></i></div>
+                <div>
+                    <h2 class="track-title">Track 1: Processing Pipeline</h2>
+                    <p class="track-subtitle">8 modules covering end-to-end video analysis for question classification</p>
                 </div>
             </div>
 
-            <!-- Quiz 3 -->
-            <div class="quiz-container" id="quiz3">
-                <div class="quiz-header">
-                    <i class="fa-solid fa-brain quiz-icon"></i>
-                    <span class="quiz-title">Knowledge Check</span>
+            <div class="module-grid">
+                <!-- Module 1: Video Input -->
+                <div class="module-card" data-module="p1">
+                    <div class="module-header">
+                        <div class="module-number">1</div>
+                        <div class="module-info">
+                            <div class="module-title">Video Input & Storage</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 25 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Learn how classroom videos are securely uploaded, stored, and prepared for ML processing using Azure Blob Storage.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Cloud storage patterns</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> File format handling</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Security best practices</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon explore"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <span class="phase-title">Explore: Video Data Characteristics</span>
+                                <span class="phase-time">10 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <p>Classroom videos present unique challenges for ML systems. Consider:</p>
+                                <div class="activity-steps">
+                                    <div class="activity-step">
+                                        <div class="step-number">1</div>
+                                        <div class="step-content">
+                                            <h4>Variable Quality</h4>
+                                            <p>Recordings range from smartphone footage to professional cameras. Resolution varies from 720p to 4K.</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-content">
+                                            <h4>Multi-Channel Audio</h4>
+                                            <p>Classroom environments have background noise, multiple speakers, and varying microphone positions.</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-step">
+                                        <div class="step-number">3</div>
+                                        <div class="step-content">
+                                            <h4>Privacy Considerations</h4>
+                                            <p>Videos contain children - requiring secure storage, access controls, and data handling compliance.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon create"><i class="fa-solid fa-code"></i></div>
+                                <span class="phase-title">Create: Azure Blob Storage Integration</span>
+                                <span class="phase-time">10 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <p>Study how videos are uploaded securely to cloud storage:</p>
+                                <div class="code-block"><span class="comment"># Azure SDK for Python - Secure Video Upload</span>
+<span class="keyword">from</span> azure.storage.blob <span class="keyword">import</span> BlobServiceClient
+
+<span class="keyword">def</span> <span class="function">upload_classroom_video</span>(file_path: str, video_id: str) -> str:
+    <span class="string">"""
+    Upload video to Azure Blob Storage with metadata.
+    Returns the secure URL for downstream processing.
+    """</span>
+    <span class="comment"># Create blob client with managed identity (no keys in code)</span>
+    blob_client = container_client.get_blob_client(
+        blob_name=f<span class="string">"videos/{video_id}.mp4"</span>
+    )
+
+    <span class="comment"># Upload with content settings for video</span>
+    <span class="keyword">with</span> <span class="function">open</span>(file_path, <span class="string">"rb"</span>) <span class="keyword">as</span> video_file:
+        blob_client.upload_blob(
+            video_file,
+            content_settings=ContentSettings(content_type=<span class="string">"video/mp4"</span>),
+            metadata={<span class="string">"source"</span>: <span class="string">"classroom"</span>, <span class="string">"processed"</span>: <span class="string">"false"</span>}
+        )
+
+    <span class="keyword">return</span> blob_client.url</div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon reflect"><i class="fa-solid fa-clipboard-question"></i></div>
+                                <span class="phase-title">Reflect: Knowledge Check</span>
+                                <span class="phase-time">5 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <div class="quiz-container" id="quiz-p1">
+                                    <div class="quiz-header">
+                                        <i class="fa-solid fa-brain quiz-icon"></i>
+                                        <span class="quiz-title">Assessment</span>
+                                    </div>
+                                    <div class="quiz-question">Why do we use managed identity instead of storing API keys in code?</div>
+                                    <div class="quiz-options">
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p1" value="a">
+                                            It's faster for API calls
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p1" value="b">
+                                            Keys in code can be leaked in version control, creating security vulnerabilities
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p1" value="c">
+                                            Azure requires it for all blob storage
+                                        </label>
+                                    </div>
+                                    <button class="quiz-submit" onclick="checkQuiz('quiz-p1', 'b', 'Correct! Storing credentials in code is a major security risk. Managed identity allows the application to authenticate without exposing secrets.', 'Not quite. The key reason is security - credentials in code can be accidentally committed to repositories and exposed.')">Check Answer</button>
+                                    <div class="quiz-feedback" id="quiz-p1-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="quiz-question">Transform this CEQ into an OEQ: "Is that a cat in your drawing?"</div>
-                <div class="quiz-options">
-                    <label class="quiz-option">
-                        <input type="radio" name="q3" value="a">
-                        "Is that a cat or a dog?"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q3" value="b">
-                        "Did you draw a cat?"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q3" value="c">
-                        "Tell me about what you drew"
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q3" value="d">
-                        "Can you draw a cat?"
-                    </label>
+
+                <!-- Module 2: Audio Extraction -->
+                <div class="module-card" data-module="p2">
+                    <div class="module-header">
+                        <div class="module-number">2</div>
+                        <div class="module-info">
+                            <div class="module-title">Audio Extraction with FFmpeg</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 30 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Extract and normalize audio streams from video files, preparing them for speech recognition.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> FFmpeg commands</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Sample rate conversion</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Audio normalization</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon explore"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <span class="phase-title">Explore: Why 16kHz Mono?</span>
+                                <span class="phase-time">10 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <p>Whisper and most speech recognition models expect specific audio characteristics:</p>
+                                <div class="activity-steps">
+                                    <div class="activity-step">
+                                        <div class="step-number">1</div>
+                                        <div class="step-content">
+                                            <h4>16kHz Sample Rate</h4>
+                                            <p>Human speech frequencies (85Hz-255Hz fundamentals, up to 8kHz harmonics) are fully captured at 16kHz. Higher rates waste compute without improving accuracy.</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-content">
+                                            <h4>Mono Channel</h4>
+                                            <p>Speech recognition processes single-channel audio. Stereo adds complexity without benefit for transcription.</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-step">
+                                        <div class="step-number">3</div>
+                                        <div class="step-content">
+                                            <h4>PCM 16-bit</h4>
+                                            <p>Uncompressed PCM preserves audio fidelity. 16-bit depth provides 96dB dynamic range - more than sufficient for speech.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon create"><i class="fa-solid fa-code"></i></div>
+                                <span class="phase-title">Create: FFmpeg Pipeline</span>
+                                <span class="phase-time">15 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <div class="code-block"><span class="comment"># FFmpeg command for Whisper-compatible audio extraction</span>
+ffmpeg -i classroom_video.mp4 \
+    -vn \                    <span class="comment"># Strip video stream (audio only)</span>
+    -acodec pcm_s16le \      <span class="comment"># 16-bit PCM encoding</span>
+    -ar <span class="number">16000</span> \             <span class="comment"># 16kHz sample rate</span>
+    -ac <span class="number">1</span> \                 <span class="comment"># Mono channel</span>
+    -af "highpass=f=80,lowpass=f=8000" \  <span class="comment"># Speech frequency filter</span>
+    output_audio.wav
+
+<span class="comment"># Python wrapper for programmatic use</span>
+<span class="keyword">import</span> subprocess
+
+<span class="keyword">def</span> <span class="function">extract_audio</span>(video_path: str, output_path: str) -> bool:
+    cmd = [
+        <span class="string">"ffmpeg"</span>, <span class="string">"-i"</span>, video_path,
+        <span class="string">"-vn"</span>, <span class="string">"-acodec"</span>, <span class="string">"pcm_s16le"</span>,
+        <span class="string">"-ar"</span>, <span class="string">"16000"</span>, <span class="string">"-ac"</span>, <span class="string">"1"</span>,
+        output_path
+    ]
+    result = subprocess.<span class="function">run</span>(cmd, capture_output=<span class="keyword">True</span>)
+    <span class="keyword">return</span> result.returncode == <span class="number">0</span></div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon reflect"><i class="fa-solid fa-clipboard-question"></i></div>
+                                <span class="phase-title">Reflect: Knowledge Check</span>
+                                <span class="phase-time">5 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <div class="quiz-container" id="quiz-p2">
+                                    <div class="quiz-header">
+                                        <i class="fa-solid fa-brain quiz-icon"></i>
+                                        <span class="quiz-title">Assessment</span>
+                                    </div>
+                                    <div class="quiz-question">What does the "-vn" flag do in FFmpeg?</div>
+                                    <div class="quiz-options">
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p2" value="a">
+                                            Enables verbose output for debugging
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p2" value="b">
+                                            Strips the video stream, outputting audio only
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p2" value="c">
+                                            Normalizes volume levels
+                                        </label>
+                                    </div>
+                                    <button class="quiz-submit" onclick="checkQuiz('quiz-p2', 'b', 'Correct! The -vn flag tells FFmpeg to skip the video stream, resulting in an audio-only output file.', 'Not quite. The -vn flag means \"no video\" - it strips the video stream from the output.')">Check Answer</button>
+                                    <div class="quiz-feedback" id="quiz-p2-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <button class="quiz-submit" onclick="checkQuiz('quiz3', 'c', 'Excellent! \"Tell me about what you drew\" invites the child to describe, explain, and share their creative process.', 'Not quite. The correct answer is C. \"Tell me about what you drew\" is truly open-ended, inviting the child to share their thoughts and creative process.')">Submit Answer</button>
-                <div class="quiz-feedback" id="quiz3-feedback"></div>
+
+                <!-- Module 3: Speech Recognition -->
+                <div class="module-card" data-module="p3">
+                    <div class="module-header">
+                        <div class="module-number">3</div>
+                        <div class="module-info">
+                            <div class="module-title">Speech Recognition with Whisper</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 35 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Use OpenAI's Whisper model to transcribe classroom audio with word-level timestamps.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Whisper API</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Model selection</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Timestamp extraction</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon explore"><i class="fa-solid fa-magnifying-glass"></i></div>
+                                <span class="phase-title">Explore: Whisper Model Architecture</span>
+                                <span class="phase-time">15 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <p>OpenAI Whisper is a transformer-based encoder-decoder model trained on 680,000 hours of multilingual audio:</p>
+                                <div class="activity-steps">
+                                    <div class="activity-step">
+                                        <div class="step-number">1</div>
+                                        <div class="step-content">
+                                            <h4>Model Sizes</h4>
+                                            <p><strong>tiny</strong> (39M params) | <strong>base</strong> (74M) | <strong>small</strong> (244M) | <strong>medium</strong> (769M) | <strong>large</strong> (1.5B)</p>
+                                        </div>
+                                    </div>
+                                    <div class="activity-step">
+                                        <div class="step-number">2</div>
+                                        <div class="step-content">
+                                            <h4>Accuracy vs Speed Trade-off</h4>
+                                            <p>We use <strong>base</strong> model (~140MB) for optimal balance - 5x faster than large with comparable accuracy for English speech.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon create"><i class="fa-solid fa-code"></i></div>
+                                <span class="phase-title">Create: Transcription Pipeline</span>
+                                <span class="phase-time">15 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <div class="code-block"><span class="comment"># From src/ml/audio/whisper_processor.py</span>
+<span class="keyword">import</span> whisper  <span class="comment"># OpenAI Whisper (PyTorch-based)</span>
+
+<span class="keyword">class</span> <span class="function">WhisperAudioProcessor</span>:
+    <span class="keyword">def</span> <span class="function">__init__</span>(self, model_size: str = <span class="string">"base"</span>):
+        <span class="comment"># Load pre-trained model (downloads ~140MB on first run)</span>
+        self.model = whisper.<span class="function">load_model</span>(model_size)
+
+    <span class="keyword">def</span> <span class="function">transcribe</span>(self, audio_path: str) -> dict:
+        <span class="string">"""Transcribe audio with word-level timestamps."""</span>
+        result = self.model.<span class="function">transcribe</span>(
+            audio_path,
+            word_timestamps=<span class="keyword">True</span>,   <span class="comment"># Enable precise timing</span>
+            language=<span class="string">"en"</span>,            <span class="comment"># Force English</span>
+            task=<span class="string">"transcribe"</span>         <span class="comment"># (vs "translate")</span>
+        )
+
+        <span class="comment"># Extract segments with timing info</span>
+        segments = []
+        <span class="keyword">for</span> seg <span class="keyword">in</span> result[<span class="string">"segments"</span>]:
+            segments.append({
+                <span class="string">"text"</span>: seg[<span class="string">"text"</span>].strip(),
+                <span class="string">"start"</span>: seg[<span class="string">"start"</span>],
+                <span class="string">"end"</span>: seg[<span class="string">"end"</span>]
+            })
+
+        <span class="keyword">return</span> {<span class="string">"segments"</span>: segments, <span class="string">"full_text"</span>: result[<span class="string">"text"</span>]}</div>
+                            </div>
+                        </div>
+
+                        <div class="learning-phase">
+                            <div class="phase-header">
+                                <div class="phase-icon reflect"><i class="fa-solid fa-clipboard-question"></i></div>
+                                <span class="phase-title">Reflect: Knowledge Check</span>
+                                <span class="phase-time">5 min</span>
+                            </div>
+                            <div class="phase-content">
+                                <div class="quiz-container" id="quiz-p3">
+                                    <div class="quiz-header">
+                                        <i class="fa-solid fa-brain quiz-icon"></i>
+                                        <span class="quiz-title">Assessment</span>
+                                    </div>
+                                    <div class="quiz-question">Why do we enable word_timestamps=True?</div>
+                                    <div class="quiz-options">
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p3" value="a">
+                                            To measure processing speed
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p3" value="b">
+                                            To align transcript text with specific moments in the audio for speaker diarization
+                                        </label>
+                                        <label class="quiz-option">
+                                            <input type="radio" name="q-p3" value="c">
+                                            To reduce memory usage
+                                        </label>
+                                    </div>
+                                    <button class="quiz-submit" onclick="checkQuiz('quiz-p3', 'b', 'Correct! Word timestamps allow us to know exactly when each word was spoken, enabling speaker identification and wait time analysis.', 'Not quite. Timestamps are essential for correlating transcribed text with speaker segments and calculating pause durations.')">Check Answer</button>
+                                    <div class="quiz-feedback" id="quiz-p3-feedback"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4: Speaker Diarization -->
+                <div class="module-card" data-module="p4">
+                    <div class="module-header">
+                        <div class="module-number">4</div>
+                        <div class="module-info">
+                            <div class="module-title">Speaker Diarization with pyannote</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 30 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Identify teacher vs child speech segments using neural speaker embeddings.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Speaker embeddings</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Clustering</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Turn-taking analysis</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: pyannote.audio pipeline, speaker clustering, teacher/child mapping...</p>
+                    </div>
+                </div>
+
+                <!-- Module 5-8: Simplified -->
+                <div class="module-card" data-module="p5">
+                    <div class="module-header">
+                        <div class="module-number">5</div>
+                        <div class="module-info">
+                            <div class="module-title">Question Detection</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 25 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Identify educator questions using punctuation, WH-words, and sentence structure patterns.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Regex patterns</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Question markers</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: Question detection patterns, WH-word identification...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="p6">
+                    <div class="module-header">
+                        <div class="module-number">6</div>
+                        <div class="module-info">
+                            <div class="module-title">Feature Extraction (19 Features)</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 40 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Extract 19 linguistic features that distinguish open-ended from closed-ended questions.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> OEQ indicators</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> CEQ indicators</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Feature engineering</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: QuestionFeatureExtractor implementation, 19-feature vector...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="p7">
+                    <div class="module-header">
+                        <div class="module-number">7</div>
+                        <div class="module-info">
+                            <div class="module-title">3-Model Ensemble Classification</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 45 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Combine MLPClassifier, RandomForest, and LogisticRegression with weighted soft voting.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Ensemble methods</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Soft voting</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> scikit-learn</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: EnsembleQuestionClassifier, voting strategies, weights [0.40, 0.35, 0.25]...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="p8">
+                    <div class="module-header">
+                        <div class="module-number">8</div>
+                        <div class="module-info">
+                            <div class="module-title">API & Real-time Feedback</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 30 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Deploy the ML pipeline as a FastAPI service with real-time classification endpoints.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> FastAPI</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> REST endpoints</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Azure deployment</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: API design, response schemas, deployment patterns...</p>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Module 4: Using the ML Tool -->
-    <section class="learning-section" style="background: #fafafa;">
-        <div class="container">
-            <h2><span class="section-number">4</span>Using the Cultivate ML Classifier</h2>
-
-            <div class="learning-content">
-                <p>Our machine learning classifier analyzes educator questions in real-time, providing instant feedback on whether questions are open-ended or closed-ended. Here's how to get the most from the tool:</p>
-
-                <div class="key-points">
-                    <h4><i class="fa-solid fa-robot"></i> How the Classifier Works</h4>
-                    <ul>
-                        <li><strong>Feature Extraction</strong> - The system analyzes 19 linguistic features in each question</li>
-                        <li><strong>Ensemble Voting</strong> - 3 scikit-learn models vote on the classification (MLPClassifier, RandomForest, LogisticRegression)</li>
-                        <li><strong>Confidence Score</strong> - Higher confidence means stronger agreement among models</li>
-                        <li><strong>Real-time Feedback</strong> - Get instant classification as you type</li>
-                    </ul>
-                </div>
-
-                <p>The classifier is designed as a training tool, not a judgment. Use it to build awareness of your questioning patterns and gradually increase your OEQ ratio over time.</p>
-            </div>
-
-            <!-- Quiz 4 -->
-            <div class="quiz-container" id="quiz4">
-                <div class="quiz-header">
-                    <i class="fa-solid fa-brain quiz-icon"></i>
-                    <span class="quiz-title">Knowledge Check</span>
-                </div>
-                <div class="quiz-question">How many ML models participate in the ensemble voting system?</div>
-                <div class="quiz-options">
-                    <label class="quiz-option">
-                        <input type="radio" name="q4" value="a">
-                        3 models
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q4" value="b">
-                        5 models
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q4" value="c">
-                        7 models
-                    </label>
-                    <label class="quiz-option">
-                        <input type="radio" name="q4" value="d">
-                        10 models
-                    </label>
-                </div>
-                <button class="quiz-submit" onclick="checkQuiz('quiz4', 'a', 'Correct! Our ensemble uses 3 scikit-learn models: MLPClassifier (Neural Network), RandomForestClassifier, and LogisticRegression with soft voting.', 'Not quite. The correct answer is A. Our ensemble classifier uses 3 models with weighted soft voting to achieve robust accuracy.')">Submit Answer</button>
-                <div class="quiz-feedback" id="quiz4-feedback"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Score Summary -->
-    <section class="section">
-        <div class="container">
-            <div class="score-summary" id="score-summary">
-                <h2><i class="fa-solid fa-trophy"></i> Module Complete!</h2>
-                <div class="score-value" id="final-score">0/4</div>
-                <div class="score-message" id="score-message">Great effort! Review the sections you missed and try again.</div>
-                <div style="margin-top: 1.5rem;">
-                    <a href="demo.html" class="btn btn-primary" style="background: white; color: #2E7D32;">Practice with Demo</a>
+        <!-- ML Training Track -->
+        <section class="track-section">
+            <div class="track-header">
+                <div class="track-icon training"><i class="fa-solid fa-brain"></i></div>
+                <div>
+                    <h2 class="track-title">Track 2: Ensemble Training</h2>
+                    <p class="track-subtitle">8 modules covering how we built and validated the 3-model ensemble</p>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA -->
-    <section class="section cta-section">
-        <div class="container">
-            <div class="cta-content">
-                <h2>Ready to Practice?</h2>
-                <p>Apply what you've learned using our interactive question classifier.</p>
-                <div class="cta-buttons">
-                    <a href="demo.html" class="btn btn-primary btn-large">Try the Demo</a>
-                    <a href="architecture.html" class="btn btn-outline btn-large">View Technical Docs</a>
+            <div class="module-grid">
+                <div class="module-card" data-module="t1">
+                    <div class="module-header">
+                        <div class="module-number">1</div>
+                        <div class="module-info">
+                            <div class="module-title">Data Collection (26 Videos)</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 25 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Learn about the ground truth dataset: 26 classroom videos with 119 expert-annotated questions.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Dataset design</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Sampling strategy</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: Video selection, age groups, activity types...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t2">
+                    <div class="module-header">
+                        <div class="module-number">2</div>
+                        <div class="module-info">
+                            <div class="module-title">Expert Annotation (CLASS Framework)</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 35 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Understand how CLASS-certified researchers labeled questions as OEQ or CEQ with detailed criteria.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> CLASS Framework</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Annotation guidelines</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: Annotation process, inter-rater reliability, edge cases...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t3">
+                    <div class="module-header">
+                        <div class="module-number">3</div>
+                        <div class="module-info">
+                            <div class="module-title">Train/Test Split Strategy</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 20 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Apply stratified splitting and cross-validation to ensure robust model evaluation.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Stratification</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Cross-validation</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: 80/20 split, StratifiedKFold, preventing data leakage...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t4">
+                    <div class="module-header">
+                        <div class="module-number">4</div>
+                        <div class="module-info">
+                            <div class="module-title">Feature Engineering Design</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 40 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Design 19 interpretable features based on linguistic research on questioning patterns.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Feature design</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Research-backed</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: has_how, has_why, has_what_think, oeq_score, ceq_score...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t5">
+                    <div class="module-header">
+                        <div class="module-number">5</div>
+                        <div class="module-info">
+                            <div class="module-title">Model Architecture Selection</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 45 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Choose complementary model architectures: MLPClassifier, RandomForest, LogisticRegression.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Model diversity</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> scikit-learn</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: Why these 3 models, complementary biases, scikit-learn implementation...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t6">
+                    <div class="module-header">
+                        <div class="module-number">6</div>
+                        <div class="module-info">
+                            <div class="module-title">Hyperparameter Optimization</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 35 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Use GridSearchCV to find optimal parameters for each model in the ensemble.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Grid search</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Parameter tuning</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: hidden_layer_sizes, n_estimators, C values, best parameters found...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t7">
+                    <div class="module-header">
+                        <div class="module-number">7</div>
+                        <div class="module-info">
+                            <div class="module-title">Ensemble Weight Optimization</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 30 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Determine optimal voting weights: [0.40, 0.35, 0.25] for MLP, RF, LR.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Weight search</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Soft voting</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: SoftVotingStrategy, weight optimization, probability averaging...</p>
+                    </div>
+                </div>
+
+                <div class="module-card" data-module="t8">
+                    <div class="module-header">
+                        <div class="module-number">8</div>
+                        <div class="module-info">
+                            <div class="module-title">Final Evaluation (89% Accuracy)</div>
+                            <div class="module-time"><i class="fa-solid fa-clock"></i> 30 min</div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down module-expand"></i>
+                    </div>
+                    <div class="module-preview">
+                        <p class="module-description">Evaluate the final ensemble on held-out test data: precision, recall, F1, confusion matrix.</p>
+                        <div class="module-objectives">
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Metrics</span>
+                            <span class="objective-tag"><i class="fa-solid fa-check"></i> Error analysis</span>
+                        </div>
+                    </div>
+                    <div class="module-content">
+                        <p style="color: var(--text-secondary); padding: var(--space-lg);">Module content: 89% accuracy, confusion matrix, error cases, model persistence...</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Progress Tracker -->
+        <section class="progress-section">
+            <div class="progress-header">
+                <h2 class="progress-title">Your Learning Progress</h2>
+                <p class="progress-subtitle">Track your completion across both learning tracks</p>
+            </div>
+            <div class="progress-tracks">
+                <div class="progress-track">
+                    <h4><i class="fa-solid fa-diagram-project"></i> Processing Pipeline</h4>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>0/8 modules completed</span>
+                        <span>~4.5 hours total</span>
+                    </div>
+                </div>
+                <div class="progress-track">
+                    <h4><i class="fa-solid fa-brain"></i> Ensemble Training</h4>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>0/8 modules completed</span>
+                        <span>~4 hours total</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
-                    <span class="brand-text">Cultivate Learning</span>
-                </div>
-                <div class="footer-info">
-                    <p>A partnership between Bona Opera Ventures and University of Washington</p>
-                </div>
-            </div>
-        </div>
+        <p>Curriculum based on <a href="https://creativecomputing.gse.harvard.edu/guide/about.html" target="_blank">Creative Computing</a> by Karen Brennan (Harvard) and Mitchel Resnick (MIT Media Lab)</p>
+        <p style="margin-top: var(--space-sm);">Cultivate Learning | A partnership between Bona Opera Ventures and University of Washington</p>
     </footer>
 
     <script>
-        let correctAnswers = 0;
-        let totalQuizzes = 4;
-        let completedQuizzes = 0;
+        // Module expansion
+        document.querySelectorAll('.module-card').forEach(card => {
+            card.querySelector('.module-header').addEventListener('click', () => {
+                card.classList.toggle('expanded');
+            });
+        });
 
-        function checkQuiz(quizId, correctAnswer, correctMessage, incorrectMessage) {
+        // Quiz functionality
+        function checkQuiz(quizId, correctAnswer, correctMsg, incorrectMsg) {
             const quiz = document.getElementById(quizId);
             const selected = quiz.querySelector('input[type="radio"]:checked');
             const feedback = document.getElementById(quizId + '-feedback');
@@ -503,7 +1300,7 @@
 
             const options = quiz.querySelectorAll('.quiz-option');
             options.forEach(opt => {
-                opt.classList.remove('selected', 'correct', 'incorrect');
+                opt.classList.remove('correct', 'incorrect');
                 const input = opt.querySelector('input');
                 if (input.value === correctAnswer) {
                     opt.classList.add('correct');
@@ -519,40 +1316,12 @@
             if (selected.value === correctAnswer) {
                 feedback.classList.remove('incorrect');
                 feedback.classList.add('correct');
-                feedback.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + correctMessage;
-                correctAnswers++;
+                feedback.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + correctMsg;
             } else {
                 feedback.classList.remove('correct');
                 feedback.classList.add('incorrect');
-                feedback.innerHTML = '<i class="fa-solid fa-times-circle"></i> ' + incorrectMessage;
+                feedback.innerHTML = '<i class="fa-solid fa-times-circle"></i> ' + incorrectMsg;
             }
-
-            completedQuizzes++;
-
-            if (completedQuizzes === totalQuizzes) {
-                showFinalScore();
-            }
-        }
-
-        function showFinalScore() {
-            const summary = document.getElementById('score-summary');
-            const scoreValue = document.getElementById('final-score');
-            const scoreMessage = document.getElementById('score-message');
-
-            scoreValue.textContent = correctAnswers + '/' + totalQuizzes;
-
-            if (correctAnswers === totalQuizzes) {
-                scoreMessage.textContent = 'Perfect score! You have mastered the fundamentals of effective questioning.';
-            } else if (correctAnswers >= 3) {
-                scoreMessage.textContent = 'Great job! You have a solid understanding. Review the missed questions to master the material.';
-            } else if (correctAnswers >= 2) {
-                scoreMessage.textContent = 'Good effort! Consider reviewing the modules to strengthen your understanding.';
-            } else {
-                scoreMessage.textContent = 'Keep learning! Review the modules above and try the quizzes again.';
-            }
-
-            summary.classList.add('show');
-            summary.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }
     </script>
 </body>
