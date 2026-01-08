@@ -1,0 +1,21 @@
+{
+  "name": "cultivate-funding-demo",
+  "version": "1.0.0",
+  "description": "Cultivate Learning ML Pipeline - Funding Demo Site",
+  "scripts": {
+    "serve": "npx serve -l 3000 -s .",
+    "dev": "npx serve -l 3000 -s . --cors",
+    "start": "npx serve -l 3000 -s ."
+  },
+  "keywords": [
+    "cultivate-learning",
+    "ml",
+    "education",
+    "early-childhood"
+  ],
+  "author": "Bona Opera Ventures",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0"
+  }
+}

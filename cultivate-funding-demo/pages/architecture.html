@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Architecture | Cultivate Learning ML Pipeline</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/architecture.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span class="brand-text">Cultivate Learning</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="architecture.html" class="nav-link active">Architecture</a>
+                <a href="demo.html" class="nav-link">Interactive Demo</a>
+                <a href="research.html" class="nav-link">Research</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>ML Pipeline Architecture</h1>
+            <p>End-to-end video analysis system for educator question classification</p>
+        </div>
+    </section>
+
+    <!-- Pipeline Overview -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Complete Pipeline Flow</h2>
+                <p class="section-subtitle">From classroom video to actionable educator feedback</p>
+            </div>
+
+            <!-- Visual Pipeline Diagram -->
+            <div class="pipeline-diagram">
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">1</div>
+                        <h3>Video Input</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">🎬</div>
+                        <div class="stage-details">
+                            <p>Classroom recording (MP4/MOV)</p>
+                            <ul>
+                                <li>Resolution: Up to 4K</li>
+                                <li>Duration: 1-60 minutes</li>
+                                <li>Audio: Multi-channel</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">Azure Blob Storage</span>
+                        <span class="tech-tag">Secure Upload</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">2</div>
+                        <h3>Audio Extraction</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">🎵</div>
+                        <div class="stage-details">
+                            <p>FFmpeg audio processing</p>
+                            <ul>
+                                <li>Sample Rate: 16kHz</li>
+                                <li>Format: Mono WAV</li>
+                                <li>Encoding: PCM 16-bit</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">FFmpeg</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">3</div>
+                        <h3>Speech Recognition</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">🗣️</div>
+                        <div class="stage-details">
+                            <p>OpenAI Whisper transcription</p>
+                            <ul>
+                                <li>Model: base/medium</li>
+                                <li>Word timestamps</li>
+                                <li>Auto language detect</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">Whisper</span>
+                        <span class="tech-tag">HuggingFace</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">4</div>
+                        <h3>Speaker Diarization</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">👥</div>
+                        <div class="stage-details">
+                            <p>Who said what, when</p>
+                            <ul>
+                                <li>Teacher identification</li>
+                                <li>Child speech segments</li>
+                                <li>Turn-taking analysis</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">pyannote</span>
+                        <span class="tech-tag">librosa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Second Row -->
+            <div class="pipeline-diagram pipeline-row-2">
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">5</div>
+                        <h3>Question Detection</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">❓</div>
+                        <div class="stage-details">
+                            <p>Identify educator questions</p>
+                            <ul>
+                                <li>Punctuation analysis</li>
+                                <li>Interrogative patterns</li>
+                                <li>Context extraction</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">Regex</span>
+                        <span class="tech-tag">NLP</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage highlight">
+                    <div class="stage-header">
+                        <div class="stage-number">6</div>
+                        <h3>Feature Extraction</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">📊</div>
+                        <div class="stage-details">
+                            <p>56 linguistic features</p>
+                            <ul>
+                                <li>16 OEQ indicators</li>
+                                <li>13 CEQ indicators</li>
+                                <li>Structural features</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">NumPy</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage highlight">
+                    <div class="stage-header">
+                        <div class="stage-number">7</div>
+                        <h3>Ensemble ML</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">🧠</div>
+                        <div class="stage-details">
+                            <p>7-model voting system</p>
+                            <ul>
+                                <li>Neural Network</li>
+                                <li>Random Forest</li>
+                                <li>XGBoost + more</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">PyTorch</span>
+                        <span class="tech-tag">scikit-learn</span>
+                    </div>
+                </div>
+
+                <div class="pipeline-connector">
+                    <div class="connector-line"></div>
+                    <div class="connector-arrow">→</div>
+                </div>
+
+                <div class="pipeline-stage">
+                    <div class="stage-header">
+                        <div class="stage-number">8</div>
+                        <h3>Feedback Generation</h3>
+                    </div>
+                    <div class="stage-content">
+                        <div class="stage-icon">💡</div>
+                        <div class="stage-details">
+                            <p>Actionable insights</p>
+                            <ul>
+                                <li>OEQ/CEQ distribution</li>
+                                <li>Wait time analysis</li>
+                                <li>Improvement tips</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="stage-tech">
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">CLASS Framework</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Extraction Detail -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Feature Extraction Engine</h2>
+                <p class="section-subtitle">56 carefully engineered linguistic features power our classification</p>
+            </div>
+
+            <div class="feature-matrix">
+                <div class="feature-category">
+                    <h3 class="category-title oeq-title">OEQ Indicators (16 features)</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-name">what</span>
+                            <span class="feature-desc">Open exploration</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">how</span>
+                            <span class="feature-desc">Process inquiry</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">why</span>
+                            <span class="feature-desc">Reasoning prompt</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">describe</span>
+                            <span class="feature-desc">Elaboration request</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">explain</span>
+                            <span class="feature-desc">Understanding probe</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">tell me</span>
+                            <span class="feature-desc">Narrative prompt</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">think</span>
+                            <span class="feature-desc">Opinion seeking</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">feel</span>
+                            <span class="feature-desc">Emotional inquiry</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">imagine</span>
+                            <span class="feature-desc">Creative prompt</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">wonder</span>
+                            <span class="feature-desc">Curiosity catalyst</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">predict</span>
+                            <span class="feature-desc">Future thinking</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">compare</span>
+                            <span class="feature-desc">Analytical prompt</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-category">
+                    <h3 class="category-title ceq-title">CEQ Indicators (13 features)</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-name">is/are</span>
+                            <span class="feature-desc">Yes/no pattern</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">do/does</span>
+                            <span class="feature-desc">Yes/no pattern</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">did</span>
+                            <span class="feature-desc">Past confirmation</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">can/could</span>
+                            <span class="feature-desc">Ability check</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">will/would</span>
+                            <span class="feature-desc">Future confirm</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">should</span>
+                            <span class="feature-desc">Norm check</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">has/have</span>
+                            <span class="feature-desc">Possession check</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">was/were</span>
+                            <span class="feature-desc">Past state check</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-category">
+                    <h3 class="category-title structural-title">Structural Features (27 features)</h3>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <span class="feature-name">word_count</span>
+                            <span class="feature-desc">Question length</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">char_count</span>
+                            <span class="feature-desc">Character count</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">avg_word_len</span>
+                            <span class="feature-desc">Complexity proxy</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">question_marks</span>
+                            <span class="feature-desc">Punctuation count</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">comma_count</span>
+                            <span class="feature-desc">Clause indicator</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">starts_wh</span>
+                            <span class="feature-desc">WH-question start</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">contains_you</span>
+                            <span class="feature-desc">Direct address</span>
+                        </div>
+                        <div class="feature-item">
+                            <span class="feature-name">ends_question</span>
+                            <span class="feature-desc">? at end</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ensemble Model Detail -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">7-Model Ensemble Architecture</h2>
+                <p class="section-subtitle">Soft voting with weighted probability averaging</p>
+            </div>
+
+            <div class="ensemble-diagram">
+                <div class="ensemble-input">
+                    <div class="input-box">
+                        <h4>Feature Vector</h4>
+                        <p>56-dimensional input</p>
+                        <div class="vector-preview">[0.23, 0.87, 0.12, ..., 0.45]</div>
+                    </div>
+                </div>
+
+                <div class="ensemble-arrow">↓</div>
+
+                <div class="ensemble-models">
+                    <div class="model-card nn">
+                        <div class="model-icon">🧠</div>
+                        <h4>Neural Network</h4>
+                        <p class="model-arch">[56→128→64→2]</p>
+                        <div class="model-weight">Weight: 0.18</div>
+                    </div>
+                    <div class="model-card rf">
+                        <div class="model-icon">🌲</div>
+                        <h4>Random Forest</h4>
+                        <p class="model-arch">100 trees, depth=10</p>
+                        <div class="model-weight">Weight: 0.16</div>
+                    </div>
+                    <div class="model-card xgb">
+                        <div class="model-icon">⚡</div>
+                        <h4>XGBoost</h4>
+                        <p class="model-arch">Gradient boosting</p>
+                        <div class="model-weight">Weight: 0.16</div>
+                    </div>
+                    <div class="model-card svm">
+                        <div class="model-icon">📐</div>
+                        <h4>SVM</h4>
+                        <p class="model-arch">RBF kernel</p>
+                        <div class="model-weight">Weight: 0.14</div>
+                    </div>
+                    <div class="model-card lr">
+                        <div class="model-icon">📈</div>
+                        <h4>Logistic Reg</h4>
+                        <p class="model-arch">L2 regularized</p>
+                        <div class="model-weight">Weight: 0.12</div>
+                    </div>
+                    <div class="model-card lgb">
+                        <div class="model-icon">💡</div>
+                        <h4>LightGBM</h4>
+                        <p class="model-arch">Leaf-wise growth</p>
+                        <div class="model-weight">Weight: 0.12</div>
+                    </div>
+                    <div class="model-card gb">
+                        <div class="model-icon">🎯</div>
+                        <h4>Gradient Boost</h4>
+                        <p class="model-arch">sklearn GBC</p>
+                        <div class="model-weight">Weight: 0.12</div>
+                    </div>
+                </div>
+
+                <div class="ensemble-arrow">↓</div>
+
+                <div class="ensemble-voting">
+                    <div class="voting-box">
+                        <h4>Soft Voting</h4>
+                        <p>Weighted probability averaging</p>
+                        <div class="voting-formula">
+                            P(class) = Σ(weight<sub>i</sub> × P<sub>i</sub>(class))
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ensemble-arrow">↓</div>
+
+                <div class="ensemble-output">
+                    <div class="output-box oeq">
+                        <span class="output-label">OEQ</span>
+                        <span class="output-prob">0.73</span>
+                    </div>
+                    <div class="output-box ceq">
+                        <span class="output-label">CEQ</span>
+                        <span class="output-prob">0.27</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Metrics -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Model Performance</h2>
+                <p class="section-subtitle">Validated against expert-annotated ground truth data</p>
+            </div>
+
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>Accuracy</h4>
+                        <div class="metric-value">89%</div>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="bar-fill" style="width: 89%"></div>
+                    </div>
+                    <p class="metric-desc">Overall classification accuracy on held-out test set</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>OEQ Precision</h4>
+                        <div class="metric-value">87%</div>
+                    </div>
+                    <div class="metric-bar oeq-bar">
+                        <div class="bar-fill" style="width: 87%"></div>
+                    </div>
+                    <p class="metric-desc">When we predict OEQ, we're right 87% of the time</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>OEQ Recall</h4>
+                        <div class="metric-value">84%</div>
+                    </div>
+                    <div class="metric-bar oeq-bar">
+                        <div class="bar-fill" style="width: 84%"></div>
+                    </div>
+                    <p class="metric-desc">We find 84% of all true OEQ questions</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>CEQ Precision</h4>
+                        <div class="metric-value">91%</div>
+                    </div>
+                    <div class="metric-bar ceq-bar">
+                        <div class="bar-fill" style="width: 91%"></div>
+                    </div>
+                    <p class="metric-desc">When we predict CEQ, we're right 91% of the time</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>F1 Score</h4>
+                        <div class="metric-value">0.88</div>
+                    </div>
+                    <div class="metric-bar">
+                        <div class="bar-fill" style="width: 88%"></div>
+                    </div>
+                    <p class="metric-desc">Harmonic mean of precision and recall</p>
+                </div>
+
+                <div class="metric-card">
+                    <div class="metric-header">
+                        <h4>Latency</h4>
+                        <div class="metric-value">&lt;50ms</div>
+                    </div>
+                    <div class="metric-bar latency-bar">
+                        <div class="bar-fill" style="width: 95%"></div>
+                    </div>
+                    <p class="metric-desc">End-to-end inference time per question</p>
+                </div>
+            </div>
+
+            <div class="confusion-matrix">
+                <h3>Confusion Matrix</h3>
+                <div class="matrix-container">
+                    <div class="matrix-labels-y">
+                        <span>Actual OEQ</span>
+                        <span>Actual CEQ</span>
+                    </div>
+                    <div class="matrix-grid">
+                        <div class="matrix-cell tp">
+                            <span class="cell-value">42</span>
+                            <span class="cell-label">True Positive</span>
+                        </div>
+                        <div class="matrix-cell fn">
+                            <span class="cell-value">8</span>
+                            <span class="cell-label">False Negative</span>
+                        </div>
+                        <div class="matrix-cell fp">
+                            <span class="cell-value">6</span>
+                            <span class="cell-label">False Positive</span>
+                        </div>
+                        <div class="matrix-cell tn">
+                            <span class="cell-value">63</span>
+                            <span class="cell-label">True Negative</span>
+                        </div>
+                    </div>
+                    <div class="matrix-labels-x">
+                        <span>Predicted OEQ</span>
+                        <span>Predicted CEQ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Endpoints -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">API Reference</h2>
+                <p class="section-subtitle">RESTful endpoints for classification services</p>
+            </div>
+
+            <div class="api-cards">
+                <div class="api-card">
+                    <div class="api-method post">POST</div>
+                    <div class="api-endpoint">/api/v2/classify/ensemble</div>
+                    <div class="api-desc">Classify question using 7-model ensemble voting</div>
+                    <div class="api-example">
+                        <pre><code>{
+  "text": "What do you think will happen?",
+  "scenario_id": 1,
+  "debug_mode": true
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-method post">POST</div>
+                    <div class="api-endpoint">/api/v1/classify</div>
+                    <div class="api-desc">Classify using classic single-model approach</div>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-method post">POST</div>
+                    <div class="api-endpoint">/api/v2/classify/batch</div>
+                    <div class="api-desc">Batch classify multiple questions (10-20x faster)</div>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-method post">POST</div>
+                    <div class="api-endpoint">/api/v1/video/upload</div>
+                    <div class="api-desc">Upload video for full pipeline analysis</div>
+                </div>
+
+                <div class="api-card">
+                    <div class="api-method ws">WS</div>
+                    <div class="api-endpoint">/ws/video/{video_id}</div>
+                    <div class="api-desc">WebSocket for real-time processing updates</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Try It Yourself</h2>
+                <p>Experience the classification pipeline in action with our interactive demo.</p>
+                <div class="cta-buttons">
+                    <a href="demo.html" class="btn btn-primary btn-large">Launch Demo</a>
+                    <a href="research.html" class="btn btn-outline btn-large">View Research</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌱</span>
+                    <span class="brand-text">Cultivate Learning</span>
+                </div>
+                <div class="footer-info">
+                    <p>A partnership between Bona Opera Ventures and University of Washington</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/main.js"></script>
+</body>
+</html>

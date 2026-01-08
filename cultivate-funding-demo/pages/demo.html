@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Demo | Cultivate Learning</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/demo.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🌱</span>
+                <span class="brand-text">Cultivate Learning</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="architecture.html" class="nav-link">Architecture</a>
+                <a href="demo.html" class="nav-link active">Interactive Demo</a>
+                <a href="research.html" class="nav-link">Research</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Demo Header -->
+    <section class="demo-header">
+        <div class="container">
+            <h1>Interactive Question Classifier</h1>
+            <p>Type any educator question and see how our ML ensemble classifies it</p>
+        </div>
+    </section>
+
+    <!-- Main Demo Area -->
+    <section class="demo-section">
+        <div class="container">
+            <div class="demo-layout">
+                <!-- Input Panel -->
+                <div class="demo-input-panel">
+                    <div class="panel-header">
+                        <h2>Enter a Question</h2>
+                        <div class="model-selector">
+                            <label>Model:</label>
+                            <select id="model-select">
+                                <option value="ensemble">Ensemble (7 models)</option>
+                                <option value="classic">Classic (Single model)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="input-area">
+                        <textarea
+                            id="question-input"
+                            placeholder="Type an educator question here... e.g., 'What do you think will happen if we add more water?'"
+                            rows="3"
+                        ></textarea>
+                        <div class="input-actions">
+                            <button id="classify-btn" class="btn btn-primary">
+                                <span class="btn-text">Classify Question</span>
+                                <span class="btn-loading" style="display: none;">
+                                    <span class="spinner"></span> Analyzing...
+                                </span>
+                            </button>
+                            <button id="clear-btn" class="btn btn-secondary">Clear</button>
+                        </div>
+                    </div>
+
+                    <!-- Example Questions -->
+                    <div class="examples-section">
+                        <h3>Try These Examples</h3>
+                        <div class="example-tabs">
+                            <button class="tab-btn active" data-tab="oeq">Open-Ended (OEQ)</button>
+                            <button class="tab-btn" data-tab="ceq">Closed-Ended (CEQ)</button>
+                            <button class="tab-btn" data-tab="tricky">Tricky Cases</button>
+                        </div>
+
+                        <div class="example-content" id="tab-oeq">
+                            <div class="example-item" data-question="What do you think will happen next?">
+                                <span class="example-text">"What do you think will happen next?"</span>
+                                <span class="example-reason">Invites prediction and reasoning</span>
+                            </div>
+                            <div class="example-item" data-question="How did that make you feel?">
+                                <span class="example-text">"How did that make you feel?"</span>
+                                <span class="example-reason">Explores emotional response</span>
+                            </div>
+                            <div class="example-item" data-question="Why do you think the tower fell down?">
+                                <span class="example-text">"Why do you think the tower fell down?"</span>
+                                <span class="example-reason">Prompts causal reasoning</span>
+                            </div>
+                            <div class="example-item" data-question="Tell me about what you're building.">
+                                <span class="example-text">"Tell me about what you're building."</span>
+                                <span class="example-reason">Encourages elaboration</span>
+                            </div>
+                            <div class="example-item" data-question="What would happen if we tried it a different way?">
+                                <span class="example-text">"What would happen if we tried it a different way?"</span>
+                                <span class="example-reason">Invites creative thinking</span>
+                            </div>
+                        </div>
+
+                        <div class="example-content hidden" id="tab-ceq">
+                            <div class="example-item" data-question="Is the flower red?">
+                                <span class="example-text">"Is the flower red?"</span>
+                                <span class="example-reason">Yes/no answer expected</span>
+                            </div>
+                            <div class="example-item" data-question="Did you wash your hands?">
+                                <span class="example-text">"Did you wash your hands?"</span>
+                                <span class="example-reason">Factual confirmation</span>
+                            </div>
+                            <div class="example-item" data-question="Can you see the moon?">
+                                <span class="example-text">"Can you see the moon?"</span>
+                                <span class="example-reason">Binary response</span>
+                            </div>
+                            <div class="example-item" data-question="Are you ready for snack time?">
+                                <span class="example-text">"Are you ready for snack time?"</span>
+                                <span class="example-reason">Yes/no question</span>
+                            </div>
+                            <div class="example-item" data-question="Do you want the blue one or the red one?">
+                                <span class="example-text">"Do you want the blue one or the red one?"</span>
+                                <span class="example-reason">Limited choice question</span>
+                            </div>
+                        </div>
+
+                        <div class="example-content hidden" id="tab-tricky">
+                            <div class="example-item" data-question="What color is the sky?">
+                                <span class="example-text">"What color is the sky?"</span>
+                                <span class="example-reason">Looks open but has factual answer</span>
+                            </div>
+                            <div class="example-item" data-question="Can you tell me more about that?">
+                                <span class="example-text">"Can you tell me more about that?"</span>
+                                <span class="example-reason">Starts with 'can' but invites elaboration</span>
+                            </div>
+                            <div class="example-item" data-question="Is that how you build a castle?">
+                                <span class="example-text">"Is that how you build a castle?"</span>
+                                <span class="example-reason">Could be rhetorical</span>
+                            </div>
+                            <div class="example-item" data-question="What do we do after snack?">
+                                <span class="example-text">"What do we do after snack?"</span>
+                                <span class="example-reason">Looks open but expects routine answer</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Results Panel -->
+                <div class="demo-results-panel">
+                    <div class="panel-header">
+                        <h2>Classification Results</h2>
+                    </div>
+
+                    <!-- Initial State -->
+                    <div class="results-placeholder" id="results-placeholder">
+                        <div class="placeholder-icon">🎯</div>
+                        <p>Enter a question and click "Classify" to see the ML analysis</p>
+                    </div>
+
+                    <!-- Results Content (hidden initially) -->
+                    <div class="results-content hidden" id="results-content">
+                        <!-- Main Classification -->
+                        <div class="main-result">
+                            <div class="classification-badge" id="classification-badge">
+                                <span class="badge-type">OEQ</span>
+                            </div>
+                            <div class="classification-label" id="classification-label">Open-Ended Question</div>
+                        </div>
+
+                        <!-- Confidence Meter -->
+                        <div class="confidence-section">
+                            <div class="confidence-header">
+                                <span>Confidence</span>
+                                <span class="confidence-value" id="confidence-value">87%</span>
+                            </div>
+                            <div class="confidence-meter">
+                                <div class="meter-fill" id="confidence-fill"></div>
+                            </div>
+                            <div class="probability-breakdown">
+                                <div class="prob-item oeq">
+                                    <span class="prob-label">OEQ</span>
+                                    <span class="prob-value" id="oeq-prob">0.87</span>
+                                </div>
+                                <div class="prob-item ceq">
+                                    <span class="prob-label">CEQ</span>
+                                    <span class="prob-value" id="ceq-prob">0.13</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ensemble Voting (only shown for ensemble model) -->
+                        <div class="voting-section" id="voting-section">
+                            <h3>Ensemble Voting</h3>
+                            <div class="vote-summary" id="vote-summary">
+                                <span class="vote-count oeq" id="oeq-votes">5 models</span>
+                                <span class="vote-vs">vs</span>
+                                <span class="vote-count ceq" id="ceq-votes">2 models</span>
+                            </div>
+                            <div class="model-votes" id="model-votes">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Feature Analysis -->
+                        <div class="features-section">
+                            <h3>Key Features Detected</h3>
+                            <div class="features-list" id="features-list">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <!-- Teaching Tip -->
+                        <div class="teaching-tip" id="teaching-tip">
+                            <div class="tip-icon">💡</div>
+                            <div class="tip-content">
+                                <h4>Teaching Tip</h4>
+                                <p id="tip-text">Great open-ended question! This invites children to think deeply and share their ideas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario Practice Section -->
+    <section class="section section-alt">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Practice Scenarios</h2>
+                <p class="section-subtitle">Real classroom situations from our training data</p>
+            </div>
+
+            <div class="scenarios-grid">
+                <div class="scenario-card" data-scenario="1">
+                    <div class="scenario-icon">🏗️</div>
+                    <h3>Block Tower Collapse</h3>
+                    <p>A toddler's block tower just fell. How would you respond?</p>
+                    <div class="scenario-questions">
+                        <button class="scenario-q" data-question="What happened?">What happened?</button>
+                        <button class="scenario-q" data-question="Did it fall down?">Did it fall down?</button>
+                        <button class="scenario-q" data-question="Why do you think it fell?">Why do you think it fell?</button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario="2">
+                    <div class="scenario-icon">🌸</div>
+                    <h3>Flower Book Discovery</h3>
+                    <p>Children are exploring a book about flowers. Engage their curiosity.</p>
+                    <div class="scenario-questions">
+                        <button class="scenario-q" data-question="What do you see on this page?">What do you see?</button>
+                        <button class="scenario-q" data-question="Is that a rose?">Is that a rose?</button>
+                        <button class="scenario-q" data-question="What do you think the flower needs to grow?">What helps it grow?</button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario="3">
+                    <div class="scenario-icon">🍉</div>
+                    <h3>Melon Exploration</h3>
+                    <p>During snack, children are curious about a melon.</p>
+                    <div class="scenario-questions">
+                        <button class="scenario-q" data-question="What do you notice about the melon?">What do you notice?</button>
+                        <button class="scenario-q" data-question="Do you like melon?">Do you like melon?</button>
+                        <button class="scenario-q" data-question="What do you think is inside?">What's inside?</button>
+                    </div>
+                </div>
+
+                <div class="scenario-card" data-scenario="4">
+                    <div class="scenario-icon">🎨</div>
+                    <h3>Color Mixing</h3>
+                    <p>A preschooler is mixing paint colors at the art table.</p>
+                    <div class="scenario-questions">
+                        <button class="scenario-q" data-question="What happens when you mix those colors?">What happens when you mix?</button>
+                        <button class="scenario-q" data-question="Is that green?">Is that green?</button>
+                        <button class="scenario-q" data-question="How did you make that color?">How did you make that?</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Status -->
+    <section class="section">
+        <div class="container">
+            <div class="api-status-card">
+                <div class="status-indicator" id="api-status">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Checking API...</span>
+                </div>
+                <div class="api-info">
+                    <span class="api-label">Endpoint:</span>
+                    <code id="api-endpoint">Not connected</code>
+                </div>
+                <div class="api-info">
+                    <span class="api-label">Model:</span>
+                    <code id="api-model">-</code>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon">🌱</span>
+                    <span class="brand-text">Cultivate Learning</span>
+                </div>
+                <div class="footer-info">
+                    <p>A partnership between Bona Opera Ventures and University of Washington</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/demo.js"></script>
+</body>
+</html>
