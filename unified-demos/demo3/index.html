@@ -612,9 +612,111 @@
         .error-dismiss:hover {
             background: rgba(255, 255, 255, 0.2);
         }
+
+        /* Password Protection Overlay */
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 99999;
+            color: white;
+        }
+
+        .password-overlay.hidden {
+            display: none;
+        }
+
+        .password-box {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .password-box h2 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            font-size: var(--font-xl);
+        }
+
+        .password-box p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            font-size: var(--font-sm);
+        }
+
+        .password-input-group {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+
+        .password-input {
+            flex: 1;
+            padding: var(--space-md);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            font-size: var(--font-base);
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .password-input:focus {
+            outline: none;
+            border-color: var(--brand-primary);
+        }
+
+        .password-submit {
+            padding: var(--space-md) var(--space-lg);
+            background: var(--brand-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .password-submit:hover {
+            background: var(--brand-secondary);
+        }
+
+        .password-error {
+            color: var(--error);
+            font-size: var(--font-sm);
+            margin-top: var(--space-sm);
+            display: none;
+        }
+
+        .password-error.show {
+            display: block;
+        }
     </style>
 </head>
 <body data-theme="light">
+    <!-- Password Protection Overlay -->
+    <div id="passwordOverlay" class="password-overlay">
+        <div class="password-box">
+            <h2>Protected Content</h2>
+            <p>This demo contains sensitive educational data. Please enter the access code to continue.</p>
+            <div class="password-input-group">
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter access code" autocomplete="off">
+                <button id="passwordSubmit" class="password-submit">Enter</button>
+            </div>
+            <div id="passwordError" class="password-error">Incorrect access code. Please try again.</div>
+        </div>
+    </div>
+
     <!-- Unified Header will be injected here -->
 
     <!-- Global Loading Indicator -->
@@ -811,6 +913,47 @@
     <script src="../shared/footer.js"></script>
     <script src="../shared/model-settings.js"></script>
     <script src="../shared/api-config.js"></script>
+
+    <!-- Password Protection -->
+    <script>
+        (function() {
+            const ACCESS_CODE = 'TURING';
+            const SESSION_KEY = 'demo3_access_granted';
+
+            // Check if already authenticated in this session
+            if (sessionStorage.getItem(SESSION_KEY) === 'true') {
+                document.getElementById('passwordOverlay').classList.add('hidden');
+                return;
+            }
+
+            const overlay = document.getElementById('passwordOverlay');
+            const input = document.getElementById('passwordInput');
+            const submit = document.getElementById('passwordSubmit');
+            const error = document.getElementById('passwordError');
+
+            function checkPassword() {
+                if (input.value.toUpperCase() === ACCESS_CODE) {
+                    sessionStorage.setItem(SESSION_KEY, 'true');
+                    overlay.classList.add('hidden');
+                    error.classList.remove('show');
+                } else {
+                    error.classList.add('show');
+                    input.value = '';
+                    input.focus();
+                }
+            }
+
+            submit.addEventListener('click', checkPassword);
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+
+            // Focus input on load
+            input.focus();
+        })();
+    </script>
 
     <!-- Demo 3 Functionality -->
     <script type="module" src="./app.js"></script>
