@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 3 - Multi-Video Analysis Platform | Cultivate Learning</title>
+
+    <!-- Unified Design System -->
+    <link rel="stylesheet" href="../shared/unified-styles.css">
+
+    <!-- Page Specific Styles -->
+    <style>
+        /* Demo 3 Specific Styles */
+
+        /* Video Selector Section */
+        .video-selector {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+
+        .video-selector-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .video-selector-title {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: var(--space-sm);
+        }
+
+        .filter-btn {
+            padding: var(--space-sm) var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
+
+        .filter-btn.active {
+            background: var(--brand-primary);
+            border-color: var(--brand-primary);
+            color: var(--text-inverse);
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: var(--space-md);
+        }
+
+        .video-card {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .video-card:hover {
+            border-color: var(--brand-primary);
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .video-card.selected {
+            border-color: var(--brand-primary);
+            background: var(--bg-secondary);
+        }
+
+        .video-card-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            margin-bottom: var(--space-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-tertiary);
+            font-size: var(--font-2xl);
+        }
+
+        .video-card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .video-card-meta {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
+        .video-card-badge {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-top: var(--space-sm);
+        }
+
+        .video-card-badge.pk {
+            background: var(--success);
+            color: var(--text-inverse);
+        }
+
+        .video-card-badge.toddler {
+            background: var(--info);
+            color: var(--text-inverse);
+        }
+
+        /* Video Player Container */
+        .video-player-container {
+            position: relative;
+            background: #000;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            margin-bottom: var(--space-lg);
+        }
+
+        .video-player {
+            width: 100%;
+            height: auto;
+            display: block;
+            min-height: 400px;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+            padding: var(--space-lg);
+            color: white;
+        }
+
+        .video-info-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) var(--space-lg);
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+        }
+
+        .video-info-title {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .video-info-meta {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
+        /* Questions Container */
+        .questions-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            max-height: 500px;
+            overflow-y: auto;
+        }
+
+        .question-item {
+            margin-bottom: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-fast);
+        }
+
+        .question-item:hover {
+            border-color: var(--brand-primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+
+        .question-timestamp {
+            color: var(--brand-primary);
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .question-timestamp:hover {
+            text-decoration: underline;
+        }
+
+        .question-classification {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .ml-prediction {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-xs);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ml-prediction.oeq {
+            background: var(--success);
+            color: var(--text-inverse);
+        }
+
+        .ml-prediction.ceq {
+            background: var(--info);
+            color: var(--text-inverse);
+        }
+
+        .question-text {
+            margin-bottom: var(--space-sm);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .question-details {
+            font-size: var(--font-sm);
+            color: var(--text-tertiary);
+        }
+
+        /* Ground Truth Container */
+        .ground-truth-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .ground-truth-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+
+        @media (max-width: 768px) {
+            .ground-truth-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .ground-truth-section {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            border: 1px solid var(--border-light);
+        }
+
+        .ground-truth-title {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+
+        /* Analytics Container */
+        .analytics-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+
+        .stat-card {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            border: 1px solid var(--border-light);
+        }
+
+        .stat-number {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--brand-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .stat-label {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .chart-placeholder {
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            text-align: center;
+            color: var(--text-tertiary);
+            border: 2px dashed var(--border-light);
+            margin-top: var(--space-lg);
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--border-light);
+            border-top: 2px solid var(--brand-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+            margin-right: var(--space-sm);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Rate Button */
+        .rate-button {
+            padding: var(--space-xs) var(--space-sm);
+            font-size: var(--font-xs);
+            font-weight: 500;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .rate-button:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--brand-primary);
+            color: var(--brand-primary);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn var(--transition-base);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Rating Modal Styles */
+        .rating-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+        }
+
+        .rating-modal.show {
+            display: flex;
+        }
+
+        .rating-modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .rating-modal h3 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            font-size: var(--font-lg);
+            font-weight: 600;
+        }
+
+        .rating-question {
+            background: var(--bg-tertiary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .rating-current {
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            gap: var(--space-sm);
+            color: var(--text-primary);
+        }
+
+        .rating-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .rating-option {
+            padding: var(--space-md);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            text-align: center;
+            transition: all var(--transition-fast);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
+        .rating-option:hover {
+            border-color: var(--brand-primary);
+            background: var(--bg-secondary);
+        }
+
+        .rating-option.selected {
+            border-color: var(--brand-primary);
+            background: var(--bg-tertiary);
+            color: var(--brand-primary);
+        }
+
+        .rating-option .label {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+        }
+
+        .rating-option .desc {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+
+        .rating-actions {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: flex-end;
+        }
+
+        .rating-btn {
+            padding: var(--space-sm) var(--space-lg);
+            border: none;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: background-color var(--transition-fast);
+        }
+
+        .rating-btn.primary {
+            background: var(--brand-primary);
+            color: white;
+        }
+
+        .rating-btn.primary:hover {
+            background: var(--brand-secondary);
+        }
+
+        .rating-btn.secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .rating-btn.secondary:hover {
+            background: var(--bg-secondary);
+        }
+
+        .rating-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Empty state */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-xl);
+            color: var(--text-tertiary);
+        }
+
+        .empty-state-icon {
+            font-size: var(--font-3xl);
+            margin-bottom: var(--space-md);
+        }
+
+        .empty-state-title {
+            font-size: var(--font-lg);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .empty-state-description {
+            font-size: var(--font-sm);
+        }
+
+        /* Global Loading Indicator */
+        .loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            gap: var(--space-md);
+        }
+
+        /* Global Error Container */
+        .error-container {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 9998;
+            max-width: 400px;
+        }
+
+        .error-message {
+            background: var(--error);
+            color: white;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .error-icon {
+            font-weight: bold;
+            font-size: var(--font-lg);
+            width: 24px;
+            height: 24px;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .error-text {
+            flex: 1;
+        }
+
+        .error-dismiss {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-sm);
+        }
+
+        .error-dismiss:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <!-- Unified Header will be injected here -->
+
+    <!-- Global Loading Indicator -->
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="loading-spinner"></div>
+        <span id="loadingMessage">Loading...</span>
+    </div>
+
+    <!-- Global Error Container -->
+    <div id="errorContainer" class="error-container" style="display: none;"></div>
+
+    <div class="unified-container">
+        <div class="unified-card">
+            <div class="card-header">
+                <h2 class="card-title">Multi-Video Analysis Platform</h2>
+                <p class="card-description">Compare and analyze question patterns across multiple teaching videos</p>
+            </div>
+
+            <!-- Video Selector Section - Container for VideoSelector component -->
+            <section id="videoSelectorContainer" class="video-selector" aria-label="Video Library">
+                <!-- VideoSelector component will render its content here -->
+                <div class="loading-spinner"></div>
+                <span>Loading video library...</span>
+            </section>
+
+            <!-- Tab Navigation -->
+            <nav class="tab-navigation" role="tablist" aria-label="Analysis sections">
+                <button class="tab-btn active" role="tab" aria-selected="true" aria-controls="video-library" onclick="showTab('video-library')">Video Library</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="question-analysis" onclick="showTab('question-analysis')">Question Analysis</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="ground-truth" onclick="showTab('ground-truth')">Ground Truth Comparison</button>
+                <button class="tab-btn" role="tab" aria-selected="false" aria-controls="analytics" onclick="showTab('analytics')">Analytics</button>
+            </nav>
+
+            <!-- Video Library Tab -->
+            <div id="video-library" class="tab-content active" role="tabpanel" aria-labelledby="video-library-tab">
+                <h3 class="card-title">Selected Video</h3>
+                <p class="card-description">Select a video from the library above to begin analysis</p>
+
+                <div class="video-player-container">
+                    <video class="video-player" controls id="mainVideo" aria-label="Teaching video player">
+                        <source src="" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
+                <div class="video-info-bar" id="videoInfoBar">
+                    <div>
+                        <div class="video-info-title" id="selectedVideoTitle">No video selected</div>
+                        <div class="video-info-meta" id="selectedVideoMeta">Select a video from the library to begin</div>
+                    </div>
+                    <div id="videoStats">
+                        <!-- Stats will be populated -->
+                    </div>
+                </div>
+
+                <div class="stats-grid" id="summaryStats">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalQuestions">--</div>
+                        <div class="stat-label">Questions Detected</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="oeqCount">--</div>
+                        <div class="stat-label">Open-Ended Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="ceqCount">--</div>
+                        <div class="stat-label">Closed-Ended Questions</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="avgConfidence">--</div>
+                        <div class="stat-label">Avg ML Confidence</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question Analysis Tab -->
+            <div id="question-analysis" class="tab-content" role="tabpanel" aria-labelledby="question-analysis-tab">
+                <h3 class="card-title">Question Classification Analysis</h3>
+                <p class="card-description">ML-powered question detection with Ensemble classifier</p>
+
+                <div class="questions-container" id="questionPanelContainer" aria-live="polite">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">?</div>
+                        <div class="empty-state-title">No Video Selected</div>
+                        <div class="empty-state-description">Select a video from the library to analyze questions</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ground Truth Comparison Tab -->
+            <div id="ground-truth" class="tab-content" role="tabpanel" aria-labelledby="ground-truth-tab">
+                <h3 class="card-title">Ground Truth Comparison</h3>
+                <p class="card-description">Compare ML predictions with human expert annotations</p>
+
+                <div class="ground-truth-container" id="groundTruthContainer">
+                    <div class="ground-truth-grid">
+                        <div class="ground-truth-section">
+                            <h4 class="ground-truth-title">ML Predictions</h4>
+                            <div id="mlPredictions" aria-live="polite">
+                                <div class="empty-state">
+                                    <div class="empty-state-title">No Data Available</div>
+                                    <div class="empty-state-description">Select a video to view ML predictions</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ground-truth-section">
+                            <h4 class="ground-truth-title">Expert Annotations</h4>
+                            <div id="expertAnnotations" aria-live="polite">
+                                <div class="empty-state">
+                                    <div class="empty-state-title">No Annotations</div>
+                                    <div class="empty-state-description">Expert annotations will appear here</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analytics Tab -->
+            <div id="analytics" class="tab-content" role="tabpanel" aria-labelledby="analytics-tab">
+                <h3 class="card-title">Analytics Dashboard</h3>
+                <p class="card-description">Cross-video analysis and performance metrics</p>
+
+                <div class="analytics-container" id="analyticsDashboardContainer">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalVideos">--</div>
+                            <div class="stat-label">Videos Analyzed</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="totalQuestionsAll">--</div>
+                            <div class="stat-label">Total Questions</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="overallAccuracy">--</div>
+                            <div class="stat-label">Model Accuracy</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="oeqRatio">--</div>
+                            <div class="stat-label">OEQ Ratio</div>
+                        </div>
+                    </div>
+
+                    <div class="chart-placeholder" id="analyticsChart">
+                        <span>Analytics charts will be rendered here</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rating Modal -->
+    <div id="ratingModal" class="rating-modal" role="dialog" aria-modal="true" aria-labelledby="ratingModalTitle">
+        <div class="rating-modal-content">
+            <h3 id="ratingModalTitle">Rate ML Classification</h3>
+            <div id="ratingQuestion" class="rating-question" aria-label="Question being rated"></div>
+            <div class="rating-current">
+                <span>Current Classification:</span>
+                <span id="currentClassification" style="font-weight: 600; margin-left: 8px;"></span>
+                <span id="currentConfidence" style="margin-left: 8px; color: var(--text-secondary);"></span>
+            </div>
+            <div class="rating-options" role="radiogroup" aria-label="Rating options">
+                <div class="rating-option" data-type="correct" role="radio" aria-checked="false" tabindex="0">
+                    <div class="label">Correct</div>
+                    <div class="desc">The ML classification is accurate</div>
+                </div>
+                <div class="rating-option" data-type="incorrect" role="radio" aria-checked="false" tabindex="0">
+                    <div class="label">Incorrect</div>
+                    <div class="desc">The ML classification needs correction</div>
+                </div>
+            </div>
+            <div id="correctionOptions" style="display: none; margin-bottom: 20px;" role="radiogroup" aria-label="Correction options">
+                <h4 style="margin-bottom: 12px; color: var(--text-primary);">Correct Classification:</h4>
+                <div style="display: flex; gap: 12px;">
+                    <button class="rating-option" data-correct-type="OEQ" style="flex: 1; padding: 12px;" role="radio" aria-checked="false">
+                        <div class="label">OEQ</div>
+                        <div class="desc">Open-Ended Question</div>
+                    </button>
+                    <button class="rating-option" data-correct-type="CEQ" style="flex: 1; padding: 12px;" role="radio" aria-checked="false">
+                        <div class="label">CEQ</div>
+                        <div class="desc">Closed-Ended Question</div>
+                    </button>
+                </div>
+            </div>
+            <div class="rating-actions">
+                <button class="rating-btn secondary" onclick="closeRatingModal()" aria-label="Cancel rating">Cancel</button>
+                <button id="submitRating" class="rating-btn primary" onclick="submitRating()" disabled aria-label="Submit rating">Submit Rating</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Unified Components -->
+    <script src="../shared/unified-header.js"></script>
+    <script src="../shared/footer.js"></script>
+    <script src="../shared/model-settings.js"></script>
+    <script src="../shared/api-config.js"></script>
+
+    <!-- Demo 3 Functionality -->
+    <script type="module" src="./app.js"></script>
+</body>
+</html>

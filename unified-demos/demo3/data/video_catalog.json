@@ -1,0 +1,1353 @@
+{
+  "videos": [
+    {
+      "id": "48378879",
+      "filename": "ACAP_Marty_005",
+      "display_name": "ACAP Marty",
+      "age_group": "PK",
+      "timestamp_range": "2:10-2:55",
+      "description": "MAIN FOCUS: Science Knowledge and Skills. Teacher at circle time preparing children for transition and explaining one of the activities. Has a child come up and demonstrate how to use \\\"magic\\\" magnifying glasses 0:00-3:38. Has second child model/demonstrate 3:50-6:08. Uses word \\\"lens\\\" at 0:35, \\\"transparent\\\" at 1:36. Ties lens to book they read 1:10. Spanish for red 2:53, 2:55,; blue 4:25. Reminds children not to laugh at one another, hurt feelings 1:46.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "2:13",
+          "timestamp_seconds": 133.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ and listens for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What color do your friends look?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.4631967544555664
+        },
+        {
+          "id": "q2",
+          "timestamp": "2:22",
+          "timestamp_seconds": 142.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"What do you think…?\" but doesn't pause before repeating the question",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": true
+          },
+          "has_transcript": true,
+          "transcript_text": "Now, what do you think will happen if we put some",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6228718439737956
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/ACAP_Marty_005.mp4",
+        "file_size_mb": 39.47,
+        "modified": "2025-09-23T11:08:57.327174"
+      },
+      "has_transcripts": true,
+      "transcript_count": 5
+    },
+    {
+      "id": "159878873",
+      "filename": "Being Aware of a Toddler's Needs",
+      "display_name": "Being Aware of a Toddler's Needs",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:00-0:36",
+      "description": "This video includes educators engaged in responsive teaching practices with children. The educators use verbal instruction, materials, proximity and conflict resolution strategies to guide children in Problem solving strategies.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:02",
+          "timestamp_seconds": 2.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ \"what would you like to do? And teacher waits for response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": false,
+          "transcript_text": null,
+          "ml_prediction": null
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:05",
+          "timestamp_seconds": 5.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) but teacher answers her own question without waiting for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": true,
+            "restates_question": false
+          },
+          "has_transcript": false,
+          "transcript_text": null,
+          "ml_prediction": null
+        }
+      ],
+      "file_info": {
+        "exists": false,
+        "local_path": null,
+        "file_size_mb": 0
+      },
+      "has_transcripts": false,
+      "transcript_count": 0
+    },
+    {
+      "id": "163402756",
+      "filename": "Book about Flowers SOM SUBS .mp4",
+      "display_name": "Book about Flowers SOM SUBS",
+      "age_group": "PK",
+      "timestamp_range": "0:15-1:00",
+      "description": "In this 2 minute video, the educator begins to read a book. As the educator begins they also book mapping and begin to ask chidlren what they think will happen. 00:50 The educator and chidlren read together and the educator points to different parts of the pages to ask the children questions and help identify the different parts of a flower.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:18",
+          "timestamp_seconds": 18.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ with a pause allowing one child to respond",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What do you think is going on in this picture right here?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.7682131379842758
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:25",
+          "timestamp_seconds": 25.0,
+          "ground_truth_type": "OEQ",
+          "description": "Teacher repeats same OEQ allowing another child to respond",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": true
+          },
+          "has_transcript": true,
+          "transcript_text": "flowers? Anyone else? What do you think is happening right now?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.49204551472383384
+        }
+      ],
+      "file_info": {
+        "exists": false,
+        "local_path": null,
+        "file_size_mb": 0
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "162954734",
+      "filename": "Building Blocks Little School Ladybugs Kaylee 027.MP4",
+      "display_name": "Building Blocks Little School Ladybugs Kaylee",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:03-0:43",
+      "description": "An educator sits at a table of older toddlers as they eat lunch. She engages them in conversation as she talks about the foods in their lunchboxes.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:03",
+          "timestamp_seconds": 3.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ with brief pause for child to confirm yes",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "sandwich? She has a sandwich right there? Does she have...",
+          "ml_prediction": null,
+          "transcript_confidence": 0.48525458574295044
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:05",
+          "timestamp_seconds": 5.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ brief pause for child to confirm yes",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "She has a sandwich right there. Does she have Cheeto Puffs?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6387585269080268
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 027.mp4",
+        "file_size_mb": 87.0,
+        "modified": "2025-09-23T11:09:35.594937"
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "162954537",
+      "filename": "Building Blocks Little School Ladybugs Kaylee 013.MP4",
+      "display_name": "Building Blocks Little School Ladybugs Kaylee",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:00-0:45",
+      "description": "An educator kneels at a sensory table with paper \"grass\", flowers, beans, flowers, and scoops, She models how to \"plant\" a flower in the pot and encourages them to do so. She asks some open-ended questions like \"what do you see?\" and \"what does your flower smell like?\".",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:02",
+          "timestamp_seconds": 2.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) with no pause for a response teacher continues talking",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Can you guys put beans in your pot? Let's all build.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.545566809804816
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:12",
+          "timestamp_seconds": 12.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ  (yes/no) pauses for a response when child doesn't answer teacher repeats the question",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": true
+          },
+          "has_transcript": true,
+          "transcript_text": "So do you wanna add your flour to your pot?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6909566606794084
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Building Blocks Little School Ladybugs Kaylee 013.mp4",
+        "file_size_mb": 115.19,
+        "modified": "2025-09-23T11:09:21.887354"
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "158526693",
+      "filename": "CDCSA Sunset Ridge Khani 011",
+      "display_name": "CDCSA Sunset Ridge Khani",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:41",
+      "description": "A child is sitting at table with a teacher. The teacher asks the child questions about the material she is playing attempting to engage in a conversation with the child.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:06",
+          "timestamp_seconds": 6.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"how can...\" and brief pause for child response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "How can they stick together if you're not picking them up on your hands?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6197122272692228
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:22",
+          "timestamp_seconds": 22.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ, \"how many…\" but doesn’t pause for response and continues talking",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "How many did you use? Oh, look at that.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.49446420108570777
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/CDCSA Sunset Ridge Khani 011.mp4",
+        "file_size_mb": 12.12,
+        "modified": "2025-09-23T11:09:26.690742"
+      },
+      "has_transcripts": true,
+      "transcript_count": 5
+    },
+    {
+      "id": "158527763",
+      "filename": "CDCSA Wenatchee Center Karina 021",
+      "display_name": "CDCSA Wenatchee Center Karina",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:15",
+      "description": "Children are having meal time as educators are serving and talking to the children. Educators assist with serving and asking if children need more food.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:18",
+          "timestamp_seconds": 18.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) teacher waits for response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "So welcome.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.45426229635874427
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:31",
+          "timestamp_seconds": 31.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) teacher in background asks a question sound is much lower, harder to hear",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Everybody have their milk? Everybody has their toast? Here you go teacher.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6054522340947932
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 021.MP4",
+        "file_size_mb": 36.09,
+        "modified": "2025-09-23T11:09:45.300074"
+      },
+      "has_transcripts": true,
+      "transcript_count": 6
+    },
+    {
+      "id": "158527757",
+      "filename": "CDCSA Wenatchee Center Karina 017",
+      "display_name": "CDCSA Wenatchee Center Karina",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Children are playing near an educator as the educator asks which song they want to sing. One of the children has a drum and other one decides to sing 'wheels on the bus,' throughout the song the children decide what to sing next as the educator facilitates the song. A child arrives to the classroom and the child gets up to greet them. The child is able to decide where to play next.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:02",
+          "timestamp_seconds": 2.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ \"what song could we sing?\" requires only one word response but questions allows for a broad range of responses",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Beautiful song. What song could we sing this morning? Kaki. What?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.45583015441894537
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:04",
+          "timestamp_seconds": 4.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ, Teacher asks \"what?\" for the child to repeat what he said",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": true
+          },
+          "has_transcript": true,
+          "transcript_text": "What song could we sing this morning? Kaki. What? Kaki. OK, you start.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.48761987686157227
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Karina 017.mp4",
+        "file_size_mb": 59.66,
+        "modified": "2025-09-23T11:09:46.629594"
+      },
+      "has_transcripts": true,
+      "transcript_count": 6
+    },
+    {
+      "id": "158527927",
+      "filename": "CDCSA Wenatchee Center Yasmin 035",
+      "display_name": "CDCSA Wenatchee Center Yasmin",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Children are playing outside in the sand area filling up their buckets. One child leaves to water a plant while the other child stays. The educator engages in conversation asking the child his thought process and how to ask the children to share with them. While keeping an eye on the other child the educator fails to notice a child wanting to take the bucket from another child and reacts by saying 'whoa' when a child throws sand in the air. The educator continues to talk to both children.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:01",
+          "timestamp_seconds": 1.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) teacher waits for response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You want this one? It has a little",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5384577342442104
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:12",
+          "timestamp_seconds": 12.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, good \"how\" question, teacher listens for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You're gonna clean it? How are you gonna clean the water? How are you gonna clean the water off? I don't know.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5821307672036661
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/CDCSA Wenatchee Center Yasmin 035.MP4",
+        "file_size_mb": 27.17,
+        "modified": "2025-09-23T11:09:46.829645"
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "154480223",
+      "filename": "Center Street Nancy Coach iPhone 010",
+      "display_name": "Center Street Nancy Coach iPhone",
+      "age_group": "PK",
+      "timestamp_range": "1:45-2:30",
+      "description": "This is a 20-minute video clip filmed by an educational coach of circle time. They sing a song in different ways (fast, loud, silent). 1:45 The educator asks the children for help writing numbers 1-9 on a white board. She then asks them how to form various two-digit numbers. 5:19 She asks them to name opposites. 5:54 She shows the children photos of children with disabilities and asks them what games they could play together. 13:24 She tells them to lie down, and they listen to a song on a speaker while acting out parts. 17:00 They sing another song.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "1:53",
+          "timestamp_seconds": 113.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) seemed more rhetorical not really waiting for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": true,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": false,
+          "transcript_text": null,
+          "ml_prediction": null
+        },
+        {
+          "id": "q2",
+          "timestamp": "2:00",
+          "timestamp_seconds": 120.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what do I do?\" teacher waits for children to shoutout response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": false,
+          "transcript_text": null,
+          "ml_prediction": null
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Center Street Nancy Coach iPhone 010.MOV",
+        "file_size_mb": 1449.84,
+        "modified": "2025-09-23T11:12:40.131652"
+      },
+      "has_transcripts": false,
+      "transcript_count": 0
+    },
+    {
+      "id": "48390102",
+      "filename": "Clarke County School District Lynn 007",
+      "display_name": "Clarke County School District Lynn",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "MAIN FOCUS: Approaches to Learning Language Development. Children sit on the carpet for circle time. The teacher is going over the weather. A child would like to help. The teacher encourages the child to use her words to ask. Then, the child looks out the window to check on the weather. The child makes an observation about the seed packet that is hanging on the window that she is looking out of. The teacher finds that as an opportunity to discuss the seed packet and incorporate novel words into the discussion. (3:25) Another child asks if he can complete the weather checking routine of circle time. The child holds up a sunshine and puts it up on the calendar.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:01",
+          "timestamp_seconds": 1.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what do you need help with?\" and teacher listens intently to response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What do you need to help with? You want to help with the weather?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.7555257144727205
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:04",
+          "timestamp_seconds": 4.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) listens to responses",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You want to help with the weather? Say that. I would like to help with the weather.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.682201800139054
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Clarke County School District Lynn 007.mp4",
+        "file_size_mb": 31.42,
+        "modified": "2025-09-23T11:09:55.004042"
+      },
+      "has_transcripts": true,
+      "transcript_count": 8
+    },
+    {
+      "id": "159878847",
+      "filename": "Conflict Management during Outdoor Play",
+      "display_name": "Conflict Management during Outdoor Play",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "This video includes educators engaged in responsive teaching practices with children. The educators use verbal instruction, materials, proximity and conflict resolution strategies to guide children in Problem solving strategies.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:01",
+          "timestamp_seconds": 1.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ \"whose hat is it?\" brief pause before teacher restates the question in different words",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": true
+          },
+          "has_transcript": true,
+          "transcript_text": "Whose hat is it? Do you know?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.7129211823145549
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:03",
+          "timestamp_seconds": 3.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) pauses for response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Whose hat is it? Do you know? OK, but I think Miracle is saying.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6306989743159368
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Conflict Management during Outdoor Play.mp4",
+        "file_size_mb": 178.62,
+        "modified": "2025-09-23T11:10:21.937727"
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "48386726",
+      "filename": "Draw Results",
+      "display_name": "Draw Results",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:35",
+      "description": "In this 30-second video an educator asks child what is different about two items drawn.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:01",
+          "timestamp_seconds": 1.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what is different…?\" but doesn't pause for response before rewording her question",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What is different? Can you tell me the difference?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6143377849033901
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:03",
+          "timestamp_seconds": 3.0,
+          "ground_truth_type": "OEQ",
+          "description": "Good OEQ, \"how do they look different?\", and pauses for response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What is different? Can you tell me the difference? How do they look different?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.7123733043670655
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Draw Results.mp4",
+        "file_size_mb": 4.83,
+        "modified": "2025-09-23T11:09:51.501552"
+      },
+      "has_transcripts": true,
+      "transcript_count": 3
+    },
+    {
+      "id": "152342221",
+      "filename": "Edgewater Early Head Start Martha 036",
+      "display_name": "Edgewater Early Head Start Martha",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Main focus: Supporting social and emotional development. Educators paint with preschoolers on an easel.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:05",
+          "timestamp_seconds": 5.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) waits intently for child response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What do you feel like? Cold.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.3090621508084811
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:34",
+          "timestamp_seconds": 34.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what else is yellow\" doesn't encourage more than one word but promotes deeper thinking",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What else is yellow? A pink.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.43393153410691476
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Edgewater Early Head Start Martha 036.mp4",
+        "file_size_mb": 254.13,
+        "modified": "2025-09-23T11:11:03.550993"
+      },
+      "has_transcripts": true,
+      "transcript_count": 2
+    },
+    {
+      "id": "129737801",
+      "filename": "Fiddleheads Sarah 038",
+      "display_name": "Fiddleheads Sarah",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:32",
+      "description": "Outdoor Nature Based Learning Program. Main Focus: Behavioral expectations. An educator leads a group of preschoolers on a trail. They discuss with the children the expectations for their walk.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:14",
+          "timestamp_seconds": 14.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ teacher looking for a specific answer, pauses for a response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Okay, I was gonna say, oh, what kind of feet are we gonna use?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5143231891450428
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:17",
+          "timestamp_seconds": 17.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) brief pause for response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "We're going to use running feet.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5071647383949973
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Fiddleheads Sarah 038.MP4",
+        "file_size_mb": 200.02,
+        "modified": "2025-09-23T11:10:54.688990"
+      },
+      "has_transcripts": true,
+      "transcript_count": 4
+    },
+    {
+      "id": "161447297",
+      "filename": "Launch Cascade Vista Breanna 013.MP4",
+      "display_name": "Launch Cascade Vista Breanna",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Children are working on a project, and the educator provides assistance to help a child finish. At 1:15, the educator reminds a child to stop what he is doing, saying, \"(Child's name), not inside the class, no thank you.\" Other children are also at the table and engage in conversation. The children tell the educator that they are friends and show the educator what they have made. At 2:15, two children begin to discuss a letter, and then one child explains what he made.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:08",
+          "timestamp_seconds": 8.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) but teacher answers her own question",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": true,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Whoever starts with the water!",
+          "ml_prediction": null,
+          "transcript_confidence": 0.2881967226664225
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:24",
+          "timestamp_seconds": 24.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ \"which one is the bottom?\" and waits for child to respond",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You put it over both. That's how you spell your name. Okay, which one's the bottom?  Yep.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5955128025364231
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Launch Cascade Vista Breanna 013.mp4",
+        "file_size_mb": 66.33,
+        "modified": "2025-09-23T11:10:46.635660"
+      },
+      "has_transcripts": true,
+      "transcript_count": 3
+    },
+    {
+      "id": "161765962",
+      "filename": "Launch Highland Park 004.mp4",
+      "display_name": "Launch Highland Park",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:40",
+      "description": "The children are sitting down eating snack. An educator sits at the end of the table and asks children questions. She also narrates and positive behavior support. She asks several children specific follow up questions.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:02",
+          "timestamp_seconds": 2.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ with a pause but child shrugs",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "together so what are you going to do next are you going to eat it",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6773347589704726
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:04",
+          "timestamp_seconds": 4.0,
+          "ground_truth_type": "CEQ",
+          "description": "Teacher gets more specific with her 1st question by turning it into a CEQ (yes/no)",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "next? Are you gonna eat it?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.4446260278875177
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Launch Highland Park 004.mp4",
+        "file_size_mb": 38.84,
+        "modified": "2025-09-23T11:10:42.565962"
+      },
+      "has_transcripts": true,
+      "transcript_count": 5
+    },
+    {
+      "id": "94273400",
+      "filename": "Little Teddys - Jeanette First Walkthrough 015",
+      "display_name": "Little Teddys - Jeanette First Walkthrough",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:00-0:45",
+      "description": "Coach is engaged with a group of children, and reading a story & asking questions based on children's interest. Pointing out to images in the book. :30 mark helps child find a seat.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:00",
+          "timestamp_seconds": 0.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) pause for child response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You like those flowers too? Yeah, cause they're blowing.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.3417539066738553
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:07",
+          "timestamp_seconds": 7.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what happens when…\" teacher pauses for response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "You blow it? And what happens when you blow it? It makes a w-",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5116628805796306
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Little Teddys - Jeanette First Walkthrough 015.mov",
+        "file_size_mb": 873.95,
+        "modified": "2025-09-23T11:12:27.213737"
+      },
+      "has_transcripts": true,
+      "transcript_count": 5
+    },
+    {
+      "id": "56650940",
+      "filename": "Offer Resources AIAN_SUBS",
+      "display_name": "Offer Resources AIAN SUBS",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:38",
+      "description": "In this 30-second video, an educator uses a toy orca to talk about whales. She then has children go over to the map and shows them, using the toy orca to show them where they migrate.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:13",
+          "timestamp_seconds": 13.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) rhetorical dooesn't wait for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": true,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Hey, let's go! Can I go show you guys where they swim to on our map?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6902499198913574
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Offer Resources AIAN_SUBS.mp4",
+        "file_size_mb": 57.27,
+        "modified": "2025-09-23T11:11:04.971320"
+      },
+      "has_transcripts": true,
+      "transcript_count": 1
+    },
+    {
+      "id": "65579863",
+      "filename": "Puddle Jumpers - Debra 054",
+      "display_name": "Puddle Jumpers - Debra",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Main focus: The teacher and group of children are sitting on the floor engaging in book reading. The teacher asks questions about children's ability and connects it to the reading. The teacher listen to children's conversations.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:01",
+          "timestamp_seconds": 1.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) but doesn't pause for a response and goes right into her next question",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Who's going? Have you ever done that? Oh boy.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5675854682922363
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:03",
+          "timestamp_seconds": 3.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) listens to responses",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Can you open that? Oh boy. Can you roll your eyes?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.32300644829159675
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Puddle Jumpers - Debra 054.mp4",
+        "file_size_mb": 19.69,
+        "modified": "2025-09-23T11:11:08.438595"
+      },
+      "has_transcripts": true,
+      "transcript_count": 3
+    },
+    {
+      "id": "48393993",
+      "filename": "Snoqualmie_Ridge_ELC-Linda-001",
+      "display_name": "Snoqualmie Ridge ELC-Linda-",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "Main Focus: Mathematical knowledge and skills. Two preschool-aged girls and a teacher engage in water play at the sensory table. They are using measuring cups and spoons to fill up larger measuring cups. The teacher facilitates learning by asking the children to share what they are doing and what is happening to their cups of water. The teacher encourages the girls to look at the measurements on their cups and read them to see how full they are. There is frequent conversation throughout the video. The teacher provides information about the types of measurements they are using (i.e. \u001c one cup\u001d , \u001c one teaspoon\u001d , etc.) and uses Narration to summarize the girls\u0019 actions. (3:50) The teacher invites two new students to the water table and explains the goals for the activity and some ideas about ways to explore. Throughout the video, there are mid-level examples of Supporting Cognition as the teacher asks open-ended questions and prompts thought processes. The teacher demonstrates high quality emotional support through Caring community and Following Children's Lead.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:03",
+          "timestamp_seconds": 3.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) waits for child to respond",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Oh, it's getting heavy. Is it getting heavy? It's getting filled up.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6689098358154297
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:05",
+          "timestamp_seconds": 5.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"how full is it? Teacher pauses for child to respond",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Is it getting heavy? It's getting filled up. How full is it right now?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.834850730895996
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Snoqualmie_Ridge_ELC-Linda-001.mp4",
+        "file_size_mb": 27.67,
+        "modified": "2025-09-23T11:11:12.145583"
+      },
+      "has_transcripts": true,
+      "transcript_count": 7
+    },
+    {
+      "id": "56587820",
+      "filename": "Structure Activity Video_SUBS.mp4",
+      "display_name": "Structure Activity Video SUBS",
+      "age_group": "PK",
+      "timestamp_range": "0:35-1:20",
+      "description": "In this 7-minute video, an educator leads a small group in which they explore a melon. The educator uses visuals to compare the melon to a pumpkin they have explored and to remind children of previous learning. Children answer questions about similarities and differences, characteristics and vocabulary related to the anatomy of the melon. The educator cuts into the melon as children make predictions about what is inside. Each child gets a scoop of seeds on a tray to explore the smell, texture and taste.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:37",
+          "timestamp_seconds": 37.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) and teaches pauses for a response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "So tell me if this reminds you of a pump.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.6638288497924805
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:44",
+          "timestamp_seconds": 44.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ and teacher gives a child an opportunity to respond",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": true,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "What is like a pumpkin about this?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5987874811345881
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/Structure Activity Video_SUBS.mp4",
+        "file_size_mb": 414.53,
+        "modified": "2025-09-23T11:15:34.985147"
+      },
+      "has_transcripts": true,
+      "transcript_count": 5
+    },
+    {
+      "id": "66514411",
+      "filename": "What Can We Measure_ESP SUBS",
+      "display_name": "What Can We Measure ESP SUBS",
+      "age_group": "PK",
+      "timestamp_range": "0:00-0:45",
+      "description": "in this 1 1/2 minute video, an educator asks children at a large group what types of things they can measure. They then measure their bodies with feet.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:05",
+          "timestamp_seconds": 5.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ promotoes deeper thinking but not more than one word response, teacher listens to response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Who can tell me what do we have to imagine?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.546947751726423
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:24",
+          "timestamp_seconds": 24.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what else?\" promotoes deeper thinking but not more than one word response, teacher listens to response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "We can measure our warm, that's a very good one. What else could we measure? Yes? We can measure our warm.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5739337314258922
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/What Can We Measure_ESP SUBS.mp4",
+        "file_size_mb": 164.4,
+        "modified": "2025-09-23T11:15:21.962175"
+      },
+      "has_transcripts": true,
+      "transcript_count": 2
+    },
+    {
+      "id": "161524537",
+      "filename": "YWCA Bessie T Draper Jeanette 099.mp4",
+      "display_name": "YWCA Bessie T Draper Jeanette",
+      "age_group": "TODDLER",
+      "timestamp_range": "0:00-0:45",
+      "description": "In this video, an educator sits on a chair reading a book out loud. Another adult sits on the floor supporting the children. The educator reading out loud has to stop and ask a child to sit down. She continues reading and the toddlers are engaged, pointing at the pages and babbling/talking out loud. The children continue to move around as she reads but they remain engaged.",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:10",
+          "timestamp_seconds": 10.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) but teacher doesn't wait for a response begins redirecting a child",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "I said maybe my bear is up in the moon. See the moon?",
+          "ml_prediction": null,
+          "transcript_confidence": 0.5877243518829346
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:43",
+          "timestamp_seconds": 43.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ (yes/no) but doesn't pause for a response",
+          "behavioral_notes": {
+            "pauses_for_response": false,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Let's look.",
+          "ml_prediction": null,
+          "transcript_confidence": 0.2566603933061872
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/YWCA Bessie T Draper Jeanette 099.mp4",
+        "file_size_mb": 110.18,
+        "modified": "2025-09-23T11:15:13.522278"
+      },
+      "has_transcripts": true,
+      "transcript_count": 2
+    },
+    {
+      "id": "48385321",
+      "filename": "childrens_place_zaid_006",
+      "display_name": "childrens place zaid",
+      "age_group": "PK",
+      "timestamp_range": "0:20-1:05",
+      "description": "A teacher and three students are in the main classroom area. 0:00-0:21/The teacher sings a song for students to get into a circle and sit down.0:22-1:32/The teacher leads a discussion referencing their \\&quot;sink and float\\&quot;&quot; chart. He goes down the list of items and asks the children questions regarding sink",
+      "questions": [
+        {
+          "id": "q1",
+          "timestamp": "0:22",
+          "timestamp_seconds": 22.0,
+          "ground_truth_type": "OEQ",
+          "description": "OEQ, \"what did we learn?\" but teacher does not pause for response before continuing to talk",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Okay, so what do we learn? We learn that...",
+          "ml_prediction": null,
+          "transcript_confidence": 0.40671825408935547
+        },
+        {
+          "id": "q2",
+          "timestamp": "0:27",
+          "timestamp_seconds": 27.0,
+          "ground_truth_type": "CEQ",
+          "description": "CEQ, \"some tihngs what?\" and pauses for response",
+          "behavioral_notes": {
+            "pauses_for_response": true,
+            "rhetorical": false,
+            "child_responds": false,
+            "teacher_answers_own": false,
+            "restates_question": false
+          },
+          "has_transcript": true,
+          "transcript_text": "Some things sink and some things what? Flow. Flow. Okay, why do you...",
+          "ml_prediction": null,
+          "transcript_confidence": 0.3787795172797309
+        }
+      ],
+      "file_info": {
+        "exists": true,
+        "local_path": "/home/warrenjo/src/tmp2/secure data/childrens_place_zaid_006.mp4",
+        "file_size_mb": 10.07,
+        "modified": "2025-09-23T11:09:47.702096"
+      },
+      "has_transcripts": true,
+      "transcript_count": 6
+    }
+  ],
+  "metadata": {
+    "generated_at": "2026-01-08T09:04:17.775939",
+    "source_csv": "/home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv",
+    "transcripts_dir": "/home/warrenjo/src/tmp/cultivate-uw-ml-mvp/data/transcripts/transcripts",
+    "secure_data_dir": "/home/warrenjo/src/tmp2/secure data"
+  },
+  "statistics": {
+    "total_videos": 25,
+    "total_questions": 49,
+    "questions_by_type": {
+      "OEQ": 18,
+      "CEQ": 31,
+      "UNKNOWN": 0
+    },
+    "videos_by_age_group": {
+      "PK": 19,
+      "TODDLER": 6,
+      "INFANT": 0,
+      "UNKNOWN": 0
+    },
+    "videos_with_transcripts": 23,
+    "questions_with_transcripts": 45
+  }
+}
