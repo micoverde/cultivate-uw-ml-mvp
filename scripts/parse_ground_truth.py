@@ -348,22 +348,22 @@ def main():
     parser = argparse.ArgumentParser(description='Parse Cultivate Learning ground truth CSV')
     parser.add_argument(
         '--csv',
-        default='/home/warrenjo/src/tmp2/secure data/VideosAskingQuestions CSV.csv',
-        help='Path to CSV file with expert annotations'
+        required=True,
+        help='Path to CSV file with expert annotations (required)'
     )
     parser.add_argument(
         '--transcripts',
-        default='/home/warrenjo/src/tmp/cultivate-uw-ml-mvp/data/transcripts/transcripts',
+        default='./data/transcripts/transcripts',
         help='Path to directory with Whisper transcripts'
     )
     parser.add_argument(
         '--secure-data',
-        default='/home/warrenjo/src/tmp2/secure data',
+        default='.',
         help='Path to secure data directory with video files'
     )
     parser.add_argument(
         '--output',
-        default='/home/warrenjo/src/tmp/cultivate-uw-ml-mvp/unified-demos/demo3/data/video_catalog.json',
+        default='./unified-demos/demo3/data/video_catalog.json',
         help='Output path for video catalog JSON'
     )
 
