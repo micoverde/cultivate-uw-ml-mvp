@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Modules | Cultivate Learning</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .learning-section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .learning-section:last-of-type {
+            border-bottom: none;
+        }
+        .section-number {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            margin-right: 1rem;
+        }
+        .learning-content {
+            margin: 2rem 0;
+            line-height: 1.8;
+        }
+        .learning-content p {
+            margin-bottom: 1rem;
+        }
+        .key-points {
+            background: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        .key-points h4 {
+            color: #2E7D32;
+            margin-bottom: 1rem;
+        }
+        .key-points ul {
+            margin-left: 1.5rem;
+        }
+        .key-points li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Quiz Styles */
+        .quiz-container {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            border: 2px solid #4CAF50;
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        .quiz-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .quiz-icon {
+            font-size: 1.5rem;
+            color: #2E7D32;
+        }
+        .quiz-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1B5E20;
+        }
+        .quiz-question {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        .quiz-option {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-option:hover {
+            border-color: #4CAF50;
+            background: #f9fff9;
+        }
+        .quiz-option.selected {
+            border-color: #2196F3;
+            background: #e3f2fd;
+        }
+        .quiz-option.correct {
+            border-color: #4CAF50;
+            background: #e8f5e9;
+        }
+        .quiz-option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+        .quiz-option input {
+            margin-right: 1rem;
+        }
+        .quiz-feedback {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+        }
+        .quiz-feedback.show {
+            display: block;
+        }
+        .quiz-feedback.correct {
+            background: #e8f5e9;
+            border: 1px solid #4CAF50;
+            color: #2E7D32;
+        }
+        .quiz-feedback.incorrect {
+            background: #ffebee;
+            border: 1px solid #f44336;
+            color: #c62828;
+        }
+        .quiz-submit {
+            margin-top: 1rem;
+            padding: 0.75rem 2rem;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .quiz-submit:hover {
+            background: #388E3C;
+        }
+        .quiz-submit:disabled {
+            background: #bdbdbd;
+            cursor: not-allowed;
+        }
+
+        /* Score Summary */
+        .score-summary {
+            background: linear-gradient(135deg, #1B5E20, #2E7D32);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            margin: 3rem 0;
+            display: none;
+        }
+        .score-summary.show {
+            display: block;
+        }
+        .score-value {
+            font-size: 3rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        .score-message {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Example boxes */
+        .example-box {
+            background: #fff3e0;
+            border-left: 4px solid #ff9800;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .example-box.oeq {
+            background: #e8f5e9;
+            border-left-color: #4CAF50;
+        }
+        .example-box.ceq {
+            background: #e3f2fd;
+            border-left-color: #2196F3;
+        }
+        .example-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .example-box.oeq .example-label { color: #2E7D32; }
+        .example-box.ceq .example-label { color: #1565C0; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
+                <span class="brand-text">Cultivate Learning</span>
+            </div>
+            <div class="nav-links">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="architecture.html" class="nav-link">Docs</a>
+                <a href="learning.html" class="nav-link active">Learning</a>
+                <a href="demo.html" class="nav-link">Demo 2</a>
+                <a href="https://victorious-meadow-0b2278a10.1.azurestaticapps.net/" class="nav-link" target="_blank">Demo 3</a>
+                <a href="https://victorious-meadow-0b2278a10.1.azurestaticapps.net/demo4/" class="nav-link" target="_blank">Demo 4</a>
+                <a href="research.html" class="nav-link">Research</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Learning Modules</h1>
+            <p>Master the art of asking effective questions in early childhood education</p>
+        </div>
+    </section>
+
+    <!-- Module 1: Introduction to Question Types -->
+    <section class="learning-section">
+        <div class="container">
+            <h2><span class="section-number">1</span>Understanding OEQ vs CEQ</h2>
+
+            <div class="learning-content">
+                <p>In early childhood education, the questions we ask children have a profound impact on their cognitive development and learning outcomes. Questions are categorized into two main types:</p>
+
+                <div class="key-points">
+                    <h4><i class="fa-solid fa-lightbulb"></i> Key Concepts</h4>
+                    <ul>
+                        <li><strong>Open-Ended Questions (OEQ)</strong> - Encourage children to think, explain, and elaborate. These questions don't have a single correct answer and promote critical thinking.</li>
+                        <li><strong>Closed-Ended Questions (CEQ)</strong> - Have specific, short answers (often yes/no). While useful for assessment, they don't encourage extended thinking.</li>
+                    </ul>
+                </div>
+
+                <div class="example-box oeq">
+                    <div class="example-label"><i class="fa-solid fa-check-circle"></i> Open-Ended Question Example</div>
+                    <p>"What do you think will happen if we add more blocks to your tower?"</p>
+                </div>
+
+                <div class="example-box ceq">
+                    <div class="example-label"><i class="fa-solid fa-circle"></i> Closed-Ended Question Example</div>
+                    <p>"Did your tower fall down?"</p>
+                </div>
+            </div>
+
+            <!-- Quiz 1 -->
+            <div class="quiz-container" id="quiz1">
+                <div class="quiz-header">
+                    <i class="fa-solid fa-brain quiz-icon"></i>
+                    <span class="quiz-title">Knowledge Check</span>
+                </div>
+                <div class="quiz-question">Which of the following is an Open-Ended Question (OEQ)?</div>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="a">
+                        "Is the sky blue?"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="b">
+                        "How do you think the caterpillar feels?"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="c">
+                        "Did you wash your hands?"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q1" value="d">
+                        "Can you count to five?"
+                    </label>
+                </div>
+                <button class="quiz-submit" onclick="checkQuiz('quiz1', 'b', 'Correct! \"How do you think...\" prompts the child to express thoughts and feelings, encouraging deeper thinking.', 'Not quite. The correct answer is B. \"How do you think the caterpillar feels?\" is open-ended because it invites the child to share their perspective and reasoning.')">Submit Answer</button>
+                <div class="quiz-feedback" id="quiz1-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 2: Why OEQs Matter -->
+    <section class="learning-section" style="background: #fafafa;">
+        <div class="container">
+            <h2><span class="section-number">2</span>The Power of Open-Ended Questions</h2>
+
+            <div class="learning-content">
+                <p>Research shows that the ratio of OEQ to CEQ in classroom interactions significantly impacts child development. The CLASS (Classroom Assessment Scoring System) framework emphasizes the importance of high-quality teacher-child interactions.</p>
+
+                <div class="key-points">
+                    <h4><i class="fa-solid fa-chart-line"></i> Research Findings</h4>
+                    <ul>
+                        <li>Children exposed to more OEQs show <strong>23% higher vocabulary growth</strong></li>
+                        <li>OEQs promote <strong>executive function development</strong> and self-regulation</li>
+                        <li>The ideal OEQ:CEQ ratio is approximately <strong>3:1</strong> for optimal engagement</li>
+                        <li>Wait time after asking OEQs should be <strong>3-5 seconds</strong> for deeper responses</li>
+                    </ul>
+                </div>
+
+                <p>Open-ended questions trigger what researchers call "sustained shared thinking" - extended conversations where adults and children work together to solve problems or explore ideas.</p>
+            </div>
+
+            <!-- Quiz 2 -->
+            <div class="quiz-container" id="quiz2">
+                <div class="quiz-header">
+                    <i class="fa-solid fa-brain quiz-icon"></i>
+                    <span class="quiz-title">Knowledge Check</span>
+                </div>
+                <div class="quiz-question">What is the recommended wait time after asking an open-ended question?</div>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="a">
+                        Less than 1 second
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="b">
+                        3-5 seconds
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="c">
+                        10-15 seconds
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q2" value="d">
+                        Wait time doesn't matter
+                    </label>
+                </div>
+                <button class="quiz-submit" onclick="checkQuiz('quiz2', 'b', 'Correct! 3-5 seconds gives children time to process the question and formulate a thoughtful response.', 'Not quite. The correct answer is B. Research shows 3-5 seconds of wait time allows children to process and form deeper responses.')">Submit Answer</button>
+                <div class="quiz-feedback" id="quiz2-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 3: Transforming Questions -->
+    <section class="learning-section">
+        <div class="container">
+            <h2><span class="section-number">3</span>Transforming CEQs into OEQs</h2>
+
+            <div class="learning-content">
+                <p>One of the most valuable skills for educators is learning to transform closed-ended questions into open-ended ones. This simple shift can dramatically change the quality of classroom discourse.</p>
+
+                <div class="key-points">
+                    <h4><i class="fa-solid fa-arrows-rotate"></i> Transformation Strategies</h4>
+                    <ul>
+                        <li><strong>Add "how" or "why"</strong> - Instead of "Did you build a tower?" ask "How did you build your tower?"</li>
+                        <li><strong>Use "tell me about"</strong> - Instead of "Is that a dog?" say "Tell me about your drawing"</li>
+                        <li><strong>Ask for predictions</strong> - Instead of "Will it fall?" ask "What do you think will happen?"</li>
+                        <li><strong>Invite comparisons</strong> - Instead of "Is this bigger?" ask "How are these different?"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-label"><i class="fa-solid fa-arrow-right"></i> Transformation Example</div>
+                    <p><strong>Before (CEQ):</strong> "Did you like the story?"</p>
+                    <p><strong>After (OEQ):</strong> "What was your favorite part of the story and why?"</p>
+                </div>
+            </div>
+
+            <!-- Quiz 3 -->
+            <div class="quiz-container" id="quiz3">
+                <div class="quiz-header">
+                    <i class="fa-solid fa-brain quiz-icon"></i>
+                    <span class="quiz-title">Knowledge Check</span>
+                </div>
+                <div class="quiz-question">Transform this CEQ into an OEQ: "Is that a cat in your drawing?"</div>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="a">
+                        "Is that a cat or a dog?"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="b">
+                        "Did you draw a cat?"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="c">
+                        "Tell me about what you drew"
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q3" value="d">
+                        "Can you draw a cat?"
+                    </label>
+                </div>
+                <button class="quiz-submit" onclick="checkQuiz('quiz3', 'c', 'Excellent! \"Tell me about what you drew\" invites the child to describe, explain, and share their creative process.', 'Not quite. The correct answer is C. \"Tell me about what you drew\" is truly open-ended, inviting the child to share their thoughts and creative process.')">Submit Answer</button>
+                <div class="quiz-feedback" id="quiz3-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Module 4: Using the ML Tool -->
+    <section class="learning-section" style="background: #fafafa;">
+        <div class="container">
+            <h2><span class="section-number">4</span>Using the Cultivate ML Classifier</h2>
+
+            <div class="learning-content">
+                <p>Our machine learning classifier analyzes educator questions in real-time, providing instant feedback on whether questions are open-ended or closed-ended. Here's how to get the most from the tool:</p>
+
+                <div class="key-points">
+                    <h4><i class="fa-solid fa-robot"></i> How the Classifier Works</h4>
+                    <ul>
+                        <li><strong>Feature Extraction</strong> - The system analyzes 56 linguistic features in each question</li>
+                        <li><strong>Ensemble Voting</strong> - 7 different ML models vote on the classification</li>
+                        <li><strong>Confidence Score</strong> - Higher confidence means stronger agreement among models</li>
+                        <li><strong>Real-time Feedback</strong> - Get instant classification as you type</li>
+                    </ul>
+                </div>
+
+                <p>The classifier is designed as a training tool, not a judgment. Use it to build awareness of your questioning patterns and gradually increase your OEQ ratio over time.</p>
+            </div>
+
+            <!-- Quiz 4 -->
+            <div class="quiz-container" id="quiz4">
+                <div class="quiz-header">
+                    <i class="fa-solid fa-brain quiz-icon"></i>
+                    <span class="quiz-title">Knowledge Check</span>
+                </div>
+                <div class="quiz-question">How many ML models participate in the ensemble voting system?</div>
+                <div class="quiz-options">
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="a">
+                        3 models
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="b">
+                        5 models
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="c">
+                        7 models
+                    </label>
+                    <label class="quiz-option">
+                        <input type="radio" name="q4" value="d">
+                        10 models
+                    </label>
+                </div>
+                <button class="quiz-submit" onclick="checkQuiz('quiz4', 'c', 'Correct! Our ensemble uses 7 different ML models including Neural Network, Random Forest, XGBoost, and more.', 'Not quite. The correct answer is C. Our ensemble classifier uses 7 different models to achieve higher accuracy through voting.')">Submit Answer</button>
+                <div class="quiz-feedback" id="quiz4-feedback"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Score Summary -->
+    <section class="section">
+        <div class="container">
+            <div class="score-summary" id="score-summary">
+                <h2><i class="fa-solid fa-trophy"></i> Module Complete!</h2>
+                <div class="score-value" id="final-score">0/4</div>
+                <div class="score-message" id="score-message">Great effort! Review the sections you missed and try again.</div>
+                <div style="margin-top: 1.5rem;">
+                    <a href="demo.html" class="btn btn-primary" style="background: white; color: #2E7D32;">Practice with Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Practice?</h2>
+                <p>Apply what you've learned using our interactive question classifier.</p>
+                <div class="cta-buttons">
+                    <a href="demo.html" class="btn btn-primary btn-large">Try the Demo</a>
+                    <a href="architecture.html" class="btn btn-outline btn-large">View Technical Docs</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span class="brand-icon"><i class="fa-solid fa-seedling"></i></span>
+                    <span class="brand-text">Cultivate Learning</span>
+                </div>
+                <div class="footer-info">
+                    <p>A partnership between Bona Opera Ventures and University of Washington</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let correctAnswers = 0;
+        let totalQuizzes = 4;
+        let completedQuizzes = 0;
+
+        function checkQuiz(quizId, correctAnswer, correctMessage, incorrectMessage) {
+            const quiz = document.getElementById(quizId);
+            const selected = quiz.querySelector('input[type="radio"]:checked');
+            const feedback = document.getElementById(quizId + '-feedback');
+            const button = quiz.querySelector('.quiz-submit');
+
+            if (!selected) {
+                alert('Please select an answer');
+                return;
+            }
+
+            const options = quiz.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.classList.remove('selected', 'correct', 'incorrect');
+                const input = opt.querySelector('input');
+                if (input.value === correctAnswer) {
+                    opt.classList.add('correct');
+                } else if (input.checked) {
+                    opt.classList.add('incorrect');
+                }
+                input.disabled = true;
+            });
+
+            button.disabled = true;
+            feedback.classList.add('show');
+
+            if (selected.value === correctAnswer) {
+                feedback.classList.remove('incorrect');
+                feedback.classList.add('correct');
+                feedback.innerHTML = '<i class="fa-solid fa-check-circle"></i> ' + correctMessage;
+                correctAnswers++;
+            } else {
+                feedback.classList.remove('correct');
+                feedback.classList.add('incorrect');
+                feedback.innerHTML = '<i class="fa-solid fa-times-circle"></i> ' + incorrectMessage;
+            }
+
+            completedQuizzes++;
+
+            if (completedQuizzes === totalQuizzes) {
+                showFinalScore();
+            }
+        }
+
+        function showFinalScore() {
+            const summary = document.getElementById('score-summary');
+            const scoreValue = document.getElementById('final-score');
+            const scoreMessage = document.getElementById('score-message');
+
+            scoreValue.textContent = correctAnswers + '/' + totalQuizzes;
+
+            if (correctAnswers === totalQuizzes) {
+                scoreMessage.textContent = 'Perfect score! You have mastered the fundamentals of effective questioning.';
+            } else if (correctAnswers >= 3) {
+                scoreMessage.textContent = 'Great job! You have a solid understanding. Review the missed questions to master the material.';
+            } else if (correctAnswers >= 2) {
+                scoreMessage.textContent = 'Good effort! Consider reviewing the modules to strengthen your understanding.';
+            } else {
+                scoreMessage.textContent = 'Keep learning! Review the modules above and try the quizzes again.';
+            }
+
+            summary.classList.add('show');
+            summary.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
