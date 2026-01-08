@@ -542,7 +542,7 @@ export class VideoSelector {
         styles.textContent = `
             .video-selector {
                 font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
-                background: #f8f9fa;
+                background: var(--bg-tertiary, #292929);
                 border-radius: 8px;
                 padding: 20px;
                 height: 100%;
@@ -557,7 +557,7 @@ export class VideoSelector {
             .video-selector__title {
                 margin: 0 0 15px 0;
                 font-size: 1.5rem;
-                color: #333;
+                color: var(--text-primary, #ffffff);
             }
 
             .video-selector__controls {
@@ -575,16 +575,18 @@ export class VideoSelector {
             .video-selector__search-input {
                 width: 100%;
                 padding: 10px 15px;
-                border: 1px solid #ddd;
+                border: 1px solid var(--border-light, #404040);
                 border-radius: 6px;
                 font-size: 0.95rem;
+                background: var(--bg-primary, #1a1a1a);
+                color: var(--text-primary, #ffffff);
                 transition: border-color 0.2s, box-shadow 0.2s;
             }
 
             .video-selector__search-input:focus {
                 outline: none;
-                border-color: #4a90d9;
-                box-shadow: 0 0 0 3px rgba(74, 144, 217, 0.1);
+                border-color: var(--brand-primary, #0078d4);
+                box-shadow: 0 0 0 3px rgba(0, 120, 212, 0.2);
             }
 
             .video-selector__filters {
@@ -594,8 +596,9 @@ export class VideoSelector {
 
             .video-selector__filter-btn {
                 padding: 8px 16px;
-                border: 1px solid #ddd;
-                background: white;
+                border: 1px solid var(--border-light, #404040);
+                background: var(--bg-primary, #1a1a1a);
+                color: var(--text-secondary, #d9d9d9);
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 0.9rem;
@@ -603,13 +606,14 @@ export class VideoSelector {
             }
 
             .video-selector__filter-btn:hover {
-                background: #f0f0f0;
+                background: var(--bg-secondary, #1f1f1f);
+                border-color: var(--brand-primary, #0078d4);
             }
 
             .video-selector__filter-btn.active {
-                background: #4a90d9;
-                color: white;
-                border-color: #4a90d9;
+                background: var(--brand-primary, #0078d4);
+                color: var(--text-inverse, #1a1a1a);
+                border-color: var(--brand-primary, #0078d4);
             }
 
             .video-selector__sort {
@@ -620,15 +624,16 @@ export class VideoSelector {
 
             .video-selector__sort label {
                 font-size: 0.9rem;
-                color: #666;
+                color: var(--text-secondary, #d9d9d9);
             }
 
             .video-selector__sort-select {
                 padding: 8px 12px;
-                border: 1px solid #ddd;
+                border: 1px solid var(--border-light, #404040);
                 border-radius: 6px;
                 font-size: 0.9rem;
-                background: white;
+                background: var(--bg-primary, #1a1a1a);
+                color: var(--text-primary, #ffffff);
                 cursor: pointer;
             }
 
@@ -651,18 +656,18 @@ export class VideoSelector {
                 grid-column: 1 / -1;
                 text-align: center;
                 padding: 40px 20px;
-                color: #666;
+                color: var(--text-secondary, #d9d9d9);
             }
 
             .video-selector__error {
-                color: #dc3545;
+                color: var(--error, #d13438);
             }
 
             .video-selector__error-icon {
                 width: 50px;
                 height: 50px;
                 margin: 0 auto 15px;
-                background: #dc3545;
+                background: var(--error, #d13438);
                 color: white;
                 border-radius: 50%;
                 display: flex;
@@ -675,7 +680,7 @@ export class VideoSelector {
             .video-selector__retry-btn {
                 margin-top: 15px;
                 padding: 10px 20px;
-                background: #4a90d9;
+                background: var(--brand-primary, #0078d4);
                 color: white;
                 border: none;
                 border-radius: 6px;
@@ -684,33 +689,34 @@ export class VideoSelector {
             }
 
             .video-selector__retry-btn:hover {
-                background: #3a7fc8;
+                background: var(--brand-secondary, #106ebe);
             }
 
             /* Video Card Styles */
             .video-card {
-                background: white;
+                background: var(--bg-primary, #1a1a1a);
                 border-radius: 8px;
                 padding: 16px;
                 cursor: pointer;
                 transition: all 0.2s;
-                border: 2px solid transparent;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                border: 2px solid var(--border-light, #404040);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.3);
             }
 
             .video-card:hover {
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.4);
                 transform: translateY(-2px);
+                border-color: var(--brand-primary, #0078d4);
             }
 
             .video-card:focus {
                 outline: none;
-                border-color: #4a90d9;
+                border-color: var(--brand-primary, #0078d4);
             }
 
             .video-card.selected {
-                border-color: #4a90d9;
-                background: #f0f7ff;
+                border-color: var(--brand-primary, #0078d4);
+                background: var(--bg-secondary, #1f1f1f);
             }
 
             .video-card.unavailable {
@@ -729,7 +735,7 @@ export class VideoSelector {
                 margin: 0;
                 font-size: 1rem;
                 font-weight: 600;
-                color: #333;
+                color: var(--text-primary, #ffffff);
                 line-height: 1.3;
             }
 
@@ -743,13 +749,13 @@ export class VideoSelector {
             }
 
             .video-card__badge--pk {
-                background: #e3f2fd;
-                color: #1976d2;
+                background: var(--info, #0078d4);
+                color: white;
             }
 
             .video-card__badge--toddler {
-                background: #fce4ec;
-                color: #c2185b;
+                background: #c2185b;
+                color: white;
             }
 
             .video-card__body {
@@ -771,21 +777,21 @@ export class VideoSelector {
             .video-card__stat-value {
                 font-size: 1.25rem;
                 font-weight: 700;
-                color: #333;
+                color: var(--text-primary, #ffffff);
             }
 
             .video-card__stat-label {
                 font-size: 0.8rem;
-                color: #666;
+                color: var(--text-secondary, #d9d9d9);
             }
 
             .video-card__stat-icon {
                 font-size: 1rem;
-                color: #dc3545;
+                color: var(--error, #d13438);
             }
 
             .video-card__stat-icon.active {
-                color: #28a745;
+                color: var(--success, #107c10);
             }
 
             .video-card__accuracy {
@@ -794,21 +800,21 @@ export class VideoSelector {
 
             .video-card__accuracy-bar {
                 height: 6px;
-                background: #e9ecef;
+                background: var(--bg-tertiary, #292929);
                 border-radius: 3px;
                 overflow: hidden;
             }
 
             .video-card__accuracy-fill {
                 height: 100%;
-                background: linear-gradient(90deg, #28a745, #20c997);
+                background: linear-gradient(90deg, var(--success, #107c10), #20c997);
                 border-radius: 3px;
                 transition: width 0.3s ease;
             }
 
             .video-card__accuracy-label {
                 font-size: 0.8rem;
-                color: #28a745;
+                color: var(--success, #107c10);
                 margin-top: 4px;
                 display: block;
             }
@@ -819,12 +825,12 @@ export class VideoSelector {
 
             .video-card__no-ml-label {
                 font-size: 0.8rem;
-                color: #6c757d;
+                color: var(--text-tertiary, #a6a6a6);
                 font-style: italic;
             }
 
             .video-card__footer {
-                border-top: 1px solid #eee;
+                border-top: 1px solid var(--border-light, #404040);
                 padding-top: 10px;
                 display: flex;
                 justify-content: space-between;
@@ -833,19 +839,19 @@ export class VideoSelector {
 
             .video-card__file-size {
                 font-size: 0.8rem;
-                color: #666;
+                color: var(--text-secondary, #d9d9d9);
             }
 
             .video-card__unavailable {
                 font-size: 0.8rem;
-                color: #dc3545;
+                color: var(--error, #d13438);
             }
 
             /* Stats Footer */
             .video-selector__stats {
                 margin-top: 15px;
                 padding-top: 15px;
-                border-top: 1px solid #ddd;
+                border-top: 1px solid var(--border-light, #404040);
             }
 
             .video-selector__stats-content {
@@ -853,11 +859,11 @@ export class VideoSelector {
                 flex-wrap: wrap;
                 gap: 8px;
                 font-size: 0.85rem;
-                color: #666;
+                color: var(--text-secondary, #d9d9d9);
             }
 
             .video-selector__stats-divider {
-                color: #ddd;
+                color: var(--border-light, #404040);
             }
 
             /* Responsive adjustments */

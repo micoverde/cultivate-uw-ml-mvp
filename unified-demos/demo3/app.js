@@ -702,6 +702,70 @@ function seekToTimestamp(seconds) {
     }
 }
 
+/**
+ * Update summary stats for selected video
+ * @param {Object} video - Video object from catalog
+ * @param {Array} questions - Classified questions array
+ */
+function updateVideoStats(video, questions) {
+    const totalQuestionsEl = document.getElementById('totalQuestions');
+    const oeqCountEl = document.getElementById('oeqCount');
+    const ceqCountEl = document.getElementById('ceqCount');
+    const avgConfidenceEl = document.getElementById('avgConfidence');
+
+    if (!questions || !Array.isArray(questions)) {
+        console.warn('[Demo3] No questions to update stats');
+        return;
+    }
+
+    // Count question types from ML predictions
+    let oeqCount = 0;
+    let ceqCount = 0;
+    let totalConfidence = 0;
+    let confidenceCount = 0;
+
+    questions.forEach(q => {
+        // Use ML prediction if available, otherwise use ground truth
+        const prediction = q.ml_prediction || q.ground_truth_type;
+
+        if (prediction === 'OEQ') {
+            oeqCount++;
+        } else if (prediction === 'CEQ') {
+            ceqCount++;
+        }
+
+        // Sum confidence for average calculation
+        if (q.ml_confidence !== undefined && q.ml_confidence !== null) {
+            totalConfidence += q.ml_confidence;
+            confidenceCount++;
+        }
+    });
+
+    // Update DOM elements
+    if (totalQuestionsEl) {
+        totalQuestionsEl.textContent = questions.length;
+    }
+
+    if (oeqCountEl) {
+        oeqCountEl.textContent = oeqCount;
+    }
+
+    if (ceqCountEl) {
+        ceqCountEl.textContent = ceqCount;
+    }
+
+    if (avgConfidenceEl) {
+        if (confidenceCount > 0) {
+            const avgConfidence = (totalConfidence / confidenceCount * 100).toFixed(1);
+            avgConfidenceEl.textContent = `${avgConfidence}%`;
+        } else {
+            avgConfidenceEl.textContent = '--';
+        }
+    }
+
+    console.log(`[Demo3] Stats updated: ${questions.length} questions, ${oeqCount} OEQ, ${ceqCount} CEQ`);
+}
+
 // ============================================================================
 // EVENT HANDLERS
 // ============================================================================
@@ -949,10 +1013,16 @@ async function initializeApp() {
             }
         });
 
-        // Listen for questions loaded to update QuestionPanel
+        // Listen for questions loaded to update QuestionPanel and stats
         window.addEventListener('questionsLoaded', (e) => {
-            if (window.questionPanel && e.detail?.video) {
-                window.questionPanel.setVideo(e.detail.video);
+            if (e.detail?.video) {
+                // Update QuestionPanel
+                if (window.questionPanel) {
+                    window.questionPanel.setVideo(e.detail.video);
+                }
+                // Update summary stats using classified questions
+                const questions = e.detail.questions || e.detail.video.questions;
+                updateVideoStats(e.detail.video, questions);
             }
         });
 
