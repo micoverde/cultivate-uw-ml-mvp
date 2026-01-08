@@ -703,7 +703,17 @@
         }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
+    <!-- Demo 3 defaults to dark mode -->
+    <script>
+        // Set dark mode as default for Demo 3 if no preference saved
+        if (!localStorage.getItem('theme')) {
+            localStorage.setItem('theme', 'dark');
+        }
+        // Apply saved theme immediately to prevent flash
+        document.body.setAttribute('data-theme', localStorage.getItem('theme') || 'dark');
+    </script>
+
     <!-- Password Protection Overlay -->
     <div id="passwordOverlay" class="password-overlay">
         <div class="password-box">
