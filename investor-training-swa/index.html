@@ -1,0 +1,1639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cultivate Learning ML Pipeline | Investor Training</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* ==========================================================================
+           Creative Learning Spiral - Additional Styles
+           ========================================================================== */
+
+        /* Spiral Visualization */
+        .spiral-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+        }
+
+        .spiral-svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .spiral-path {
+            fill: none;
+            stroke: rgba(255, 255, 255, 0.3);
+            stroke-width: 3;
+            stroke-linecap: round;
+        }
+
+        .spiral-path-active {
+            fill: none;
+            stroke: var(--color-white);
+            stroke-width: 4;
+            stroke-linecap: round;
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: drawSpiral 3s ease-out forwards;
+        }
+
+        @keyframes drawSpiral {
+            to { stroke-dashoffset: 0; }
+        }
+
+        .spiral-node {
+            position: absolute;
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: var(--radius-full);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+            text-decoration: none;
+        }
+
+        .spiral-node:hover, .spiral-node.active {
+            background: rgba(255, 255, 255, 0.35);
+            border-color: var(--color-white);
+            transform: scale(1.15);
+        }
+
+        .spiral-node-icon {
+            font-size: 1.5rem;
+            margin-bottom: 2px;
+        }
+
+        .spiral-node-label {
+            font-size: var(--font-size-xs);
+            color: var(--color-white);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wide);
+        }
+
+        /* Position spiral nodes */
+        .spiral-node[data-phase="imagine"] { top: 15%; left: 50%; transform: translateX(-50%); }
+        .spiral-node[data-phase="create"] { top: 30%; right: 10%; }
+        .spiral-node[data-phase="play"] { bottom: 25%; right: 15%; }
+        .spiral-node[data-phase="share"] { bottom: 15%; left: 15%; }
+        .spiral-node[data-phase="reflect"] { top: 35%; left: 8%; }
+
+        /* Quick Demo Button (Low Floor) */
+        .quick-demo-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            background: var(--color-accent);
+            color: var(--color-white);
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: var(--letter-spacing-wide);
+            transition: all var(--transition-bounce);
+            margin-left: var(--spacing-4);
+        }
+
+        .quick-demo-cta:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Learning Phase Sections */
+        .learning-phase {
+            padding: var(--spacing-20) var(--spacing-6);
+            position: relative;
+        }
+
+        .learning-phase:nth-child(odd) {
+            background: var(--color-white);
+        }
+
+        .learning-phase:nth-child(even) {
+            background: var(--color-gray-50);
+        }
+
+        .phase-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-4);
+            margin-bottom: var(--spacing-8);
+        }
+
+        .phase-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-card-accent);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            flex-shrink: 0;
+        }
+
+        .phase-title-group {
+            flex: 1;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 700;
+            letter-spacing: var(--letter-spacing-widest);
+            text-transform: uppercase;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .phase-title {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            color: var(--color-gray-900);
+            letter-spacing: var(--letter-spacing-tight);
+        }
+
+        .phase-question {
+            font-size: var(--font-size-xl);
+            color: var(--color-gray-600);
+            font-style: italic;
+            margin-bottom: var(--spacing-8);
+            padding-left: var(--spacing-4);
+            border-left: 4px solid var(--color-primary);
+        }
+
+        /* Use-Modify-Create Progression */
+        .umc-progression {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-6);
+            margin-bottom: var(--spacing-10);
+        }
+
+        .umc-step {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid;
+            transition: all var(--transition-bounce);
+        }
+
+        .umc-step:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .umc-step.use { border-color: var(--color-secondary); }
+        .umc-step.modify { border-color: var(--color-primary); }
+        .umc-step.create { border-color: var(--color-accent); }
+
+        .umc-step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .umc-step-badge {
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wider);
+        }
+
+        .umc-step.use .umc-step-badge { background: rgba(14, 165, 233, 0.1); color: var(--color-secondary); }
+        .umc-step.modify .umc-step-badge { background: rgba(79, 70, 229, 0.1); color: var(--color-primary); }
+        .umc-step.create .umc-step-badge { background: rgba(16, 185, 129, 0.1); color: var(--color-accent); }
+
+        .umc-step h4 {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-2);
+        }
+
+        .umc-step p {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+            line-height: 1.6;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .umc-step-link {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            text-decoration: none;
+            transition: gap var(--transition-fast);
+        }
+
+        .umc-step.use .umc-step-link { color: var(--color-secondary); }
+        .umc-step.modify .umc-step-link { color: var(--color-primary); }
+        .umc-step.create .umc-step-link { color: var(--color-accent); }
+
+        .umc-step-link:hover { gap: var(--spacing-3); }
+
+        /* Tinker Zone */
+        .tinker-zone {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(14, 165, 233, 0.05) 100%);
+            border: 2px dashed var(--color-primary);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-8);
+            margin: var(--spacing-8) 0;
+            text-align: center;
+        }
+
+        .tinker-zone-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .tinker-zone-icon {
+            font-size: 1.5rem;
+        }
+
+        .tinker-zone h4 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+        }
+
+        .tinker-zone p {
+            color: var(--color-gray-600);
+            margin-bottom: var(--spacing-6);
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .tinker-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-2);
+            background: var(--color-primary);
+            color: var(--color-white);
+            padding: var(--spacing-3) var(--spacing-6);
+            border-radius: var(--radius-lg);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all var(--transition-bounce);
+        }
+
+        .tinker-btn:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Reflection Prompt */
+        .reflection-prompt {
+            background: var(--color-gray-900);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin-top: var(--spacing-8);
+        }
+
+        .reflection-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-3);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .reflection-icon {
+            font-size: 1.25rem;
+        }
+
+        .reflection-label {
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            color: var(--color-gray-400);
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wider);
+        }
+
+        .reflection-question {
+            font-size: var(--font-size-xl);
+            color: var(--color-white);
+            font-weight: 600;
+            margin-bottom: var(--spacing-4);
+        }
+
+        .reflection-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: var(--spacing-4);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--radius-lg);
+            color: var(--color-white);
+            font-family: var(--font-family);
+            font-size: var(--font-size-base);
+            resize: vertical;
+        }
+
+        .reflection-textarea::placeholder {
+            color: var(--color-gray-500);
+        }
+
+        .reflection-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+        }
+
+        /* Journey Tracker */
+        .journey-tracker {
+            position: fixed;
+            right: var(--spacing-6);
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-4);
+            box-shadow: var(--shadow-xl);
+            z-index: 90;
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-3);
+        }
+
+        .journey-node {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            position: relative;
+            text-decoration: none;
+        }
+
+        .journey-node.inactive {
+            background: var(--color-gray-100);
+            color: var(--color-gray-400);
+        }
+
+        .journey-node.active {
+            background: var(--gradient-card-accent);
+            color: var(--color-white);
+        }
+
+        .journey-node.completed {
+            background: var(--color-accent);
+            color: var(--color-white);
+        }
+
+        .journey-node:hover .journey-tooltip {
+            opacity: 1;
+            transform: translateX(-10px);
+        }
+
+        .journey-tooltip {
+            position: absolute;
+            right: 100%;
+            top: 50%;
+            transform: translateY(-50%) translateX(0);
+            background: var(--color-gray-900);
+            color: var(--color-white);
+            padding: var(--spacing-2) var(--spacing-3);
+            border-radius: var(--radius-md);
+            font-size: var(--font-size-xs);
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: all var(--transition-fast);
+            margin-right: var(--spacing-2);
+        }
+
+        .journey-connector {
+            width: 2px;
+            height: 20px;
+            background: var(--color-gray-200);
+            margin: 0 auto;
+        }
+
+        /* Pathways Section (Wide Walls) */
+        .pathways-section {
+            padding: var(--spacing-16) var(--spacing-6);
+            background: var(--color-gray-50);
+        }
+
+        .pathways-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-6);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .pathway-card {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-8);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-bounce);
+            text-decoration: none;
+            display: block;
+        }
+
+        .pathway-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-card-hover);
+        }
+
+        .pathway-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-card-accent);
+            border-radius: var(--radius-xl);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto var(--spacing-4);
+        }
+
+        .pathway-label {
+            display: inline-block;
+            background: var(--color-gray-100);
+            color: var(--color-gray-600);
+            padding: var(--spacing-1) var(--spacing-3);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: var(--letter-spacing-wider);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .pathway-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            color: var(--color-gray-900);
+            margin-bottom: var(--spacing-3);
+        }
+
+        .pathway-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+            line-height: 1.6;
+        }
+
+        /* 4 P's Section */
+        .four-ps-section {
+            padding: var(--spacing-16) var(--spacing-6);
+            background: var(--gradient-hero);
+            position: relative;
+        }
+
+        .four-ps-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--spacing-6);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .four-p-item {
+            text-align: center;
+            color: var(--color-white);
+        }
+
+        .four-p-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto var(--spacing-4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .four-p-title {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--spacing-2);
+        }
+
+        .four-p-desc {
+            font-size: var(--font-size-sm);
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Learning Summary */
+        .learning-summary {
+            background: var(--color-white);
+            border-radius: var(--radius-2xl);
+            padding: var(--spacing-10);
+            max-width: 800px;
+            margin: var(--spacing-16) auto;
+            box-shadow: var(--shadow-xl);
+        }
+
+        .summary-header {
+            text-align: center;
+            margin-bottom: var(--spacing-8);
+        }
+
+        .summary-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-card-accent);
+            border-radius: var(--radius-full);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto var(--spacing-4);
+        }
+
+        .summary-reflections {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin-bottom: var(--spacing-6);
+        }
+
+        .summary-reflections h4 {
+            font-size: var(--font-size-base);
+            font-weight: 700;
+            color: var(--color-gray-700);
+            margin-bottom: var(--spacing-4);
+        }
+
+        .reflection-item {
+            padding: var(--spacing-3);
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-3);
+            border-left: 3px solid var(--color-primary);
+        }
+
+        .reflection-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .reflection-item-q {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-500);
+            margin-bottom: var(--spacing-1);
+        }
+
+        .reflection-item-a {
+            font-size: var(--font-size-base);
+            color: var(--color-gray-800);
+        }
+
+        .summary-export-btn {
+            display: block;
+            width: 100%;
+            padding: var(--spacing-4);
+            background: var(--gradient-card-accent);
+            color: var(--color-white);
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-bounce);
+        }
+
+        .summary-export-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Peer Comparison */
+        .peer-comparison {
+            background: var(--color-gray-50);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-6);
+            margin-top: var(--spacing-6);
+        }
+
+        .peer-stat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-3) 0;
+            border-bottom: 1px solid var(--color-gray-200);
+        }
+
+        .peer-stat:last-child {
+            border-bottom: none;
+        }
+
+        .peer-stat-label {
+            font-size: var(--font-size-sm);
+            color: var(--color-gray-600);
+        }
+
+        .peer-stat-value {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        /* Section Content Container */
+        .phase-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 968px) {
+            .spiral-container {
+                width: 300px;
+                height: 300px;
+            }
+
+            .spiral-node {
+                width: 55px;
+                height: 55px;
+            }
+
+            .spiral-node-icon {
+                font-size: 1.2rem;
+            }
+
+            .umc-progression {
+                grid-template-columns: 1fr;
+            }
+
+            .pathways-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .four-ps-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .journey-tracker {
+                display: none;
+            }
+
+            .quick-demo-cta {
+                margin-left: 0;
+                margin-top: var(--spacing-4);
+            }
+
+            .hero-cta-group {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .four-ps-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .spiral-container {
+                width: 250px;
+                height: 250px;
+            }
+
+            .spiral-node {
+                width: 45px;
+                height: 45px;
+            }
+
+            .spiral-node-icon {
+                font-size: 1rem;
+            }
+
+            .spiral-node-label {
+                display: none;
+            }
+        }
+
+        /* Hero CTA Group */
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Protection Overlay -->
+    <div id="password-overlay" class="password-overlay">
+        <div class="password-modal">
+            <div class="password-icon">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+            </div>
+            <h2>Investor Access</h2>
+            <p>Enter access code to explore the ML Pipeline learning journey</p>
+            <form id="password-form">
+                <input type="password" id="access-code" placeholder="Access Code" autocomplete="off" autofocus>
+                <button type="submit">Begin Learning Journey</button>
+            </form>
+            <p id="error-message" class="error-message"></p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content hidden">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                            <path d="M2 17l10 5 10-5"></path>
+                            <path d="M2 12l10 5 10-5"></path>
+                        </svg>
+                    </span>
+                    <span class="logo-text">Cultivate Learning</span>
+                </div>
+                <nav class="nav">
+                    <a href="#imagine" class="nav-link">Imagine</a>
+                    <a href="#create" class="nav-link">Create</a>
+                    <a href="#play" class="nav-link">Play</a>
+                    <a href="#share" class="nav-link">Share</a>
+                    <a href="#reflect" class="nav-link">Reflect</a>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Journey Tracker (Fixed Sidebar) -->
+        <div class="journey-tracker" id="journey-tracker">
+            <a href="#imagine" class="journey-node active" data-phase="imagine">
+                <span>&#128161;</span>
+                <span class="journey-tooltip">Imagine</span>
+            </a>
+            <div class="journey-connector"></div>
+            <a href="#create" class="journey-node inactive" data-phase="create">
+                <span>&#128295;</span>
+                <span class="journey-tooltip">Create</span>
+            </a>
+            <div class="journey-connector"></div>
+            <a href="#play" class="journey-node inactive" data-phase="play">
+                <span>&#127922;</span>
+                <span class="journey-tooltip">Play</span>
+            </a>
+            <div class="journey-connector"></div>
+            <a href="#share" class="journey-node inactive" data-phase="share">
+                <span>&#128101;</span>
+                <span class="journey-tooltip">Share</span>
+            </a>
+            <div class="journey-connector"></div>
+            <a href="#reflect" class="journey-node inactive" data-phase="reflect">
+                <span>&#129300;</span>
+                <span class="journey-tooltip">Reflect</span>
+            </a>
+        </div>
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-badge">Creative Learning Experience</div>
+                <h1 class="hero-title">Discover AI in Education</h1>
+                <p class="hero-subtitle">
+                    Embark on a learning journey through our ML pipeline. Imagine possibilities,
+                    create understanding, play with real models, share discoveries, and reflect
+                    on the future of educator effectiveness.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">Learning Phases</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">15+</span>
+                        <span class="stat-label">Interactive Demos</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">98%</span>
+                        <span class="stat-label">Model Accuracy</span>
+                    </div>
+                </div>
+                <div class="hero-cta-group">
+                    <a href="#imagine" class="hero-cta">Start Your Journey</a>
+                    <a href="module4-live-demo.html" class="quick-demo-cta">
+                        <span>&#9889;</span> Quick Demo (2 min)
+                    </a>
+                </div>
+            </div>
+
+            <!-- Creative Learning Spiral Visualization -->
+            <div class="hero-visual">
+                <div class="spiral-container">
+                    <svg class="spiral-svg" viewBox="0 0 400 400">
+                        <!-- Background spiral path -->
+                        <path class="spiral-path" d="M200,50
+                            C300,50 350,150 350,200
+                            C350,280 280,330 200,330
+                            C120,330 70,280 70,200
+                            C70,140 110,90 160,80
+                            C200,72 240,90 260,130
+                            C280,170 270,210 240,240
+                            C210,270 170,270 150,240
+                            C130,210 140,180 170,165
+                            C200,150 220,165 220,190" />
+                        <!-- Animated active path -->
+                        <path class="spiral-path-active" d="M200,50
+                            C300,50 350,150 350,200
+                            C350,280 280,330 200,330
+                            C120,330 70,280 70,200
+                            C70,140 110,90 160,80
+                            C200,72 240,90 260,130
+                            C280,170 270,210 240,240
+                            C210,270 170,270 150,240
+                            C130,210 140,180 170,165
+                            C200,150 220,165 220,190" />
+                    </svg>
+                    <a href="#imagine" class="spiral-node" data-phase="imagine">
+                        <span class="spiral-node-icon">&#128161;</span>
+                        <span class="spiral-node-label">Imagine</span>
+                    </a>
+                    <a href="#create" class="spiral-node" data-phase="create">
+                        <span class="spiral-node-icon">&#128295;</span>
+                        <span class="spiral-node-label">Create</span>
+                    </a>
+                    <a href="#play" class="spiral-node" data-phase="play">
+                        <span class="spiral-node-icon">&#127922;</span>
+                        <span class="spiral-node-label">Play</span>
+                    </a>
+                    <a href="#share" class="spiral-node" data-phase="share">
+                        <span class="spiral-node-icon">&#128101;</span>
+                        <span class="spiral-node-label">Share</span>
+                    </a>
+                    <a href="#reflect" class="spiral-node" data-phase="reflect">
+                        <span class="spiral-node-icon">&#129300;</span>
+                        <span class="spiral-node-label">Reflect</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: IMAGINE -->
+        <section id="imagine" class="learning-phase">
+            <div class="phase-content">
+                <div class="phase-header">
+                    <div class="phase-icon">&#128161;</div>
+                    <div class="phase-title-group">
+                        <span class="phase-badge">Phase 1</span>
+                        <h2 class="phase-title">Imagine</h2>
+                    </div>
+                </div>
+
+                <p class="phase-question">
+                    "What if we could understand educator effectiveness in ways never before possible?"
+                </p>
+
+                <!-- Use-Modify-Create Progression -->
+                <div class="umc-progression">
+                    <div class="umc-step use">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Use</span>
+                        </div>
+                        <h4>Watch the Vision</h4>
+                        <p>See how AI analyzes classroom interactions to provide actionable insights for educators.</p>
+                        <a href="module1-data-collection.html" class="umc-step-link">
+                            View Introduction
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step modify">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Modify</span>
+                        </div>
+                        <h4>Explore Scenarios</h4>
+                        <p>Adjust the context - different age groups, class sizes, teaching styles - and see how insights adapt.</p>
+                        <a href="module1-data-collection.html#scenarios" class="umc-step-link">
+                            Try Scenarios
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step create">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Create</span>
+                        </div>
+                        <h4>Envision Impact</h4>
+                        <p>Design your own use case - what would AI-powered insights mean for your educational context?</p>
+                        <a href="#imagine-create" class="umc-step-link">
+                            Share Your Vision
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tinker Zone -->
+                <div class="tinker-zone" id="imagine-create">
+                    <div class="tinker-zone-header">
+                        <span class="tinker-zone-icon">&#128736;</span>
+                        <h4>Tinker Zone: Envision the Possibilities</h4>
+                    </div>
+                    <p>What problem in education would you most want AI to help solve? Think beyond current limitations.</p>
+                    <a href="module1-data-collection.html" class="tinker-btn">
+                        Explore Data Collection
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Reflection Prompt -->
+                <div class="reflection-prompt">
+                    <div class="reflection-header">
+                        <span class="reflection-icon">&#128173;</span>
+                        <span class="reflection-label">Reflection</span>
+                    </div>
+                    <p class="reflection-question">What surprised you most about the possibilities of AI in education?</p>
+                    <textarea class="reflection-textarea" id="reflection-imagine" placeholder="Share your thoughts..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: CREATE -->
+        <section id="create" class="learning-phase">
+            <div class="phase-content">
+                <div class="phase-header">
+                    <div class="phase-icon">&#128295;</div>
+                    <div class="phase-title-group">
+                        <span class="phase-badge">Phase 2</span>
+                        <h2 class="phase-title">Create</h2>
+                    </div>
+                </div>
+
+                <p class="phase-question">
+                    "How do we build an ML pipeline from real classroom data?"
+                </p>
+
+                <div class="umc-progression">
+                    <div class="umc-step use">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Use</span>
+                        </div>
+                        <h4>Follow the Pipeline</h4>
+                        <p>Walk through each stage of feature extraction - audio analysis, visual patterns, behavioral signals.</p>
+                        <a href="module2-feature-extraction.html" class="umc-step-link">
+                            View Pipeline
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step modify">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Modify</span>
+                        </div>
+                        <h4>Adjust Parameters</h4>
+                        <p>Change feature weights, threshold values, and aggregation methods to see how outputs shift.</p>
+                        <a href="module2-feature-extraction.html#parameters" class="umc-step-link">
+                            Modify Features
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step create">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Create</span>
+                        </div>
+                        <h4>Design Your Feature</h4>
+                        <p>Propose a new feature that could improve educator assessment - what signal would you capture?</p>
+                        <a href="#create-tinker" class="umc-step-link">
+                            Design Feature
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tinker-zone" id="create-tinker">
+                    <div class="tinker-zone-header">
+                        <span class="tinker-zone-icon">&#128736;</span>
+                        <h4>Tinker Zone: Build Understanding</h4>
+                    </div>
+                    <p>Experiment with the feature extraction process. What happens when you emphasize different signals?</p>
+                    <a href="module2-feature-extraction.html" class="tinker-btn">
+                        Open Feature Lab
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="reflection-prompt">
+                    <div class="reflection-header">
+                        <span class="reflection-icon">&#128173;</span>
+                        <span class="reflection-label">Reflection</span>
+                    </div>
+                    <p class="reflection-question">How might the choice of features influence what we measure about teaching?</p>
+                    <textarea class="reflection-textarea" id="reflection-create" placeholder="Share your thoughts..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: PLAY -->
+        <section id="play" class="learning-phase">
+            <div class="phase-content">
+                <div class="phase-header">
+                    <div class="phase-icon">&#127922;</div>
+                    <div class="phase-title-group">
+                        <span class="phase-badge">Phase 3</span>
+                        <h2 class="phase-title">Play</h2>
+                    </div>
+                </div>
+
+                <p class="phase-question">
+                    "What happens when we tinker with the models interactively?"
+                </p>
+
+                <div class="umc-progression">
+                    <div class="umc-step use">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Use</span>
+                        </div>
+                        <h4>Run Sample Analysis</h4>
+                        <p>Watch the ML models process real classroom scenarios and generate CLASS dimension scores.</p>
+                        <a href="module3-ml-models.html" class="umc-step-link">
+                            Run Analysis
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step modify">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Modify</span>
+                        </div>
+                        <h4>Try Different Inputs</h4>
+                        <p>Change the classroom scenarios, adjust model confidence thresholds, compare ensemble results.</p>
+                        <a href="module4-live-demo.html" class="umc-step-link">
+                            Interactive Demo
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step create">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Create</span>
+                        </div>
+                        <h4>Design Your Scenario</h4>
+                        <p>Build a custom classroom scenario and predict what the model will find before running it.</p>
+                        <a href="module4-live-demo.html#custom" class="umc-step-link">
+                            Create Scenario
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tinker-zone" id="play-tinker">
+                    <div class="tinker-zone-header">
+                        <span class="tinker-zone-icon">&#128736;</span>
+                        <h4>Tinker Zone: Experiment Freely</h4>
+                    </div>
+                    <p>No wrong answers here - play with the models, push boundaries, discover unexpected patterns!</p>
+                    <a href="module4-live-demo.html" class="tinker-btn">
+                        Open ML Playground
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Peer Comparison -->
+                <div class="peer-comparison">
+                    <h4 style="margin-bottom: var(--spacing-4); color: var(--color-gray-700);">How Others Explored (Anonymized)</h4>
+                    <div class="peer-stat">
+                        <span class="peer-stat-label">Most tested scenario type</span>
+                        <span class="peer-stat-value">High Engagement</span>
+                    </div>
+                    <div class="peer-stat">
+                        <span class="peer-stat-label">Average exploration time</span>
+                        <span class="peer-stat-value">12 min</span>
+                    </div>
+                    <div class="peer-stat">
+                        <span class="peer-stat-label">Custom scenarios created</span>
+                        <span class="peer-stat-value">47</span>
+                    </div>
+                </div>
+
+                <div class="reflection-prompt">
+                    <div class="reflection-header">
+                        <span class="reflection-icon">&#128173;</span>
+                        <span class="reflection-label">Reflection</span>
+                    </div>
+                    <p class="reflection-question">What patterns or behaviors did you discover that you did not expect?</p>
+                    <textarea class="reflection-textarea" id="reflection-play" placeholder="Share your discoveries..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 4: SHARE -->
+        <section id="share" class="learning-phase">
+            <div class="phase-content">
+                <div class="phase-header">
+                    <div class="phase-icon">&#128101;</div>
+                    <div class="phase-title-group">
+                        <span class="phase-badge">Phase 4</span>
+                        <h2 class="phase-title">Share</h2>
+                    </div>
+                </div>
+
+                <p class="phase-question">
+                    "What real results are emerging, and how do they compare?"
+                </p>
+
+                <div class="umc-progression">
+                    <div class="umc-step use">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Use</span>
+                        </div>
+                        <h4>View Real Results</h4>
+                        <p>Explore validated outcomes from pilot deployments - actual educator improvements measured.</p>
+                        <a href="module4-live-demo.html#results" class="umc-step-link">
+                            See Results
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step modify">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Modify</span>
+                        </div>
+                        <h4>Compare Approaches</h4>
+                        <p>See how AI-assisted assessment compares to traditional methods - accuracy, speed, and consistency.</p>
+                        <a href="module3-ml-models.html#comparison" class="umc-step-link">
+                            Compare Methods
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step create">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Create</span>
+                        </div>
+                        <h4>Build Your Narrative</h4>
+                        <p>Synthesize what you have learned into a story about the future of educator development.</p>
+                        <a href="#share-narrative" class="umc-step-link">
+                            Create Story
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="tinker-zone" id="share-narrative">
+                    <div class="tinker-zone-header">
+                        <span class="tinker-zone-icon">&#128736;</span>
+                        <h4>Tinker Zone: Tell the Story</h4>
+                    </div>
+                    <p>What story would you tell about this technology to someone who has never seen it?</p>
+                    <a href="module4-live-demo.html" class="tinker-btn">
+                        Generate Report
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </a>
+                </div>
+
+                <div class="reflection-prompt">
+                    <div class="reflection-header">
+                        <span class="reflection-icon">&#128173;</span>
+                        <span class="reflection-label">Reflection</span>
+                    </div>
+                    <p class="reflection-question">How might this change educator training at scale?</p>
+                    <textarea class="reflection-textarea" id="reflection-share" placeholder="Share your vision..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 5: REFLECT -->
+        <section id="reflect" class="learning-phase">
+            <div class="phase-content">
+                <div class="phase-header">
+                    <div class="phase-icon">&#129300;</div>
+                    <div class="phase-title-group">
+                        <span class="phase-badge">Phase 5</span>
+                        <h2 class="phase-title">Reflect</h2>
+                    </div>
+                </div>
+
+                <p class="phase-question">
+                    "What did you learn about AI in education? What questions remain?"
+                </p>
+
+                <div class="umc-progression">
+                    <div class="umc-step use">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Use</span>
+                        </div>
+                        <h4>Review Your Journey</h4>
+                        <p>Look back at your reflections from each phase - how has your understanding evolved?</p>
+                        <a href="#learning-summary" class="umc-step-link">
+                            View Summary
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step modify">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Modify</span>
+                        </div>
+                        <h4>Refine Your Understanding</h4>
+                        <p>Update earlier reflections with new insights - learning is iterative, not linear.</p>
+                        <a href="#imagine" class="umc-step-link">
+                            Revisit Phases
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="umc-step create">
+                        <div class="umc-step-header">
+                            <span class="umc-step-badge">Create</span>
+                        </div>
+                        <h4>Ask New Questions</h4>
+                        <p>What new questions emerged? What would you explore next with more time?</p>
+                        <a href="#final-reflection" class="umc-step-link">
+                            Final Reflection
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12 5 19 12 12 19"></polyline>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Personal Learning Summary -->
+                <div class="learning-summary" id="learning-summary">
+                    <div class="summary-header">
+                        <div class="summary-icon">&#127891;</div>
+                        <h3 class="section-title">Your Learning Journey</h3>
+                        <p class="section-subtitle">A summary of your exploration and reflections</p>
+                    </div>
+
+                    <div class="summary-reflections" id="summary-reflections">
+                        <h4>Your Reflections</h4>
+                        <div class="reflection-item">
+                            <p class="reflection-item-q">Imagine: What surprised you about AI possibilities?</p>
+                            <p class="reflection-item-a" id="summary-imagine">No reflection recorded yet</p>
+                        </div>
+                        <div class="reflection-item">
+                            <p class="reflection-item-q">Create: How do features influence measurement?</p>
+                            <p class="reflection-item-a" id="summary-create">No reflection recorded yet</p>
+                        </div>
+                        <div class="reflection-item">
+                            <p class="reflection-item-q">Play: What unexpected patterns did you find?</p>
+                            <p class="reflection-item-a" id="summary-play">No reflection recorded yet</p>
+                        </div>
+                        <div class="reflection-item">
+                            <p class="reflection-item-q">Share: How might this change educator training?</p>
+                            <p class="reflection-item-a" id="summary-share">No reflection recorded yet</p>
+                        </div>
+                    </div>
+
+                    <button class="summary-export-btn" id="export-summary">
+                        Export Learning Summary
+                    </button>
+                </div>
+
+                <div class="reflection-prompt" id="final-reflection">
+                    <div class="reflection-header">
+                        <span class="reflection-icon">&#128173;</span>
+                        <span class="reflection-label">Final Reflection</span>
+                    </div>
+                    <p class="reflection-question">What questions do you still have about AI in education?</p>
+                    <textarea class="reflection-textarea" id="reflection-final" placeholder="Share your remaining questions..."></textarea>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pathways Section (Wide Walls) -->
+        <section class="pathways-section">
+            <div class="section-header">
+                <h2 class="section-title">Choose Your Path</h2>
+                <p class="section-subtitle">
+                    Multiple ways to explore based on your interests and expertise
+                </p>
+            </div>
+
+            <div class="pathways-grid">
+                <a href="module4-live-demo.html" class="pathway-card">
+                    <div class="pathway-icon">&#9889;</div>
+                    <span class="pathway-label">Low Floor</span>
+                    <h3 class="pathway-title">Quick Experience</h3>
+                    <p class="pathway-desc">Jump straight into an interactive demo. No technical background needed - just curiosity.</p>
+                </a>
+
+                <a href="module1-data-collection.html" class="pathway-card">
+                    <div class="pathway-icon">&#128218;</div>
+                    <span class="pathway-label">Wide Walls</span>
+                    <h3 class="pathway-title">Impact Stories</h3>
+                    <p class="pathway-desc">Explore real-world impact through educator stories, case studies, and outcome data.</p>
+                </a>
+
+                <a href="module3-ml-models.html" class="pathway-card">
+                    <div class="pathway-icon">&#128187;</div>
+                    <span class="pathway-label">High Ceiling</span>
+                    <h3 class="pathway-title">Technical Deep-Dive</h3>
+                    <p class="pathway-desc">Full API documentation, model architectures, and integration guides for technical evaluation.</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- 4 P's of Creative Learning -->
+        <section class="four-ps-section">
+            <div class="section-header" style="color: white;">
+                <h2 class="section-title" style="color: white;">The 4 P's of Creative Learning</h2>
+                <p class="section-subtitle" style="color: rgba(255,255,255,0.9);">
+                    Our approach is grounded in MIT's research on how people learn best
+                </p>
+            </div>
+
+            <div class="four-ps-grid">
+                <div class="four-p-item">
+                    <div class="four-p-icon">&#128204;</div>
+                    <h3 class="four-p-title">Projects</h3>
+                    <p class="four-p-desc">Learn through building - from data pipelines to custom scenarios</p>
+                </div>
+                <div class="four-p-item">
+                    <div class="four-p-icon">&#10084;</div>
+                    <h3 class="four-p-title">Passion</h3>
+                    <p class="four-p-desc">Connect to what matters - improving education for all children</p>
+                </div>
+                <div class="four-p-item">
+                    <div class="four-p-icon">&#128101;</div>
+                    <h3 class="four-p-title">Peers</h3>
+                    <p class="four-p-desc">Share discoveries and compare approaches with other explorers</p>
+                </div>
+                <div class="four-p-item">
+                    <div class="four-p-icon">&#127922;</div>
+                    <h3 class="four-p-title">Play</h3>
+                    <p class="four-p-desc">Experiment freely - there are no wrong answers in exploration</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Cultivate Learning Investor Training Portal
+                </p>
+                <p class="footer-text" style="font-size: var(--font-size-xs); margin-top: var(--spacing-2);">
+                    Designed with pedagogical principles from Dr. Karen Brennan (Harvard GSE) and Mitch Resnick (MIT Lifelong Kindergarten)
+                </p>
+                <p class="footer-copyright">
+                    &copy; 2026 University of Washington. Confidential &amp; Proprietary.
+                </p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Password Protection
+        const ACCESS_CODE = 'CULTIVATE';
+        const STORAGE_KEY = 'cultivate_access_granted';
+        const REFLECTIONS_KEY = 'cultivate_reflections';
+
+        function checkAccess() {
+            return sessionStorage.getItem(STORAGE_KEY) === 'true';
+        }
+
+        function grantAccess() {
+            sessionStorage.setItem(STORAGE_KEY, 'true');
+            document.getElementById('password-overlay').classList.add('hidden');
+            document.getElementById('main-content').classList.remove('hidden');
+            loadReflections();
+        }
+
+        function showError(message) {
+            const errorEl = document.getElementById('error-message');
+            errorEl.textContent = message;
+            errorEl.classList.add('visible');
+            setTimeout(() => errorEl.classList.remove('visible'), 3000);
+        }
+
+        // Check if already authenticated
+        if (checkAccess()) {
+            grantAccess();
+        }
+
+        // Handle form submission
+        document.getElementById('password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const input = document.getElementById('access-code');
+            const code = input.value.trim().toUpperCase();
+
+            if (code === ACCESS_CODE) {
+                grantAccess();
+            } else {
+                showError('Invalid access code. Please try again.');
+                input.value = '';
+                input.focus();
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Journey Tracker - Update based on scroll position
+        const phases = ['imagine', 'create', 'play', 'share', 'reflect'];
+        const journeyNodes = document.querySelectorAll('.journey-node');
+
+        function updateJourneyTracker() {
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+            phases.forEach((phase, index) => {
+                const section = document.getElementById(phase);
+                if (section) {
+                    const sectionTop = section.offsetTop;
+                    const sectionBottom = sectionTop + section.offsetHeight;
+                    const node = document.querySelector(`.journey-node[data-phase="${phase}"]`);
+
+                    if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                        node.classList.add('active');
+                        node.classList.remove('inactive', 'completed');
+                    } else if (scrollPosition >= sectionBottom) {
+                        node.classList.add('completed');
+                        node.classList.remove('active', 'inactive');
+                    } else {
+                        node.classList.add('inactive');
+                        node.classList.remove('active', 'completed');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener('scroll', updateJourneyTracker);
+        updateJourneyTracker();
+
+        // Reflection Management
+        function saveReflections() {
+            const reflections = {
+                imagine: document.getElementById('reflection-imagine').value,
+                create: document.getElementById('reflection-create').value,
+                play: document.getElementById('reflection-play').value,
+                share: document.getElementById('reflection-share').value,
+                final: document.getElementById('reflection-final').value
+            };
+            localStorage.setItem(REFLECTIONS_KEY, JSON.stringify(reflections));
+            updateSummary(reflections);
+        }
+
+        function loadReflections() {
+            const saved = localStorage.getItem(REFLECTIONS_KEY);
+            if (saved) {
+                const reflections = JSON.parse(saved);
+                document.getElementById('reflection-imagine').value = reflections.imagine || '';
+                document.getElementById('reflection-create').value = reflections.create || '';
+                document.getElementById('reflection-play').value = reflections.play || '';
+                document.getElementById('reflection-share').value = reflections.share || '';
+                document.getElementById('reflection-final').value = reflections.final || '';
+                updateSummary(reflections);
+            }
+        }
+
+        function updateSummary(reflections) {
+            document.getElementById('summary-imagine').textContent = reflections.imagine || 'No reflection recorded yet';
+            document.getElementById('summary-create').textContent = reflections.create || 'No reflection recorded yet';
+            document.getElementById('summary-play').textContent = reflections.play || 'No reflection recorded yet';
+            document.getElementById('summary-share').textContent = reflections.share || 'No reflection recorded yet';
+        }
+
+        // Auto-save reflections on input
+        document.querySelectorAll('.reflection-textarea').forEach(textarea => {
+            textarea.addEventListener('input', saveReflections);
+        });
+
+        // Export Summary
+        document.getElementById('export-summary').addEventListener('click', function() {
+            const reflections = JSON.parse(localStorage.getItem(REFLECTIONS_KEY) || '{}');
+            const summary = `
+CULTIVATE LEARNING - INVESTOR TRAINING JOURNEY SUMMARY
+========================================================
+Generated: ${new Date().toLocaleString()}
+
+IMAGINE PHASE
+-------------
+Question: What surprised you about AI possibilities in education?
+Response: ${reflections.imagine || 'Not answered'}
+
+CREATE PHASE
+------------
+Question: How do features influence what we measure about teaching?
+Response: ${reflections.create || 'Not answered'}
+
+PLAY PHASE
+----------
+Question: What unexpected patterns did you discover?
+Response: ${reflections.play || 'Not answered'}
+
+SHARE PHASE
+-----------
+Question: How might this change educator training at scale?
+Response: ${reflections.share || 'Not answered'}
+
+FINAL REFLECTION
+----------------
+Question: What questions do you still have about AI in education?
+Response: ${reflections.final || 'Not answered'}
+
+========================================================
+Thank you for exploring the Cultivate Learning ML Pipeline!
+            `.trim();
+
+            const blob = new Blob([summary], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'cultivate-learning-journey-summary.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        });
+
+        // Spiral node hover effects
+        document.querySelectorAll('.spiral-node').forEach(node => {
+            node.addEventListener('mouseenter', function() {
+                this.classList.add('active');
+            });
+            node.addEventListener('mouseleave', function() {
+                this.classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
