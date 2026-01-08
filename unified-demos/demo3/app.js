@@ -345,9 +345,15 @@ function getVideoSourceUrl(video) {
     }
 
     // Construct Azure Blob Storage URL
-    const filename = encodeURIComponent(video.filename);
-    const extension = video.file_info?.local_path?.split('.').pop() || 'mp4';
+    // Check if filename already has an extension
+    const hasExtension = /\.(mp4|mov|avi|webm)$/i.test(video.filename);
+    const filename = encodeURIComponent(video.filename.trim());
 
+    if (hasExtension) {
+        return `${Config.azureBlobBase}/${filename}`;
+    }
+
+    const extension = video.file_info?.local_path?.split('.').pop() || 'mp4';
     return `${Config.azureBlobBase}/${filename}.${extension}`;
 }
 
