@@ -594,6 +594,181 @@
         .save-reflection:hover { background: #9c27b0; }
         .save-reflection:focus { outline: 3px solid var(--brand-primary); outline-offset: 2px; }
 
+        /* Progress Tracking Styles */
+        .progress-dashboard {
+            background: var(--bg-primary);
+            border: 2px solid var(--border-light);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-lg);
+            flex-wrap: wrap;
+            gap: var(--space-md);
+        }
+
+        .progress-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .progress-title i {
+            font-size: 28px;
+            color: var(--success);
+        }
+
+        .progress-title h3 {
+            font-size: var(--font-xl);
+            font-weight: 700;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: var(--space-xl);
+        }
+
+        .progress-stat {
+            text-align: center;
+        }
+
+        .progress-stat-value {
+            font-size: var(--font-2xl);
+            font-weight: 700;
+            color: var(--brand-primary);
+        }
+
+        .progress-stat-label {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+
+        .progress-bar-container {
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-md);
+            height: 24px;
+            overflow: hidden;
+            margin-bottom: var(--space-md);
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), #4caf50);
+            border-radius: var(--radius-md);
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-sm);
+            font-weight: 600;
+            color: white;
+            min-width: fit-content;
+            padding: 0 var(--space-md);
+        }
+
+        .progress-message {
+            font-size: var(--font-base);
+            color: var(--text-secondary);
+            text-align: center;
+        }
+
+        /* Module Completion Indicator */
+        .module-header .completion-badge {
+            display: none;
+            width: 32px;
+            height: 32px;
+            background: var(--success);
+            color: white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-left: auto;
+            margin-right: var(--space-sm);
+        }
+
+        .module-card.completed .completion-badge {
+            display: flex;
+        }
+
+        .module-card.completed .module-number {
+            background: linear-gradient(135deg, var(--success), #388e3c);
+        }
+
+        .module-card.completed {
+            border-color: var(--success);
+        }
+
+        /* Mark Complete Button */
+        .mark-complete-section {
+            display: flex;
+            justify-content: center;
+            padding: var(--space-lg);
+            border-top: 2px dashed var(--border-light);
+            margin-top: var(--space-lg);
+        }
+
+        .mark-complete-btn {
+            background: linear-gradient(135deg, var(--success), #388e3c);
+            color: white;
+            border: none;
+            padding: var(--space-md) var(--space-2xl);
+            border-radius: var(--radius-lg);
+            font-size: var(--font-lg);
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            transition: all var(--transition-fast);
+        }
+
+        .mark-complete-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+        }
+
+        .mark-complete-btn:disabled {
+            background: var(--bg-tertiary);
+            color: var(--text-tertiary);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .mark-complete-btn i {
+            font-size: 20px;
+        }
+
+        /* Completed state */
+        .module-card.completed .mark-complete-btn {
+            background: var(--bg-tertiary);
+            color: var(--success);
+        }
+
+        /* Reset Progress Button */
+        .reset-progress-btn {
+            background: transparent;
+            border: 2px solid var(--error);
+            color: var(--error);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-md);
+            font-size: var(--font-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .reset-progress-btn:hover {
+            background: var(--error);
+            color: white;
+        }
+
         /* Quiz Section */
         .quiz-container {
             background: linear-gradient(135deg, rgba(129, 199, 132, 0.1), rgba(56, 142, 60, 0.1));
@@ -771,6 +946,35 @@
 
     <!-- Main Content -->
     <main id="main-content" class="container">
+        <!-- Progress Dashboard -->
+        <section class="progress-dashboard" id="progress-dashboard" aria-label="Learning Progress">
+            <div class="progress-header">
+                <div class="progress-title">
+                    <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
+                    <h3>Your Learning Progress</h3>
+                </div>
+                <div class="progress-stats">
+                    <div class="progress-stat">
+                        <div class="progress-stat-value" id="modules-completed">0</div>
+                        <div class="progress-stat-label">Completed</div>
+                    </div>
+                    <div class="progress-stat">
+                        <div class="progress-stat-value" id="modules-total">16</div>
+                        <div class="progress-stat-label">Total Modules</div>
+                    </div>
+                </div>
+            </div>
+            <div class="progress-bar-container" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+                <div class="progress-bar-fill" id="progress-bar" style="width: 0%;">0%</div>
+            </div>
+            <p class="progress-message" id="progress-message">Start your learning journey by completing your first module!</p>
+            <div style="text-align: center; margin-top: var(--space-md);">
+                <button class="reset-progress-btn" onclick="resetProgress()" title="Clear all progress and start over">
+                    <i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reset Progress
+                </button>
+            </div>
+        </section>
+
         <!-- Framework Section -->
         <section class="framework-section" aria-labelledby="framework-title">
             <div class="framework-header">
@@ -1648,7 +1852,293 @@ ffmpeg -i classroom_video.mp4 \    <span class="comment"># "Take this video file
     </footer>
 
     <script>
-        // Module expansion with accessibility
+        // ═══════════════════════════════════════════════════════════════════════
+        // INDEXEDDB PROGRESS TRACKING SYSTEM
+        // Stores learner progress locally, ready for future online sync
+        // ═══════════════════════════════════════════════════════════════════════
+
+        const DB_NAME = 'CultivateLearningDB';
+        const DB_VERSION = 1;
+        const STORE_NAME = 'learnerProgress';
+        let db = null;
+
+        // Initialize IndexedDB
+        function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(DB_NAME, DB_VERSION);
+
+                request.onerror = () => {
+                    console.error('IndexedDB error:', request.error);
+                    reject(request.error);
+                };
+
+                request.onsuccess = () => {
+                    db = request.result;
+                    console.log('IndexedDB initialized successfully');
+                    resolve(db);
+                };
+
+                request.onupgradeneeded = (event) => {
+                    const database = event.target.result;
+
+                    // Create object store for progress data
+                    if (!database.objectStoreNames.contains(STORE_NAME)) {
+                        const store = database.createObjectStore(STORE_NAME, { keyPath: 'id' });
+                        store.createIndex('type', 'type', { unique: false });
+                        store.createIndex('timestamp', 'timestamp', { unique: false });
+                        console.log('IndexedDB object store created');
+                    }
+                };
+            });
+        }
+
+        // Save data to IndexedDB
+        async function saveToDB(id, type, data) {
+            if (!db) await initDB();
+
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+
+                const record = {
+                    id: id,
+                    type: type,
+                    data: data,
+                    timestamp: new Date().toISOString()
+                };
+
+                const request = store.put(record);
+
+                request.onsuccess = () => resolve(record);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Load data from IndexedDB
+        async function loadFromDB(id) {
+            if (!db) await initDB();
+
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.get(id);
+
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Load all data of a specific type
+        async function loadAllByType(type) {
+            if (!db) await initDB();
+
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readonly');
+                const store = transaction.objectStore(STORE_NAME);
+                const index = store.index('type');
+                const request = index.getAll(type);
+
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // Clear all data from IndexedDB
+        async function clearDB() {
+            if (!db) await initDB();
+
+            return new Promise((resolve, reject) => {
+                const transaction = db.transaction([STORE_NAME], 'readwrite');
+                const store = transaction.objectStore(STORE_NAME);
+                const request = store.clear();
+
+                request.onsuccess = () => resolve();
+                request.onerror = () => reject(request.error);
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // PROGRESS TRACKING
+        // ═══════════════════════════════════════════════════════════════════════
+
+        const TOTAL_MODULES = 16;
+        let completedModules = new Set();
+
+        // Mark module as complete
+        async function markModuleComplete(moduleId) {
+            completedModules.add(moduleId);
+
+            // Save to IndexedDB
+            await saveToDB(`module-${moduleId}`, 'module-completion', {
+                moduleId: moduleId,
+                completed: true,
+                completedAt: new Date().toISOString()
+            });
+
+            // Update UI
+            updateModuleUI(moduleId, true);
+            updateProgressDashboard();
+
+            // Show congratulations
+            showCompletionMessage(moduleId);
+        }
+
+        // Unmark module (toggle)
+        async function toggleModuleComplete(moduleId) {
+            if (completedModules.has(moduleId)) {
+                completedModules.delete(moduleId);
+                await saveToDB(`module-${moduleId}`, 'module-completion', {
+                    moduleId: moduleId,
+                    completed: false,
+                    completedAt: null
+                });
+                updateModuleUI(moduleId, false);
+            } else {
+                await markModuleComplete(moduleId);
+            }
+            updateProgressDashboard();
+        }
+
+        // Update module card UI
+        function updateModuleUI(moduleId, isCompleted) {
+            const card = document.querySelector(`[data-module="${moduleId}"]`);
+            if (!card) return;
+
+            if (isCompleted) {
+                card.classList.add('completed');
+                const btn = card.querySelector('.mark-complete-btn');
+                if (btn) {
+                    btn.innerHTML = '<i class="fa-solid fa-check-circle"></i> Completed!';
+                }
+            } else {
+                card.classList.remove('completed');
+                const btn = card.querySelector('.mark-complete-btn');
+                if (btn) {
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Mark as Complete';
+                }
+            }
+        }
+
+        // Update progress dashboard
+        function updateProgressDashboard() {
+            const completed = completedModules.size;
+            const percentage = Math.round((completed / TOTAL_MODULES) * 100);
+
+            // Update stats
+            document.getElementById('modules-completed').textContent = completed;
+
+            // Update progress bar
+            const progressBar = document.getElementById('progress-bar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+
+            // Update ARIA
+            const container = document.querySelector('.progress-bar-container');
+            container.setAttribute('aria-valuenow', percentage);
+
+            // Update message
+            const messageEl = document.getElementById('progress-message');
+            if (completed === 0) {
+                messageEl.textContent = "Start your learning journey by completing your first module!";
+            } else if (completed < 4) {
+                messageEl.textContent = "Great start! Keep going - you're building a strong foundation.";
+            } else if (completed < 8) {
+                messageEl.textContent = "Excellent progress! You're understanding the ML pipeline.";
+            } else if (completed < 12) {
+                messageEl.textContent = "Amazing work! You're more than halfway through.";
+            } else if (completed < TOTAL_MODULES) {
+                messageEl.textContent = "Almost there! Just a few more modules to complete.";
+            } else {
+                messageEl.textContent = "Congratulations! You've completed all modules! You now understand the entire ML system.";
+            }
+        }
+
+        // Show completion message
+        function showCompletionMessage(moduleId) {
+            const messages = [
+                "Excellent work! You've mastered this concept.",
+                "Well done! Another step forward in your learning journey.",
+                "Great job! Your understanding is growing.",
+                "Fantastic! Keep up the excellent progress.",
+                "Wonderful! You're doing amazing work."
+            ];
+            const randomMsg = messages[Math.floor(Math.random() * messages.length)];
+            alert(randomMsg);
+        }
+
+        // Reset all progress
+        async function resetProgress() {
+            if (!confirm('Are you sure you want to reset all your progress? This cannot be undone.')) {
+                return;
+            }
+
+            await clearDB();
+            completedModules.clear();
+
+            // Reset all module UIs
+            document.querySelectorAll('.module-card').forEach(card => {
+                card.classList.remove('completed');
+                const btn = card.querySelector('.mark-complete-btn');
+                if (btn) {
+                    btn.innerHTML = '<i class="fa-solid fa-check"></i> Mark as Complete';
+                }
+            });
+
+            updateProgressDashboard();
+            alert('Your progress has been reset. You can start fresh!');
+        }
+
+        // Load saved progress
+        async function loadProgress() {
+            try {
+                const progressRecords = await loadAllByType('module-completion');
+                progressRecords.forEach(record => {
+                    if (record.data.completed) {
+                        completedModules.add(record.data.moduleId);
+                        updateModuleUI(record.data.moduleId, true);
+                    }
+                });
+                updateProgressDashboard();
+            } catch (error) {
+                console.error('Error loading progress:', error);
+            }
+        }
+
+        // Inject completion badges and buttons into module cards
+        function injectProgressUI() {
+            document.querySelectorAll('.module-card').forEach(card => {
+                const moduleId = card.dataset.module;
+
+                // Add completion badge to header
+                const header = card.querySelector('.module-header');
+                const expandIcon = header.querySelector('.module-expand');
+                if (expandIcon && !header.querySelector('.completion-badge')) {
+                    const badge = document.createElement('div');
+                    badge.className = 'completion-badge';
+                    badge.innerHTML = '<i class="fa-solid fa-check"></i>';
+                    badge.setAttribute('aria-label', 'Module completed');
+                    expandIcon.parentNode.insertBefore(badge, expandIcon);
+                }
+
+                // Add Mark Complete button to module content
+                const content = card.querySelector('.module-content');
+                if (content && !content.querySelector('.mark-complete-section')) {
+                    const section = document.createElement('div');
+                    section.className = 'mark-complete-section';
+                    section.innerHTML = `
+                        <button class="mark-complete-btn" onclick="toggleModuleComplete('${moduleId}')">
+                            <i class="fa-solid fa-check"></i> Mark as Complete
+                        </button>
+                    `;
+                    content.appendChild(section);
+                }
+            });
+        }
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // MODULE EXPANSION
+        // ═══════════════════════════════════════════════════════════════════════
+
         document.querySelectorAll('.module-header').forEach(header => {
             header.addEventListener('click', toggleModule);
             header.addEventListener('keydown', (e) => {
@@ -1666,7 +2156,10 @@ ffmpeg -i classroom_video.mp4 \    <span class="comment"># "Take this video file
             this.setAttribute('aria-expanded', !isExpanded);
         }
 
-        // Quiz functionality
+        // ═══════════════════════════════════════════════════════════════════════
+        // QUIZ FUNCTIONALITY
+        // ═══════════════════════════════════════════════════════════════════════
+
         function checkQuiz(quizId, correctAnswer, correctMsg, incorrectMsg) {
             const quiz = document.getElementById(quizId);
             const selected = quiz.querySelector('input[type="radio"]:checked');
@@ -1704,8 +2197,11 @@ ffmpeg -i classroom_video.mp4 \    <span class="comment"># "Take this video file
             }
         }
 
-        // Reflection saving (localStorage)
-        function saveReflection(moduleId) {
+        // ═══════════════════════════════════════════════════════════════════════
+        // REFLECTION SAVING (Also uses IndexedDB now)
+        // ═══════════════════════════════════════════════════════════════════════
+
+        async function saveReflection(moduleId) {
             const textareas = document.querySelectorAll(`[id^="reflect-${moduleId}"]`);
             const reflections = {};
 
@@ -1713,33 +2209,64 @@ ffmpeg -i classroom_video.mp4 \    <span class="comment"># "Take this video file
                 reflections[ta.id] = ta.value;
             });
 
-            localStorage.setItem(`reflections-${moduleId}`, JSON.stringify(reflections));
+            // Save to IndexedDB
+            await saveToDB(`reflections-${moduleId}`, 'reflection', {
+                moduleId: moduleId,
+                reflections: reflections
+            });
 
             alert('Your reflections have been saved! They will be here when you return.');
         }
 
-        // Load saved reflections on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const allTextareas = document.querySelectorAll('.reflection-textarea');
-            allTextareas.forEach(ta => {
-                const moduleMatch = ta.id.match(/reflect-(\w+)-/);
-                if (moduleMatch) {
-                    const moduleId = moduleMatch[1];
-                    const saved = localStorage.getItem(`reflections-${moduleId}`);
-                    if (saved) {
-                        const reflections = JSON.parse(saved);
-                        if (reflections[ta.id]) {
-                            ta.value = reflections[ta.id];
+        // Load saved reflections from IndexedDB
+        async function loadReflections() {
+            try {
+                const allTextareas = document.querySelectorAll('.reflection-textarea');
+                for (const ta of allTextareas) {
+                    const moduleMatch = ta.id.match(/reflect-(\w+)-/);
+                    if (moduleMatch) {
+                        const moduleId = moduleMatch[1];
+                        const saved = await loadFromDB(`reflections-${moduleId}`);
+                        if (saved && saved.data.reflections && saved.data.reflections[ta.id]) {
+                            ta.value = saved.data.reflections[ta.id];
                         }
                     }
                 }
-            });
-        });
+            } catch (error) {
+                console.error('Error loading reflections:', error);
+            }
+        }
 
         // Print reflections
         function printReflections() {
             window.print();
         }
+
+        // ═══════════════════════════════════════════════════════════════════════
+        // INITIALIZATION
+        // ═══════════════════════════════════════════════════════════════════════
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                // Initialize IndexedDB
+                await initDB();
+
+                // Inject progress UI elements
+                injectProgressUI();
+
+                // Load saved progress
+                await loadProgress();
+
+                // Load saved reflections
+                await loadReflections();
+
+                console.log('Cultivate Learning initialized successfully');
+            } catch (error) {
+                console.error('Initialization error:', error);
+                // Fallback: still show UI even if IndexedDB fails
+                injectProgressUI();
+            }
+        });
     </script>
 </body>
 </html>
