@@ -347,17 +347,24 @@ function getVideoSourceUrl(video) {
     }
 
     // Construct Azure Blob Storage URL with SAS token for secure access
-    // Check if filename already has an extension
-    const hasExtension = /\.(mp4|mov|avi|webm)$/i.test(video.filename);
-    const filename = encodeURIComponent(video.filename.trim());
-    const sasToken = Config.azureBlobSasToken ? `?${Config.azureBlobSasToken}` : '';
+    // Normalize filename: trim whitespace and convert extension to lowercase (Azure is case-sensitive)
+    let normalizedFilename = video.filename.trim();
 
-    if (hasExtension) {
-        return `${Config.azureBlobBase}/${filename}${sasToken}`;
+    // Check if filename has extension and normalize it to lowercase
+    const extMatch = normalizedFilename.match(/\.(mp4|mov|avi|webm)$/i);
+    if (extMatch) {
+        // Replace uppercase extension with lowercase
+        normalizedFilename = normalizedFilename.slice(0, -extMatch[0].length) + extMatch[0].toLowerCase();
+    } else {
+        // Add extension from local_path or default to .mp4
+        const extension = video.file_info?.local_path?.split('.').pop()?.toLowerCase() || 'mp4';
+        normalizedFilename = `${normalizedFilename}.${extension}`;
     }
 
-    const extension = video.file_info?.local_path?.split('.').pop() || 'mp4';
-    return `${Config.azureBlobBase}/${filename}.${extension}${sasToken}`;
+    const filename = encodeURIComponent(normalizedFilename);
+    const sasToken = Config.azureBlobSasToken ? `?${Config.azureBlobSasToken}` : '';
+
+    return `${Config.azureBlobBase}/${filename}${sasToken}`;
 }
 
 // ============================================================================
