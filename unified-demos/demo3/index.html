@@ -544,10 +544,87 @@
         .empty-state-description {
             font-size: var(--font-sm);
         }
+
+        /* Global Loading Indicator */
+        .loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            color: white;
+            gap: var(--space-md);
+        }
+
+        /* Global Error Container */
+        .error-container {
+            position: fixed;
+            top: var(--space-lg);
+            right: var(--space-lg);
+            z-index: 9998;
+            max-width: 400px;
+        }
+
+        .error-message {
+            background: var(--error);
+            color: white;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .error-icon {
+            font-weight: bold;
+            font-size: var(--font-lg);
+            width: 24px;
+            height: 24px;
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .error-text {
+            flex: 1;
+        }
+
+        .error-dismiss {
+            background: transparent;
+            border: 1px solid white;
+            color: white;
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: var(--font-sm);
+        }
+
+        .error-dismiss:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body data-theme="light">
     <!-- Unified Header will be injected here -->
+
+    <!-- Global Loading Indicator -->
+    <div id="loadingIndicator" class="loading-indicator" style="display: none;">
+        <div class="loading-spinner"></div>
+        <span id="loadingMessage">Loading...</span>
+    </div>
+
+    <!-- Global Error Container -->
+    <div id="errorContainer" class="error-container" style="display: none;"></div>
 
     <div class="unified-container">
         <div class="unified-card">
@@ -556,21 +633,11 @@
                 <p class="card-description">Compare and analyze question patterns across multiple teaching videos</p>
             </div>
 
-            <!-- Video Selector Section -->
-            <section class="video-selector" aria-label="Video Library">
-                <div class="video-selector-header">
-                    <h3 class="video-selector-title">Video Library</h3>
-                    <div class="filter-buttons" role="group" aria-label="Filter videos by age group">
-                        <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-                        <button class="filter-btn" data-filter="pk" aria-pressed="false">PK</button>
-                        <button class="filter-btn" data-filter="toddler" aria-pressed="false">Toddler</button>
-                    </div>
-                </div>
-                <div class="video-grid" id="videoGrid" role="listbox" aria-label="Available videos">
-                    <!-- Video cards will be populated by JavaScript -->
-                    <div class="loading-spinner"></div>
-                    <span>Loading video library...</span>
-                </div>
+            <!-- Video Selector Section - Container for VideoSelector component -->
+            <section id="videoSelectorContainer" class="video-selector" aria-label="Video Library">
+                <!-- VideoSelector component will render its content here -->
+                <div class="loading-spinner"></div>
+                <span>Loading video library...</span>
             </section>
 
             <!-- Tab Navigation -->
@@ -628,7 +695,7 @@
                 <h3 class="card-title">Question Classification Analysis</h3>
                 <p class="card-description">ML-powered question detection with Ensemble classifier</p>
 
-                <div class="questions-container" id="questionsContainer" aria-live="polite">
+                <div class="questions-container" id="questionPanelContainer" aria-live="polite">
                     <div class="empty-state">
                         <div class="empty-state-icon">?</div>
                         <div class="empty-state-title">No Video Selected</div>
@@ -671,7 +738,7 @@
                 <h3 class="card-title">Analytics Dashboard</h3>
                 <p class="card-description">Cross-video analysis and performance metrics</p>
 
-                <div class="analytics-container" id="analyticsContainer">
+                <div class="analytics-container" id="analyticsDashboardContainer">
                     <div class="stats-grid">
                         <div class="stat-card">
                             <div class="stat-number" id="totalVideos">--</div>
@@ -746,6 +813,6 @@
     <script src="../shared/api-config.js"></script>
 
     <!-- Demo 3 Functionality -->
-    <script src="./app.js"></script>
+    <script type="module" src="./app.js"></script>
 </body>
 </html>

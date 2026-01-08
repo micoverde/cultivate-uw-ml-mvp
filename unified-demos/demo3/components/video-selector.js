@@ -16,7 +16,7 @@ export class VideoSelector {
      * Creates a new VideoSelector instance
      * @param {string} containerId - The ID of the container element to render into
      * @param {Object} options - Configuration options
-     * @param {string} [options.catalogPath='../data/video_catalog.json'] - Path to video catalog JSON
+     * @param {string} [options.catalogPath='./data/video_catalog.json'] - Path to video catalog JSON (relative to HTML page)
      * @param {Function} [options.onVideoSelect] - Callback when video is selected
      * @param {boolean} [options.autoLoad=true] - Whether to auto-load catalog on init
      */
@@ -24,7 +24,7 @@ export class VideoSelector {
         this.containerId = containerId;
         this.container = null;
         this.options = {
-            catalogPath: options.catalogPath || '../data/video_catalog.json',
+            catalogPath: options.catalogPath || './data/video_catalog.json',
             onVideoSelect: options.onVideoSelect || null,
             autoLoad: options.autoLoad !== false
         };

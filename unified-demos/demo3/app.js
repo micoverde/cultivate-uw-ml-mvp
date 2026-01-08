@@ -538,12 +538,14 @@ function switchTab(tabName) {
 
     // Update tab buttons
     document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.tab === tabName);
+        const btnTab = btn.dataset.tab || btn.getAttribute('aria-controls');
+        btn.classList.toggle('active', btnTab === tabName);
+        btn.setAttribute('aria-selected', btnTab === tabName ? 'true' : 'false');
     });
 
-    // Update tab content panels
+    // Update tab content panels (IDs match tabName directly)
     document.querySelectorAll('.tab-content').forEach(panel => {
-        panel.classList.toggle('active', panel.id === `${tabName}-tab`);
+        panel.classList.toggle('active', panel.id === tabName);
     });
 
     // Tab-specific initialization
@@ -618,9 +620,9 @@ function displayGroundTruth(video) {
  * @param {Object} video - Video object from catalog
  */
 function updateVideoPlayer(video) {
-    const videoElement = document.getElementById('videoPlayer');
-    const videoTitle = document.getElementById('videoTitle');
-    const videoDescription = document.getElementById('videoDescription');
+    const videoElement = document.getElementById('mainVideo');
+    const videoTitle = document.getElementById('selectedVideoTitle');
+    const videoDescription = document.getElementById('selectedVideoMeta');
 
     if (!videoElement) {
         console.warn('[Demo3] Video player element not found');
@@ -640,7 +642,7 @@ function updateVideoPlayer(video) {
         }
 
         if (videoDescription) {
-            videoDescription.textContent = video.description || '';
+            videoDescription.textContent = video.description || `${video.age_group || ''} - ${video.questions?.length || 0} questions`;
         }
 
         // Set up event handlers
@@ -668,7 +670,7 @@ function updateVideoPlayer(video) {
  * @param {number} seconds - Target time in seconds
  */
 function seekToTimestamp(seconds) {
-    const videoElement = document.getElementById('videoPlayer');
+    const videoElement = document.getElementById('mainVideo');
 
     if (videoElement && !isNaN(seconds)) {
         videoElement.currentTime = seconds;
@@ -821,8 +823,9 @@ async function initializeComponents() {
     try {
         // Initialize VideoSelector component
         // Constructor signature: (containerId: string, options?: object)
+        // Note: VideoSelector renders its own UI inside the container, so we use the video grid container
         if (VideoSelector) {
-            window.videoSelector = new VideoSelector('videoSelectorContainer', {
+            window.videoSelector = new VideoSelector('videoGrid', {
                 catalogPath: Config.catalogPath,
                 onVideoSelect: (video) => {
                     window.dispatchEvent(new CustomEvent('videoSelected', { detail: { video } }));
@@ -835,7 +838,7 @@ async function initializeComponents() {
         }
 
         // Initialize QuestionPanel component
-        // Constructor signature: (containerSelector: string)
+        // Constructor signature: (containerSelector: string) - uses CSS selector
         if (QuestionPanel) {
             window.questionPanel = new QuestionPanel('#questionPanelContainer');
             console.log('[Demo3] QuestionPanel initialized');
@@ -844,7 +847,7 @@ async function initializeComponents() {
         }
 
         // Initialize AnalyticsDashboard component
-        // Constructor signature: (containerId: string, options?: object)
+        // Constructor signature: (containerId: string, options?: object) - uses element ID
         if (AnalyticsDashboard) {
             window.analyticsDashboard = new AnalyticsDashboard('analyticsDashboardContainer', {
                 showExport: true,
@@ -871,11 +874,14 @@ async function initializeComponents() {
 
 /**
  * Set up tab switching buttons
+ * Note: Tab buttons in HTML use aria-controls attribute instead of data-tab,
+ * so we check both for compatibility
  */
 function setupTabButtons() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            const tabName = btn.dataset.tab;
+            // Support both data-tab attribute and aria-controls for flexibility
+            const tabName = btn.dataset.tab || btn.getAttribute('aria-controls');
             if (tabName) {
                 switchTab(tabName);
             }
@@ -969,6 +975,178 @@ if (document.readyState === 'loading') {
 }
 
 // ============================================================================
+// GLOBAL FUNCTIONS FOR HTML ONCLICK HANDLERS
+// ============================================================================
+// These functions are called directly from HTML onclick attributes
+
+/**
+ * Show a specific tab (used by tab buttons in HTML)
+ * @param {string} tabId - Tab identifier
+ */
+window.showTab = function(tabId) {
+    switchTab(tabId);
+};
+
+/**
+ * Open the rating modal for a question
+ * @param {string} questionId - Question ID
+ * @param {string} text - Question text
+ * @param {string} classification - Current ML classification
+ * @param {number} confidence - Confidence score
+ */
+window.openRatingModal = function(questionId, text, classification, confidence) {
+    const modal = document.getElementById('ratingModal');
+    const questionDiv = document.getElementById('ratingQuestion');
+    const currentClass = document.getElementById('currentClassification');
+    const currentConf = document.getElementById('currentConfidence');
+
+    if (modal && questionDiv && currentClass && currentConf) {
+        questionDiv.textContent = `"${text}"`;
+        currentClass.textContent = classification;
+        currentConf.textContent = `(${Math.round(confidence * 100)}% confidence)`;
+
+        // Store question data for submission
+        modal.dataset.questionId = questionId;
+        modal.dataset.classification = classification;
+        modal.dataset.text = text;
+
+        // Reset selection state
+        document.querySelectorAll('.rating-option').forEach(opt => {
+            opt.classList.remove('selected');
+            opt.setAttribute('aria-checked', 'false');
+        });
+        document.getElementById('correctionOptions').style.display = 'none';
+        document.getElementById('submitRating').disabled = true;
+
+        modal.classList.add('show');
+    }
+};
+
+/**
+ * Close the rating modal
+ */
+window.closeRatingModal = function() {
+    const modal = document.getElementById('ratingModal');
+    if (modal) {
+        modal.classList.remove('show');
+    }
+};
+
+/**
+ * Submit the rating from the modal
+ */
+window.submitRating = async function() {
+    const modal = document.getElementById('ratingModal');
+    if (!modal) return;
+
+    const questionId = modal.dataset.questionId;
+    const originalClassification = modal.dataset.classification;
+    const text = modal.dataset.text;
+
+    // Determine if rating is correct or incorrect
+    const correctOption = document.querySelector('.rating-option[data-type="correct"].selected');
+    const incorrectOption = document.querySelector('.rating-option[data-type="incorrect"].selected');
+
+    if (!correctOption && !incorrectOption) {
+        console.warn('[Demo3] No rating selection made');
+        return;
+    }
+
+    const isCorrect = correctOption !== null;
+    let correctClass = originalClassification;
+
+    if (!isCorrect) {
+        // Get the corrected classification
+        const correctionBtn = document.querySelector('[data-correct-type].selected');
+        if (correctionBtn) {
+            correctClass = correctionBtn.dataset.correctType;
+        }
+    }
+
+    const ratingData = {
+        videoId: AppState.currentVideo?.id,
+        questionId: questionId,
+        predictedClass: originalClassification,
+        correctClass: correctClass,
+        isCorrect: isCorrect,
+        text: text
+    };
+
+    // Dispatch the rating event
+    window.dispatchEvent(new CustomEvent('ratingSubmitted', { detail: ratingData }));
+
+    // Close modal
+    window.closeRatingModal();
+
+    console.log('[Demo3] Rating submitted from modal:', ratingData);
+};
+
+// Set up rating option click handlers
+document.addEventListener('DOMContentLoaded', () => {
+    // Rating option selection
+    document.querySelectorAll('.rating-option[data-type]').forEach(option => {
+        option.addEventListener('click', () => {
+            // Clear other selections
+            document.querySelectorAll('.rating-option[data-type]').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.setAttribute('aria-checked', 'false');
+            });
+
+            option.classList.add('selected');
+            option.setAttribute('aria-checked', 'true');
+
+            // Show correction options if incorrect was selected
+            const correctionOptions = document.getElementById('correctionOptions');
+            const submitBtn = document.getElementById('submitRating');
+
+            if (option.dataset.type === 'incorrect') {
+                correctionOptions.style.display = 'block';
+                submitBtn.disabled = true;
+            } else {
+                correctionOptions.style.display = 'none';
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Keyboard accessibility
+        option.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                option.click();
+            }
+        });
+    });
+
+    // Correction type selection
+    document.querySelectorAll('[data-correct-type]').forEach(option => {
+        option.addEventListener('click', () => {
+            document.querySelectorAll('[data-correct-type]').forEach(opt => {
+                opt.classList.remove('selected');
+                opt.setAttribute('aria-checked', 'false');
+            });
+
+            option.classList.add('selected');
+            option.setAttribute('aria-checked', 'true');
+            document.getElementById('submitRating').disabled = false;
+        });
+    });
+
+    // Close modal on backdrop click
+    document.getElementById('ratingModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'ratingModal') {
+            window.closeRatingModal();
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            window.closeRatingModal();
+        }
+    });
+});
+
+// ============================================================================
 // EXPORTS - Make key functions available globally for debugging
 // ============================================================================
 
@@ -980,7 +1158,7 @@ window.Demo3 = {
     // Actions
     classifyQuestion,
     classifyVideoQuestions,
-    submitRating,
+    submitRating: submitRating,
     switchTab,
     seekToTimestamp,
 
@@ -991,7 +1169,12 @@ window.Demo3 = {
 
     // Reload functions
     reloadCatalog: loadCatalog,
-    reinitialize: initializeApp
+    reinitialize: initializeApp,
+
+    // Component references
+    get videoSelector() { return window.videoSelector; },
+    get questionPanel() { return window.questionPanel; },
+    get analyticsDashboard() { return window.analyticsDashboard; }
 };
 
 console.log('[Demo3] Global Demo3 object available for debugging');

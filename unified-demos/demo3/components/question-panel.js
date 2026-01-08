@@ -14,6 +14,8 @@
 class QuestionPanel {
     constructor(containerSelector) {
         this.container = document.querySelector(containerSelector);
+        this.initialized = false;
+
         if (!this.container) {
             console.error(`QuestionPanel: Container "${containerSelector}" not found`);
             return;
@@ -26,6 +28,7 @@ class QuestionPanel {
         this.isClassifying = false;
 
         this.init();
+        this.initialized = true;
     }
 
     init() {
@@ -637,8 +640,9 @@ class QuestionPanel {
 
     handleTimestampClick(timestampSeconds) {
         console.log(`QuestionPanel: Jump to timestamp ${timestampSeconds}s`);
+        // Use 'seconds' key for compatibility with app.js handleJumpToTimestamp
         window.dispatchEvent(new CustomEvent('jumpToTimestamp', {
-            detail: { timestamp: timestampSeconds }
+            detail: { seconds: timestampSeconds, timestamp: timestampSeconds }
         }));
     }
 
@@ -668,6 +672,12 @@ class QuestionPanel {
      * @param {Object} video - Video object from catalog
      */
     setVideo(video) {
+        // Guard: don't proceed if component wasn't properly initialized
+        if (!this.initialized || !this.container) {
+            console.warn('QuestionPanel: Cannot setVideo - component not initialized');
+            return;
+        }
+
         // Cancel any pending classification request
         this.cancelClassification();
 
@@ -698,6 +708,7 @@ class QuestionPanel {
 
     /**
      * Classify all questions using the ML API
+     * Uses individual classify endpoints (batch endpoints don't exist)
      */
     async classifyQuestions() {
         // Cancel any existing request
@@ -720,59 +731,79 @@ class QuestionPanel {
         this.abortController = new AbortController();
 
         try {
-            const baseUrl = window.apiConfig?.getBaseUrl() || 'http://localhost:5001';
             const selectedModel = window.modelSettings?.getSelectedModel() || 'classic';
 
-            // Determine the correct batch endpoint
-            const endpoint = selectedModel === 'ensemble'
-                ? `${baseUrl}/api/v2/classify/batch`
-                : `${baseUrl}/api/v1/classify/batch`;
+            // Use apiConfig to get the correct endpoint for current environment/model
+            // Falls back to constructing URL manually if apiConfig not available
+            let endpoint;
+            if (window.apiConfig?.getClassifyEndpoint) {
+                endpoint = window.apiConfig.getClassifyEndpoint();
+            } else {
+                const baseUrl = window.apiConfig?.getBaseUrl() || 'http://localhost:5001';
+                endpoint = selectedModel === 'ensemble'
+                    ? `${baseUrl}/api/v2/classify/ensemble`
+                    : `${baseUrl}/api/classify`;
+            }
 
             console.log(`QuestionPanel: Classifying ${questionsToClassify.length} questions`);
             console.log(`QuestionPanel: Using ${selectedModel} model at ${endpoint}`);
 
-            const response = await fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    questions: questionsToClassify.map(q => q.transcript_text),
-                    model: selectedModel
-                }),
-                signal: this.abortController.signal
+            // Classify each question individually (batch endpoints don't exist)
+            const classificationPromises = questionsToClassify.map(async (question) => {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            text: question.transcript_text,
+                            debug_mode: true
+                        }),
+                        signal: this.abortController.signal
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.status} ${response.statusText}`);
+                    }
+
+                    const data = await response.json();
+                    return {
+                        questionId: question.id,
+                        success: true,
+                        result: {
+                            prediction: data.classification || data.prediction || 'Unknown',
+                            confidence: data.confidence || data.score || 0,
+                            model: selectedModel
+                        }
+                    };
+                } catch (error) {
+                    if (error.name === 'AbortError') {
+                        throw error; // Re-throw abort errors to stop all requests
+                    }
+                    return {
+                        questionId: question.id,
+                        success: false,
+                        error: error.message
+                    };
+                }
             });
 
-            if (!response.ok) {
-                throw new Error(`API error: ${response.status} ${response.statusText}`);
-            }
+            const results = await Promise.all(classificationPromises);
 
-            const data = await response.json();
-            console.log('QuestionPanel: Classification results:', data);
+            // Process results
+            results.forEach(result => {
+                if (result.success) {
+                    this.classifications.set(result.questionId, result.result);
+                } else {
+                    this.classifications.set(result.questionId, {
+                        error: result.error,
+                        model: selectedModel
+                    });
+                }
+            });
 
-            // Map results back to questions
-            if (data.results && Array.isArray(data.results)) {
-                questionsToClassify.forEach((question, index) => {
-                    if (data.results[index]) {
-                        this.classifications.set(question.id, {
-                            prediction: data.results[index].classification || data.results[index].prediction,
-                            confidence: data.results[index].confidence || data.results[index].score || 0,
-                            model: selectedModel
-                        });
-                    }
-                });
-            } else if (data.classifications && Array.isArray(data.classifications)) {
-                // Alternative response format
-                questionsToClassify.forEach((question, index) => {
-                    if (data.classifications[index]) {
-                        this.classifications.set(question.id, {
-                            prediction: data.classifications[index].type || data.classifications[index].classification,
-                            confidence: data.classifications[index].confidence || 0,
-                            model: selectedModel
-                        });
-                    }
-                });
-            }
+            console.log(`QuestionPanel: Classification complete. ${results.filter(r => r.success).length}/${results.length} succeeded`);
 
             this.isClassifying = false;
             this.render();

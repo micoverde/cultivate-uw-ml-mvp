@@ -13,6 +13,7 @@ class UnifiedHeader {
         const path = window.location.pathname;
         if (path.includes('demo1')) return 'demo1';
         if (path.includes('demo2')) return 'demo2';
+        if (path.includes('demo3')) return 'demo3';
         return 'hub';
     }
 
@@ -44,6 +45,10 @@ class UnifiedHeader {
                     <a href="${this.currentPage === 'demo2' ? '#' : this.currentPage === 'hub' ? 'demo2/index.html' : '../demo2/index.html'}"
                        class="nav-link ${this.currentPage === 'demo2' ? 'active' : ''}">
                         Demo 2
+                    </a>
+                    <a href="${this.currentPage === 'demo3' ? '#' : this.currentPage === 'hub' ? 'demo3/index.html' : '../demo3/index.html'}"
+                       class="nav-link ${this.currentPage === 'demo3' ? 'active' : ''}">
+                        Demo 3
                     </a>
                     <div class="header-separator"></div>
                     <button class="theme-toggle-btn" id="themeToggle">

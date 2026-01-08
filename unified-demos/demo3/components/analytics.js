@@ -34,6 +34,13 @@ class AnalyticsDashboard {
         this.sortColumn = null;
         this.sortDirection = 'asc';
 
+        // Event handler references for cleanup
+        this._boundHandlers = {
+            tabHandlers: [],
+            exportHandler: null,
+            sortHandler: null
+        };
+
         // Initialize when DOM is ready
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => this.init());
@@ -141,7 +148,7 @@ class AnalyticsDashboard {
             ceqRecall,
             ceqF1,
             total,
-            oegCount: TP + FN,
+            oeqCount: TP + FN,
             ceqCount: TN + FP,
             correctCount: TP + TN,
             incorrectCount: FP + FN
@@ -198,9 +205,12 @@ class AnalyticsDashboard {
 
     /**
      * Escape CSV special characters
+     * Handles null, undefined, and non-string values safely
      */
     escapeCSV(value) {
-        if (typeof value !== 'string') return value;
+        // Handle null/undefined explicitly to avoid "null"/"undefined" strings
+        if (value === null || value === undefined) return '';
+        if (typeof value !== 'string') return String(value);
         if (value.includes(',') || value.includes('"') || value.includes('\n')) {
             return `"${value.replace(/"/g, '""')}"`;
         }
@@ -842,8 +852,8 @@ class AnalyticsDashboard {
             return this.renderEmptyState('No classification results yet. Run classifications to see analytics.');
         }
 
-        const oegPercent = metrics.total > 0 ? (metrics.oegCount / metrics.total) * 100 : 50;
-        const oegAngle = (oegPercent / 100) * 360;
+        const oeqPercent = metrics.total > 0 ? (metrics.oeqCount / metrics.total) * 100 : 50;
+        const oeqAngle = (oeqPercent / 100) * 360;
 
         const getAccuracyClass = (value) => {
             if (value >= 0.85) return 'good';
@@ -875,15 +885,15 @@ class AnalyticsDashboard {
             </div>
 
             <div class="pie-chart-container">
-                <div class="pie-chart" style="--oeg-angle: ${oegAngle}deg"></div>
+                <div class="pie-chart" style="--oeg-angle: ${oeqAngle}deg"></div>
                 <div class="pie-legend">
                     <div class="legend-item">
                         <div class="legend-color oeq"></div>
-                        <span>OEQ: ${metrics.oegCount} (${oegPercent.toFixed(1)}%)</span>
+                        <span>OEQ: ${metrics.oeqCount} (${oeqPercent.toFixed(1)}%)</span>
                     </div>
                     <div class="legend-item">
                         <div class="legend-color ceq"></div>
-                        <span>CEQ: ${metrics.ceqCount} (${(100 - oegPercent).toFixed(1)}%)</span>
+                        <span>CEQ: ${metrics.ceqCount} (${(100 - oeqPercent).toFixed(1)}%)</span>
                     </div>
                 </div>
             </div>
@@ -1177,30 +1187,67 @@ class AnalyticsDashboard {
     // EVENT HANDLING
     // ============================================================
 
+    /**
+     * Remove previously bound event handlers to prevent memory leaks
+     */
+    unbindEvents() {
+        if (!this.container) return;
+
+        // Remove tab handlers
+        this._boundHandlers.tabHandlers.forEach(({ element, handler }) => {
+            element.removeEventListener('click', handler);
+        });
+        this._boundHandlers.tabHandlers = [];
+
+        // Remove export handler
+        if (this._boundHandlers.exportHandler) {
+            const exportBtn = this.container.querySelector('#analytics-export');
+            if (exportBtn) {
+                exportBtn.removeEventListener('click', this._boundHandlers.exportHandler);
+            }
+            this._boundHandlers.exportHandler = null;
+        }
+
+        // Remove sort handler (delegated on container)
+        if (this._boundHandlers.sortHandler) {
+            this.container.removeEventListener('click', this._boundHandlers.sortHandler);
+            this._boundHandlers.sortHandler = null;
+        }
+    }
+
     bindEvents() {
         if (!this.container) return;
 
-        // Tab switching
+        // Clean up old handlers first to prevent accumulation
+        this.unbindEvents();
+
+        // Tab switching (use currentTarget to handle child element clicks properly)
         this.container.querySelectorAll('.analytics-tab').forEach(tab => {
-            tab.addEventListener('click', (e) => {
-                const tabId = e.target.dataset.tab;
-                this.switchTab(tabId);
-            });
+            const handler = (e) => {
+                const tabId = e.currentTarget.dataset.tab;
+                if (tabId) {
+                    this.switchTab(tabId);
+                }
+            };
+            tab.addEventListener('click', handler);
+            this._boundHandlers.tabHandlers.push({ element: tab, handler });
         });
 
         // Export button
         const exportBtn = this.container.querySelector('#analytics-export');
         if (exportBtn) {
-            exportBtn.addEventListener('click', () => this.exportCSV());
+            this._boundHandlers.exportHandler = () => this.exportCSV();
+            exportBtn.addEventListener('click', this._boundHandlers.exportHandler);
         }
 
-        // Table sorting
-        this.container.addEventListener('click', (e) => {
+        // Table sorting (delegated on container)
+        this._boundHandlers.sortHandler = (e) => {
             const th = e.target.closest('th[data-sort]');
             if (th) {
                 this.handleSort(th.dataset.sort);
             }
-        });
+        };
+        this.container.addEventListener('click', this._boundHandlers.sortHandler);
     }
 
     switchTab(tabId) {
