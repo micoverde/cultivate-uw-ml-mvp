@@ -109,7 +109,7 @@ app.add_middleware(SecurityMiddleware)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origin_regex=r'^https?://((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9-]+\.(azurestaticapps\.net|azurecontainerapps\.io))$',  # Allow localhost and Azure domains
+    allow_origin_regex=r'^https?://((localhost|127\.0\.0\.1)(:\d+)?|[a-z0-9.-]+\.(azurestaticapps\.net|azurecontainerapps\.io))$',  # Allow localhost and Azure domains
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allow_headers=["*"],
