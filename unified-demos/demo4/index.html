@@ -301,6 +301,71 @@
         .question-display.visible {
             display: block;
         }
+
+        .features-list {
+            margin-top: var(--space-md);
+            text-align: left;
+            max-height: 200px;
+            overflow-y: auto;
+            border-top: 1px solid var(--border-light);
+            padding-top: var(--space-sm);
+        }
+
+        .feature-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-xs) 0;
+            font-size: var(--font-sm);
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .feature-item:last-child {
+            border-bottom: none;
+        }
+
+        .feature-name {
+            color: var(--text-secondary);
+            flex: 1;
+        }
+
+        .feature-value {
+            font-weight: 600;
+            color: var(--brand-primary);
+            padding: 2px 8px;
+            background: var(--bg-tertiary);
+            border-radius: var(--radius-sm);
+            font-family: monospace;
+        }
+
+        .feature-desc {
+            font-size: var(--font-xs);
+            color: var(--text-tertiary);
+            margin-left: var(--space-sm);
+            flex: 1;
+        }
+
+        .features-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-light);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-sm);
+            font-size: var(--font-sm);
+            cursor: pointer;
+            margin-top: var(--space-sm);
+            width: 100%;
+            transition: all var(--transition-fast);
+        }
+
+        .features-toggle:hover {
+            background: var(--brand-primary);
+            color: var(--text-inverse);
+            border-color: var(--brand-primary);
+        }
+
+        .features-list.collapsed {
+            display: none;
+        }
     </style>
 </head>
 <body data-theme="light">
@@ -340,6 +405,8 @@
                 </div>
                 <div class="confidence-text" id="rule-conf">--%</div>
                 <div class="latency" id="rule-latency">--ms</div>
+                <button class="features-toggle" onclick="toggleFeatures('rule')">Show Features</button>
+                <div class="features-list collapsed" id="rule-features"></div>
             </div>
 
             <div class="extractor-card" id="semantic-card">
@@ -351,6 +418,8 @@
                 </div>
                 <div class="confidence-text" id="semantic-conf">--%</div>
                 <div class="latency" id="semantic-latency">--ms</div>
+                <button class="features-toggle" onclick="toggleFeatures('semantic')">Show Features</button>
+                <div class="features-list collapsed" id="semantic-features"></div>
             </div>
 
             <div class="extractor-card" id="hybrid-card">
@@ -362,6 +431,8 @@
                 </div>
                 <div class="confidence-text" id="hybrid-conf">--%</div>
                 <div class="latency" id="hybrid-latency">--ms</div>
+                <button class="features-toggle" onclick="toggleFeatures('hybrid')">Show Features</button>
+                <div class="features-list collapsed" id="hybrid-features"></div>
             </div>
         </div>
 
@@ -406,7 +477,7 @@
         // API Configuration
         const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
             ? 'http://localhost:5001'
-            : 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
+            : 'https://cultivate-ml-api.wonderfulcliff-bce5d5d4.eastus2.azurecontainerapps.io';
 
         let apiOnline = false;
 
@@ -444,6 +515,35 @@
             document.getElementById('question-input').value = text;
         }
 
+        function toggleFeatures(prefix) {
+            const featuresList = document.getElementById(`${prefix}-features`);
+            const toggleBtn = featuresList.previousElementSibling;
+
+            if (featuresList.classList.contains('collapsed')) {
+                featuresList.classList.remove('collapsed');
+                toggleBtn.textContent = 'Hide Features';
+            } else {
+                featuresList.classList.add('collapsed');
+                toggleBtn.textContent = 'Show Features';
+            }
+        }
+
+        function renderFeatures(prefix, features) {
+            const featuresList = document.getElementById(`${prefix}-features`);
+            if (!features || features.length === 0) {
+                featuresList.innerHTML = '<div class="feature-item"><span class="feature-name">No features to display</span></div>';
+                return;
+            }
+
+            featuresList.innerHTML = features.map(f => `
+                <div class="feature-item">
+                    <span class="feature-name">${f.name}</span>
+                    <span class="feature-value">${typeof f.value === 'number' ? f.value.toFixed(2) : f.value}</span>
+                    <span class="feature-desc">${f.description}</span>
+                </div>
+            `).join('');
+        }
+
         function updateCard(prefix, data) {
             const classEl = document.getElementById(`${prefix}-class`);
             const confBar = document.getElementById(`${prefix}-conf-bar`);
@@ -458,6 +558,7 @@
                 confText.textContent = 'Unavailable';
                 latencyEl.textContent = data.error || 'Model not loaded';
                 card.classList.add('unavailable');
+                renderFeatures(prefix, []);
                 return;
             }
 
@@ -466,7 +567,12 @@
             classEl.className = `classification-badge ${data.classification.toLowerCase()}`;
             confBar.style.width = `${data.confidence * 100}%`;
             confText.textContent = `${(data.confidence * 100).toFixed(1)}%`;
-            latencyEl.textContent = `${data.latency_ms}ms`;
+            latencyEl.textContent = `${data.latency_ms.toFixed(1)}ms`;
+
+            // Render features if available
+            if (data.features) {
+                renderFeatures(prefix, data.features);
+            }
         }
 
         function setWinner(winner) {
@@ -556,6 +662,7 @@
         function runDemoMode(question) {
             // Simulate classification based on patterns
             const qLower = question.toLowerCase();
+            const wordCount = question.split(/\s+/).length;
 
             // CEQ patterns
             const ceqPatterns = ['did ', 'is ', 'are ', 'was ', 'were ', 'can ', 'could ', 'do ', 'does '];
@@ -564,6 +671,38 @@
             // OEQ patterns
             const oeqPatterns = ['how ', 'why ', 'what do you think', 'explain', 'describe'];
             const isOeq = oeqPatterns.some(p => qLower.includes(p));
+
+            // Extract demo features
+            const hasHow = qLower.includes('how ') ? 1 : 0;
+            const hasWhy = qLower.includes('why ') ? 1 : 0;
+            const hasWhat = qLower.includes('what ') ? 1 : 0;
+            const hasQuestionMark = question.includes('?') ? 1 : 0;
+            const hasDidIsAre = ceqPatterns.some(p => qLower.startsWith(p)) ? 1 : 0;
+
+            // Build demo features
+            const ruleFeatures = [
+                { name: 'word_count', value: wordCount, description: 'Number of words' },
+                { name: 'has_question_mark', value: hasQuestionMark, description: 'Contains question mark' },
+                { name: 'char_count', value: question.length, description: 'Character count' }
+            ];
+            if (hasHow) ruleFeatures.push({ name: 'has_how', value: 1, description: "Contains 'how'" });
+            if (hasWhy) ruleFeatures.push({ name: 'has_why', value: 1, description: "Contains 'why'" });
+            if (hasWhat) ruleFeatures.push({ name: 'has_what', value: 1, description: "Contains 'what'" });
+            if (hasDidIsAre) ruleFeatures.push({ name: 'has_did_is_are', value: 1, description: 'Starts with did/is/are' });
+            if (isOeq) ruleFeatures.push({ name: 'oeq_score', value: isOeq ? 2 : 0, description: 'OEQ indicator score' });
+            if (isCeq) ruleFeatures.push({ name: 'ceq_score', value: isCeq ? 2 : 0, description: 'CEQ indicator score' });
+
+            const semanticFeatures = [
+                { name: 'embedding_dim_42', value: 0.234 + Math.random() * 0.1, description: 'Semantic dimension 42' },
+                { name: 'embedding_dim_128', value: -0.156 + Math.random() * 0.1, description: 'Semantic dimension 128' },
+                { name: 'embedding_dim_256', value: 0.089 + Math.random() * 0.1, description: 'Semantic dimension 256' },
+                { name: 'embedding_dim_300', value: 0.312 + Math.random() * 0.1, description: 'Semantic dimension 300' },
+                { name: 'embedding_dim_350', value: -0.078 + Math.random() * 0.1, description: 'Semantic dimension 350' }
+            ];
+
+            const hybridFeatures = ruleFeatures.slice(0, 5).concat([
+                { name: 'semantic_combined', value: 0.85 + Math.random() * 0.1, description: 'Semantic confidence boost' }
+            ]);
 
             let ruleClass, ruleConf, semClass, semConf, hybClass, hybConf;
 
@@ -593,7 +732,8 @@
                     classification: ruleClass,
                     confidence: ruleConf,
                     latency_ms: 2 + Math.random() * 2,
-                    available: true
+                    available: true,
+                    features: ruleFeatures
                 });
             }, 100);
 
@@ -602,7 +742,8 @@
                     classification: semClass,
                     confidence: semConf,
                     latency_ms: 35 + Math.random() * 15,
-                    available: true
+                    available: true,
+                    features: semanticFeatures
                 });
             }, 300);
 
@@ -611,7 +752,8 @@
                     classification: hybClass,
                     confidence: hybConf,
                     latency_ms: 40 + Math.random() * 15,
-                    available: true
+                    available: true,
+                    features: hybridFeatures
                 });
                 setWinner('Hybrid');
             }, 500);
