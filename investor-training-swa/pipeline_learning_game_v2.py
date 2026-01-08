@@ -3,14 +3,14 @@
 ╔══════════════════════════════════════════════════════════════════════════════╗
 ║  CULTIVATE LEARNING ML PIPELINE - ENHANCED INTERACTIVE INVESTOR GAME v2.0    ║
 ║                                                                              ║
-║  Designed by 5 Senior Learning Scientists:                                   ║
+║  Based on the work of:                                                       ║
 ║  - Dr. Karen Brennan (HGSE) - Reflection & Creative Learning Spiral          ║
 ║  - Dr. Mitch Resnick (MIT) - Tinkering Zones & 4 P's                         ║
 ║  - Prof. David Malan (Harvard CS50) - Scaffolding & Clear Explanations       ║
 ║  - Dr. Hal Abelson (MIT) - Computational Thinking Progressions               ║
 ║  - Dr. Chris Dede (HGSE) - Immersive Assessment & Mission Control            ║
 ║                                                                              ║
-║  Based on: lively-water-04219020f.4.azurestaticapps.net/pages/architecture   ║
+║  Architecture: lively-water-04219020f.4.azurestaticapps.net/pages/architecture║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
 
@@ -516,7 +516,7 @@ def show_intro():
     ║   🎮  CULTIVATE LEARNING ML PIPELINE v2.0                              ║
     ║       Enhanced Interactive Investor Learning Game                      ║
     ║                                                                        ║
-    ║   Designed by 5 Senior Learning Scientists from Harvard & MIT          ║
+    ║   Based on the work of 5 Learning Scientists from Harvard & MIT         ║
     ║   - Dr. Karen Brennan (HGSE): Creative Learning Spiral                 ║
     ║   - Dr. Mitch Resnick (MIT): Tinkering & 4 P's                         ║
     ║   - Prof. David Malan (Harvard): CS50 Scaffolding                      ║
