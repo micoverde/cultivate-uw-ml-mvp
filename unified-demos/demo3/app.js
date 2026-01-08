@@ -118,8 +118,10 @@ const Config = {
         return 'https://cultivate-ml-api.ashysky-fe559536.eastus.azurecontainerapps.io';
     },
 
-    // Azure Blob Storage for video fallback
+    // Azure Blob Storage for video fallback (PRIVATE container)
     azureBlobBase: 'https://cultivatemlvideos.blob.core.windows.net/videos',
+    // SAS token for secure video access (expires 2026-02-07, read-only, HTTPS only)
+    azureBlobSasToken: 'se=2026-02-07T17%3A59Z&sp=r&spr=https&sv=2022-11-02&sr=c&sig=UQPjPAuF9k8%2BJHLXlefZ433mh2EIjSpvqSC5KZfPU0w%3D',
 
     // LocalStorage keys
     storageKeys: {
@@ -344,17 +346,18 @@ function getVideoSourceUrl(video) {
         console.log('[Demo3] Local file exists but using Azure Blob for web playback');
     }
 
-    // Construct Azure Blob Storage URL
+    // Construct Azure Blob Storage URL with SAS token for secure access
     // Check if filename already has an extension
     const hasExtension = /\.(mp4|mov|avi|webm)$/i.test(video.filename);
     const filename = encodeURIComponent(video.filename.trim());
+    const sasToken = Config.azureBlobSasToken ? `?${Config.azureBlobSasToken}` : '';
 
     if (hasExtension) {
-        return `${Config.azureBlobBase}/${filename}`;
+        return `${Config.azureBlobBase}/${filename}${sasToken}`;
     }
 
     const extension = video.file_info?.local_path?.split('.').pop() || 'mp4';
-    return `${Config.azureBlobBase}/${filename}.${extension}`;
+    return `${Config.azureBlobBase}/${filename}.${extension}${sasToken}`;
 }
 
 // ============================================================================
