@@ -1,0 +1,3074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Live ML Demo | Cultivate Learning Investor Training</title>
+    <style>
+        /* ECE Question Classification System - Professional Dual Theme Interface */
+        /* Microsoft Fluent Design System - Light Mode Default */
+
+        /* THEME SYSTEM - CSS CUSTOM PROPERTIES */
+        :root {
+            /* LIGHT THEME (DEFAULT) - Microsoft Fluent Colors */
+
+            /* Primary Colors */
+            --primary-50: #F3F9FF;
+            --primary-100: #E1F1FF;
+            --primary-500: #0078D4;
+            --primary-600: #106EBE;
+            --primary-700: #005A9E;
+            --primary-900: #003D6B;
+
+            /* Surface Hierarchy - Light Mode (Soft & Comfortable) */
+            --surface-50: #F4F1EE;     /* Cards - warm linen, like quality notebook paper */
+            --surface-100: #EFEBE8;    /* Page background - soft mushroom/parchment */
+            --surface-200: #E8E3DF;    /* Secondary backgrounds - muted warm beige */
+            --surface-300: #DFD9D4;    /* Subtle borders - warm sand */
+            --surface-400: #D4CDC7;    /* Medium borders - soft taupe */
+            --surface-500: #C7BEB6;    /* Strong borders - warm stone */
+            --surface-600: #AFA59D;    /* Disabled elements - muted brown */
+
+            /* Text Hierarchy - Light Mode */
+            --text-primary: #1F1F1F;   /* High contrast text */
+            --text-secondary: #424242; /* Medium contrast text */
+            --text-tertiary: #6B6B6B;  /* Low contrast text */
+            --text-disabled: #A6A6A6;  /* Disabled text */
+            --text-inverse: #FFFFFF;   /* Text on dark backgrounds */
+
+            /* Semantic Colors - Light Theme (Warm & Friendly) */
+            --success-50: #F4FAF4;     /* Soft warm green background */
+            --success-500: #107C10;
+            --success-600: #0E6B0E;
+            --success-text: #0E6B0E;
+
+            --warning-50: #FFF9F2;     /* Warm cream orange background */
+            --warning-500: #FF8C00;
+            --warning-600: #E67A00;
+            --warning-text: #CC6900;
+
+            --error-50: #FDF4F5;       /* Soft warm pink background */
+            --error-500: #D13438;
+            --error-600: #B71C1C;
+            --error-text: #A91E22;
+
+            /* Microsoft Fluent Effects */
+            --elevation-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+            --elevation-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.12), 0 16px 32px rgba(0, 0, 0, 0.12);
+            --border-radius-small: 4px;
+            --border-radius-medium: 8px;
+            --border-radius-large: 12px;
+            --transition-fast: 0.2s ease;
+            --transition-medium: 0.3s ease;
+        }
+
+        /* DARK THEME OVERRIDES */
+        [data-theme="dark"] {
+            /* Primary Colors - Dark Mode Optimized */
+            --primary-50: #001529;
+            --primary-100: #002040;
+            --primary-500: #60CDFF;
+            --primary-600: #4FC3F7;
+            --primary-700: #29B6F6;
+
+            /* Surface Hierarchy - Dark Mode */
+            --surface-50: #2D2D2D;     /* Cards, elevated surfaces */
+            --surface-100: #1C1C1C;    /* Page background */
+            --surface-200: #202020;    /* Secondary backgrounds */
+            --surface-300: #383838;    /* Subtle borders */
+            --surface-400: #484848;    /* Medium borders */
+            --surface-500: #5C5C5C;    /* Strong borders */
+            --surface-600: #6B6B6B;    /* Disabled elements */
+
+            /* Text Hierarchy - Dark Mode */
+            --text-primary: #FFFFFF;   /* High contrast text */
+            --text-secondary: #E1E1E1; /* Medium contrast text */
+            --text-tertiary: #BFBFBF;  /* Low contrast text */
+            --text-disabled: #8A8A8A;  /* Disabled text */
+            --text-inverse: #1F1F1F;   /* Text on light backgrounds */
+
+            /* Semantic Colors - Dark Theme */
+            --success-50: #1C2A1C;     /* Dark green background */
+            --success-500: #6BB26B;
+            --success-600: #5A9E5A;
+            --success-text: #6BB26B;
+
+            --warning-50: #2A1F0D;     /* Dark amber background */
+            --warning-500: #D18B47;
+            --warning-600: #C17A36;
+            --warning-text: #D18B47;
+
+            --error-50: #2A1215;       /* Dark red background */
+            --error-500: #E74856;
+            --error-600: #D13438;
+            --error-text: #E74856;
+
+            /* Dark Mode Effects */
+            --elevation-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 0 8px 16px rgba(0, 0, 0, 0.3);
+            --elevation-shadow-large: 0 4px 8px rgba(0, 0, 0, 0.4), 0 16px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        /* BASE STYLES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-primary);
+            background: var(--surface-100);
+            min-height: 100vh;
+            transition: background-color var(--transition-medium), color var(--transition-medium);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* THEME TOGGLE COMPONENT */
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 9999;
+            background: var(--surface-50);
+            border: 2px solid var(--surface-400);
+            border-radius: var(--border-radius-large);
+            padding: 10px 14px;
+            display: flex !important;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--elevation-shadow-large);
+            transition: all var(--transition-medium);
+            cursor: pointer;
+        }
+
+        .theme-toggle:hover {
+            background: var(--surface-200);
+            border-color: var(--primary-500);
+            transform: translateY(-1px);
+        }
+
+        .theme-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--text-secondary);
+            transition: color var(--transition-fast);
+        }
+
+        .theme-toggle-switch {
+            width: 40px;
+            height: 20px;
+            background: var(--surface-300);
+            border-radius: 10px;
+            position: relative;
+            transition: background-color var(--transition-fast);
+        }
+
+        .theme-toggle-switch.active {
+            background: var(--primary-500);
+        }
+
+        .theme-toggle-knob {
+            width: 16px;
+            height: 16px;
+            background: var(--surface-50);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform var(--transition-fast);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .theme-toggle-switch.active .theme-toggle-knob {
+            transform: translateX(20px);
+        }
+
+        /* LAYOUT COMPONENTS */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px;
+            min-height: 100vh;
+        }
+
+        header {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: var(--elevation-shadow);
+            transition: all var(--transition-medium);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 16px;
+        }
+
+        /* API STATUS INDICATOR */
+        .api-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: var(--border-radius-medium);
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .api-status.connected {
+            background: var(--success-50);
+            color: var(--success-text);
+            border: 1px solid var(--success-500);
+        }
+
+        .api-status.disconnected {
+            background: var(--error-50);
+            color: var(--error-text);
+            border: 1px solid var(--error-500);
+        }
+
+        .api-status.checking {
+            background: var(--warning-50);
+            color: var(--warning-text);
+            border: 1px solid var(--warning-500);
+        }
+
+        .status-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .api-status.connected .status-dot {
+            background: var(--success-500);
+        }
+
+        .api-status.disconnected .status-dot {
+            background: var(--error-500);
+            animation: none;
+        }
+
+        .api-status.checking .status-dot {
+            background: var(--warning-500);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        /* MAIN LAYOUT */
+        .demo-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        @media (max-width: 1024px) {
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 24px;
+            box-shadow: var(--elevation-shadow);
+            transition: all var(--transition-medium);
+        }
+
+        .card:hover {
+            box-shadow: var(--elevation-shadow-large);
+        }
+
+        .card h2 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card h3 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        /* SCENARIO SELECTOR */
+        .scenario-selector {
+            margin-bottom: 24px;
+        }
+
+        .scenario-selector label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .scenario-selector select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--surface-300);
+            border-radius: var(--border-radius-small);
+            font-size: 14px;
+            color: var(--text-primary);
+            background: var(--surface-50);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+        }
+
+        .scenario-selector select:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px var(--primary-50);
+        }
+
+        /* SCENARIO DISPLAY */
+        .scenario-display {
+            background: var(--surface-200);
+            padding: 20px;
+            border-radius: var(--border-radius-medium);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-500);
+        }
+
+        .scenario-meta {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .age-badge {
+            background: var(--warning-50);
+            color: var(--warning-text);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .focus-badge {
+            background: var(--primary-50);
+            color: var(--primary-700);
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .scenario-context {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .child-behavior-box {
+            background: var(--warning-50);
+            padding: 12px;
+            border-radius: var(--border-radius-small);
+            border: 1px solid var(--warning-500);
+            margin-bottom: 12px;
+        }
+
+        .child-behavior-box strong {
+            color: var(--warning-text);
+        }
+
+        .example-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .example-question {
+            padding: 12px;
+            border-radius: var(--border-radius-small);
+            font-size: 13px;
+        }
+
+        .example-question.ceq {
+            background: var(--error-50);
+            border: 1px solid var(--error-500);
+        }
+
+        .example-question.oeq {
+            background: var(--success-50);
+            border: 1px solid var(--success-500);
+        }
+
+        .example-question .label {
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .example-question.ceq .label {
+            color: var(--error-text);
+        }
+
+        .example-question.oeq .label {
+            color: var(--success-text);
+        }
+
+        /* INPUT AREA */
+        .input-area {
+            margin-bottom: 20px;
+        }
+
+        .input-area label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--surface-300);
+            border-radius: var(--border-radius-small);
+            font-size: 14px;
+            color: var(--text-primary);
+            background: var(--surface-50);
+            transition: all var(--transition-fast);
+            resize: vertical;
+            min-height: 100px;
+            font-family: inherit;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary-500);
+            box-shadow: 0 0 0 3px var(--primary-50);
+        }
+
+        .text-input::placeholder {
+            color: var(--text-tertiary);
+        }
+
+        /* BUTTONS */
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all var(--transition-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background: var(--primary-500);
+            color: var(--text-inverse);
+            box-shadow: var(--elevation-shadow);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: var(--primary-600);
+            transform: translateY(-1px);
+            box-shadow: var(--elevation-shadow-large);
+        }
+
+        .btn-secondary {
+            background: var(--surface-200);
+            color: var(--text-primary);
+            border: 1px solid var(--surface-400);
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: var(--surface-300);
+            border-color: var(--primary-500);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        /* RESULTS PANEL */
+        .results-panel {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 24px;
+            box-shadow: var(--elevation-shadow);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--surface-300);
+        }
+
+        .response-time {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            font-family: 'Courier New', monospace;
+        }
+
+        /* CLASSIFICATION DISPLAY */
+        .classification-result {
+            text-align: center;
+            padding: 24px;
+            margin-bottom: 20px;
+            border-radius: var(--border-radius-medium);
+        }
+
+        .classification-result.oeq {
+            background: var(--success-50);
+            border: 2px solid var(--success-500);
+        }
+
+        .classification-result.ceq {
+            background: var(--error-50);
+            border: 2px solid var(--error-500);
+        }
+
+        .classification-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .classification-result.oeq .classification-label {
+            color: var(--success-text);
+        }
+
+        .classification-result.ceq .classification-label {
+            color: var(--error-text);
+        }
+
+        .classification-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .classification-result.oeq .classification-value {
+            color: var(--success-600);
+        }
+
+        .classification-result.ceq .classification-value {
+            color: var(--error-600);
+        }
+
+        .confidence-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+            background: var(--surface-200);
+            color: var(--text-secondary);
+        }
+
+        /* PROBABILITY METERS */
+        .probability-section {
+            margin-bottom: 24px;
+        }
+
+        .probability-item {
+            margin-bottom: 16px;
+        }
+
+        .probability-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .probability-bar {
+            height: 12px;
+            background: var(--surface-300);
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .probability-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 0.6s ease;
+        }
+
+        .probability-fill.oeq {
+            background: linear-gradient(90deg, var(--success-500), var(--success-600));
+        }
+
+        .probability-fill.ceq {
+            background: linear-gradient(90deg, var(--error-500), var(--error-600));
+        }
+
+        /* METRICS GRID */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .metric-card {
+            background: var(--surface-200);
+            border-radius: var(--border-radius-medium);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-500);
+            margin-bottom: 4px;
+        }
+
+        .metric-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* COACHING RECOMMENDATIONS */
+        .coaching-section {
+            background: var(--surface-200);
+            padding: 20px;
+            border-radius: var(--border-radius-medium);
+            margin-top: 20px;
+        }
+
+        .coaching-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .coaching-list {
+            list-style: none;
+        }
+
+        .coaching-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid var(--surface-300);
+            font-size: 14px;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .coaching-list li:last-child {
+            border-bottom: none;
+        }
+
+        .coaching-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: var(--primary-500);
+            border-radius: 50%;
+            margin-top: 7px;
+            flex-shrink: 0;
+        }
+
+        /* LOADING STATE */
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--border-radius-large);
+            z-index: 10;
+        }
+
+        [data-theme="dark"] .loading-overlay {
+            background: rgba(28, 28, 28, 0.9);
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--surface-300);
+            border-top-color: var(--primary-500);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 16px;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* ERROR STATE */
+        .error-box {
+            background: var(--error-50);
+            border: 1px solid var(--error-500);
+            border-radius: var(--border-radius-medium);
+            padding: 20px;
+            color: var(--error-text);
+        }
+
+        .error-box h4 {
+            margin-bottom: 8px;
+            color: var(--error-600);
+        }
+
+        .error-box code {
+            background: var(--surface-200);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+
+        /* SIDE-BY-SIDE COMPARISON */
+        .comparison-section {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--surface-300);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .comparison-card {
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+        }
+
+        .comparison-card.user {
+            background: var(--surface-200);
+            border: 1px solid var(--surface-400);
+        }
+
+        .comparison-card.optimal {
+            background: var(--success-50);
+            border: 1px solid var(--success-500);
+        }
+
+        .comparison-card .label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .comparison-card.user .label {
+            color: var(--text-secondary);
+        }
+
+        .comparison-card.optimal .label {
+            color: var(--success-text);
+        }
+
+        .comparison-card .response-text {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        /* FOOTER */
+        .footer {
+            margin-top: 40px;
+            padding: 24px 0;
+            border-top: 1px solid var(--surface-300);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            color: var(--text-tertiary);
+        }
+
+        .footer-left {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .footer-logo {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-500);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 12px;
+        }
+
+        .footer a {
+            color: var(--primary-500);
+            text-decoration: none;
+            transition: color var(--transition-fast);
+        }
+
+        .footer a:hover {
+            color: var(--primary-600);
+            text-decoration: underline;
+        }
+
+        /* MODULE NAVIGATION */
+        .module-nav {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .module-nav a {
+            padding: 8px 16px;
+            background: var(--surface-200);
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--border-radius-small);
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .module-nav a:hover {
+            background: var(--primary-500);
+            color: var(--text-inverse);
+        }
+
+        .module-nav a.active {
+            background: var(--primary-500);
+            color: var(--text-inverse);
+        }
+
+        /* FEATURE BREAKDOWN */
+        .feature-breakdown {
+            background: var(--surface-200);
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+            margin-top: 16px;
+        }
+
+        .feature-breakdown h5 {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .feature-item {
+            background: var(--surface-50);
+            padding: 8px 12px;
+            border-radius: var(--border-radius-small);
+            font-size: 12px;
+        }
+
+        .feature-item .feature-name {
+            color: var(--text-tertiary);
+            margin-bottom: 2px;
+        }
+
+        .feature-item .feature-value {
+            font-weight: 600;
+            color: var(--primary-500);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                padding: 12px;
+            }
+
+            header {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 1.5rem;
+            }
+
+            .demo-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .example-questions,
+            .comparison-grid,
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer {
+                flex-direction: column;
+                gap: 12px;
+                text-align: center;
+            }
+
+            .feature-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* ============================================
+           CREATIVE LEARNING SPIRAL - TINKERING STYLES
+           Based on Mitch Resnick's Lifelong Kindergarten
+           ============================================ */
+
+        /* SPIRAL PROGRESS INDICATOR */
+        .spiral-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            background: var(--surface-200);
+            border-radius: var(--border-radius-medium);
+            margin-bottom: 16px;
+        }
+
+        .spiral-stage {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            background: var(--surface-300);
+            color: var(--text-tertiary);
+            transition: all var(--transition-fast);
+        }
+
+        .spiral-stage.completed {
+            background: var(--success-50);
+            color: var(--success-text);
+        }
+
+        .spiral-stage.active {
+            background: var(--primary-500);
+            color: var(--text-inverse);
+            transform: scale(1.05);
+        }
+
+        .spiral-connector {
+            width: 20px;
+            height: 2px;
+            background: var(--surface-400);
+        }
+
+        .spiral-connector.completed {
+            background: var(--success-500);
+        }
+
+        /* TINKER ZONE */
+        .tinker-zone {
+            background: linear-gradient(135deg, var(--primary-50) 0%, var(--surface-50) 100%);
+            border: 2px solid var(--primary-500);
+            border-radius: var(--border-radius-large);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .tinker-zone h3 {
+            color: var(--primary-700);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+        }
+
+        .tinker-controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .tinker-control {
+            background: var(--surface-50);
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+            border: 1px solid var(--surface-300);
+        }
+
+        .tinker-control label {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .tinker-slider {
+            width: 100%;
+            margin: 8px 0;
+        }
+
+        .tinker-value {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary-500);
+            text-align: center;
+        }
+
+        .tinker-toggle {
+            display: flex;
+            gap: 8px;
+        }
+
+        .tinker-toggle button {
+            flex: 1;
+            padding: 8px 12px;
+            border: 2px solid var(--surface-300);
+            background: var(--surface-50);
+            border-radius: var(--border-radius-small);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all var(--transition-fast);
+        }
+
+        .tinker-toggle button.active {
+            border-color: var(--primary-500);
+            background: var(--primary-50);
+            color: var(--primary-700);
+        }
+
+        .tinker-toggle button:hover:not(.active) {
+            border-color: var(--primary-500);
+        }
+
+        /* WHAT-IF EXPLORER */
+        .whatif-explorer {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .whatif-explorer h3 {
+            color: var(--text-primary);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .whatif-experiments {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .whatif-btn {
+            padding: 8px 14px;
+            background: var(--surface-200);
+            border: 1px solid var(--surface-400);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all var(--transition-fast);
+        }
+
+        .whatif-btn:hover {
+            background: var(--primary-50);
+            border-color: var(--primary-500);
+            color: var(--primary-700);
+        }
+
+        .whatif-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .whatif-panel {
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+            border: 1px solid var(--surface-300);
+        }
+
+        .whatif-panel.original {
+            background: var(--surface-200);
+        }
+
+        .whatif-panel.transformed {
+            background: var(--warning-50);
+            border-color: var(--warning-500);
+        }
+
+        .whatif-panel .panel-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+        }
+
+        .whatif-panel .panel-text {
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 12px;
+        }
+
+        .whatif-panel .panel-result {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .whatif-panel .panel-result.oeq {
+            background: var(--success-50);
+            color: var(--success-text);
+        }
+
+        .whatif-panel .panel-result.ceq {
+            background: var(--error-50);
+            color: var(--error-text);
+        }
+
+        /* FEATURE VISUALIZATION PLAYGROUND */
+        .feature-playground {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .feature-playground h4 {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .feature-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+        }
+
+        .feature-category {
+            background: var(--surface-200);
+            border-radius: var(--border-radius-medium);
+            padding: 12px;
+            border-left: 4px solid var(--primary-500);
+        }
+
+        .feature-category-name {
+            font-size: 12px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .feature-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+
+        .feature-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--surface-400);
+            transition: all var(--transition-fast);
+        }
+
+        .feature-dot.active {
+            background: var(--success-500);
+            box-shadow: 0 0 8px var(--success-500);
+        }
+
+        .feature-dot.high {
+            background: var(--primary-500);
+            box-shadow: 0 0 8px var(--primary-500);
+        }
+
+        /* USE-MODIFY-CREATE ACTIVITIES */
+        .umc-activities {
+            background: var(--surface-50);
+            border: 1px solid var(--surface-300);
+            border-radius: var(--border-radius-large);
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        .umc-tabs {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 16px;
+            background: var(--surface-200);
+            padding: 4px;
+            border-radius: var(--border-radius-medium);
+        }
+
+        .umc-tab {
+            flex: 1;
+            padding: 10px 16px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            border-radius: var(--border-radius-small);
+            transition: all var(--transition-fast);
+        }
+
+        .umc-tab.active {
+            background: var(--surface-50);
+            color: var(--primary-500);
+            box-shadow: var(--elevation-shadow);
+        }
+
+        .umc-tab:hover:not(.active) {
+            background: var(--surface-300);
+        }
+
+        .umc-content {
+            padding: 16px;
+            background: var(--surface-200);
+            border-radius: var(--border-radius-medium);
+        }
+
+        .umc-task {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: var(--surface-50);
+            border-radius: var(--border-radius-small);
+            margin-bottom: 8px;
+        }
+
+        .umc-task:last-child {
+            margin-bottom: 0;
+        }
+
+        .umc-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--surface-400);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .umc-checkbox.completed {
+            background: var(--success-500);
+            border-color: var(--success-500);
+        }
+
+        .umc-checkbox.completed::after {
+            content: '\u2713';
+            color: white;
+            font-size: 14px;
+        }
+
+        /* REFLECTION PROMPTS */
+        .reflection-prompt {
+            background: linear-gradient(135deg, var(--warning-50) 0%, var(--surface-50) 100%);
+            border: 2px solid var(--warning-500);
+            border-radius: var(--border-radius-large);
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .reflection-prompt h4 {
+            color: var(--warning-600);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .reflection-question {
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+            margin-bottom: 16px;
+        }
+
+        .reflection-input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--surface-400);
+            border-radius: var(--border-radius-small);
+            font-family: inherit;
+            font-size: 14px;
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .reflection-input:focus {
+            outline: none;
+            border-color: var(--warning-500);
+            box-shadow: 0 0 0 3px var(--warning-50);
+        }
+
+        .reflection-submit {
+            margin-top: 12px;
+        }
+
+        /* PLAY STATISTICS */
+        .play-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .play-stat {
+            background: var(--surface-200);
+            padding: 16px;
+            border-radius: var(--border-radius-medium);
+            text-align: center;
+        }
+
+        .play-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-500);
+        }
+
+        .play-stat-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* DISCOVERY BADGE */
+        .discovery-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            color: #1F1F1F;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* RESPONSIVE FOR NEW COMPONENTS */
+        @media (max-width: 768px) {
+            .tinker-controls {
+                grid-template-columns: 1fr;
+            }
+
+            .whatif-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .play-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .spiral-indicator {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .feature-categories {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="themeToggle">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 18.5C15.59 18.5 18.5 15.59 18.5 12C18.5 8.41 15.59 5.5 12 5.5C8.41 5.5 5.5 8.41 5.5 12C5.5 15.59 8.41 18.5 12 18.5ZM12 2L14.39 5.42C13.65 5.15 12.84 5 12 5C11.16 5 10.35 5.15 9.61 5.42L12 2Z"/>
+        </svg>
+        <div class="theme-toggle-switch" id="themeSwitch">
+            <div class="theme-toggle-knob"></div>
+        </div>
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.75,4.09L15.22,6.03L16.13,9.09L13.5,7.28L10.87,9.09L11.78,6.03L9.25,4.09L12.44,4L13.5,1L14.56,4L17.75,4.09M21.25,11L19.61,12.25L20.2,14.23L18.5,13.06L16.8,14.23L17.39,12.25L15.75,11L17.81,10.95L18.5,9L19.19,10.95L21.25,11M18.97,15.95C19.8,15.87 20.69,17.05 20.16,17.8C19.84,18.25 19.5,18.67 19.08,19.07C15.17,23 8.84,23 4.94,19.07C1.03,15.17 1.03,8.83 4.94,4.93C5.34,4.53 5.76,4.17 6.21,3.85C6.96,3.32 8.14,4.21 8.06,5.04C7.79,7.9 8.75,10.87 10.95,13.06C13.14,15.26 16.1,16.22 18.97,15.95Z"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px;">
+                <div>
+                    <h1>Module 4: Live ML Demo</h1>
+                    <p>Interactive demonstration with REAL PyTorch Neural Network API</p>
+                </div>
+                <div id="apiStatus" class="api-status checking">
+                    <span class="status-dot"></span>
+                    <span id="statusText">Checking API...</span>
+                </div>
+            </div>
+
+            <!-- Module Navigation -->
+            <div class="module-nav">
+                <a href="module1-intro.html">Module 1: Introduction</a>
+                <a href="module2-technology.html">Module 2: Technology</a>
+                <a href="module3-market.html">Module 3: Market</a>
+                <a href="module4-live-demo.html" class="active">Module 4: Live Demo</a>
+            </div>
+        </header>
+
+        <!-- SPIRAL PROGRESS INDICATOR -->
+        <div class="spiral-indicator" id="spiralIndicator">
+            <span class="spiral-stage completed" data-stage="imagine">Imagine</span>
+            <div class="spiral-connector completed"></div>
+            <span class="spiral-stage completed" data-stage="create">Create</span>
+            <div class="spiral-connector completed"></div>
+            <span class="spiral-stage active" data-stage="play">Play</span>
+            <div class="spiral-connector"></div>
+            <span class="spiral-stage" data-stage="share">Share</span>
+            <div class="spiral-connector"></div>
+            <span class="spiral-stage" data-stage="reflect">Reflect</span>
+            <a href="#" id="readyToReflect" style="margin-left: auto; font-size: 13px; color: var(--primary-500); text-decoration: none; display: none;">Ready to Reflect? &rarr;</a>
+        </div>
+
+        <!-- TINKER ZONE: Model Parameters -->
+        <div class="tinker-zone" id="tinkerZone">
+            <h3>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/>
+                </svg>
+                Tinker Zone: Model Parameters
+                <span style="font-size: 12px; font-weight: 400; color: var(--text-tertiary); margin-left: auto;">"Messing about" is valuable learning - Resnick</span>
+            </h3>
+            <div class="tinker-controls">
+                <!-- Confidence Threshold -->
+                <div class="tinker-control">
+                    <label>Confidence Threshold</label>
+                    <input type="range" class="tinker-slider" id="confidenceSlider" min="50" max="95" value="70" oninput="updateConfidenceThreshold(this.value)">
+                    <div class="tinker-value" id="confidenceValue">0.70</div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); text-align: center; margin-top: 4px;">
+                        Higher = more certain classifications only
+                    </div>
+                </div>
+
+                <!-- Model Type Toggle -->
+                <div class="tinker-control">
+                    <label>Model Type</label>
+                    <div class="tinker-toggle">
+                        <button id="modelNeural" class="active" onclick="setModelType('neural')">Neural Network</button>
+                        <button id="modelClassical" onclick="setModelType('classical')">Classical ML</button>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); text-align: center; margin-top: 8px;">
+                        Compare different ML approaches
+                    </div>
+                </div>
+
+                <!-- Age Group Filter -->
+                <div class="tinker-control">
+                    <label>Age Group Filter</label>
+                    <div class="tinker-toggle">
+                        <button id="ageAll" class="active" onclick="setAgeFilter('all')">All</button>
+                        <button id="ageToddler" onclick="setAgeFilter('TODDLER')">Toddler</button>
+                        <button id="agePK" onclick="setAgeFilter('PK')">Pre-K</button>
+                    </div>
+                    <div style="font-size: 11px; color: var(--text-tertiary); text-align: center; margin-top: 8px;">
+                        Focus on specific age groups
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-layout">
+            <!-- Left Panel: Scenario Selection & Input -->
+            <div>
+                <div class="card">
+                    <h2>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-500);">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        Try the ML Classifier
+                    </h2>
+
+                    <!-- Scenario Selector -->
+                    <div class="scenario-selector">
+                        <label for="scenarioSelect">Select a Child Scenario:</label>
+                        <select id="scenarioSelect" onchange="loadScenario()">
+                            <!-- Populated by JavaScript -->
+                        </select>
+                    </div>
+
+                    <!-- Scenario Display -->
+                    <div class="scenario-display" id="scenarioDisplay">
+                        <div class="scenario-meta">
+                            <span class="age-badge" id="ageBadge">TODDLER</span>
+                            <span class="focus-badge" id="focusBadge">Problem-solving</span>
+                        </div>
+                        <h3 id="scenarioTitle">Block Tower Collapse</h3>
+                        <p class="scenario-context" id="scenarioContext">
+                            Loading scenario...
+                        </p>
+                        <div class="child-behavior-box">
+                            <strong>Child Behavior:</strong>
+                            <span id="childBehavior">Loading...</span>
+                        </div>
+
+                        <!-- Example Questions -->
+                        <div class="example-questions">
+                            <div class="example-question ceq">
+                                <div class="label">Example CEQ (Closed-Ended)</div>
+                                <div id="exampleCEQ">"Did your tower fall down?"</div>
+                            </div>
+                            <div class="example-question oeq">
+                                <div class="label">Example OEQ (Open-Ended)</div>
+                                <div id="exampleOEQ">"What happened to your tower?"</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- User Input -->
+                    <div class="input-area">
+                        <label for="userResponse">Your Response to this Child:</label>
+                        <textarea
+                            id="userResponse"
+                            class="text-input"
+                            placeholder="Type your educator response here... For example: 'What do you think happened?' or 'Is that your tower?'"
+                        ></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="analyzeBtn" onclick="analyzeResponse()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                            </svg>
+                            Analyze with Real ML
+                        </button>
+                        <button class="btn btn-secondary" id="nextScenarioBtn" onclick="nextScenario()">
+                            Next Scenario
+                        </button>
+                    </div>
+                </div>
+
+                <!-- API Connection Details -->
+                <div class="card" style="margin-top: 24px;">
+                    <h3>API Connection Details</h3>
+                    <div style="font-family: 'Courier New', monospace; font-size: 13px; background: var(--surface-200); padding: 16px; border-radius: var(--border-radius-medium);">
+                        <div style="margin-bottom: 8px;">
+                            <span style="color: var(--text-tertiary);">Endpoint:</span>
+                            <span id="apiEndpoint" style="color: var(--primary-500);">http://localhost:8001/classify_response</span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <span style="color: var(--text-tertiary);">Model:</span>
+                            <span style="color: var(--success-text);">PyTorch Neural Network</span>
+                        </div>
+                        <div style="margin-bottom: 8px;">
+                            <span style="color: var(--text-tertiary);">Architecture:</span>
+                            <span style="color: var(--text-secondary);">[56 -> 64 -> 32 -> 16 -> 2]</span>
+                        </div>
+                        <div>
+                            <span style="color: var(--text-tertiary);">Features:</span>
+                            <span style="color: var(--text-secondary);">56 linguistic features</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WHAT-IF EXPLORER -->
+                <div class="whatif-explorer" id="whatifExplorer">
+                    <h3>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--warning-500);">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z"/>
+                        </svg>
+                        "What If" Explorer
+                    </h3>
+                    <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;">
+                        Click an experiment to see how small changes affect classification. Side-by-side comparison shows the impact.
+                    </p>
+                    <div class="whatif-experiments" id="whatifButtons">
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('add-why')">+ Add "why"</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('add-how')">+ Add "how"</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('add-what')">+ Add "what"</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('add-think')">+ "do you think"</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('yes-no-convert')">Make yes/no</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('extend-question')">+ "and why?"</button>
+                        <button class="whatif-btn" onclick="runWhatIfExperiment('make-open')">Make more open</button>
+                    </div>
+                    <div class="whatif-comparison" id="whatifComparison" style="display: none;">
+                        <div class="whatif-panel original">
+                            <div class="panel-label">Original</div>
+                            <div class="panel-text" id="whatifOriginal">"..."</div>
+                            <span class="panel-result" id="whatifOriginalResult">--</span>
+                        </div>
+                        <div class="whatif-panel transformed">
+                            <div class="panel-label">Transformed</div>
+                            <div class="panel-text" id="whatifTransformed">"..."</div>
+                            <span class="panel-result" id="whatifTransformedResult">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- USE-MODIFY-CREATE ACTIVITIES -->
+                <div class="umc-activities" id="umcActivities">
+                    <h3 style="margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-500);">
+                            <path d="M12 2l-5.5 9h11L12 2zm0 3.84L13.93 9h-3.87L12 5.84zM17.5 13c-2.49 0-4.5 2.01-4.5 4.5s2.01 4.5 4.5 4.5 4.5-2.01 4.5-4.5-2.01-4.5-4.5-4.5zm0 7c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5zM3 21.5h8v-8H3v8zm2-6h4v4H5v-4z"/>
+                        </svg>
+                        Use-Modify-Create Activities
+                    </h3>
+                    <div class="umc-tabs">
+                        <button class="umc-tab active" data-tab="use" onclick="switchUMCTab('use')">USE</button>
+                        <button class="umc-tab" data-tab="modify" onclick="switchUMCTab('modify')">MODIFY</button>
+                        <button class="umc-tab" data-tab="create" onclick="switchUMCTab('create')">CREATE</button>
+                    </div>
+                    <div class="umc-content" id="umcContent">
+                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 12px;" id="umcDescription">
+                            Run pre-built scenarios to understand how the ML classifier works
+                        </p>
+                        <div id="umcTasks">
+                            <div class="umc-task">
+                                <div class="umc-checkbox" data-task="use-1" onclick="toggleUMCTask('use-1')"></div>
+                                <span>Try all 10 scenarios</span>
+                            </div>
+                            <div class="umc-task">
+                                <div class="umc-checkbox" data-task="use-2" onclick="toggleUMCTask('use-2')"></div>
+                                <span>Compare OEQ vs CEQ examples</span>
+                            </div>
+                            <div class="umc-task">
+                                <div class="umc-checkbox" data-task="use-3" onclick="toggleUMCTask('use-3')"></div>
+                                <span>Observe confidence levels</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="results-panel" id="resultsPanel" style="position: relative;">
+                <div class="results-header">
+                    <h2 style="margin: 0;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-500);">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                        </svg>
+                        Analysis Results
+                    </h2>
+                    <span class="response-time" id="responseTime">--ms</span>
+                </div>
+
+                <!-- Initial State -->
+                <div id="initialState">
+                    <div style="text-align: center; padding: 60px 20px; color: var(--text-tertiary);">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="currentColor" style="opacity: 0.3; margin-bottom: 16px;">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                        </svg>
+                        <p style="font-size: 16px; margin-bottom: 8px;">Ready for Analysis</p>
+                        <p style="font-size: 14px;">Select a scenario, enter your response, and click "Analyze with Real ML"</p>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loadingState" class="loading-overlay" style="display: none;">
+                    <div class="spinner"></div>
+                    <div class="loading-text">Running neural network analysis...</div>
+                </div>
+
+                <!-- Results State -->
+                <div id="resultsState" style="display: none;">
+                    <!-- Classification Result -->
+                    <div class="classification-result" id="classificationResult">
+                        <div class="classification-label">Classification</div>
+                        <div class="classification-value" id="classificationValue">OEQ</div>
+                        <div class="confidence-badge" id="confidenceBadge">Confidence: 85%</div>
+                    </div>
+
+                    <!-- Probability Meters -->
+                    <div class="probability-section">
+                        <div class="probability-item">
+                            <div class="probability-header">
+                                <span>Open-Ended Question (OEQ)</span>
+                                <span id="oeqPercent">0%</span>
+                            </div>
+                            <div class="probability-bar">
+                                <div class="probability-fill oeq" id="oeqBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="probability-item">
+                            <div class="probability-header">
+                                <span>Closed-Ended Question (CEQ)</span>
+                                <span id="ceqPercent">0%</span>
+                            </div>
+                            <div class="probability-bar">
+                                <div class="probability-fill ceq" id="ceqBar" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-card">
+                            <div class="metric-value" id="waitTimeScore">--</div>
+                            <div class="metric-label">Wait Time Score</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="classScore">--</div>
+                            <div class="metric-label">CLASS Framework</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="scaffoldingScore">--</div>
+                            <div class="metric-label">Scaffolding Level</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value" id="featuresUsed">56</div>
+                            <div class="metric-label">Features Analyzed</div>
+                        </div>
+                    </div>
+
+                    <!-- Feature Breakdown -->
+                    <div class="feature-breakdown" id="featureBreakdown">
+                        <h5>Feature Analysis Breakdown</h5>
+                        <div class="feature-grid" id="featureGrid">
+                            <!-- Populated by JavaScript -->
+                        </div>
+                    </div>
+
+                    <!-- Coaching Recommendations -->
+                    <div class="coaching-section">
+                        <h4>Coaching Recommendations</h4>
+                        <ul class="coaching-list" id="coachingList">
+                            <li>Consider extending wait time after asking the question</li>
+                            <li>Use "what" or "how" questions to encourage deeper thinking</li>
+                            <li>Acknowledge the child's feelings before redirecting</li>
+                        </ul>
+                    </div>
+
+                    <!-- Side-by-Side Comparison -->
+                    <div class="comparison-section">
+                        <h4>Response Comparison</h4>
+                        <div class="comparison-grid">
+                            <div class="comparison-card user">
+                                <div class="label">Your Response</div>
+                                <div class="response-text" id="userResponseDisplay">"..."</div>
+                            </div>
+                            <div class="comparison-card optimal">
+                                <div class="label">Optimal OEQ Example</div>
+                                <div class="response-text" id="optimalResponse">"..."</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- FEATURE VISUALIZATION PLAYGROUND -->
+                    <div class="feature-playground" id="featurePlayground">
+                        <h4>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-500);">
+                                <path d="M3.5 18.49l6-6.01 4 4L22 6.92l-1.41-1.41-7.09 7.97-4-4L2 16.99z"/>
+                            </svg>
+                            Feature Visualization Playground (79 Dimensions)
+                        </h4>
+                        <p style="font-size: 12px; color: var(--text-tertiary); margin-bottom: 16px;">
+                            Interactive view of which features activate for different question types. Color intensity indicates feature importance.
+                        </p>
+                        <div class="feature-categories" id="featureCategories">
+                            <!-- Question Structure -->
+                            <div class="feature-category" style="border-left-color: #0078D4;">
+                                <div class="feature-category-name" style="color: #0078D4;">Question Structure</div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-question-mark"></div>
+                                    <span>Question Mark</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-question-start"></div>
+                                    <span>Question Word Start</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-word-count"></div>
+                                    <span>Word Count</span>
+                                </div>
+                            </div>
+                            <!-- Open-Ended Indicators -->
+                            <div class="feature-category" style="border-left-color: #107C10;">
+                                <div class="feature-category-name" style="color: #107C10;">OEQ Indicators</div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-what"></div>
+                                    <span>"What" Count</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-how"></div>
+                                    <span>"How" Count</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-why"></div>
+                                    <span>"Why" Count</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-think"></div>
+                                    <span>"Think" Count</span>
+                                </div>
+                            </div>
+                            <!-- Closed-Ended Indicators -->
+                            <div class="feature-category" style="border-left-color: #D13438;">
+                                <div class="feature-category-name" style="color: #D13438;">CEQ Indicators</div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-yesno"></div>
+                                    <span>Yes/No Start</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-did"></div>
+                                    <span>"Did" Count</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-is"></div>
+                                    <span>"Is/Are" Count</span>
+                                </div>
+                            </div>
+                            <!-- Engagement Quality -->
+                            <div class="feature-category" style="border-left-color: #FF8C00;">
+                                <div class="feature-category-name" style="color: #FF8C00;">Engagement</div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-elaborate"></div>
+                                    <span>Elaboration Words</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-child-ref"></div>
+                                    <span>Child Reference</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-followup"></div>
+                                    <span>Follow-up Cues</span>
+                                </div>
+                            </div>
+                            <!-- Scaffolding -->
+                            <div class="feature-category" style="border-left-color: #8764B8;">
+                                <div class="feature-category-name" style="color: #8764B8;">Scaffolding</div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-scaffolding"></div>
+                                    <span>Scaffolding Level</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-acknowledge"></div>
+                                    <span>Acknowledgment</span>
+                                </div>
+                                <div class="feature-indicator">
+                                    <div class="feature-dot" id="feat-extension"></div>
+                                    <span>Extension</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REFLECTION PROMPT (Karen Brennan style) -->
+                    <div class="reflection-prompt" id="reflectionPrompt">
+                        <h4>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
+                            </svg>
+                            Reflection Prompt
+                        </h4>
+                        <div class="reflection-question" id="reflectionQuestion">
+                            What surprised you about this result?
+                        </div>
+                        <textarea class="reflection-input" id="reflectionInput" placeholder="Share your thoughts..."></textarea>
+                        <div class="button-group reflection-submit">
+                            <button class="btn btn-secondary" onclick="submitReflection()">Save Reflection</button>
+                            <button class="btn btn-secondary" onclick="newReflectionPrompt()">New Prompt</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Error State -->
+                <div id="errorState" style="display: none;">
+                    <div class="error-box">
+                        <h4>Real ML API Not Available</h4>
+                        <p style="margin-bottom: 12px;">Cannot connect to the neural network API.</p>
+                        <p style="margin-bottom: 8px;"><strong>Required:</strong> Real PyTorch model with 56-feature extraction</p>
+                        <p style="margin-bottom: 8px;"><strong>Endpoint:</strong> <code id="errorEndpoint">http://localhost:8001</code></p>
+                        <p><strong>Solution:</strong> Start the ML API with <code>python3 ml_api_real.py</code></p>
+                        <p style="margin-top: 16px; font-size: 13px; color: var(--text-tertiary);">
+                            This demo uses REAL ML models only - no simulation or fallback data.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PLAY STATISTICS -->
+        <div class="card" style="margin-top: 24px;">
+            <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="color: var(--primary-500);">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/>
+                </svg>
+                Play Statistics
+                <span class="discovery-badge" id="discoveryBadge" style="display: none; margin-left: auto;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                    </svg>
+                    <span id="discoveryCount">0</span> Discoveries!
+                </span>
+            </h3>
+            <div class="play-stats">
+                <div class="play-stat">
+                    <div class="play-stat-value" id="statTime">0:00</div>
+                    <div class="play-stat-label">Time Tinkering</div>
+                </div>
+                <div class="play-stat">
+                    <div class="play-stat-value" id="statVariations">0</div>
+                    <div class="play-stat-label">Variations Tried</div>
+                </div>
+                <div class="play-stat">
+                    <div class="play-stat-value" id="statDiscoveries">0</div>
+                    <div class="play-stat-label">Discoveries</div>
+                </div>
+                <div class="play-stat">
+                    <div class="play-stat-value" id="statReflections">0</div>
+                    <div class="play-stat-label">Reflections</div>
+                </div>
+            </div>
+            <div style="margin-top: 16px; display: flex; gap: 12px; flex-wrap: wrap;">
+                <button class="btn btn-secondary" onclick="shareDiscoveries()" id="shareBtn" disabled>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/>
+                    </svg>
+                    Share Discoveries (Anonymized)
+                </button>
+                <button class="btn btn-secondary" onclick="resetPlaySession()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/>
+                    </svg>
+                    Reset Session
+                </button>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-left">
+                <div class="footer-logo">CL</div>
+                <div>
+                    2025 <a href="https://cultivatelearning.uw.edu/who-we-are/" target="_blank">Cultivate Learning</a>, University of Washington
+                </div>
+            </div>
+            <div style="font-family: 'Courier New', monospace; font-size: 13px;">
+                Module 4 | Build <span id="buildNumber">v4.0.0</span>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // ============================================
+        // REAL SCENARIOS DATA (from scenarios.json)
+        // ============================================
+        const scenarios = [
+            {
+                id: 1,
+                title: "Block Tower Collapse",
+                age_group: "TODDLER",
+                context: "A 2-year-old has been carefully stacking wooden blocks into a tall tower. Just as they place the final block on top, the entire tower comes crashing down. The child stares at the fallen blocks with wide eyes, their lower lip starting to quiver, showing signs of frustration and disappointment.",
+                child_behavior: "Looking upset, starting to tear up, pointing at fallen blocks",
+                educational_focus: "Problem-solving, emotional regulation, cause and effect",
+                example_ceq: "Did your tower fall down?",
+                example_oeq: "What happened to your tower?",
+                learning_opportunity: "Encourage reflection on what happened and how to rebuild"
+            },
+            {
+                id: 2,
+                title: "Lunch Resistance",
+                age_group: "TODDLER",
+                context: "During lunchtime, a 3-year-old is sitting at the table with their meal. They've eaten their favorite parts (crackers and fruit) but are now pushing their plate away, refusing to try the vegetables. They shake their head vigorously and cross their arms when you point to the green beans.",
+                child_behavior: "Pushing plate away, shaking head, crossing arms",
+                educational_focus: "Healthy eating habits, communication, autonomy",
+                example_ceq: "Are you all done eating?",
+                example_oeq: "How are you feeling about your lunch?",
+                learning_opportunity: "Explore child's feelings about food and encourage communication"
+            },
+            {
+                id: 3,
+                title: "Sensory Table Exploration",
+                age_group: "TODDLER",
+                context: "At the sensory table filled with dried beans and scoops, a 2.5-year-old is enthusiastically exploring. They're running their hands through the beans, filling containers, and inevitably spilling beans on the floor. They seem delighted by the textures and sounds but are making quite a mess.",
+                child_behavior: "Touching everything, spilling materials, laughing and exploring",
+                educational_focus: "Sensory development, fine motor skills, exploration",
+                example_ceq: "Do you like how the beans feel?",
+                example_oeq: "What do you notice about the beans?",
+                learning_opportunity: "Support sensory exploration while introducing descriptive language"
+            },
+            {
+                id: 4,
+                title: "Flower Book Discovery",
+                age_group: "PK",
+                context: "A 4-year-old is looking through a picture book about flowers during quiet reading time. They point excitedly at a page showing different flower parts - petals, stems, and leaves. They seem particularly interested in the bright colors and are making connections to flowers they've seen outside.",
+                child_behavior: "Pointing at pictures, making excited sounds, turning pages eagerly",
+                educational_focus: "Scientific observation, vocabulary development, nature connection",
+                example_ceq: "Is that a flower?",
+                example_oeq: "What do you notice about this flower?",
+                learning_opportunity: "Expand vocabulary and encourage detailed observation"
+            },
+            {
+                id: 5,
+                title: "Melon Investigation",
+                age_group: "PK",
+                context: "During a small group activity, a 4-year-old is examining a cut melon with seeds visible. They're tentatively touching the seeds with one finger, then pulling their hand back. Their expression shows curiosity mixed with slight hesitation about the slippery texture.",
+                child_behavior: "Touching carefully, pulling hand back, looking curious but cautious",
+                educational_focus: "Scientific inquiry, sensory exploration, healthy foods",
+                example_ceq: "Are the seeds slippery?",
+                example_oeq: "What do you think about these seeds?",
+                learning_opportunity: "Encourage scientific thinking and hypothesis formation"
+            },
+            {
+                id: 6,
+                title: "Construction Challenge",
+                age_group: "PK",
+                context: "A 5-year-old is working with various building materials - blocks, tubes, and connectors. They're trying to build a structure they have in mind but keep running into engineering problems. One section keeps falling over, and they're getting increasingly focused and determined.",
+                child_behavior: "Concentrating intensely, rebuilding sections, showing determination",
+                educational_focus: "STEM learning, problem-solving, persistence",
+                example_ceq: "Is this part too heavy?",
+                example_oeq: "How could you make this part stronger?",
+                learning_opportunity: "Support engineering thinking and encourage experimentation"
+            },
+            {
+                id: 7,
+                title: "Playground Hesitation",
+                age_group: "MIXED",
+                context: "A 3.5-year-old is standing at the bottom of the climbing structure, looking up at the monkey bars that the older children are using. They take a step toward the ladder, then step back. They clearly want to try but seem uncertain about their ability.",
+                child_behavior: "Stepping forward and back, looking up at equipment, watching older children",
+                educational_focus: "Risk assessment, physical development, confidence building",
+                example_ceq: "Do you want to try climbing?",
+                example_oeq: "What are you thinking about the climbing bars?",
+                learning_opportunity: "Support self-assessment and appropriate risk-taking"
+            },
+            {
+                id: 8,
+                title: "Color Mixing Surprise",
+                age_group: "MIXED",
+                context: "During art time, a 4-year-old is painting with watercolors. They've just dipped their brush in blue paint and then accidentally touched it to the yellow on their paper. Their eyes widen as they watch the green color appear where the two colors mixed.",
+                child_behavior: "Eyes widening, stopping painting to observe, looking surprised",
+                educational_focus: "Scientific discovery, art exploration, cause and effect",
+                example_ceq: "Did the colors change?",
+                example_oeq: "What happened when the blue and yellow touched?",
+                learning_opportunity: "Encourage scientific observation and experimentation"
+            },
+            {
+                id: 9,
+                title: "Story Time Interruption",
+                age_group: "MIXED",
+                context: "During group story time, you're reading a book about animals. A 3-year-old suddenly raises their hand and starts talking about their pet cat at home, making connections between the story and their personal experience.",
+                child_behavior: "Raising hand excitedly, talking about personal experience, making connections",
+                educational_focus: "Language development, personal connections, group dynamics",
+                example_ceq: "Does your cat look like this one?",
+                example_oeq: "How is your cat similar to the cat in our story?",
+                learning_opportunity: "Validate connections while maintaining group focus"
+            },
+            {
+                id: 10,
+                title: "Clean-up Avoidance",
+                age_group: "MIXED",
+                context: "Clean-up time has been announced, and while most children are putting away toys, one 4-year-old has crawled under a table with a few small toys. They're not being defiant exactly, but seem to be hoping they won't have to participate.",
+                child_behavior: "Hiding under table, clutching toys, peeking out occasionally",
+                educational_focus: "Responsibility, community participation, transition management",
+                example_ceq: "Are you hiding under there?",
+                example_oeq: "What's your plan for those toys you have with you?",
+                learning_opportunity: "Address avoidance while maintaining relationship and encouraging responsibility"
+            }
+        ];
+
+        let currentScenarioIndex = 0;
+        let apiBaseUrl = 'http://localhost:8001';
+        let analysisStartTime = 0;
+
+        // ============================================
+        // INITIALIZATION (moved to enhanced init below)
+        // ============================================
+
+        // ============================================
+        // THEME MANAGEMENT
+        // ============================================
+        function initThemeManager() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', theme);
+            updateThemeToggle(theme);
+
+            document.getElementById('themeToggle').addEventListener('click', () => {
+                const currentTheme = document.body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                document.body.setAttribute('data-theme', newTheme);
+                localStorage.setItem('theme', newTheme);
+                updateThemeToggle(newTheme);
+            });
+        }
+
+        function updateThemeToggle(theme) {
+            const themeSwitch = document.getElementById('themeSwitch');
+            if (theme === 'dark') {
+                themeSwitch.classList.add('active');
+            } else {
+                themeSwitch.classList.remove('active');
+            }
+        }
+
+        // ============================================
+        // SCENARIO MANAGEMENT
+        // ============================================
+        function populateScenarioSelector() {
+            const select = document.getElementById('scenarioSelect');
+            select.innerHTML = scenarios.map((scenario, index) =>
+                `<option value="${index}">${scenario.id}. ${scenario.title} (${scenario.age_group})</option>`
+            ).join('');
+        }
+
+        function loadScenario() {
+            const select = document.getElementById('scenarioSelect');
+            currentScenarioIndex = parseInt(select.value);
+            const scenario = scenarios[currentScenarioIndex];
+
+            document.getElementById('ageBadge').textContent = scenario.age_group;
+            document.getElementById('focusBadge').textContent = scenario.educational_focus.split(',')[0];
+            document.getElementById('scenarioTitle').textContent = scenario.title;
+            document.getElementById('scenarioContext').textContent = scenario.context;
+            document.getElementById('childBehavior').textContent = scenario.child_behavior;
+            document.getElementById('exampleCEQ').textContent = `"${scenario.example_ceq}"`;
+            document.getElementById('exampleOEQ').textContent = `"${scenario.example_oeq}"`;
+
+            // Reset UI
+            document.getElementById('userResponse').value = '';
+            showState('initial');
+        }
+
+        function nextScenario() {
+            currentScenarioIndex = (currentScenarioIndex + 1) % scenarios.length;
+            document.getElementById('scenarioSelect').value = currentScenarioIndex;
+            loadScenario();
+        }
+
+        // ============================================
+        // API STATUS CHECK
+        // ============================================
+        async function checkApiStatus() {
+            const statusEl = document.getElementById('apiStatus');
+            const statusText = document.getElementById('statusText');
+
+            try {
+                const response = await fetch(`${apiBaseUrl}/health`, {
+                    method: 'GET',
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    const data = await response.json();
+                    statusEl.className = 'api-status connected';
+                    statusText.textContent = `Connected - ${data.model_type || 'ML Ready'}`;
+                    console.log('API Health Check:', data);
+                } else {
+                    throw new Error('API returned non-OK status');
+                }
+            } catch (error) {
+                statusEl.className = 'api-status disconnected';
+                statusText.textContent = 'API Offline';
+                console.warn('API not available:', error.message);
+            }
+        }
+
+        // ============================================
+        // REAL ML ANALYSIS
+        // ============================================
+        async function analyzeResponse() {
+            const responseText = document.getElementById('userResponse').value.trim();
+
+            if (!responseText) {
+                alert('Please enter a response to analyze.');
+                return;
+            }
+
+            const scenario = scenarios[currentScenarioIndex];
+            analysisStartTime = performance.now();
+
+            console.log('========================================');
+            console.log('REAL ML ANALYSIS REQUEST');
+            console.log('========================================');
+            console.log('Input Text:', responseText);
+            console.log('Scenario ID:', scenario.id);
+            console.log('Endpoint:', `${apiBaseUrl}/classify_response`);
+
+            showState('loading');
+
+            try {
+                const requestBody = {
+                    text: responseText,
+                    scenario_id: scenario.id,
+                    debug_mode: true
+                };
+
+                console.log('Request Payload:', JSON.stringify(requestBody, null, 2));
+
+                const response = await fetch(`${apiBaseUrl}/classify_response`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(requestBody)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API Error: ${response.status} ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                const responseTime = Math.round(performance.now() - analysisStartTime);
+
+                console.log('========================================');
+                console.log('REAL ML API RESPONSE');
+                console.log('========================================');
+                console.log('Classification:', result.classification);
+                console.log('OEQ Probability:', result.oeq_probability);
+                console.log('CEQ Probability:', result.ceq_probability);
+                console.log('Confidence:', result.confidence);
+                console.log('Method:', result.method);
+                console.log('Features Used:', result.features_used);
+                console.log('Response Time:', responseTime + 'ms');
+
+                displayResults(result, responseTime, responseText, scenario);
+
+            } catch (error) {
+                console.error('REAL ML API ERROR:', error);
+                showState('error');
+                document.getElementById('errorEndpoint').textContent = apiBaseUrl;
+            }
+        }
+
+        // ============================================
+        // DISPLAY RESULTS
+        // ============================================
+        function displayResults(result, responseTime, userText, scenario) {
+            // Response time
+            document.getElementById('responseTime').textContent = `${responseTime}ms`;
+
+            // Classification result
+            const classResult = document.getElementById('classificationResult');
+            const classification = result.classification;
+            classResult.className = `classification-result ${classification.toLowerCase()}`;
+            document.getElementById('classificationValue').textContent =
+                classification === 'OEQ' ? 'Open-Ended Question' : 'Closed-Ended Question';
+            document.getElementById('confidenceBadge').textContent =
+                `Confidence: ${Math.round(result.confidence * 100)}%`;
+
+            // Probability bars
+            const oeqPercent = Math.round(result.oeq_probability * 100);
+            const ceqPercent = Math.round(result.ceq_probability * 100);
+
+            document.getElementById('oeqPercent').textContent = `${oeqPercent}%`;
+            document.getElementById('ceqPercent').textContent = `${ceqPercent}%`;
+            document.getElementById('oeqBar').style.width = `${oeqPercent}%`;
+            document.getElementById('ceqBar').style.width = `${ceqPercent}%`;
+
+            // Metrics (calculated from analysis)
+            const waitTimeScore = calculateWaitTimeScore(userText);
+            const classScore = calculateCLASSScore(result);
+            const scaffoldingLevel = calculateScaffoldingLevel(result);
+
+            document.getElementById('waitTimeScore').textContent = waitTimeScore;
+            document.getElementById('classScore').textContent = `${classScore}/5`;
+            document.getElementById('scaffoldingScore').textContent = scaffoldingLevel;
+            document.getElementById('featuresUsed').textContent = result.features_used || 56;
+
+            // Feature breakdown
+            if (result.debug_info && result.debug_info.feature_breakdown) {
+                displayFeatureBreakdown(result.debug_info.feature_breakdown);
+            }
+
+            // Coaching recommendations
+            updateCoachingRecommendations(result, scenario);
+
+            // Comparison section
+            document.getElementById('userResponseDisplay').textContent = `"${userText}"`;
+            document.getElementById('optimalResponse').textContent = `"${scenario.example_oeq}"`;
+
+            showState('results');
+        }
+
+        function displayFeatureBreakdown(breakdown) {
+            const grid = document.getElementById('featureGrid');
+            const features = [
+                { name: 'OEQ Keywords', value: breakdown.oeq_keywords || 0 },
+                { name: 'CEQ Keywords', value: breakdown.ceq_keywords || 0 },
+                { name: 'Word Count', value: breakdown.word_count || 0 },
+                { name: 'Char Count', value: breakdown.char_count || 0 },
+                { name: 'Question Marks', value: breakdown.question_marks || 0 },
+                { name: 'Question Starter', value: breakdown.starts_with_question ? 'Yes' : 'No' }
+            ];
+
+            grid.innerHTML = features.map(f => `
+                <div class="feature-item">
+                    <div class="feature-name">${f.name}</div>
+                    <div class="feature-value">${f.value}</div>
+                </div>
+            `).join('');
+        }
+
+        function calculateWaitTimeScore(text) {
+            // Simple heuristic based on question complexity
+            const wordCount = text.split(/\s+/).length;
+            if (wordCount > 15) return 'High';
+            if (wordCount > 8) return 'Medium';
+            return 'Low';
+        }
+
+        function calculateCLASSScore(result) {
+            // CLASS Framework scoring based on question type
+            const baseScore = result.classification === 'OEQ' ? 4 : 2;
+            const confidenceBonus = result.confidence > 0.7 ? 1 : 0;
+            return Math.min(5, baseScore + confidenceBonus);
+        }
+
+        function calculateScaffoldingLevel(result) {
+            if (result.oeq_probability > 0.8) return 'High';
+            if (result.oeq_probability > 0.5) return 'Medium';
+            return 'Low';
+        }
+
+        function updateCoachingRecommendations(result, scenario) {
+            const list = document.getElementById('coachingList');
+            const recommendations = [];
+
+            if (result.classification === 'CEQ') {
+                recommendations.push('Try rephrasing as an open-ended question starting with "What" or "How"');
+                recommendations.push('Allow more wait time after asking for deeper thinking');
+                recommendations.push(`Consider asking: "${scenario.example_oeq}"`);
+            } else {
+                recommendations.push('Great use of open-ended questioning!');
+                recommendations.push('Continue to allow adequate wait time for the child to respond');
+                if (result.confidence < 0.7) {
+                    recommendations.push('Consider making the question even more exploratory');
+                }
+            }
+
+            recommendations.push(`Learning opportunity: ${scenario.learning_opportunity}`);
+
+            list.innerHTML = recommendations.map(r => `<li>${r}</li>`).join('');
+        }
+
+        // ============================================
+        // UI STATE MANAGEMENT
+        // ============================================
+        function showState(state) {
+            document.getElementById('initialState').style.display = state === 'initial' ? 'block' : 'none';
+            document.getElementById('loadingState').style.display = state === 'loading' ? 'flex' : 'none';
+            document.getElementById('resultsState').style.display = state === 'results' ? 'block' : 'none';
+            document.getElementById('errorState').style.display = state === 'error' ? 'block' : 'none';
+        }
+
+        function updateBuildNumber() {
+            const now = new Date();
+            const build = `v4.0.0-${now.toISOString().split('T')[0].replace(/-/g, '')}`;
+            document.getElementById('buildNumber').textContent = build;
+        }
+
+        // ============================================
+        // CREATIVE LEARNING SPIRAL - TINKERING SYSTEM
+        // Based on Mitch Resnick's Lifelong Kindergarten
+        // ============================================
+
+        // Tinker state (inline implementation - no module import for browser compatibility)
+        const tinkerState = {
+            confidenceThreshold: 0.70,
+            modelType: 'neural',
+            ageGroupFilter: 'all',
+            sessionStartTime: Date.now(),
+            variationsTried: 0,
+            discoveriesMade: [],
+            reflectionsCompleted: [],
+            experimentsRun: []
+        };
+
+        // Load saved state
+        function loadTinkerState() {
+            try {
+                const saved = localStorage.getItem('tinkerState');
+                if (saved) {
+                    Object.assign(tinkerState, JSON.parse(saved));
+                }
+            } catch (e) {
+                console.warn('Could not load tinker state:', e);
+            }
+        }
+
+        // Save state
+        function saveTinkerState() {
+            try {
+                localStorage.setItem('tinkerState', JSON.stringify(tinkerState));
+            } catch (e) {
+                console.warn('Could not save tinker state:', e);
+            }
+        }
+
+        // Initialize tinker system
+        function initTinkerSystem() {
+            loadTinkerState();
+            updatePlayStats();
+            loadUMCProgress();
+            startPlayTimer();
+
+            // Update UI with saved state
+            document.getElementById('confidenceSlider').value = tinkerState.confidenceThreshold * 100;
+            document.getElementById('confidenceValue').textContent = tinkerState.confidenceThreshold.toFixed(2);
+
+            // Model type buttons
+            document.querySelectorAll('[id^="model"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`model${tinkerState.modelType.charAt(0).toUpperCase() + tinkerState.modelType.slice(1)}`).classList.add('active');
+
+            // Age filter buttons
+            document.querySelectorAll('[id^="age"]').forEach(btn => btn.classList.remove('active'));
+            const ageBtn = document.getElementById(`age${tinkerState.ageGroupFilter === 'all' ? 'All' : tinkerState.ageGroupFilter}`);
+            if (ageBtn) ageBtn.classList.add('active');
+
+            console.log('%c Creative Learning Spiral - Play Stage Active', 'font-size: 14px; font-weight: bold; color: #FF8C00;');
+            console.log('Tinkering Principles: Immediate feedback, Low risk, Multiple pathways');
+        }
+
+        // ============================================
+        // TINKER ZONE CONTROLS
+        // ============================================
+
+        function updateConfidenceThreshold(value) {
+            tinkerState.confidenceThreshold = value / 100;
+            document.getElementById('confidenceValue').textContent = tinkerState.confidenceThreshold.toFixed(2);
+            tinkerState.variationsTried++;
+            saveTinkerState();
+            updatePlayStats();
+            console.log('Confidence threshold changed to:', tinkerState.confidenceThreshold);
+        }
+
+        function setModelType(type) {
+            tinkerState.modelType = type;
+            document.querySelectorAll('[id^="model"]').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`model${type.charAt(0).toUpperCase() + type.slice(1)}`).classList.add('active');
+            tinkerState.variationsTried++;
+            saveTinkerState();
+            updatePlayStats();
+            console.log('Model type changed to:', type);
+        }
+
+        function setAgeFilter(ageGroup) {
+            tinkerState.ageGroupFilter = ageGroup;
+            document.querySelectorAll('[id^="age"]').forEach(btn => btn.classList.remove('active'));
+            const ageBtn = document.getElementById(`age${ageGroup === 'all' ? 'All' : ageGroup}`);
+            if (ageBtn) ageBtn.classList.add('active');
+
+            // Filter scenarios if not 'all'
+            filterScenarios(ageGroup);
+            tinkerState.variationsTried++;
+            saveTinkerState();
+            updatePlayStats();
+            console.log('Age filter changed to:', ageGroup);
+        }
+
+        function filterScenarios(ageGroup) {
+            const select = document.getElementById('scenarioSelect');
+            const options = select.querySelectorAll('option');
+
+            options.forEach((option, index) => {
+                const scenario = scenarios[index];
+                if (ageGroup === 'all' || scenario.age_group === ageGroup || scenario.age_group === 'MIXED') {
+                    option.style.display = '';
+                } else {
+                    option.style.display = 'none';
+                }
+            });
+
+            // Select first visible option if current is hidden
+            const currentOption = options[select.selectedIndex];
+            if (currentOption && currentOption.style.display === 'none') {
+                for (let i = 0; i < options.length; i++) {
+                    if (options[i].style.display !== 'none') {
+                        select.selectedIndex = i;
+                        loadScenario();
+                        break;
+                    }
+                }
+            }
+        }
+
+        // ============================================
+        // WHAT-IF EXPLORER
+        // ============================================
+
+        const whatIfExperiments = {
+            'add-why': {
+                name: "Add 'why'",
+                transform: (text) => {
+                    if (!text.toLowerCase().startsWith('why')) {
+                        return `Why ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+                    }
+                    return text;
+                }
+            },
+            'add-how': {
+                name: "Add 'how'",
+                transform: (text) => {
+                    if (!text.toLowerCase().startsWith('how')) {
+                        return `How ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+                    }
+                    return text;
+                }
+            },
+            'add-what': {
+                name: "Add 'what'",
+                transform: (text) => {
+                    if (!text.toLowerCase().startsWith('what')) {
+                        return `What ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+                    }
+                    return text;
+                }
+            },
+            'add-think': {
+                name: "Add 'do you think'",
+                transform: (text) => {
+                    const lowerText = text.toLowerCase();
+                    const questionWords = ['what', 'how', 'why', 'when', 'where', 'who'];
+                    for (const word of questionWords) {
+                        if (lowerText.startsWith(word)) {
+                            return text.slice(0, word.length) + ' do you think ' + text.slice(word.length + 1);
+                        }
+                    }
+                    return `What do you think about ${text.charAt(0).toLowerCase()}${text.slice(1)}`;
+                }
+            },
+            'yes-no-convert': {
+                name: "Make yes/no",
+                transform: (text) => {
+                    let modified = text.replace(/^(what|how|why|when|where|who)\s+/i, '');
+                    if (!modified.toLowerCase().startsWith('do') &&
+                        !modified.toLowerCase().startsWith('is') &&
+                        !modified.toLowerCase().startsWith('are')) {
+                        modified = `Did you ${modified.charAt(0).toLowerCase()}${modified.slice(1)}`;
+                    }
+                    return modified;
+                }
+            },
+            'extend-question': {
+                name: "Add 'and why?'",
+                transform: (text) => {
+                    const cleaned = text.replace(/\?$/, '');
+                    return `${cleaned}, and why?`;
+                }
+            },
+            'make-open': {
+                name: "Make more open",
+                transform: (text) => {
+                    const lowerText = text.toLowerCase();
+                    if (lowerText.startsWith('do you') || lowerText.startsWith('is that') ||
+                        lowerText.startsWith('are you') || lowerText.startsWith('did you')) {
+                        return `What are your thoughts about ${text.slice(text.indexOf(' ', 3) + 1).replace(/\?$/, '')}?`;
+                    }
+                    return `Tell me more about ${text.replace(/\?$/, '').toLowerCase()}. What do you notice?`;
+                }
+            }
+        };
+
+        async function runWhatIfExperiment(experimentId) {
+            const originalText = document.getElementById('userResponse').value.trim();
+
+            if (!originalText) {
+                alert('Please enter a question first to run What-If experiments.');
+                return;
+            }
+
+            const experiment = whatIfExperiments[experimentId];
+            if (!experiment) return;
+
+            const transformedText = experiment.transform(originalText);
+
+            // Show comparison panel
+            document.getElementById('whatifComparison').style.display = 'grid';
+            document.getElementById('whatifOriginal').textContent = `"${originalText}"`;
+            document.getElementById('whatifTransformed').textContent = `"${transformedText}"`;
+
+            // Analyze both with REAL API
+            try {
+                const [originalResult, transformedResult] = await Promise.all([
+                    analyzeTextReal(originalText),
+                    analyzeTextReal(transformedText)
+                ]);
+
+                // Update original result
+                const origResultEl = document.getElementById('whatifOriginalResult');
+                origResultEl.textContent = originalResult.classification;
+                origResultEl.className = `panel-result ${originalResult.classification.toLowerCase()}`;
+
+                // Update transformed result
+                const transResultEl = document.getElementById('whatifTransformedResult');
+                transResultEl.textContent = transformedResult.classification;
+                transResultEl.className = `panel-result ${transformedResult.classification.toLowerCase()}`;
+
+                // Record experiment
+                tinkerState.experimentsRun.push({
+                    experimentId,
+                    originalText,
+                    transformedText,
+                    originalResult: originalResult.classification,
+                    transformedResult: transformedResult.classification,
+                    timestamp: Date.now()
+                });
+                tinkerState.variationsTried++;
+
+                // Check for discovery (when transformation changes classification)
+                if (originalResult.classification !== transformedResult.classification) {
+                    recordDiscovery({
+                        pattern: `${experiment.name} changed ${originalResult.classification} to ${transformedResult.classification}`,
+                        description: `Adding "${experimentId}" changed the classification from ${originalResult.classification} to ${transformedResult.classification}`,
+                        experiment: experimentId
+                    });
+                }
+
+                saveTinkerState();
+                updatePlayStats();
+
+            } catch (error) {
+                console.error('What-If experiment failed:', error);
+                document.getElementById('whatifOriginalResult').textContent = 'API Error';
+                document.getElementById('whatifTransformedResult').textContent = 'API Error';
+            }
+        }
+
+        async function analyzeTextReal(text) {
+            const response = await fetch(`${apiBaseUrl}/classify_response`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: text,
+                    confidence_threshold: tinkerState.confidenceThreshold,
+                    model_type: tinkerState.modelType
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API Error: ${response.status}`);
+            }
+
+            return await response.json();
+        }
+
+        // ============================================
+        // USE-MODIFY-CREATE ACTIVITIES
+        // ============================================
+
+        const umcActivities = {
+            use: {
+                description: 'Run pre-built scenarios to understand how the ML classifier works',
+                tasks: [
+                    { id: 'use-1', name: 'Try all 10 scenarios' },
+                    { id: 'use-2', name: 'Compare OEQ vs CEQ examples' },
+                    { id: 'use-3', name: 'Observe confidence levels' }
+                ]
+            },
+            modify: {
+                description: 'Edit example questions and see how results change',
+                tasks: [
+                    { id: 'mod-1', name: 'Change a CEQ to an OEQ' },
+                    { id: 'mod-2', name: 'Adjust confidence threshold' },
+                    { id: 'mod-3', name: 'Try different age groups' },
+                    { id: 'mod-4', name: 'Run What-If experiments' }
+                ]
+            },
+            create: {
+                description: 'Design new scenarios and questions from scratch',
+                tasks: [
+                    { id: 'create-1', name: 'Write 3 original OEQ questions' },
+                    { id: 'create-2', name: 'Design a new scenario' },
+                    { id: 'create-3', name: 'Discover a new pattern' }
+                ]
+            }
+        };
+
+        let currentUMCTab = 'use';
+        let completedTasks = [];
+
+        function loadUMCProgress() {
+            try {
+                const saved = localStorage.getItem('completedTasks');
+                if (saved) {
+                    completedTasks = JSON.parse(saved);
+                    updateUMCCheckboxes();
+                }
+            } catch (e) {
+                console.warn('Could not load UMC progress:', e);
+            }
+        }
+
+        function switchUMCTab(tab) {
+            currentUMCTab = tab;
+            document.querySelectorAll('.umc-tab').forEach(t => t.classList.remove('active'));
+            document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+
+            const activity = umcActivities[tab];
+            document.getElementById('umcDescription').textContent = activity.description;
+
+            const tasksHtml = activity.tasks.map(task => `
+                <div class="umc-task">
+                    <div class="umc-checkbox ${completedTasks.includes(task.id) ? 'completed' : ''}" data-task="${task.id}" onclick="toggleUMCTask('${task.id}')"></div>
+                    <span>${task.name}</span>
+                </div>
+            `).join('');
+
+            document.getElementById('umcTasks').innerHTML = tasksHtml;
+        }
+
+        function toggleUMCTask(taskId) {
+            const checkbox = document.querySelector(`[data-task="${taskId}"]`);
+            if (completedTasks.includes(taskId)) {
+                completedTasks = completedTasks.filter(t => t !== taskId);
+                checkbox.classList.remove('completed');
+            } else {
+                completedTasks.push(taskId);
+                checkbox.classList.add('completed');
+            }
+            localStorage.setItem('completedTasks', JSON.stringify(completedTasks));
+        }
+
+        function updateUMCCheckboxes() {
+            completedTasks.forEach(taskId => {
+                const checkbox = document.querySelector(`[data-task="${taskId}"]`);
+                if (checkbox) {
+                    checkbox.classList.add('completed');
+                }
+            });
+        }
+
+        // ============================================
+        // FEATURE VISUALIZATION
+        // ============================================
+
+        function updateFeatureVisualization(text) {
+            const lowerText = text.toLowerCase();
+            const words = text.split(/\s+/);
+
+            // Calculate feature activations
+            const features = {
+                'feat-question-mark': text.includes('?'),
+                'feat-question-start': /^(what|how|why|when|where|who)/i.test(text),
+                'feat-word-count': words.length > 5,
+                'feat-what': (lowerText.match(/\bwhat\b/g) || []).length > 0,
+                'feat-how': (lowerText.match(/\bhow\b/g) || []).length > 0,
+                'feat-why': (lowerText.match(/\bwhy\b/g) || []).length > 0,
+                'feat-think': (lowerText.match(/\bthink\b/g) || []).length > 0,
+                'feat-yesno': /^(do|is|are|can|did|will|would|could)/i.test(text),
+                'feat-did': (lowerText.match(/\bdid\b/g) || []).length > 0,
+                'feat-is': (lowerText.match(/\b(is|are)\b/g) || []).length > 0,
+                'feat-elaborate': (lowerText.match(/\b(tell|explain|describe|share)\b/g) || []).length > 0,
+                'feat-child-ref': (lowerText.match(/\byou\b/g) || []).length > 0,
+                'feat-followup': (lowerText.match(/\b(and then|what else|anything else)\b/g) || []).length > 0,
+                'feat-scaffolding': words.length > 8,
+                'feat-acknowledge': (lowerText.match(/\b(i see|i notice|interesting)\b/g) || []).length > 0,
+                'feat-extension': (lowerText.match(/\b(more|another|else)\b/g) || []).length > 0
+            };
+
+            // Update feature dots
+            Object.entries(features).forEach(([id, active]) => {
+                const dot = document.getElementById(id);
+                if (dot) {
+                    dot.classList.remove('active', 'high');
+                    if (active) {
+                        dot.classList.add('active');
+                    }
+                }
+            });
+        }
+
+        // ============================================
+        // REFLECTION PROMPTS
+        // ============================================
+
+        const reflectionPrompts = {
+            afterAnalysis: [
+                "What surprised you about this result?",
+                "Did the classification match your expectation? Why or why not?",
+                "Which features do you think contributed most to this classification?",
+                "How confident are you in this result?"
+            ],
+            afterTinkering: [
+                "What pattern did you discover?",
+                "How did changing the parameter affect the results?",
+                "What would you try next?",
+                "What did you learn from this experiment?"
+            ],
+            summary: [
+                "How might educators use this insight?",
+                "What's the most important thing you learned?",
+                "How would you explain this to a colleague?",
+                "What questions do you still have?"
+            ]
+        };
+
+        let currentReflectionCategory = 'afterAnalysis';
+
+        function newReflectionPrompt(category = null) {
+            if (category) currentReflectionCategory = category;
+            const prompts = reflectionPrompts[currentReflectionCategory];
+            const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+            document.getElementById('reflectionQuestion').textContent = prompt;
+            document.getElementById('reflectionInput').value = '';
+        }
+
+        function submitReflection() {
+            const response = document.getElementById('reflectionInput').value.trim();
+            if (!response) {
+                alert('Please enter your reflection.');
+                return;
+            }
+
+            const reflection = {
+                prompt: document.getElementById('reflectionQuestion').textContent,
+                response: response,
+                timestamp: Date.now(),
+                category: currentReflectionCategory
+            };
+
+            tinkerState.reflectionsCompleted.push(reflection);
+            saveTinkerState();
+            updatePlayStats();
+
+            // Clear input and show new prompt
+            document.getElementById('reflectionInput').value = '';
+            newReflectionPrompt();
+
+            // Show confirmation
+            alert('Reflection saved! Keep exploring and reflecting.');
+
+            // Update spiral progress if enough reflections
+            if (tinkerState.reflectionsCompleted.length >= 3) {
+                checkSpiralProgress();
+            }
+        }
+
+        // ============================================
+        // PLAY STATISTICS
+        // ============================================
+
+        let playTimerInterval = null;
+
+        function startPlayTimer() {
+            if (playTimerInterval) clearInterval(playTimerInterval);
+            playTimerInterval = setInterval(updatePlayStats, 1000);
+        }
+
+        function updatePlayStats() {
+            // Time tinkering
+            const elapsed = Date.now() - tinkerState.sessionStartTime;
+            const minutes = Math.floor(elapsed / 60000);
+            const seconds = Math.floor((elapsed % 60000) / 1000);
+            document.getElementById('statTime').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+            // Variations
+            document.getElementById('statVariations').textContent = tinkerState.variationsTried;
+
+            // Discoveries
+            document.getElementById('statDiscoveries').textContent = tinkerState.discoveriesMade.length;
+
+            // Reflections
+            document.getElementById('statReflections').textContent = tinkerState.reflectionsCompleted.length;
+
+            // Discovery badge
+            if (tinkerState.discoveriesMade.length > 0) {
+                document.getElementById('discoveryBadge').style.display = 'inline-flex';
+                document.getElementById('discoveryCount').textContent = tinkerState.discoveriesMade.length;
+                document.getElementById('shareBtn').disabled = false;
+            }
+        }
+
+        function recordDiscovery(discovery) {
+            tinkerState.discoveriesMade.push({
+                ...discovery,
+                id: `discovery-${Date.now()}`,
+                timestamp: Date.now()
+            });
+            saveTinkerState();
+            updatePlayStats();
+
+            // Show discovery notification
+            console.log('%c New Discovery!', 'font-size: 16px; font-weight: bold; color: #FFD700;');
+            console.log(discovery.description);
+
+            // Update reflection prompt to ask about discovery
+            currentReflectionCategory = 'afterTinkering';
+            newReflectionPrompt();
+        }
+
+        function shareDiscoveries() {
+            if (tinkerState.discoveriesMade.length === 0) {
+                alert('No discoveries to share yet. Keep tinkering!');
+                return;
+            }
+
+            // Anonymized sharing - just patterns, no personal data
+            const shareData = tinkerState.discoveriesMade.map(d => ({
+                pattern: d.pattern,
+                timestamp: d.timestamp
+            }));
+
+            console.log('Sharing discoveries (anonymized):', shareData);
+            alert(`${tinkerState.discoveriesMade.length} discovery(ies) shared with the learning community!`);
+        }
+
+        function resetPlaySession() {
+            if (!confirm('Reset your play session? This will clear your statistics but keep your discoveries.')) {
+                return;
+            }
+
+            tinkerState.sessionStartTime = Date.now();
+            tinkerState.variationsTried = 0;
+            tinkerState.experimentsRun = [];
+            // Keep discoveries and reflections
+            saveTinkerState();
+            updatePlayStats();
+        }
+
+        // ============================================
+        // SPIRAL PROGRESS
+        // ============================================
+
+        function checkSpiralProgress() {
+            const playComplete =
+                tinkerState.variationsTried >= 5 &&
+                tinkerState.experimentsRun.length >= 3 &&
+                tinkerState.reflectionsCompleted.length >= 2;
+
+            if (playComplete) {
+                // Show ready to reflect link
+                document.getElementById('readyToReflect').style.display = 'block';
+
+                // Update spiral indicator
+                const playStage = document.querySelector('[data-stage="play"]');
+                playStage.classList.remove('active');
+                playStage.classList.add('completed');
+
+                const shareStage = document.querySelector('[data-stage="share"]');
+                shareStage.classList.add('active');
+
+                // Update connector
+                const connectors = document.querySelectorAll('.spiral-connector');
+                if (connectors[2]) connectors[2].classList.add('completed');
+            }
+        }
+
+        // ============================================
+        // ENHANCED INITIALIZATION
+        // ============================================
+
+        // Override the original DOMContentLoaded to include tinker system
+        const originalInit = document.addEventListener;
+        document.addEventListener('DOMContentLoaded', () => {
+            initThemeManager();
+            populateScenarioSelector();
+            loadScenario();
+            checkApiStatus();
+            updateBuildNumber();
+            initTinkerSystem();
+
+            // Console welcome
+            console.log('%c Cultivate Learning - Module 4: Live ML Demo', 'font-size: 20px; font-weight: bold; color: #0078D4;');
+            console.log('%c REAL ML API Mode - No Simulation', 'font-size: 14px; color: #107C10;');
+            console.log('%c Creative Learning Spiral - Play Stage Active', 'font-size: 14px; color: #FF8C00;');
+            console.log('API Endpoint:', apiBaseUrl);
+        });
+
+        // Update displayResults to also update feature visualization
+        const originalDisplayResults = displayResults;
+        displayResults = function(result, responseTime, userText, scenario) {
+            // Call original function
+            originalDisplayResults(result, responseTime, userText, scenario);
+
+            // Update feature visualization
+            updateFeatureVisualization(userText);
+
+            // Record variation
+            tinkerState.variationsTried++;
+            saveTinkerState();
+            updatePlayStats();
+
+            // Update reflection prompt
+            currentReflectionCategory = 'afterAnalysis';
+            newReflectionPrompt();
+
+            // Check spiral progress
+            checkSpiralProgress();
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json.schemastore.org/staticwebapp.config.json",
+  "routes": [
+    {
+      "route": "/",
+      "rewrite": "/index.html"
+    },
+    {
+      "route": "/module1-data-collection",
+      "rewrite": "/module1-data-collection.html"
+    },
+    {
+      "route": "/module2-feature-extraction",
+      "rewrite": "/module2-feature-extraction.html"
+    },
+    {
+      "route": "/module3-ml-models",
+      "rewrite": "/module3-ml-models.html"
+    },
+    {
+      "route": "/module4-live-demo",
+      "rewrite": "/module4-live-demo.html"
+    },
+    {
+      "route": "/api/*",
+      "allowedRoles": ["authenticated"]
+    }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/images/*.{png,jpg,gif,svg,ico}",
+      "/css/*.css",
+      "/js/*.js",
+      "/*.css",
+      "/*.js",
+      "/api/*"
+    ]
+  },
+  "responseOverrides": {
+    "404": {
+      "rewrite": "/index.html",
+      "statusCode": 200
+    }
+  },
+  "globalHeaders": {
+    "X-Content-Type-Options": "nosniff",
+    "X-Frame-Options": "DENY",
+    "X-XSS-Protection": "1; mode=block",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Content-Security-Policy": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:;"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".css": "text/css",
+    ".js": "application/javascript",
+    ".html": "text/html",
+    ".svg": "image/svg+xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".ico": "image/x-icon"
+  },
+  "platform": {
+    "apiRuntime": "python:3.9"
+  }
+}
